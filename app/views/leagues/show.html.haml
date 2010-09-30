@@ -1,0 +1,19 @@
+%p
+  %b Category:
+  = @league.category_id
+%p
+  %b Name:
+  = @league.name
+%p
+  %b Description:
+  = @league.description
+%p
+  %b Image url:
+  = @league.image_url
+%p
+  %b Level:
+  = @league.level
+
+= link_to 'Edit', edit_league_path(@league)
+\|
+= link_to 'Back', leagues_path

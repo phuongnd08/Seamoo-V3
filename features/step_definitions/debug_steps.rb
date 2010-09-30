@@ -1,3 +1,5 @@
-Given /^There is a category named "([^"]+)"$/ do |category_name|
-  Category.create!(:name => category_name)
+When /^I am in debug mode$/ do
+  puts "BEFORE JUMPING INTO DEBUG"
+  require 'ruby-debug'; debugger;
+  puts "AFTER JUMPING INTO DEBUG"
 end

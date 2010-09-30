@@ -1,0 +1,27 @@
+%h1 Listing leagues
+
+%table
+  %tr
+    %th Category
+    %th Name
+    %th Description
+    %th Image url
+    %th Level
+    %th
+    %th
+    %th
+
+  - @leagues.each do |league|
+    %tr
+      %td= league.category_id
+      %td= league.name
+      %td= league.description
+      %td= league.image_url
+      %td= league.level
+      %td= link_to 'Show', league
+      %td= link_to 'Edit', edit_league_path(league)
+      %td= link_to 'Destroy', league, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New league', new_league_path

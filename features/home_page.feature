@@ -12,7 +12,5 @@ Scenario: Introduction
 
 Scenario: See And Follow Categories
     Then I should see "Math"
-
-Scenario: Follow Categories
     When I follow "Math"
     Then I should be on the show category "Math" page
