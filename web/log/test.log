@@ -1,0 +1,3473 @@
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (4.1ms)[0m  CREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW KEYS FROM `schema_migrations`[0m
+  [1m[35mSQL (3.9ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+Migrating to CreateCategories (20100925042936)
+  [1m[35mSQL (2.8ms)[0m  CREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `description` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (0.6ms)[0m  [1mdescribe `schema_migrations`[0m
+  [1m[35mSQL (1.1ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20100925042936')
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.1ms)[0m  SELECT `schema_migrations`.`version` FROM `schema_migrations`
+  [1m[36mSQL (0.1ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.3ms)[0m  describe `categories`
+  [1m[36mSQL (0.1ms)[0m  [1mSHOW KEYS FROM `categories`[0m
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/categories" for 127.0.0.1 at 2010-09-25 16:58:25 +0700
+  Processing by CategoriesController#index as HTML
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered categories/index.html.haml within layouts/application (3.8ms)
+Completed 200 OK in 76ms (Views: 7.0ms | ActiveRecord: 0.6ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#index as HTML
+Completed 200 OK in 3ms (Views: 1.6ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 4ms (Views: 2.3ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#new as HTML
+Completed 200 OK in 4ms (Views: 2.3ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#edit as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 4ms (Views: 2.3ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#create as HTML
+  Parameters: {"category"=>{"these"=>"params"}}
+Redirected to http://test.host/categories/1005
+Completed 302 Found in 44ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#create as HTML
+  Parameters: {"category"=>{}}
+Redirected to http://test.host/categories/1006
+Completed 302 Found in 3ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#create as HTML
+  Parameters: {"category"=>{"these"=>"params"}}
+Completed 200 OK in 3ms (Views: 1.6ms | ActiveRecord: 0.3ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#create as HTML
+  Parameters: {"category"=>{}}
+Completed 200 OK in 3ms (Views: 1.7ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#update as HTML
+  Parameters: {"category"=>{"these"=>"params"}, "id"=>"37"}
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#update as HTML
+  Parameters: {"id"=>"1"}
+Redirected to http://test.host/categories/1010
+Completed 302 Found in 2ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#update as HTML
+  Parameters: {"id"=>"1"}
+Redirected to http://test.host/categories/1011
+Completed 302 Found in 3ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#update as HTML
+  Parameters: {"id"=>"1"}
+Completed 200 OK in 3ms (Views: 1.6ms | ActiveRecord: 0.4ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#update as HTML
+  Parameters: {"id"=>"1"}
+Completed 200 OK in 3ms (Views: 1.9ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#destroy as HTML
+  Parameters: {"id"=>"37"}
+Redirected to http://test.host/categories
+Completed 302 Found in 1ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#destroy as HTML
+  Parameters: {"id"=>"1"}
+Redirected to http://test.host/categories
+Completed 302 Found in 2ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+Rendered categories/_form.html.haml (14.0ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+Rendered categories/_form.html.haml (2.4ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#index as HTML
+Rendered categories/index.html.haml within layouts/application (1.1ms)
+Completed 200 OK in 5ms (Views: 3.9ms | ActiveRecord: 0.0ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 4ms (Views: 2.2ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#new as HTML
+Completed 200 OK in 4ms (Views: 2.3ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#edit as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#create as HTML
+  Parameters: {"category"=>{"these"=>"params"}}
+Redirected to http://test.host/categories/1005
+Completed 302 Found in 4ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#create as HTML
+  Parameters: {"category"=>{}}
+Redirected to http://test.host/categories/1006
+Completed 302 Found in 2ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#create as HTML
+  Parameters: {"category"=>{"these"=>"params"}}
+Completed 200 OK in 3ms (Views: 1.6ms | ActiveRecord: 0.3ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#create as HTML
+  Parameters: {"category"=>{}}
+Completed 200 OK in 3ms (Views: 1.6ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#update as HTML
+  Parameters: {"category"=>{"these"=>"params"}, "id"=>"37"}
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#update as HTML
+  Parameters: {"id"=>"1"}
+Redirected to http://test.host/categories/1010
+Completed 302 Found in 2ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#update as HTML
+  Parameters: {"id"=>"1"}
+Redirected to http://test.host/categories/1011
+Completed 302 Found in 2ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#update as HTML
+  Parameters: {"id"=>"1"}
+Completed 200 OK in 4ms (Views: 1.7ms | ActiveRecord: 0.3ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#update as HTML
+  Parameters: {"id"=>"1"}
+Completed 200 OK in 3ms (Views: 1.6ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#destroy as HTML
+  Parameters: {"id"=>"37"}
+Redirected to http://test.host/categories
+Completed 302 Found in 1ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#destroy as HTML
+  Parameters: {"id"=>"1"}
+Redirected to http://test.host/categories
+Completed 302 Found in 2ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+Rendered categories/_form.html.haml (5.8ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+Rendered categories/_form.html.haml (2.0ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/categories" for 127.0.0.1 at 2010-09-25 16:58:48 +0700
+  Processing by CategoriesController#index as HTML
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mCategory Load (0.1ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 65ms (Views: 4.1ms | ActiveRecord: 1.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/categories" for 127.0.0.1 at 2010-09-26 00:29:25 +0700
+  Processing by CategoriesController#index as HTML
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mCategory Load (0.1ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered categories/index.html.haml within layouts/application (3.7ms)
+Completed 200 OK in 70ms (Views: 6.5ms | ActiveRecord: 0.4ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#index as HTML
+Completed 200 OK in 3ms (Views: 1.6ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 4ms (Views: 2.3ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#new as HTML
+Completed 200 OK in 4ms (Views: 2.3ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#edit as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 4ms (Views: 2.3ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#create as HTML
+  Parameters: {"category"=>{"these"=>"params"}}
+Redirected to http://test.host/categories/1005
+Completed 302 Found in 4ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#create as HTML
+  Parameters: {"category"=>{}}
+Redirected to http://test.host/categories/1006
+Completed 302 Found in 2ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#create as HTML
+  Parameters: {"category"=>{"these"=>"params"}}
+Completed 200 OK in 3ms (Views: 1.6ms | ActiveRecord: 0.3ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#create as HTML
+  Parameters: {"category"=>{}}
+Completed 200 OK in 45ms (Views: 1.7ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#update as HTML
+  Parameters: {"category"=>{"these"=>"params"}, "id"=>"37"}
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#update as HTML
+  Parameters: {"id"=>"1"}
+Redirected to http://test.host/categories/1010
+Completed 302 Found in 3ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#update as HTML
+  Parameters: {"id"=>"1"}
+Redirected to http://test.host/categories/1011
+Completed 302 Found in 2ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#update as HTML
+  Parameters: {"id"=>"1"}
+Completed 200 OK in 3ms (Views: 1.6ms | ActiveRecord: 0.3ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#update as HTML
+  Parameters: {"id"=>"1"}
+Completed 200 OK in 3ms (Views: 1.6ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#destroy as HTML
+  Parameters: {"id"=>"37"}
+Redirected to http://test.host/categories
+Completed 302 Found in 1ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#destroy as HTML
+  Parameters: {"id"=>"1"}
+Redirected to http://test.host/categories
+Completed 302 Found in 2ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+Rendered categories/_form.html.haml (7.2ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+Rendered categories/_form.html.haml (2.6ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#index as HTML
+Rendered categories/index.html.haml within layouts/application (1.1ms)
+Completed 200 OK in 5ms (Views: 3.9ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 4ms (Views: 2.4ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.2ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#new as HTML
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.3ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#edit as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 2ms (Views: 2.2ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+Rendered categories/_form.html.haml (6.2ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+Rendered categories/_form.html.haml (2.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/categories" for 127.0.0.1 at 2010-09-27 20:43:41 +0700
+  Processing by CategoriesController#index as HTML
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 67ms (Views: 4.2ms | ActiveRecord: 2.8ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#index as HTML
+Rendered categories/index.html.haml within layouts/application (1.1ms)
+Completed 200 OK in 5ms (Views: 4.0ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 4ms (Views: 2.3ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#new as HTML
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#edit as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 2ms (Views: 2.1ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+Rendered categories/_form.html.haml (6.0ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+Rendered categories/_form.html.haml (2.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/categories" for 127.0.0.1 at 2010-09-27 20:45:29 +0700
+  Processing by CategoriesController#index as HTML
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mCategory Load (0.1ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 66ms (Views: 4.2ms | ActiveRecord: 2.7ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#index as HTML
+Rendered categories/index.html.haml within layouts/application (1.1ms)
+Completed 200 OK in 5ms (Views: 3.9ms | ActiveRecord: 0.0ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 4ms (Views: 2.3ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#new as HTML
+Completed 200 OK in 2ms (Views: 2.1ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#edit as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 2ms (Views: 2.1ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+Rendered categories/_form.html.haml (6.2ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+Rendered categories/_form.html.haml (2.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/categories" for 127.0.0.1 at 2010-09-27 20:45:48 +0700
+  Processing by CategoriesController#index as HTML
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mCategory Load (0.1ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 66ms (Views: 4.2ms | ActiveRecord: 2.6ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#index as HTML
+Rendered categories/index.html.haml within layouts/application (1.1ms)
+Completed 200 OK in 5ms (Views: 3.9ms | ActiveRecord: 0.0ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 4ms (Views: 2.3ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#new as HTML
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#edit as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 2ms (Views: 2.2ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+Rendered categories/_form.html.haml (5.9ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+Rendered categories/_form.html.haml (2.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/categories" for 127.0.0.1 at 2010-09-27 20:46:56 +0700
+  Processing by CategoriesController#index as HTML
+  [1m[35mSQL (0.8ms)[0m  SHOW TABLES
+  [1m[36mCategory Load (0.1ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 67ms (Views: 4.4ms | ActiveRecord: 3.2ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#index as HTML
+Rendered categories/index.html.haml within layouts/application (1.2ms)
+Completed 200 OK in 43ms (Views: 4.1ms | ActiveRecord: 0.0ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 4ms (Views: 2.3ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#index as HTML
+Rendered categories/index.html.haml within layouts/application (1.1ms)
+Completed 200 OK in 5ms (Views: 3.9ms | ActiveRecord: 0.0ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 4ms (Views: 2.8ms | ActiveRecord: 0.2ms)
+  [1m[35mSQL (0.2ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+Rendered categories/_form.html.haml (7.4ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+Rendered categories/_form.html.haml (2.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/categories" for 127.0.0.1 at 2010-09-27 20:48:23 +0700
+  Processing by CategoriesController#index as HTML
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mCategory Load (0.1ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 88ms (Views: 5.3ms | ActiveRecord: 1.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#index as HTML
+Rendered categories/index.html.haml within layouts/application (1.1ms)
+Completed 200 OK in 5ms (Views: 3.8ms | ActiveRecord: 0.0ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+Rendered categories/_form.html.haml (6.2ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+Rendered categories/_form.html.haml (2.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/categories" for 127.0.0.1 at 2010-09-27 20:57:42 +0700
+  Processing by CategoriesController#index as HTML
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mCategory Load (0.1ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 108ms (Views: 4.3ms | ActiveRecord: 0.9ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#index as HTML
+Rendered categories/index.html.haml within layouts/application (1.2ms)
+Completed 200 OK in 5ms (Views: 4.2ms | ActiveRecord: 0.0ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 4ms (Views: 2.2ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+Rendered categories/_form.html.haml (6.2ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+Rendered categories/_form.html.haml (2.3ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/categories" for 127.0.0.1 at 2010-09-27 21:02:38 +0700
+  Processing by CategoriesController#index as HTML
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mCategory Load (0.1ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 108ms (Views: 4.2ms | ActiveRecord: 0.9ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#index as HTML
+Rendered categories/index.html.haml within layouts/application (1.1ms)
+Completed 200 OK in 5ms (Views: 3.9ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 4ms (Views: 2.3ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+Rendered categories/_form.html.haml (6.4ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+Rendered categories/_form.html.haml (2.2ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/categories" for 127.0.0.1 at 2010-09-27 21:03:07 +0700
+  Processing by CategoriesController#index as HTML
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mCategory Load (0.1ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 110ms (Views: 4.2ms | ActiveRecord: 0.9ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#index as HTML
+Rendered categories/index.html.haml within layouts/application (1.1ms)
+Completed 200 OK in 5ms (Views: 3.8ms | ActiveRecord: 0.0ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 4ms (Views: 2.3ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/categories" for 127.0.0.1 at 2010-09-27 21:15:40 +0700
+  Processing by CategoriesController#index as HTML
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mCategory Load (0.1ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 108ms (Views: 4.2ms | ActiveRecord: 0.9ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:15:48 +0700
+  Processing by HomeController#index as HTML
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mCategory Load (0.1ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered home/index.html.haml within layouts/application (5.3ms)
+Completed 200 OK in 79ms (Views: 8.7ms | ActiveRecord: 0.4ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:15:49 +0700
+  Processing by HomeController#index as HTML
+  [1m[35mCategory Load (0.1ms)[0m  SELECT `categories`.* FROM `categories`
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.3ms)
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:15:49 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.1ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.2ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#index as HTML
+Rendered categories/index.html.haml within layouts/application (1.1ms)
+Completed 200 OK in 5ms (Views: 3.9ms | ActiveRecord: 0.0ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 4ms (Views: 2.5ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/categories" for 127.0.0.1 at 2010-09-27 21:16:18 +0700
+  Processing by CategoriesController#index as HTML
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mCategory Load (0.1ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 108ms (Views: 4.3ms | ActiveRecord: 0.7ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:16:27 +0700
+  Processing by HomeController#index as HTML
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mCategory Load (0.1ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered home/index.html.haml within layouts/application (5.4ms)
+Completed 200 OK in 79ms (Views: 8.7ms | ActiveRecord: 0.4ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:16:27 +0700
+  Processing by HomeController#index as HTML
+  [1m[35mCategory Load (0.1ms)[0m  SELECT `categories`.* FROM `categories`
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.3ms)
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:16:27 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.1ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.2ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:17:51 +0700
+  Processing by HomeController#index as HTML
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mCategory Load (0.1ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered home/index.html.haml within layouts/application (5.6ms)
+Completed 200 OK in 78ms (Views: 8.9ms | ActiveRecord: 0.4ms)
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.5ms)[0m  [1mdescribe `categories`[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:17:51', NULL, 'Math', '2010-09-27 14:17:51')
+  [1m[36mSQL (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mSQL (1.5ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:17:51 +0700
+  Processing by HomeController#index as HTML
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories`
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 2.6ms)
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:41:17 +0700
+  Processing by HomeController#index as HTML
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mCategory Load (0.1ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered home/index.html.haml within layouts/application (5.8ms)
+Completed 200 OK in 79ms (Views: 9.0ms | ActiveRecord: 0.4ms)
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.5ms)[0m  [1mdescribe `categories`[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:41:17', NULL, 'Math', '2010-09-27 14:41:17')
+  [1m[36mSQL (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mSQL (1.4ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:41:17 +0700
+  Processing by HomeController#index as HTML
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories`
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 2.5ms)
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:41:31 +0700
+  Processing by HomeController#index as HTML
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mCategory Load (0.1ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered home/index.html.haml within layouts/application (5.7ms)
+Completed 200 OK in 79ms (Views: 9.0ms | ActiveRecord: 0.4ms)
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.4ms)[0m  [1mdescribe `categories`[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:41:31', NULL, 'Math', '2010-09-27 14:41:31')
+  [1m[36mSQL (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mSQL (2.6ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:41:31 +0700
+  Processing by HomeController#index as HTML
+  [1m[35mCategory Load (0.4ms)[0m  SELECT `categories`.* FROM `categories`
+Completed 200 OK in 4ms (Views: 2.6ms | ActiveRecord: 4.0ms)
+  [1m[36mSQL (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.5ms)[0m  describe `categories`
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:42:22', NULL, 'Math', '2010-09-27 14:42:22')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:42:22 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.4ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered home/index.html.haml within layouts/application (8.1ms)
+Completed 200 OK in 14ms (Views: 11.6ms | ActiveRecord: 1.6ms)
+  [1m[35mSQL (1.7ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.6ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:42:31', NULL, 'Math', '2010-09-27 14:42:31')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:42:31 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered home/index.html.haml within layouts/application (10.1ms)
+Completed 200 OK in 16ms (Views: 14.4ms | ActiveRecord: 1.5ms)
+  [1m[35mSQL (1.7ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.5ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:43:35', NULL, 'Math', '2010-09-27 14:43:35')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:43:36 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered home/index.html.haml within layouts/application (57.4ms)
+Completed 200 OK in 62ms (Views: 60.7ms | ActiveRecord: 1.4ms)
+  [1m[35mSQL (1.3ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:43:36', NULL, 'Math', '2010-09-27 14:43:36')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:43:36 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.4ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 6ms (Views: 5.0ms | ActiveRecord: 1.9ms)
+  [1m[35mSQL (1.2ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:43:36', NULL, 'Math', '2010-09-27 14:43:36')[0m
+  [1m[35mSQL (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:43:36 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 6ms (Views: 5.2ms | ActiveRecord: 1.8ms)
+  [1m[35mSQL (8.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.5ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:44:14', NULL, 'Math', '2010-09-27 14:44:14')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:44:14 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered home/index.html.haml within layouts/application (8.0ms)
+Completed 200 OK in 13ms (Views: 11.3ms | ActiveRecord: 1.4ms)
+  [1m[35mSQL (1.2ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:44:14', NULL, 'Math', '2010-09-27 14:44:14')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:44:14 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 5ms (Views: 4.1ms | ActiveRecord: 1.7ms)
+  [1m[35mSQL (14.8ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:44:14', NULL, 'Math', '2010-09-27 14:44:14')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:44:14 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 8ms (Views: 6.4ms | ActiveRecord: 15.4ms)
+  [1m[35mSQL (1.3ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.5ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:46:19', NULL, 'Math', '2010-09-27 14:46:19')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:46:20 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered home/index.html.haml within layouts/application (56.8ms)
+Completed 200 OK in 62ms (Views: 60.1ms | ActiveRecord: 1.4ms)
+  [1m[35mSQL (1.4ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:46:20', NULL, 'Math', '2010-09-27 14:46:20')[0m
+  [1m[35mSQL (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:46:20 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 5ms (Views: 4.2ms | ActiveRecord: 2.0ms)
+  [1m[35mSQL (0.9ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:46:20', NULL, 'Math', '2010-09-27 14:46:20')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:46:20 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 5ms (Views: 4.1ms | ActiveRecord: 1.4ms)
+  [1m[35mSQL (0.9ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.5ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:46:54', NULL, 'Math', '2010-09-27 14:46:54')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:46:54 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered home/index.html.haml within layouts/application (56.9ms)
+Completed 200 OK in 62ms (Views: 60.2ms | ActiveRecord: 1.4ms)
+  [1m[35mSQL (1.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:46:54', NULL, 'Math', '2010-09-27 14:46:54')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:46:54 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 5ms (Views: 4.3ms | ActiveRecord: 1.6ms)
+  [1m[35mSQL (13.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:46:54', NULL, 'Math', '2010-09-27 14:46:54')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:46:54 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 7ms (Views: 5.3ms | ActiveRecord: 13.6ms)
+  [1m[35mSQL (1.3ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.5ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:48:18', NULL, 'Math', '2010-09-27 14:48:18')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:48:18 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered home/index.html.haml within layouts/application (57.0ms)
+Completed 200 OK in 62ms (Views: 60.3ms | ActiveRecord: 1.3ms)
+  [1m[35mSQL (1.4ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:48:18', NULL, 'Math', '2010-09-27 14:48:18')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:48:18 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 5ms (Views: 4.3ms | ActiveRecord: 2.0ms)
+  [1m[35mSQL (0.9ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:48:18', NULL, 'Math', '2010-09-27 14:48:18')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:48:18 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 5ms (Views: 4.1ms | ActiveRecord: 1.4ms)
+  [1m[35mSQL (0.9ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#index as HTML
+Rendered categories/index.html.haml within layouts/application (1.2ms)
+Completed 200 OK in 5ms (Views: 4.0ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 4ms (Views: 2.3ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/categories" for 127.0.0.1 at 2010-09-27 21:50:21 +0700
+  Processing by CategoriesController#index as HTML
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 67ms (Views: 3.6ms | ActiveRecord: 0.8ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.5ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:50:30', NULL, 'Math', '2010-09-27 14:50:30')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:50:30 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered home/index.html.haml within layouts/application (6.2ms)
+Completed 200 OK in 11ms (Views: 9.5ms | ActiveRecord: 1.4ms)
+  [1m[35mSQL (1.6ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:50:30', NULL, 'Math', '2010-09-27 14:50:30')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:50:30 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 2.1ms)
+  [1m[35mSQL (10.2ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:50:30', NULL, 'Math', '2010-09-27 14:50:30')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:50:30 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 5ms (Views: 3.8ms | ActiveRecord: 10.8ms)
+
+
+Started GET "/categories/23" for 127.0.0.1 at 2010-09-27 21:50:32 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"23"}
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 23) LIMIT 1
+Completed 200 OK in 9ms (Views: 6.8ms | ActiveRecord: 0.2ms)
+  [1m[36mSQL (1.3ms)[0m  [1mROLLBACK[0m
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.5ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:51:55', NULL, 'Math', '2010-09-27 14:51:55')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:51:55 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered home/index.html.haml within layouts/application (5.9ms)
+Completed 200 OK in 10ms (Views: 9.0ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/categories/24" for 127.0.0.1 at 2010-09-27 21:52:17 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"24"}
+  [1m[35mCategory Load (0.3ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 24) LIMIT 1
+Rendered categories/show.html.haml within layouts/application (5.8ms)
+Completed 200 OK in 11ms (Views: 9.1ms | ActiveRecord: 0.3ms)
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+  [1m[35mSQL (1.5ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#index as HTML
+Rendered categories/index.html.haml within layouts/application (1.1ms)
+Completed 200 OK in 5ms (Views: 3.9ms | ActiveRecord: 0.0ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 4ms (Views: 2.4ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/categories" for 127.0.0.1 at 2010-09-27 21:52:26 +0700
+  Processing by CategoriesController#index as HTML
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 66ms (Views: 3.6ms | ActiveRecord: 0.8ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.5ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:52:34', NULL, 'Math', '2010-09-27 14:52:34')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:52:34 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered home/index.html.haml within layouts/application (6.2ms)
+Completed 200 OK in 11ms (Views: 9.6ms | ActiveRecord: 1.3ms)
+  [1m[35mSQL (1.2ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:52:35', NULL, 'Math', '2010-09-27 14:52:35')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:52:35 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 1.7ms)
+  [1m[35mSQL (10.6ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:52:35', NULL, 'Math', '2010-09-27 14:52:35')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:52:35 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 5ms (Views: 3.8ms | ActiveRecord: 11.2ms)
+
+
+Started GET "/categories/27" for 127.0.0.1 at 2010-09-27 21:52:35 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"27"}
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 27) LIMIT 1
+Completed 200 OK in 9ms (Views: 6.8ms | ActiveRecord: 0.2ms)
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+  [1m[35mSQL (0.9ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.5ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:52:43', NULL, 'Math', '2010-09-27 14:52:43')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:52:43 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered home/index.html.haml within layouts/application (6.1ms)
+Completed 200 OK in 11ms (Views: 9.5ms | ActiveRecord: 1.3ms)
+  [1m[35mSQL (1.5ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:52:43', NULL, 'Math', '2010-09-27 14:52:43')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:52:43 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 2.1ms)
+  [1m[35mSQL (0.9ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:52:43', NULL, 'Math', '2010-09-27 14:52:43')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:52:43 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/categories/30" for 127.0.0.1 at 2010-09-27 21:52:43 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"30"}
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 30) LIMIT 1
+Completed 200 OK in 8ms (Views: 6.8ms | ActiveRecord: 0.2ms)
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+  [1m[35mSQL (0.9ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.5ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:53:08', NULL, 'Math', '2010-09-27 14:53:08')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:53:09 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered home/index.html.haml within layouts/application (7.2ms)
+Completed 200 OK in 60ms (Views: 58.7ms | ActiveRecord: 1.3ms)
+  [1m[35mSQL (2.4ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:53:09', NULL, 'Math', '2010-09-27 14:53:09')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:53:09 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.2ms | ActiveRecord: 3.0ms)
+  [1m[35mSQL (1.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:53:09', NULL, 'Math', '2010-09-27 14:53:09')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:53:09 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.0ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/categories/33" for 127.0.0.1 at 2010-09-27 21:53:09 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"33"}
+  [1m[35mCategory Load (0.3ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 33) LIMIT 1
+Completed 200 OK in 8ms (Views: 6.7ms | ActiveRecord: 0.3ms)
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+  [1m[35mSQL (0.9ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.5ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:53:17', NULL, 'Math', '2010-09-27 14:53:17')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:53:17 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered home/index.html.haml within layouts/application (6.2ms)
+Completed 200 OK in 11ms (Views: 9.5ms | ActiveRecord: 1.3ms)
+  [1m[35mSQL (1.4ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:53:17', NULL, 'Math', '2010-09-27 14:53:17')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:53:17 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.0ms | ActiveRecord: 2.0ms)
+  [1m[35mSQL (1.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:53:17', NULL, 'Math', '2010-09-27 14:53:17')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:53:17 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.0ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/categories/36" for 127.0.0.1 at 2010-09-27 21:53:17 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"36"}
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 36) LIMIT 1
+Completed 200 OK in 8ms (Views: 6.8ms | ActiveRecord: 0.2ms)
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+  [1m[35mSQL (0.9ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.5ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:53:35', NULL, 'Math', '2010-09-27 14:53:35')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:53:35 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered home/index.html.haml within layouts/application (6.2ms)
+Completed 200 OK in 11ms (Views: 9.5ms | ActiveRecord: 1.3ms)
+  [1m[35mSQL (2.7ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:53:35', NULL, 'Math', '2010-09-27 14:53:35')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:53:35 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 3.2ms)
+  [1m[35mSQL (1.2ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:53:35', NULL, 'Math', '2010-09-27 14:53:35')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:53:35 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.0ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/categories/39" for 127.0.0.1 at 2010-09-27 21:53:35 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"39"}
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 39) LIMIT 1
+Completed 200 OK in 8ms (Views: 6.7ms | ActiveRecord: 0.2ms)
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+  [1m[35mSQL (1.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.5ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:54:39', NULL, 'Math', '2010-09-27 14:54:39')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:54:39 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered home/index.html.haml within layouts/application (6.2ms)
+Completed 200 OK in 11ms (Views: 9.5ms | ActiveRecord: 1.3ms)
+  [1m[35mSQL (2.2ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:54:40', NULL, 'Math', '2010-09-27 14:54:40')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:54:40 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 2.7ms)
+  [1m[35mSQL (1.2ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 14:54:40', NULL, 'Math', '2010-09-27 14:54:40')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-27 21:54:40 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/categories/42" for 127.0.0.1 at 2010-09-27 21:54:40 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"42"}
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 42) LIMIT 1
+Completed 200 OK in 9ms (Views: 6.8ms | ActiveRecord: 0.2ms)
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+  [1m[35mSQL (1.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#index as HTML
+Rendered categories/index.html.haml within layouts/application (1.4ms)
+Completed 200 OK in 21ms (Views: 19.3ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 12ms (Views: 11.1ms | ActiveRecord: 0.2ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#index as HTML
+Completed 200 OK in 6ms (Views: 4.0ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#show as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 44ms (Views: 2.5ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#new as HTML
+Completed 200 OK in 4ms (Views: 2.4ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#edit as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 4ms (Views: 2.4ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#create as HTML
+  Parameters: {"league"=>{"these"=>"params"}}
+Redirected to 
+Completed   in 3ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#create as HTML
+  Parameters: {"league"=>{}}
+Redirected to 
+Completed   in 2ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#create as HTML
+  Parameters: {"league"=>{"these"=>"params"}}
+Completed 200 OK in 3ms (Views: 1.8ms | ActiveRecord: 0.3ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#create as HTML
+  Parameters: {"league"=>{}}
+Completed 200 OK in 3ms (Views: 1.6ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#update as HTML
+  Parameters: {"league"=>{"these"=>"params"}, "id"=>"37"}
+Completed 200 OK in 2ms (Views: 1.5ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#update as HTML
+  Parameters: {"id"=>"1"}
+Redirected to 
+Completed   in 2ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#update as HTML
+  Parameters: {"id"=>"1"}
+Redirected to 
+Completed   in 2ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#update as HTML
+  Parameters: {"id"=>"1"}
+Completed 200 OK in 3ms (Views: 1.6ms | ActiveRecord: 0.3ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#update as HTML
+  Parameters: {"id"=>"1"}
+Completed 200 OK in 3ms (Views: 1.6ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#destroy as HTML
+  Parameters: {"id"=>"37"}
+Redirected to http://test.host/leagues
+Completed 302 Found in 1ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#destroy as HTML
+  Parameters: {"id"=>"1"}
+Redirected to http://test.host/leagues
+Completed 302 Found in 2ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/categories" for 127.0.0.1 at 2010-09-30 22:58:21 +0700
+  Processing by CategoriesController#index as HTML
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 112ms (Views: 4.6ms | ActiveRecord: 1.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/leagues" for 127.0.0.1 at 2010-09-30 22:58:21 +0700
+  Processing by LeaguesController#index as HTML
+  [1m[35mLeague Load (0.3ms)[0m  SELECT `leagues`.* FROM `leagues`
+Mysql::Error: Table 'seamoo_test.leagues' doesn't exist: SELECT     `leagues`.* FROM       `leagues`
+Completed   in 3ms
+  [1m[36mSQL (0.0ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.0ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.0ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.0ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.0ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.0ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.0ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.0ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.0ms)[0m  [1mROLLBACK[0m
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.5ms)[0m  describe `categories`
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 15:58:31', NULL, 'Math', '2010-09-30 15:58:31')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 22:58:31 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered home/index.html.haml within layouts/application (7.7ms)
+Completed 200 OK in 24ms (Views: 22.6ms | ActiveRecord: 1.4ms)
+  [1m[35mSQL (1.6ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 15:58:31', NULL, 'Math', '2010-09-30 15:58:31')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 22:58:31 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 2.2ms)
+  [1m[35mSQL (1.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 15:58:31', NULL, 'Math', '2010-09-30 15:58:31')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 22:58:31 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.0ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/categories/3" for 127.0.0.1 at 2010-09-30 22:58:31 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[35mCategory Load (0.3ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 3) LIMIT 1
+Completed 200 OK in 9ms (Views: 7.0ms | ActiveRecord: 0.3ms)
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+  [1m[35mSQL (0.9ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#index as HTML
+Rendered categories/index.html.haml within layouts/application (1.4ms)
+Completed 200 OK in 7ms (Views: 4.9ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 4ms (Views: 2.8ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#index as HTML
+Completed 200 OK in 6ms (Views: 4.0ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#show as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 48ms (Views: 3.0ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#new as HTML
+Completed 200 OK in 5ms (Views: 2.8ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#edit as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 5ms (Views: 2.9ms | ActiveRecord: 0.2ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#create as HTML
+  Parameters: {"league"=>{"these"=>"params"}}
+Redirected to 
+Completed   in 3ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#create as HTML
+  Parameters: {"league"=>{}}
+Redirected to 
+Completed   in 3ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#create as HTML
+  Parameters: {"league"=>{"these"=>"params"}}
+Completed 200 OK in 4ms (Views: 2.0ms | ActiveRecord: 0.3ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#create as HTML
+  Parameters: {"league"=>{}}
+Completed 200 OK in 4ms (Views: 2.0ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#update as HTML
+  Parameters: {"league"=>{"these"=>"params"}, "id"=>"37"}
+Completed 200 OK in 2ms (Views: 1.9ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#update as HTML
+  Parameters: {"id"=>"1"}
+Redirected to 
+Completed   in 3ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#update as HTML
+  Parameters: {"id"=>"1"}
+Redirected to 
+Completed   in 3ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#update as HTML
+  Parameters: {"id"=>"1"}
+Completed 200 OK in 4ms (Views: 2.2ms | ActiveRecord: 0.3ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#update as HTML
+  Parameters: {"id"=>"1"}
+Completed 200 OK in 4ms (Views: 1.9ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#destroy as HTML
+  Parameters: {"id"=>"37"}
+Redirected to http://test.host/leagues
+Completed 302 Found in 1ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#destroy as HTML
+  Parameters: {"id"=>"1"}
+Redirected to http://test.host/leagues
+Completed 302 Found in 2ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/categories" for 127.0.0.1 at 2010-09-30 22:59:28 +0700
+  Processing by CategoriesController#index as HTML
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 68ms (Views: 3.7ms | ActiveRecord: 1.0ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/leagues" for 127.0.0.1 at 2010-09-30 22:59:28 +0700
+  Processing by LeaguesController#index as HTML
+  [1m[35mLeague Load (0.3ms)[0m  SELECT `leagues`.* FROM `leagues`
+Mysql::Error: Table 'seamoo_test.leagues' doesn't exist: SELECT     `leagues`.* FROM       `leagues`
+Completed   in 3ms
+  [1m[36mSQL (0.0ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.0ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.0ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.0ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.0ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.5ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 15:59:36', NULL, 'Math', '2010-09-30 15:59:36')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 22:59:36 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered home/index.html.haml within layouts/application (5.9ms)
+Completed 200 OK in 11ms (Views: 9.2ms | ActiveRecord: 1.3ms)
+  [1m[35mSQL (1.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 15:59:36', NULL, 'Math', '2010-09-30 15:59:36')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 22:59:36 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.2ms | ActiveRecord: 1.6ms)
+  [1m[35mSQL (12.6ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 15:59:36', NULL, 'Math', '2010-09-30 15:59:36')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 22:59:36 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.2ms | ActiveRecord: 13.2ms)
+
+
+Started GET "/categories/6" for 127.0.0.1 at 2010-09-30 22:59:36 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[35mCategory Load (0.3ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 6) LIMIT 1
+Completed 200 OK in 9ms (Views: 6.9ms | ActiveRecord: 0.3ms)
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+  [1m[35mSQL (0.9ms)[0m  ROLLBACK
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+Migrating to CreateCategories (20100925042936)
+Migrating to AddImageUrlToCategories (20100927134013)
+  [1m[35mSQL (0.4ms)[0m  describe `schema_migrations`
+  [1m[36mSQL (1.1ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20100927134013')[0m
+Migrating to CreateLeagues (20100930155327)
+  [1m[35mSQL (14.8ms)[0m  CREATE TABLE `leagues` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `category_id` int(11), `name` varchar(255), `description` varchar(255), `image_url` varchar(255), `level` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (1.2ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20100930155327')[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[35mSQL (0.1ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.3ms)[0m  [1mdescribe `categories`[0m
+  [1m[35mSQL (0.1ms)[0m  SHOW KEYS FROM `categories`
+  [1m[36mSQL (0.3ms)[0m  [1mdescribe `leagues`[0m
+  [1m[35mSQL (0.1ms)[0m  SHOW KEYS FROM `leagues`
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#index as HTML
+Rendered categories/index.html.haml within layouts/application (1.1ms)
+Completed 200 OK in 5ms (Views: 3.9ms | ActiveRecord: 0.0ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 4ms (Views: 2.3ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#index as HTML
+Completed 200 OK in 5ms (Views: 3.2ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#show as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 48ms (Views: 2.5ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#new as HTML
+Completed 200 OK in 4ms (Views: 2.4ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#edit as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 4ms (Views: 2.3ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#create as HTML
+  Parameters: {"league"=>{"these"=>"params"}}
+Redirected to http://test.host/leagues/1007
+Completed 302 Found in 5ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#create as HTML
+  Parameters: {"league"=>{}}
+Redirected to http://test.host/leagues/1008
+Completed 302 Found in 2ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#create as HTML
+  Parameters: {"league"=>{"these"=>"params"}}
+Completed 200 OK in 3ms (Views: 1.6ms | ActiveRecord: 0.4ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#create as HTML
+  Parameters: {"league"=>{}}
+Completed 200 OK in 3ms (Views: 1.6ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#update as HTML
+  Parameters: {"league"=>{"these"=>"params"}, "id"=>"37"}
+Completed 200 OK in 2ms (Views: 1.7ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#update as HTML
+  Parameters: {"id"=>"1"}
+Redirected to http://test.host/leagues/1012
+Completed 302 Found in 3ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#update as HTML
+  Parameters: {"id"=>"1"}
+Redirected to http://test.host/leagues/1013
+Completed 302 Found in 3ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#update as HTML
+  Parameters: {"id"=>"1"}
+Completed 200 OK in 3ms (Views: 1.6ms | ActiveRecord: 0.4ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#update as HTML
+  Parameters: {"id"=>"1"}
+Completed 200 OK in 3ms (Views: 1.6ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#destroy as HTML
+  Parameters: {"id"=>"37"}
+Redirected to http://test.host/leagues
+Completed 302 Found in 1ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#destroy as HTML
+  Parameters: {"id"=>"1"}
+Redirected to http://test.host/leagues
+Completed 302 Found in 2ms
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/categories" for 127.0.0.1 at 2010-09-30 23:00:02 +0700
+  Processing by CategoriesController#index as HTML
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 67ms (Views: 3.7ms | ActiveRecord: 1.0ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/leagues" for 127.0.0.1 at 2010-09-30 23:00:02 +0700
+  Processing by LeaguesController#index as HTML
+  [1m[35mLeague Load (0.2ms)[0m  SELECT `leagues`.* FROM `leagues`
+Completed 200 OK in 7ms (Views: 4.0ms | ActiveRecord: 0.4ms)
+  [1m[36mSQL (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.0ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.0ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.0ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.0ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.0ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.0ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.0ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.0ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.0ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.0ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.0ms)[0m  [1mROLLBACK[0m
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.7ms)[0m  describe `categories`
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:00:11', NULL, 'Math', '2010-09-30 16:00:11')[0m
+  [1m[35mSQL (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:00:11 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.4ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered home/index.html.haml within layouts/application (8.2ms)
+Completed 200 OK in 15ms (Views: 12.8ms | ActiveRecord: 2.0ms)
+  [1m[35mSQL (1.4ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:00:11', NULL, 'Math', '2010-09-30 16:00:11')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:00:11 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.2ms | ActiveRecord: 2.0ms)
+  [1m[35mSQL (1.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:00:11', NULL, 'Math', '2010-09-30 16:00:11')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:00:11 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.3ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/categories/9" for 127.0.0.1 at 2010-09-30 23:00:11 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"9"}
+  [1m[35mCategory Load (0.3ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 9) LIMIT 1
+Completed 200 OK in 9ms (Views: 7.2ms | ActiveRecord: 0.3ms)
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+  [1m[35mSQL (0.9ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#index as HTML
+Rendered leagues/index.html.haml within layouts/application (1.2ms)
+Completed 200 OK in 5ms (Views: 4.0ms | ActiveRecord: 0.0ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#show as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 4ms (Views: 2.3ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#new as HTML
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#edit as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 2ms (Views: 2.1ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#index as HTML
+Rendered leagues/index.html.haml within layouts/application (1.2ms)
+Completed 200 OK in 5ms (Views: 4.1ms | ActiveRecord: 0.0ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#show as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 4ms (Views: 2.5ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#index as HTML
+Rendered categories/index.html.haml within layouts/application (1.4ms)
+Completed 200 OK in 7ms (Views: 5.0ms | ActiveRecord: 0.0ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 5ms (Views: 3.1ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#index as HTML
+Completed 200 OK in 6ms (Views: 4.0ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#show as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 5ms (Views: 2.9ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/categories" for 127.0.0.1 at 2010-09-30 23:13:41 +0700
+  Processing by CategoriesController#index as HTML
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 86ms (Views: 4.6ms | ActiveRecord: 0.9ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/leagues" for 127.0.0.1 at 2010-09-30 23:13:42 +0700
+  Processing by LeaguesController#index as HTML
+  [1m[35mLeague Load (0.1ms)[0m  SELECT `leagues`.* FROM `leagues`
+Completed 200 OK in 9ms (Views: 5.3ms | ActiveRecord: 0.3ms)
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.5ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:13:51', NULL, 'Math', '2010-09-30 16:13:51')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:13:51 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered home/index.html.haml within layouts/application (6.2ms)
+Completed 200 OK in 11ms (Views: 9.5ms | ActiveRecord: 1.4ms)
+  [1m[35mSQL (1.6ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:13:51', NULL, 'Math', '2010-09-30 16:13:51')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:13:51 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 2.1ms)
+  [1m[35mSQL (3.5ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:13:51', NULL, 'Math', '2010-09-30 16:13:51')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:13:51 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 4.1ms)
+
+
+Started GET "/categories/12" for 127.0.0.1 at 2010-09-30 23:13:51 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"12"}
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 12) LIMIT 1
+Completed 200 OK in 9ms (Views: 7.0ms | ActiveRecord: 0.2ms)
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+  [1m[35mSQL (0.9ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.5ms)[0m  describe `categories`
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:14:12', NULL, 'Math', '2010-09-30 16:14:12')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:14:13 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered home/index.html.haml within layouts/application (6.1ms)
+Completed 200 OK in 11ms (Views: 9.4ms | ActiveRecord: 1.5ms)
+  [1m[35mSQL (1.4ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:14:13', NULL, 'Math', '2010-09-30 16:14:13')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:14:13 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 2.0ms)
+  [1m[35mSQL (2.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:14:13', NULL, 'Math', '2010-09-30 16:14:13')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:14:13 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 2.6ms)
+
+
+Started GET "/categories/15" for 127.0.0.1 at 2010-09-30 23:14:13 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"15"}
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 15) LIMIT 1
+Completed 200 OK in 9ms (Views: 7.1ms | ActiveRecord: 0.2ms)
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+  [1m[35mSQL (1.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.6ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:22:02', NULL, 'Math', '2010-09-30 16:22:02')[0m
+  [1m[35mSQL (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:22:02 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered home/index.html.haml within layouts/application (6.1ms)
+Completed 200 OK in 11ms (Views: 9.4ms | ActiveRecord: 1.5ms)
+  [1m[35mSQL (1.7ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:22:02', NULL, 'Math', '2010-09-30 16:22:02')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:22:02 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.3ms | ActiveRecord: 2.2ms)
+  [1m[35mSQL (1.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:22:02', NULL, 'Math', '2010-09-30 16:22:02')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:22:02 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.2ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/categories/18" for 127.0.0.1 at 2010-09-30 23:22:02 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"18"}
+  [1m[35mCategory Load (0.3ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 18) LIMIT 1
+Completed 200 OK in 9ms (Views: 7.3ms | ActiveRecord: 0.3ms)
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+  [1m[35mSQL (0.9ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#index as HTML
+Rendered categories/index.html.haml within layouts/application (1.3ms)
+Completed 200 OK in 6ms (Views: 4.3ms | ActiveRecord: 0.0ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 4ms (Views: 2.3ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#index as HTML
+Completed 200 OK in 6ms (Views: 3.9ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#show as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 48ms (Views: 46.6ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/categories" for 127.0.0.1 at 2010-09-30 23:22:10 +0700
+  Processing by CategoriesController#index as HTML
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 71ms (Views: 5.0ms | ActiveRecord: 1.0ms)
+  [1m[35mSQL (0.2ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/leagues" for 127.0.0.1 at 2010-09-30 23:22:10 +0700
+  Processing by LeaguesController#index as HTML
+  [1m[35mLeague Load (0.2ms)[0m  SELECT `leagues`.* FROM `leagues`
+Completed 200 OK in 8ms (Views: 4.3ms | ActiveRecord: 0.4ms)
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.6ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:22:20', NULL, 'Math', '2010-09-30 16:22:20')[0m
+  [1m[35mSQL (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:22:20 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered home/index.html.haml within layouts/application (7.5ms)
+Completed 200 OK in 13ms (Views: 11.6ms | ActiveRecord: 1.5ms)
+  [1m[35mSQL (1.4ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:22:20', NULL, 'Math', '2010-09-30 16:22:20')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:22:20 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 5ms (Views: 3.5ms | ActiveRecord: 2.0ms)
+  [1m[35mSQL (0.9ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:22:20', NULL, 'Math', '2010-09-30 16:22:20')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:22:20 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/categories/21" for 127.0.0.1 at 2010-09-30 23:22:20 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"21"}
+  [1m[35mCategory Load (0.3ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 21) LIMIT 1
+Completed 200 OK in 9ms (Views: 7.0ms | ActiveRecord: 0.3ms)
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+  [1m[35mSQL (0.8ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.5ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:22:30', NULL, 'Math', '2010-09-30 16:22:30')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:22:30 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered home/index.html.haml within layouts/application (6.1ms)
+Completed 200 OK in 11ms (Views: 9.4ms | ActiveRecord: 1.4ms)
+  [1m[35mSQL (1.5ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:22:30', NULL, 'Math', '2010-09-30 16:22:30')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:22:30 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 2.0ms)
+  [1m[35mSQL (5.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:22:30', NULL, 'Math', '2010-09-30 16:22:30')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:22:30 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.2ms | ActiveRecord: 5.7ms)
+
+
+Started GET "/categories/24" for 127.0.0.1 at 2010-09-30 23:22:30 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"24"}
+  [1m[35mCategory Load (0.3ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 24) LIMIT 1
+Completed 200 OK in 8ms (Views: 6.7ms | ActiveRecord: 0.3ms)
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+  [1m[35mSQL (0.9ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:22:30', NULL, 'Math', '2010-09-30 16:22:30')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:22:30 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.2ms | ActiveRecord: 1.7ms)
+  [1m[35mSQL (1.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:22:30', NULL, 'Math', '2010-09-30 16:22:30')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:22:30 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.0ms | ActiveRecord: 1.5ms)
+  [1m[35mSQL (23.4ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:22:30', NULL, 'Math', '2010-09-30 16:22:30')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:22:30 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 5ms (Views: 3.6ms | ActiveRecord: 24.0ms)
+
+
+Started GET "/categories/27" for 127.0.0.1 at 2010-09-30 23:22:30 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"27"}
+  [1m[35mCategory Load (0.3ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 27) LIMIT 1
+Completed 200 OK in 5ms (Views: 3.0ms | ActiveRecord: 0.3ms)
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+  [1m[35mSQL (0.9ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.5ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:24:14', NULL, 'Math', '2010-09-30 16:24:14')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:24:14 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered home/index.html.haml within layouts/application (6.1ms)
+Completed 200 OK in 11ms (Views: 9.4ms | ActiveRecord: 1.4ms)
+  [1m[35mSQL (2.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:24:14', NULL, 'Math', '2010-09-30 16:24:14')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:24:14 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.2ms | ActiveRecord: 2.6ms)
+  [1m[35mSQL (1.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:24:14', NULL, 'Math', '2010-09-30 16:24:14')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:24:14 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (1.3ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 6ms (Views: 3.3ms | ActiveRecord: 2.7ms)
+
+
+Started GET "/categories/30" for 127.0.0.1 at 2010-09-30 23:24:14 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"30"}
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 30) LIMIT 1
+Completed 200 OK in 8ms (Views: 6.8ms | ActiveRecord: 0.2ms)
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+  [1m[35mSQL (0.9ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:24:14', NULL, 'Math', '2010-09-30 16:24:14')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:24:14 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 1.6ms)
+  [1m[35mSQL (0.9ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:24:14', NULL, 'Math', '2010-09-30 16:24:14')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:24:14 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/categories/32" for 127.0.0.1 at 2010-09-30 23:24:14 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"32"}
+  [1m[35mCategory Load (0.3ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 32) LIMIT 1
+Completed 200 OK in 4ms (Views: 3.0ms | ActiveRecord: 0.3ms)
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+  [1m[35mSQL (0.9ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.5ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:25:33', NULL, 'Math', '2010-09-30 16:25:33')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mSQL (18.6ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:25:33', NULL, 'Math', '2010-09-30 16:25:33')
+  [1m[36mSQL (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:25:33 +0700
+  Processing by HomeController#index as HTML
+  [1m[35mCategory Load (0.4ms)[0m  SELECT `categories`.* FROM `categories`
+Completed 200 OK in 11ms (Views: 9.4ms | ActiveRecord: 20.5ms)
+  [1m[36mSQL (1.4ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:25:33', NULL, 'Math', '2010-09-30 16:25:33')
+  [1m[36mSQL (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:25:33 +0700
+  Processing by HomeController#index as HTML
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories`
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/categories/35" for 127.0.0.1 at 2010-09-30 23:25:33 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"35"}
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 35) LIMIT 1[0m
+Completed 200 OK in 9ms (Views: 7.0ms | ActiveRecord: 0.3ms)
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1
+  [1m[36mSQL (1.1ms)[0m  [1mROLLBACK[0m
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.5ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:25:56', NULL, 'Math', '2010-09-30 16:25:56')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mSQL (1.0ms)[0m  [1mROLLBACK[0m
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.6ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:26:23', NULL, 'Math', '2010-09-30 16:26:23')[0m
+  [1m[35mSQL (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mSQL (1.2ms)[0m  [1mROLLBACK[0m
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.5ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:26:56', NULL, 'Math', '2010-09-30 16:26:56')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mSQL (1.6ms)[0m  [1mROLLBACK[0m
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.6ms)[0m  describe `categories`
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:27:06', NULL, 'Math', '2010-09-30 16:27:06')[0m
+  [1m[35mSQL (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mSQL (1.3ms)[0m  [1mROLLBACK[0m
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.6ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:28:01', NULL, 'Math', '2010-09-30 16:28:01')[0m
+  [1m[35mSQL (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+
+
+Started GET "/categories/40" for 127.0.0.1 at 2010-09-30 23:28:01 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"40"}
+  [1m[35mCategory Load (0.3ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 40) LIMIT 1
+Rendered categories/show.html.haml within layouts/application (6.5ms)
+Completed 200 OK in 13ms (Views: 10.7ms | ActiveRecord: 1.8ms)
+  [1m[36mSQL (2.0ms)[0m  [1mROLLBACK[0m
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.5ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:29:04', NULL, 'Math', '2010-09-30 16:29:04')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+
+
+Started GET "/categories/41" for 127.0.0.1 at 2010-09-30 23:29:04 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"41"}
+  [1m[35mCategory Load (0.3ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 41) LIMIT 1
+Rendered categories/show.html.haml within layouts/application (5.1ms)
+Completed 200 OK in 10ms (Views: 8.4ms | ActiveRecord: 1.6ms)
+  [1m[36mSQL (1.7ms)[0m  [1mROLLBACK[0m
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.5ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:30:09', NULL, 'Math', '2010-09-30 16:30:09')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.5ms)[0m  [1mdescribe `leagues`[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `leagues` (`category_id`, `created_at`, `description`, `image_url`, `level`, `name`, `updated_at`) VALUES (NULL, '2010-09-30 16:30:10', NULL, NULL, NULL, 'Intermediate', '2010-09-30 16:30:10')
+  [1m[36mSQL (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE `leagues` SET `category_id` = 42, `updated_at` = '2010-09-30 16:30:10' WHERE (`leagues`.`id` = 1)[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+
+
+Started GET "/categories/42" for 127.0.0.1 at 2010-09-30 23:30:10 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"42"}
+  [1m[35mCategory Load (1.1ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 42) LIMIT 1
+Rendered categories/show.html.haml within layouts/application (5.4ms)
+Completed 200 OK in 11ms (Views: 8.8ms | ActiveRecord: 3.9ms)
+  [1m[36mSQL (1.5ms)[0m  [1mROLLBACK[0m
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mLeague Load (0.2ms)[0m  [1mSELECT `leagues`.* FROM `leagues` WHERE (`leagues`.category_id = 1001)[0m
+Rendered categories/show.html.haml (85.2ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.5ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:33:42', NULL, 'Math', '2010-09-30 16:33:42')[0m
+  [1m[35mSQL (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.6ms)[0m  [1mdescribe `leagues`[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `leagues` (`category_id`, `created_at`, `description`, `image_url`, `level`, `name`, `updated_at`) VALUES (NULL, '2010-09-30 16:33:42', NULL, NULL, NULL, 'Intermediate', '2010-09-30 16:33:42')
+  [1m[36mSQL (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE `leagues` SET `category_id` = 43, `updated_at` = '2010-09-30 16:33:42' WHERE (`leagues`.`id` = 2)[0m
+  [1m[35mSQL (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mCategory Load (0.4ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+
+
+Started GET "/categories/43" for 127.0.0.1 at 2010-09-30 23:33:42 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"43"}
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 43) LIMIT 1
+  [1m[36mLeague Load (0.3ms)[0m  [1mSELECT `leagues`.* FROM `leagues` WHERE (`leagues`.category_id = 43)[0m
+Rendered categories/show.html.haml within layouts/application (8.0ms)
+Completed 200 OK in 13ms (Views: 11.0ms | ActiveRecord: 3.8ms)
+
+
+Started GET "/leagues/2" for 127.0.0.1 at 2010-09-30 23:33:42 +0700
+  Processing by LeaguesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mLeague Load (0.4ms)[0m  SELECT `leagues`.* FROM `leagues` WHERE (`leagues`.`id` = 2) LIMIT 1
+Rendered leagues/show.html.haml within layouts/application (6.3ms)
+Completed 200 OK in 11ms (Views: 9.2ms | ActiveRecord: 0.4ms)
+  [1m[36mSQL (2.8ms)[0m  [1mROLLBACK[0m
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.6ms)[0m  describe `categories`
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:35:20', NULL, 'Math', '2010-09-30 16:35:20')[0m
+  [1m[35mSQL (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.4ms)[0m  [1mdescribe `leagues`[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `leagues` (`category_id`, `created_at`, `description`, `image_url`, `level`, `name`, `updated_at`) VALUES (NULL, '2010-09-30 16:35:20', NULL, NULL, NULL, 'Intermediate', '2010-09-30 16:35:20')
+  [1m[36mSQL (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE `leagues` SET `category_id` = 44, `updated_at` = '2010-09-30 16:35:20' WHERE (`leagues`.`id` = 3)[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+
+
+Started GET "/categories/44" for 127.0.0.1 at 2010-09-30 23:35:20 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"44"}
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 44) LIMIT 1
+  [1m[36mLeague Load (0.5ms)[0m  [1mSELECT `leagues`.* FROM `leagues` WHERE (`leagues`.category_id = 44)[0m
+Rendered categories/show.html.haml within layouts/application (10.5ms)
+Completed 200 OK in 16ms (Views: 13.8ms | ActiveRecord: 3.6ms)
+
+
+Started GET "/leagues/3" for 127.0.0.1 at 2010-09-30 23:35:20 +0700
+  Processing by LeaguesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[35mLeague Load (0.3ms)[0m  SELECT `leagues`.* FROM `leagues` WHERE (`leagues`.`id` = 3) LIMIT 1
+Rendered leagues/show.html.haml within layouts/application (6.4ms)
+Completed 200 OK in 11ms (Views: 9.3ms | ActiveRecord: 0.3ms)
+  [1m[36mLeague Load (0.3ms)[0m  [1mSELECT `leagues`.* FROM `leagues` WHERE (`leagues`.`name` = 'Intermediate') LIMIT 1[0m
+  [1m[35mSQL (1.6ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#index as HTML
+Rendered categories/index.html.haml within layouts/application (1.2ms)
+Completed 200 OK in 5ms (Views: 3.9ms | ActiveRecord: 0.0ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 43ms (Views: 2.5ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#index as HTML
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#show as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 4ms (Views: 2.4ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mLeague Load (0.2ms)[0m  [1mSELECT `leagues`.* FROM `leagues` WHERE (`leagues`.category_id = 1007)[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/categories" for 127.0.0.1 at 2010-09-30 23:35:29 +0700
+  Processing by CategoriesController#index as HTML
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories`
+Completed 200 OK in 7ms (Views: 3.6ms | ActiveRecord: 1.2ms)
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+
+
+Started GET "/leagues" for 127.0.0.1 at 2010-09-30 23:35:29 +0700
+  Processing by LeaguesController#index as HTML
+  [1m[36mLeague Load (0.2ms)[0m  [1mSELECT `leagues`.* FROM `leagues`[0m
+Completed 200 OK in 5ms (Views: 4.0ms | ActiveRecord: 0.4ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.5ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:35:40', NULL, 'Math', '2010-09-30 16:35:40')[0m
+  [1m[35mSQL (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mCategory Load (0.4ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.5ms)[0m  [1mdescribe `leagues`[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `leagues` (`category_id`, `created_at`, `description`, `image_url`, `level`, `name`, `updated_at`) VALUES (NULL, '2010-09-30 16:35:40', NULL, NULL, NULL, 'Intermediate', '2010-09-30 16:35:40')
+  [1m[36mSQL (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.6ms)[0m  [1mUPDATE `leagues` SET `category_id` = 45, `updated_at` = '2010-09-30 16:35:40' WHERE (`leagues`.`id` = 4)[0m
+  [1m[35mSQL (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+
+
+Started GET "/categories/45" for 127.0.0.1 at 2010-09-30 23:35:40 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"45"}
+  [1m[35mCategory Load (0.7ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 45) LIMIT 1
+  [1m[36mLeague Load (0.3ms)[0m  [1mSELECT `leagues`.* FROM `leagues` WHERE (`leagues`.category_id = 45)[0m
+Rendered categories/show.html.haml within layouts/application (8.1ms)
+Completed 200 OK in 14ms (Views: 11.3ms | ActiveRecord: 4.5ms)
+
+
+Started GET "/leagues/4" for 127.0.0.1 at 2010-09-30 23:35:40 +0700
+  Processing by LeaguesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[35mLeague Load (0.3ms)[0m  SELECT `leagues`.* FROM `leagues` WHERE (`leagues`.`id` = 4) LIMIT 1
+Rendered leagues/show.html.haml within layouts/application (5.6ms)
+Completed 200 OK in 10ms (Views: 8.2ms | ActiveRecord: 0.3ms)
+  [1m[36mLeague Load (0.3ms)[0m  [1mSELECT `leagues`.* FROM `leagues` WHERE (`leagues`.`name` = 'Intermediate') LIMIT 1[0m
+  [1m[35mSQL (1.2ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:35:40', NULL, 'Math', '2010-09-30 16:35:40')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:35:40 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 9ms (Views: 7.5ms | ActiveRecord: 2.0ms)
+  [1m[35mSQL (1.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:35:40', NULL, 'Math', '2010-09-30 16:35:40')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:35:40 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 5ms (Views: 3.5ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/categories/47" for 127.0.0.1 at 2010-09-30 23:35:40 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"47"}
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 47) LIMIT 1
+  [1m[36mLeague Load (0.2ms)[0m  [1mSELECT `leagues`.* FROM `leagues` WHERE (`leagues`.category_id = 47)[0m
+Completed 200 OK in 6ms (Views: 4.1ms | ActiveRecord: 0.5ms)
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1
+  [1m[36mSQL (6.5ms)[0m  [1mROLLBACK[0m
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#index as HTML
+Rendered categories/index.html.haml within layouts/application (1.1ms)
+Completed 200 OK in 5ms (Views: 3.9ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#index as HTML
+Completed 200 OK in 4ms (Views: 3.0ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  Processing by LeaguesController#show as HTML
+  Parameters: {"id"=>"37"}
+Completed 200 OK in 4ms (Views: 2.3ms | ActiveRecord: 0.1ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mLeague Load (0.2ms)[0m  [1mSELECT `leagues`.* FROM `leagues` WHERE (`leagues`.category_id = 1007)[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+
+
+Started GET "/categories" for 127.0.0.1 at 2010-09-30 23:50:14 +0700
+  Processing by CategoriesController#index as HTML
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories`
+Completed 200 OK in 6ms (Views: 3.6ms | ActiveRecord: 1.2ms)
+  [1m[36mSQL (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35mSQL (0.0ms)[0m  BEGIN
+
+
+Started GET "/leagues" for 127.0.0.1 at 2010-09-30 23:50:14 +0700
+  Processing by LeaguesController#index as HTML
+  [1m[36mLeague Load (0.2ms)[0m  [1mSELECT `leagues`.* FROM `leagues`[0m
+Completed 200 OK in 5ms (Views: 4.0ms | ActiveRecord: 0.4ms)
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.5ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:50:22', NULL, 'Math', '2010-09-30 16:50:22')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.4ms)[0m  [1mdescribe `leagues`[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `leagues` (`category_id`, `created_at`, `description`, `image_url`, `level`, `name`, `updated_at`) VALUES (NULL, '2010-09-30 16:50:22', NULL, NULL, NULL, 'Intermediate', '2010-09-30 16:50:22')
+  [1m[36mSQL (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE `leagues` SET `category_id` = 48, `updated_at` = '2010-09-30 16:50:22' WHERE (`leagues`.`id` = 5)[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+
+
+Started GET "/categories/48" for 127.0.0.1 at 2010-09-30 23:50:22 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"48"}
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 48) LIMIT 1
+  [1m[36mLeague Load (0.2ms)[0m  [1mSELECT `leagues`.* FROM `leagues` WHERE (`leagues`.category_id = 48)[0m
+Rendered categories/show.html.haml within layouts/application (7.8ms)
+Completed 200 OK in 13ms (Views: 10.8ms | ActiveRecord: 3.1ms)
+
+
+Started GET "/leagues/5" for 127.0.0.1 at 2010-09-30 23:50:22 +0700
+  Processing by LeaguesController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[35mLeague Load (0.3ms)[0m  SELECT `leagues`.* FROM `leagues` WHERE (`leagues`.`id` = 5) LIMIT 1
+Rendered leagues/show.html.haml within layouts/application (5.7ms)
+Completed 200 OK in 10ms (Views: 8.2ms | ActiveRecord: 0.3ms)
+  [1m[36mLeague Load (0.2ms)[0m  [1mSELECT `leagues`.* FROM `leagues` WHERE (`leagues`.`name` = 'Intermediate') LIMIT 1[0m
+  [1m[35mSQL (2.5ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:50:22', NULL, 'Math', '2010-09-30 16:50:22')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:50:22 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 9ms (Views: 7.5ms | ActiveRecord: 3.4ms)
+  [1m[35mSQL (0.9ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:50:22', NULL, 'Math', '2010-09-30 16:50:22')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:50:22 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.0ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/categories/50" for 127.0.0.1 at 2010-09-30 23:50:22 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"50"}
+  [1m[35mCategory Load (0.3ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 50) LIMIT 1
+  [1m[36mLeague Load (0.2ms)[0m  [1mSELECT `leagues`.* FROM `leagues` WHERE (`leagues`.category_id = 50)[0m
+Completed 200 OK in 5ms (Views: 3.8ms | ActiveRecord: 0.5ms)
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1
+  [1m[36mSQL (0.9ms)[0m  [1mROLLBACK[0m
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.5ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:50:30', NULL, 'Math', '2010-09-30 16:50:30')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.5ms)[0m  [1mdescribe `leagues`[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `leagues` (`category_id`, `created_at`, `description`, `image_url`, `level`, `name`, `updated_at`) VALUES (NULL, '2010-09-30 16:50:31', NULL, NULL, NULL, 'Intermediate', '2010-09-30 16:50:31')
+  [1m[36mSQL (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE `leagues` SET `category_id` = 51, `updated_at` = '2010-09-30 16:50:31' WHERE (`leagues`.`id` = 6)[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+
+
+Started GET "/categories/51" for 127.0.0.1 at 2010-09-30 23:50:31 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"51"}
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 51) LIMIT 1
+  [1m[36mLeague Load (0.2ms)[0m  [1mSELECT `leagues`.* FROM `leagues` WHERE (`leagues`.category_id = 51)[0m
+Rendered categories/show.html.haml within layouts/application (7.8ms)
+Completed 200 OK in 13ms (Views: 10.8ms | ActiveRecord: 3.2ms)
+
+
+Started GET "/leagues/6" for 127.0.0.1 at 2010-09-30 23:50:31 +0700
+  Processing by LeaguesController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[35mLeague Load (0.3ms)[0m  SELECT `leagues`.* FROM `leagues` WHERE (`leagues`.`id` = 6) LIMIT 1
+Rendered leagues/show.html.haml within layouts/application (5.7ms)
+Completed 200 OK in 10ms (Views: 8.3ms | ActiveRecord: 0.3ms)
+  [1m[36mLeague Load (0.3ms)[0m  [1mSELECT `leagues`.* FROM `leagues` WHERE (`leagues`.`name` = 'Intermediate') LIMIT 1[0m
+  [1m[35mSQL (1.2ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:50:31', NULL, 'Math', '2010-09-30 16:50:31')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:50:31 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 9ms (Views: 7.6ms | ActiveRecord: 2.1ms)
+  [1m[35mSQL (0.9ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:50:31', NULL, 'Math', '2010-09-30 16:50:31')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:50:31 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/categories/53" for 127.0.0.1 at 2010-09-30 23:50:31 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"53"}
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 53) LIMIT 1
+  [1m[36mLeague Load (0.2ms)[0m  [1mSELECT `leagues`.* FROM `leagues` WHERE (`leagues`.category_id = 53)[0m
+Completed 200 OK in 5ms (Views: 3.8ms | ActiveRecord: 0.5ms)
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1
+  [1m[36mSQL (0.9ms)[0m  [1mROLLBACK[0m
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.5ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:59:49', NULL, 'Math', '2010-09-30 16:59:49')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.4ms)[0m  [1mdescribe `leagues`[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `leagues` (`category_id`, `created_at`, `description`, `image_url`, `level`, `name`, `updated_at`) VALUES (NULL, '2010-09-30 16:59:49', NULL, NULL, NULL, 'Intermediate', '2010-09-30 16:59:49')
+  [1m[36mSQL (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE `leagues` SET `category_id` = 54, `updated_at` = '2010-09-30 16:59:49' WHERE (`leagues`.`id` = 7)[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+
+
+Started GET "/categories/54" for 127.0.0.1 at 2010-09-30 23:59:49 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"54"}
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 54) LIMIT 1
+  [1m[36mLeague Load (0.3ms)[0m  [1mSELECT `leagues`.* FROM `leagues` WHERE (`leagues`.category_id = 54)[0m
+Rendered categories/show.html.haml within layouts/application (8.6ms)
+Completed 200 OK in 14ms (Views: 12.1ms | ActiveRecord: 3.1ms)
+
+
+Started GET "/leagues/7" for 127.0.0.1 at 2010-09-30 23:59:49 +0700
+  Processing by LeaguesController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[35mLeague Load (0.3ms)[0m  SELECT `leagues`.* FROM `leagues` WHERE (`leagues`.`id` = 7) LIMIT 1
+Rendered leagues/show.html.haml within layouts/application (5.7ms)
+Completed 200 OK in 10ms (Views: 8.3ms | ActiveRecord: 0.3ms)
+  [1m[36mLeague Load (0.3ms)[0m  [1mSELECT `leagues`.* FROM `leagues` WHERE (`leagues`.`name` = 'Intermediate') LIMIT 1[0m
+  [1m[35mSQL (2.0ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:59:49', NULL, 'Math', '2010-09-30 16:59:49')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:59:49 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 9ms (Views: 7.6ms | ActiveRecord: 2.9ms)
+  [1m[35mSQL (5.9ms)[0m  ROLLBACK
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 16:59:49', NULL, 'Math', '2010-09-30 16:59:49')[0m
+  [1m[35mSQL (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-09-30 23:59:49 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 5ms (Views: 3.4ms | ActiveRecord: 6.6ms)
+
+
+Started GET "/categories/56" for 127.0.0.1 at 2010-09-30 23:59:49 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"56"}
+  [1m[35mCategory Load (0.3ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 56) LIMIT 1
+  [1m[36mLeague Load (0.3ms)[0m  [1mSELECT `leagues`.* FROM `leagues` WHERE (`leagues`.category_id = 56)[0m
+Completed 200 OK in 6ms (Views: 4.3ms | ActiveRecord: 0.6ms)
+  [1m[35mCategory Load (0.3ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1
+  [1m[36mSQL (1.4ms)[0m  [1mROLLBACK[0m
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.5ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 17:13:35', NULL, 'Math', '2010-09-30 17:13:35')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.4ms)[0m  [1mdescribe `leagues`[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `leagues` (`category_id`, `created_at`, `description`, `image_url`, `level`, `name`, `updated_at`) VALUES (NULL, '2010-09-30 17:13:36', NULL, NULL, NULL, 'Intermediate', '2010-09-30 17:13:36')
+  [1m[36mSQL (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE `leagues` SET `category_id` = 57, `updated_at` = '2010-09-30 17:13:36' WHERE (`leagues`.`id` = 8)[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1[0m
+
+
+Started GET "/categories/57" for 127.0.0.1 at 2010-10-01 00:13:36 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"57"}
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 57) LIMIT 1
+  [1m[36mLeague Load (0.2ms)[0m  [1mSELECT `leagues`.* FROM `leagues` WHERE (`leagues`.category_id = 57)[0m
+Rendered categories/show.html.haml within layouts/application (7.8ms)
+Completed 200 OK in 13ms (Views: 10.9ms | ActiveRecord: 3.1ms)
+
+
+Started GET "/leagues/8" for 127.0.0.1 at 2010-10-01 00:13:36 +0700
+  Processing by LeaguesController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[35mLeague Load (0.3ms)[0m  SELECT `leagues`.* FROM `leagues` WHERE (`leagues`.`id` = 8) LIMIT 1
+Rendered leagues/show.html.haml within layouts/application (5.7ms)
+Completed 200 OK in 10ms (Views: 8.3ms | ActiveRecord: 0.3ms)
+  [1m[36mLeague Load (0.3ms)[0m  [1mSELECT `leagues`.* FROM `leagues` WHERE (`leagues`.`name` = 'Intermediate') LIMIT 1[0m
+  [1m[35mSQL (1.6ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 17:13:36', NULL, 'Math', '2010-09-30 17:13:36')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-01 00:13:36 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 10ms (Views: 8.2ms | ActiveRecord: 2.5ms)
+  [1m[35mSQL (0.9ms)[0m  ROLLBACK
+  [1m[36mSQL (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-30 17:13:36', NULL, 'Math', '2010-09-30 17:13:36')[0m
+  [1m[35mSQL (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-01 00:13:36 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/categories/59" for 127.0.0.1 at 2010-10-01 00:13:36 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"59"}
+  [1m[35mCategory Load (0.3ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 59) LIMIT 1
+  [1m[36mLeague Load (0.2ms)[0m  [1mSELECT `leagues`.* FROM `leagues` WHERE (`leagues`.category_id = 59)[0m
+Completed 200 OK in 6ms (Views: 3.9ms | ActiveRecord: 0.5ms)
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`name` = 'Math') LIMIT 1
+  [1m[36mSQL (1.0ms)[0m  [1mROLLBACK[0m

@@ -1,0 +1,175 @@
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (2.9ms)[0m  CREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW KEYS FROM `schema_migrations`[0m
+  [1m[35mSQL (3.4ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+Migrating to CreateCategories (20100925042936)
+  [1m[35mSQL (2.4ms)[0m  CREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `description` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (0.6ms)[0m  [1mdescribe `schema_migrations`[0m
+  [1m[35mSQL (3.1ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20100925042936')
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.1ms)[0m  SELECT `schema_migrations`.`version` FROM `schema_migrations`
+  [1m[36mSQL (0.1ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.3ms)[0m  describe `categories`
+  [1m[36mSQL (0.1ms)[0m  [1mSHOW KEYS FROM `categories`[0m
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[35mSQL (2.5ms)[0m  DROP DATABASE IF EXISTS `seamoo_test`
+  [1m[36mSQL (0.2ms)[0m  [1mCREATE DATABASE `seamoo_test` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (2.3ms)[0m  [1mCREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `description` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (12.9ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW KEYS FROM `schema_migrations`
+  [1m[36mSQL (3.8ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT version FROM `schema_migrations`[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20100925042936')
+
+
+Started GET "/categories" for 10.42.43.1 at 2010-09-27 20:37:22 +0700
+  Processing by CategoriesController#index as HTML
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories`
+Rendered categories/index.html.haml within layouts/application (4.8ms)
+Completed 200 OK in 149ms (Views: 9.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/javascripts/jquery.min" for 10.42.43.1 at 2010-09-27 20:37:24 +0700
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
+  
+
+Rendered /home/phuongnd08/.rvm/gems/ruby-1.9.2-p0@seamoov3/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+
+
+Started GET "/categories/new" for 10.42.43.1 at 2010-09-27 20:37:27 +0700
+  Processing by CategoriesController#new as HTML
+Rendered categories/_form.html.haml (54.8ms)
+Rendered categories/new.html.haml within layouts/application (92.8ms)
+Completed 200 OK in 103ms (Views: 96.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/javascripts/jquery.min" for 10.42.43.1 at 2010-09-27 20:37:27 +0700
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
+  
+
+Rendered /home/phuongnd08/.rvm/gems/ruby-1.9.2-p0@seamoov3/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started POST "/categories" for 10.42.43.1 at 2010-09-27 20:37:49 +0700
+  Processing by CategoriesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"aAlCTWUcDj0vBimarmD62banbwffB3/5j1V5RLcEJbE=", "category"=>{"name"=>"Math", "description"=>"Các vấn đề liên quan đến toán học"}, "commit"=>"Save"}
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  describe `categories`
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `categories` (`created_at`, `description`, `name`, `updated_at`) VALUES ('2010-09-27 13:37:49', 'Các vấn đề liên quan đến toán học', 'Math', '2010-09-27 13:37:49')[0m
+  [1m[35mSQL (1.1ms)[0m  COMMIT
+Redirected to http://server:3000/categories/1
+Completed 302 Found in 108ms
+
+
+Started GET "/categories/1" for 10.42.43.1 at 2010-09-27 20:37:49 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 1) LIMIT 1[0m
+Rendered categories/show.html.haml within layouts/application (6.8ms)
+Completed 200 OK in 21ms (Views: 10.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/javascripts/jquery.min" for 10.42.43.1 at 2010-09-27 20:37:49 +0700
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
+  
+
+Rendered /home/phuongnd08/.rvm/gems/ruby-1.9.2-p0@seamoov3/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/categories" for 10.42.43.1 at 2010-09-27 20:37:55 +0700
+  Processing by CategoriesController#index as HTML
+  [1m[35mCategory Load (0.3ms)[0m  SELECT `categories`.* FROM `categories`
+Rendered categories/index.html.haml within layouts/application (8.6ms)
+Completed 200 OK in 21ms (Views: 11.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/javascripts/jquery.min" for 10.42.43.1 at 2010-09-27 20:37:55 +0700
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
+  
+
+Rendered /home/phuongnd08/.rvm/gems/ruby-1.9.2-p0@seamoov3/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 10.42.43.1 at 2010-09-27 21:40:49 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.1ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered home/index.html.haml within layouts/application (8.6ms)
+Completed 200 OK in 21ms (Views: 11.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/javascripts/jquery.min" for 10.42.43.1 at 2010-09-27 21:40:50 +0700
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
+  
+
+Rendered /home/phuongnd08/.rvm/gems/ruby-1.9.2-p0@seamoov3/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 10.42.43.1 at 2010-09-28 23:18:57 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories`
+Rendered home/index.html.haml within layouts/application (11.3ms)
+Completed 200 OK in 151ms (Views: 32.7ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/javascripts/jquery.min" for 10.42.43.1 at 2010-09-28 23:18:59 +0700
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
+  
+
+Rendered /home/phuongnd08/.rvm/gems/ruby-1.9.2-p0@seamoov3/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.1ms)
+
+
+Started GET "/categories/1" for 10.42.43.1 at 2010-09-28 23:19:03 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 1) LIMIT 1[0m
+Rendered categories/show.html.haml within layouts/application (7.9ms)
+Completed 200 OK in 31ms (Views: 20.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/javascripts/jquery.min" for 10.42.43.1 at 2010-09-28 23:19:04 +0700
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
+  
+
+Rendered /home/phuongnd08/.rvm/gems/ruby-1.9.2-p0@seamoov3/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/categories/1/edit" for 10.42.43.1 at 2010-09-28 23:19:07 +0700
+
+AbstractController::ActionNotFound (The action 'edit' could not be found for CategoriesController):
+  
+
+Rendered /home/phuongnd08/.rvm/gems/ruby-1.9.2-p0@seamoov3/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/unknown_action.erb within rescues/layout (0.8ms)
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+Migrating to CreateCategories (20100925042936)
+Migrating to AddImageUrlToCategories (20100927134013)
+  [1m[35mSQL (0.4ms)[0m  describe `schema_migrations`
+  [1m[36mSQL (1.3ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20100927134013')[0m
+Migrating to CreateLeagues (20100930155327)
+  [1m[35mSQL (8.8ms)[0m  CREATE TABLE `leagues` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `category_id` int(11), `name` varchar(255), `description` varchar(255), `image_url` varchar(255), `level` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (1.3ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20100930155327')[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.3ms)[0m  [1mdescribe `categories`[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW KEYS FROM `categories`
+  [1m[36mSQL (0.4ms)[0m  [1mdescribe `leagues`[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW KEYS FROM `leagues`
