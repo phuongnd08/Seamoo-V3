@@ -13,6 +13,7 @@
 ActiveRecord::Schema.define(:version => 20100930155327) do
 
   create_table "categories", :force => true do |t|
+    t.string   "alias"
     t.string   "name"
     t.string   "description"
     t.datetime "created_at"
@@ -21,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20100930155327) do
 
   create_table "leagues", :force => true do |t|
     t.integer  "category_id"
+    t.string   "alias"
     t.string   "name"
     t.string   "description"
     t.string   "image_url"

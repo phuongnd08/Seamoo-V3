@@ -16,7 +16,7 @@ describe "categories/index.html.haml" do
 
   it "renders a list of categories" do
     render
-    rendered.should have_selector("tr>td", :content => "Name".to_s, :count => 2)
-    rendered.should have_selector("tr>td", :content => "Description".to_s, :count => 2)
+    rendered.should have_selector("tr>td", :content => "Name", :count => 2)
+    rendered.should have_selector("tr>td", :content => "Description", :count => 2)
   end
 end

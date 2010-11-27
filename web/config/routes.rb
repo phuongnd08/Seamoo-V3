@@ -1,7 +1,16 @@
 SeamooV3::Application.routes.draw do
-  resources :home, :only => [:index]
+  resources :oauth_consumers do
+    get :callback, :on => :member
+  end
+
+  resources :home, :only => [:index] do
+    collection do
+      get :secured
+    end
+  end
   resources :categories
   resources :leagues
+
 
   root :to => "home#index"
   # The priority is based upon order of creation:

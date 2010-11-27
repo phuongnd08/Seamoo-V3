@@ -2,6 +2,7 @@ class CreateLeagues < ActiveRecord::Migration
   def self.up
     create_table :leagues do |t|
       t.integer :category_id
+      t.string :alias
       t.string :name
       t.string :description
       t.string :image_url

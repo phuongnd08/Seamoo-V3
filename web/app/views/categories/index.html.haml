@@ -2,15 +2,11 @@
 
 %table
   %tr
-    %th Name
+    %th 
     %th Description
-    %th
-    %th
-    %th
 
   - @categories.each do |category|
     %tr
-      %td= category.name
+      %td= link_to category.name, category
       %td= category.description
-      %td= link_to 'Show', category
 %br

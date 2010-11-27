@@ -2,6 +2,6 @@
 %b Description:
 = @category.description
 %ul
-= @category.leagues.each do |league|
-  %li= link_to league.name, league
+  - @category.leagues.each do |league|
+    %li= link_to league.name, league
 = link_to 'Back', categories_path

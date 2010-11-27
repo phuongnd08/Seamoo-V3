@@ -10,7 +10,7 @@ describe "categories/show.html.haml" do
 
   it "renders attributes in <p>" do
     render
-    rendered.should contain("Name".to_s)
-    rendered.should contain("Description".to_s)
+    rendered.should contain("Name")
+    rendered.should contain("Description")
   end
 end

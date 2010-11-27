@@ -173,3 +173,451 @@ Migrating to CreateLeagues (20100930155327)
   [1m[35mSQL (0.2ms)[0m  SHOW KEYS FROM `categories`
   [1m[36mSQL (0.4ms)[0m  [1mdescribe `leagues`[0m
   [1m[35mSQL (0.2ms)[0m  SHOW KEYS FROM `leagues`
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (2.5ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[35mSQL (39.4ms)[0m  DROP DATABASE IF EXISTS `seamoo_test`
+  [1m[36mSQL (0.2ms)[0m  [1mCREATE DATABASE `seamoo_test` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (3.9ms)[0m  [1mCREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `description` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (2.0ms)[0m  [1mCREATE TABLE `leagues` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `category_id` int(11), `name` varchar(255), `description` varchar(255), `image_url` varchar(255), `level` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (2.2ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW KEYS FROM `schema_migrations`
+  [1m[36mSQL (3.8ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT version FROM `schema_migrations`[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20100930155327')
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20100927134013')[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20100925042936')
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[35mSQL (3.1ms)[0m  DROP DATABASE IF EXISTS `seamoo_test`
+  [1m[36mSQL (0.1ms)[0m  [1mCREATE DATABASE `seamoo_test` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (41.2ms)[0m  [1mCREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `description` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (2.2ms)[0m  [1mCREATE TABLE `leagues` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `category_id` int(11), `name` varchar(255), `description` varchar(255), `image_url` varchar(255), `level` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (4.4ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW KEYS FROM `schema_migrations`
+  [1m[36mSQL (3.0ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT version FROM `schema_migrations`[0m
+  [1m[35mSQL (3.3ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20100930155327')
+  [1m[36mSQL (0.9ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20100927134013')[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20100925042936')
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[35mSQL (2.9ms)[0m  DROP DATABASE IF EXISTS `seamoo_test`
+  [1m[36mSQL (0.2ms)[0m  [1mCREATE DATABASE `seamoo_test` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (2.7ms)[0m  [1mCREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `description` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (2.3ms)[0m  [1mCREATE TABLE `leagues` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `category_id` int(11), `name` varchar(255), `description` varchar(255), `image_url` varchar(255), `level` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (1.8ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW KEYS FROM `schema_migrations`
+  [1m[36mSQL (3.1ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT version FROM `schema_migrations`[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20100930155327')
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20100927134013')[0m
+  [1m[35mSQL (0.9ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20100925042936')
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[35mSQL (3.2ms)[0m  DROP DATABASE IF EXISTS `seamoo_test`
+  [1m[36mSQL (0.1ms)[0m  [1mCREATE DATABASE `seamoo_test` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (14.0ms)[0m  [1mCREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `description` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (2.4ms)[0m  [1mCREATE TABLE `leagues` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `category_id` int(11), `name` varchar(255), `description` varchar(255), `image_url` varchar(255), `level` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (3.8ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW KEYS FROM `schema_migrations`
+  [1m[36mSQL (3.6ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT version FROM `schema_migrations`[0m
+  [1m[35mSQL (3.6ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20100930155327')
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20100927134013')[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20100925042936')
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-31 09:41:11 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories`
+Rendered home/index.html.haml within layouts/application (9.1ms)
+Completed 200 OK in 161ms (Views: 12.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/javascripts/jquery.min" for 127.0.0.1 at 2010-10-31 09:41:12 +0700
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
+  
+
+Rendered /home/phuongnd08/.rvm/gems/ruby-1.9.2-p0@seamoov3/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-31 09:41:53 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.1ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered home/index.html.haml within layouts/application (45.2ms)
+Completed 200 OK in 59ms (Views: 48.4ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/javascripts/jquery.min" for 127.0.0.1 at 2010-10-31 09:41:53 +0700
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
+  
+
+Rendered /home/phuongnd08/.rvm/gems/ruby-1.9.2-p0@seamoov3/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-31 09:41:58 +0700
+  Processing by HomeController#index as HTML
+  [1m[35mCategory Load (0.1ms)[0m  SELECT `categories`.* FROM `categories`
+Rendered home/index.html.haml within layouts/application (7.3ms)
+Completed 200 OK in 22ms (Views: 10.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/javascripts/jquery.min" for 127.0.0.1 at 2010-10-31 09:41:58 +0700
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
+  
+
+Rendered /home/phuongnd08/.rvm/gems/ruby-1.9.2-p0@seamoov3/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2010-10-31 09:42:01 +0700
+  Processing by HomeController#index as HTML
+  [1m[36mCategory Load (0.1ms)[0m  [1mSELECT `categories`.* FROM `categories`[0m
+Rendered home/index.html.haml within layouts/application (7.4ms)
+Completed 200 OK in 21ms (Views: 10.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/javascripts/jquery.min" for 127.0.0.1 at 2010-10-31 09:42:01 +0700
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
+  
+
+Rendered /home/phuongnd08/.rvm/gems/ruby-1.9.2-p0@seamoov3/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.4ms)
+
+
+Started GET "/javascripts/jquery.min" for 127.0.0.1 at 2010-10-31 09:42:31 +0700
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
+  
+
+Rendered /home/phuongnd08/.rvm/gems/ruby-1.9.2-p0@seamoov3/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.1ms)
+
+
+Started GET "/categories/1" for 127.0.0.1 at 2010-10-31 09:43:05 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mCategory Load (0.2ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 1) LIMIT 1
+  [1m[36mLeague Load (0.3ms)[0m  [1mSELECT `leagues`.* FROM `leagues` WHERE (`leagues`.category_id = 1)[0m
+Rendered categories/show.html.haml within layouts/application (44.3ms)
+Completed 200 OK in 60ms (Views: 47.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/javascripts/jquery.min" for 127.0.0.1 at 2010-10-31 09:43:06 +0700
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
+  
+
+Rendered /home/phuongnd08/.rvm/gems/ruby-1.9.2-p0@seamoov3/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.1ms)
+
+
+Started GET "/categories/1" for 127.0.0.1 at 2010-10-31 09:44:21 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mCategory Load (0.1ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 1) LIMIT 1
+  [1m[36mLeague Load (0.2ms)[0m  [1mSELECT `leagues`.* FROM `leagues` WHERE (`leagues`.category_id = 1)[0m
+Rendered categories/show.html.haml within layouts/application (67.6ms)
+Completed 200 OK in 84ms (Views: 71.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/javascripts/jquery.min" for 127.0.0.1 at 2010-10-31 09:44:21 +0700
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
+  
+
+Rendered /home/phuongnd08/.rvm/gems/ruby-1.9.2-p0@seamoov3/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.4ms)
+
+
+Started GET "/categories/1" for 127.0.0.1 at 2010-10-31 09:44:40 +0700
+  Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mCategory Load (0.1ms)[0m  SELECT `categories`.* FROM `categories` WHERE (`categories`.`id` = 1) LIMIT 1
+  [1m[36mLeague Load (0.1ms)[0m  [1mSELECT `leagues`.* FROM `leagues` WHERE (`leagues`.category_id = 1)[0m
+Rendered categories/show.html.haml within layouts/application (20.6ms)
+Completed 200 OK in 36ms (Views: 23.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/javascripts/jquery.min" for 127.0.0.1 at 2010-10-31 09:44:41 +0700
+
+ActionController::RoutingError (No route matches "/javascripts/jquery.min"):
+  
+
+Rendered /home/phuongnd08/.rvm/gems/ruby-1.9.2-p0@seamoov3/gems/actionpack-3.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.3ms)
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (4.4ms)[0m  CREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW KEYS FROM `schema_migrations`[0m
+  [1m[35mSQL (50.4ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.4ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+Migrating to CreateCategories (20100925042936)
+  [1m[35mSQL (37.6ms)[0m  CREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `alias` varchar(255), `name` varchar(255), `description` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mSQL (0.4ms)[0m  [1mdescribe `schema_migrations`[0m
+  [1m[35mSQL (1.2ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20100925042936')
+Migrating to CreateLeagues (20100930155327)
+  [1m[36mSQL (2.9ms)[0m  [1mCREATE TABLE `leagues` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `category_id` int(11), `alias` varchar(255), `name` varchar(255), `description` varchar(255), `image_url` varchar(255), `level` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20100930155327')
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.2ms)[0m  SELECT `schema_migrations`.`version` FROM `schema_migrations`
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.4ms)[0m  describe `categories`
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW KEYS FROM `categories`[0m
+  [1m[35mSQL (0.4ms)[0m  describe `leagues`
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW KEYS FROM `leagues`[0m
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[36mSQL (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.5ms)[0m  [1mdescribe `categories`[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `categories` (`alias`, `created_at`, `description`, `name`, `updated_at`) VALUES ('english', '2010-10-31 03:06:58', 'Thử sức sự thành thạo Anh ngữ của bạn', 'English', '2010-10-31 03:06:58')
+  [1m[36mSQL (1.1ms)[0m  [1mCOMMIT[0m
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[35mSQL (71.1ms)[0m  DROP DATABASE IF EXISTS `seamoo_test`
+  [1m[36mSQL (0.2ms)[0m  [1mCREATE DATABASE `seamoo_test` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (3.4ms)[0m  [1mCREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `alias` varchar(255), `name` varchar(255), `description` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (24.7ms)[0m  [1mCREATE TABLE `leagues` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `category_id` int(11), `alias` varchar(255), `name` varchar(255), `description` varchar(255), `image_url` varchar(255), `level` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (2.2ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW KEYS FROM `schema_migrations`
+  [1m[36mSQL (6.9ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT version FROM `schema_migrations`[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20100930155327')
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20100925042936')[0m
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[35mSQL (3.1ms)[0m  DROP DATABASE IF EXISTS `seamoo_test`
+  [1m[36mSQL (0.1ms)[0m  [1mCREATE DATABASE `seamoo_test` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (37.6ms)[0m  [1mCREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `alias` varchar(255), `name` varchar(255), `description` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (2.2ms)[0m  [1mCREATE TABLE `leagues` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `category_id` int(11), `alias` varchar(255), `name` varchar(255), `description` varchar(255), `image_url` varchar(255), `level` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (2.0ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW KEYS FROM `schema_migrations`
+  [1m[36mSQL (12.2ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT version FROM `schema_migrations`[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20100930155327')
+  [1m[36mSQL (1.1ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20100925042936')[0m
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[35mSQL (18.8ms)[0m  DROP DATABASE IF EXISTS `seamoo_test`
+  [1m[36mSQL (0.1ms)[0m  [1mCREATE DATABASE `seamoo_test` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (3.7ms)[0m  [1mCREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `alias` varchar(255), `name` varchar(255), `description` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (2.5ms)[0m  [1mCREATE TABLE `leagues` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `category_id` int(11), `alias` varchar(255), `name` varchar(255), `description` varchar(255), `image_url` varchar(255), `level` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (1.7ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW KEYS FROM `schema_migrations`
+  [1m[36mSQL (3.1ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT version FROM `schema_migrations`[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20100930155327')
+  [1m[36mSQL (0.8ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20100925042936')[0m
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[35mSQL (3.8ms)[0m  DROP DATABASE IF EXISTS `seamoo_test`
+  [1m[36mSQL (0.2ms)[0m  [1mCREATE DATABASE `seamoo_test` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (3.4ms)[0m  [1mCREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `alias` varchar(255), `name` varchar(255), `description` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (2.2ms)[0m  [1mCREATE TABLE `leagues` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `category_id` int(11), `alias` varchar(255), `name` varchar(255), `description` varchar(255), `image_url` varchar(255), `level` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (2.8ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW KEYS FROM `schema_migrations`
+  [1m[36mSQL (3.6ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT version FROM `schema_migrations`[0m
+  [1m[35mSQL (0.9ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20100930155327')
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20100925042936')[0m
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[35mSQL (4.2ms)[0m  DROP DATABASE IF EXISTS `seamoo_test`
+  [1m[36mSQL (0.2ms)[0m  [1mCREATE DATABASE `seamoo_test` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (12.5ms)[0m  [1mCREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `alias` varchar(255), `name` varchar(255), `description` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (2.1ms)[0m  [1mCREATE TABLE `leagues` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `category_id` int(11), `alias` varchar(255), `name` varchar(255), `description` varchar(255), `image_url` varchar(255), `level` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (2.2ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW KEYS FROM `schema_migrations`
+  [1m[36mSQL (25.6ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT version FROM `schema_migrations`[0m
+  [1m[35mSQL (11.8ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20100930155327')
+  [1m[36mSQL (0.8ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20100925042936')[0m
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[35mSQL (3.5ms)[0m  DROP DATABASE IF EXISTS `seamoo_test`
+  [1m[36mSQL (0.1ms)[0m  [1mCREATE DATABASE `seamoo_test` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (12.1ms)[0m  [1mCREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `alias` varchar(255), `name` varchar(255), `description` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (2.8ms)[0m  [1mCREATE TABLE `leagues` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `category_id` int(11), `alias` varchar(255), `name` varchar(255), `description` varchar(255), `image_url` varchar(255), `level` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (2.4ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW KEYS FROM `schema_migrations`
+  [1m[36mSQL (3.5ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT version FROM `schema_migrations`[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20100930155327')
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20100925042936')[0m
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[35mSQL (5.4ms)[0m  DROP DATABASE IF EXISTS `seamoo_test`
+  [1m[36mSQL (0.1ms)[0m  [1mCREATE DATABASE `seamoo_test` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (11.4ms)[0m  [1mCREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `alias` varchar(255), `name` varchar(255), `description` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (31.0ms)[0m  [1mCREATE TABLE `leagues` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `category_id` int(11), `alias` varchar(255), `name` varchar(255), `description` varchar(255), `image_url` varchar(255), `level` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (2.2ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW KEYS FROM `schema_migrations`
+  [1m[36mSQL (6.6ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT version FROM `schema_migrations`[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20100930155327')
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20100925042936')[0m
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[35mSQL (20.5ms)[0m  DROP DATABASE IF EXISTS `seamoo_test`
+  [1m[36mSQL (0.2ms)[0m  [1mCREATE DATABASE `seamoo_test` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (24.6ms)[0m  [1mCREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `alias` varchar(255), `name` varchar(255), `description` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (2.8ms)[0m  [1mCREATE TABLE `leagues` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `category_id` int(11), `alias` varchar(255), `name` varchar(255), `description` varchar(255), `image_url` varchar(255), `level` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (1.9ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW KEYS FROM `schema_migrations`
+  [1m[36mSQL (3.3ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT version FROM `schema_migrations`[0m
+  [1m[35mSQL (0.9ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20100930155327')
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20100925042936')[0m
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[35mSQL (8.5ms)[0m  DROP DATABASE IF EXISTS `seamoo_test`
+  [1m[36mSQL (0.2ms)[0m  [1mCREATE DATABASE `seamoo_test` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (31.2ms)[0m  [1mCREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `alias` varchar(255), `name` varchar(255), `description` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (2.4ms)[0m  [1mCREATE TABLE `leagues` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `category_id` int(11), `alias` varchar(255), `name` varchar(255), `description` varchar(255), `image_url` varchar(255), `level` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (2.2ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW KEYS FROM `schema_migrations`
+  [1m[36mSQL (3.7ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT version FROM `schema_migrations`[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20100930155327')
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20100925042936')[0m
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[35mSQL (3.3ms)[0m  DROP DATABASE IF EXISTS `seamoo_test`
+  [1m[36mSQL (0.1ms)[0m  [1mCREATE DATABASE `seamoo_test` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35mSQL (0.1ms)[0m  SHOW TABLES
+  [1m[36mSQL (19.0ms)[0m  [1mCREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `alias` varchar(255), `name` varchar(255), `description` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (6.2ms)[0m  [1mCREATE TABLE `leagues` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `category_id` int(11), `alias` varchar(255), `name` varchar(255), `description` varchar(255), `image_url` varchar(255), `level` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (1.7ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW KEYS FROM `schema_migrations`
+  [1m[36mSQL (6.9ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT version FROM `schema_migrations`[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20100930155327')
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20100925042936')[0m
+  [1m[36mSQL (0.3ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[35mSQL (27.2ms)[0m  DROP DATABASE IF EXISTS `seamoo_test`
+  [1m[36mSQL (0.2ms)[0m  [1mCREATE DATABASE `seamoo_test` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (31.7ms)[0m  [1mCREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `alias` varchar(255), `name` varchar(255), `description` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (1.9ms)[0m  [1mCREATE TABLE `leagues` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `category_id` int(11), `alias` varchar(255), `name` varchar(255), `description` varchar(255), `image_url` varchar(255), `level` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (2.5ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW KEYS FROM `schema_migrations`
+  [1m[36mSQL (3.5ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT version FROM `schema_migrations`[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20100930155327')
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20100925042936')[0m
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[35mSQL (3.5ms)[0m  DROP DATABASE IF EXISTS `seamoo_test`
+  [1m[36mSQL (0.1ms)[0m  [1mCREATE DATABASE `seamoo_test` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (5.9ms)[0m  [1mCREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `alias` varchar(255), `name` varchar(255), `description` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (23.2ms)[0m  [1mCREATE TABLE `leagues` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `category_id` int(11), `alias` varchar(255), `name` varchar(255), `description` varchar(255), `image_url` varchar(255), `level` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (15.9ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW KEYS FROM `schema_migrations`
+  [1m[36mSQL (3.7ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT version FROM `schema_migrations`[0m
+  [1m[35mSQL (0.9ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20100930155327')
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20100925042936')[0m
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW TABLES[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
+  [1m[35mSQL (27.6ms)[0m  DROP DATABASE IF EXISTS `seamoo_test`
+  [1m[36mSQL (0.2ms)[0m  [1mCREATE DATABASE `seamoo_test` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (3.6ms)[0m  [1mCREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `alias` varchar(255), `name` varchar(255), `description` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.3ms)[0m  SHOW TABLES
+  [1m[36mSQL (2.3ms)[0m  [1mCREATE TABLE `leagues` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `category_id` int(11), `alias` varchar(255), `name` varchar(255), `description` varchar(255), `image_url` varchar(255), `level` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (1.7ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW KEYS FROM `schema_migrations`
+  [1m[36mSQL (3.9ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [1m[35mSQL (0.2ms)[0m  SHOW TABLES
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT version FROM `schema_migrations`[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20100930155327')
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20100925042936')[0m
