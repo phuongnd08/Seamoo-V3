@@ -1,0 +1,10 @@
+#!/bin/bash
+echo "PUSH to GITHUB"
+git push origin master
+echo "PUSH to HEROKU"
+git push heroku master
+echo "Migrate DB"
+heroku rake db:migrate
+echo "RESTART"
+heroku restart
+
