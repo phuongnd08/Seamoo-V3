@@ -5,4 +5,5 @@ Given /^I am logged in Google as "([^"]*)"$/ do |account|
   fill_in("Email", :with => username)
   fill_in("Passwd", :with => password)
   click_button("signIn")
+  visit "http://www.google.com/ncr"
 end

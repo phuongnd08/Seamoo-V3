@@ -1,18 +1,22 @@
 SeamooV3::Application.routes.draw do
-  resources :oauth_consumers do
-    get :callback, :on => :member
-  end
-
   resources :home, :only => [:index] do
     collection do
       get :secured
     end
   end
+
   resources :categories
   resources :leagues
 
 
   root :to => "home#index"
+
+  match "/auth/:provider/callback" => "authorizations#create"
+  match "/auth/failure" => "authorizations#failure"
+  match 'signin' => 'user_sessions#new', :as => :signin
+  match 'signout' => 'user_sessions#destroy', :as => :signout
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
