@@ -8,12 +8,16 @@ Scenario: Authorize using Google Account
 Given I am logged in Google as "seamoo.test/seamoo.secret"
 When I go to the secured home index page
 And I follow "Google"
-Then I should see "is asking for some information from your Google Account seamoo.test@gmail.com"
-Then I should see "Seamoo Test"
-When I press "Allow"
+Given I will
+  |action|if I see|
+  |press "Allow"|is asking for some information from your Google Account seamoo.test@gmail.com|
+  ||Hello Seamoo Test|
 Then I should be on the secured home index page
 And I should see "Hello Seamoo Test"
-And I should have user account "Seamoo Test/seamoo.test@gmail.com"
+And I should have user
+  |field|value|
+  |display name|Seamoo Test|
+  |email|seamoo.test@gmail.com|
 
 @javascript
 Scenario: Cancel authorization using Google Account

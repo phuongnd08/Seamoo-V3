@@ -23,8 +23,10 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
 
+  public
+
   def set_return_url(return_url)
-    session[:return_url]
+    session[:return_url] = return_url
   end
 
   def get_and_reset_return_url
