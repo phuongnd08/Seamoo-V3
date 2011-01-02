@@ -10,4 +10,5 @@ class UserSessionsController < ApplicationController
     flash[:notice] = "Successfully destroyed user session."
     redirect_to root_url
   end
+
 end

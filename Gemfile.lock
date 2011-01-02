@@ -249,4 +249,3 @@ DEPENDENCIES
   shoulda
   spork
   test-unit (= 1.2.3)
-
