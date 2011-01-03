@@ -1,0 +1,14 @@
+==Setting up testing environment
+Enable proxy & proxy_http modules for apache (by symlink proxy.load & proxy_http.load from /etc/apache2/mods-available/ to /etc/apache2/mods-enabled/
+Set up proxy for seamoo-1.local.com to seamoo-8.local.com (since parallel tests will running on 8 domains simultaneously)
+Example settings:
+
+				<VirtualHost *:80>
+				ServerName seamoo.local.com
+				ServerAdmin admin@seamoo.local.com
+				ProxyPreserveHost On
+				ProxyPass / http://localhost:3000/
+				ProxyPassReverse / http://localhost:3000/
+				</VirtualHost>
+
+Change /etc/hosts also to map seamoo-x.local.com to localhost

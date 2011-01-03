@@ -5,7 +5,7 @@ class AuthorizationsController < ApplicationController
     omniauth = request.env['rack.auth'] #this is where you get all the data from your provider through omniauth
     provider = omniauth['provider']
     uid = omniauth['uid']
-    user_info = omniauth['user_info']
+    user_info = {}.merge(omniauth['user_info']).merge((omniauth['extra'] || {})['user_hash'])
     
     if current_user
       flash[:notice] = "Successfully added #{omniauth['provider']} authentication"

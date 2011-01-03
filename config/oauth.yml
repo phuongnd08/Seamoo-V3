@@ -1,0 +1,10 @@
+production:
+  facebook:
+    app_id: 124666697598786
+    app_secret: 6d75c0c023e7dbc9dd009f1140c93e79
+development: &development
+  facebook:
+    app_id: 161433907235589
+    app_secret: 313cbbf152cb2f3885ba1b4d485357c9
+test:
+  <<: *development

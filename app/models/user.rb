@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   has_many :authorizations
   
   def self.create_from_omni_info(user_info)
-    User.create(
+    User.create!(
       :display_name => user_info['name'],
       :email => user_info['email']
     )

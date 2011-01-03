@@ -18,6 +18,3 @@ And I should have user
   |field|value|
   |display name|Seamoo Test|
   |email|seamoo.test@gmail.com|
-
-@javascript
-Scenario: Cancel authorization using Google Account

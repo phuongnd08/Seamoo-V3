@@ -7,3 +7,11 @@ Given /^I am logged in Google as "([^"]*)"$/ do |account|
   click_button("signIn")
   visit "http://www.google.com/ncr"
 end
+
+Given /^I am logged in Facebook as "([^"]*)"$/ do |account|
+  email, password = account.split("/")
+  visit "http://www.facebook.com"
+  fill_in("email", :with => email)
+  fill_in("pass", :with => password)
+  click_button("Login")
+end

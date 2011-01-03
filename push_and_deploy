@@ -1,8 +1,8 @@
 #!/bin/bash
 echo "PUSH to GITHUB"
-git push origin master
+git push origin master --force
 echo "PUSH to HEROKU"
-git push heroku master
+git push heroku master --force
 echo "Migrate DB"
 heroku rake db:migrate
 echo "RESTART"

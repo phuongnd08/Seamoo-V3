@@ -56,3 +56,15 @@ if defined?(ActiveRecord::Base)
   rescue LoadError => ignore_if_database_cleaner_not_present
   end
 end
+
+class TestEnv
+  class << self
+    def number
+      @number ||= (ENV["TEST_NO"] || 0).to_i + 1
+    end
+
+    def host
+      @host ||= "seamoo#{number}.local.com"
+    end
+  end
+end

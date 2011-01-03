@@ -1,9 +1,10 @@
 #config/initializers/omniauth.rb
 require 'openid/store/filesystem'
+OAUTH =  YAML::load(ERB.new(IO.read(File.join(Rails.root, 'config', 'oauth.yml'))).result)[Rails.env]
 
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider :twitter,  'KEY', 'SECRET'
-  provider :facebook, 'APP_ID', 'APP_SECRET'
+  provider :facebook, OAUTH['facebook']['app_id'], OAUTH['facebook']['app_secret']
   provider :linked_in, 'KEY', 'SECRET'
   provider :open_id,  OpenID::Store::Filesystem.new(File.join(Rails.root, '/tmp'))
 end

@@ -12,6 +12,7 @@ Given /^I will$/ do |table|
     saved_wait_time = Capybara.default_wait_time
     Capybara.default_wait_time = 0
     wait_for_true Capybara.default_wait_time, false do
+      debugger
       table.hashes.each do |hash|
         if page.has_content?(hash['if I see'])
           Then hash['action'] unless hash['action'].blank?
