@@ -9,19 +9,21 @@ end
 
 Given /^I will$/ do |table|
   begin
-    saved_wait_time = Capybara.default_wait_time
+    wait_time = Capybara.default_wait_time
     Capybara.default_wait_time = 0
-    wait_for_true Capybara.default_wait_time, false do
-      debugger
+    wait_for_true wait_time, false do
+      ok = false
       table.hashes.each do |hash|
         if page.has_content?(hash['if I see'])
           Then hash['action'] unless hash['action'].blank?
-          return true
+          ok = true
+          break
         end
       end
+      ok
     end
   ensure
-    Capybara.default_wait_time = saved_wait_time
+    Capybara.default_wait_time = wait_time
   end
 end
 
