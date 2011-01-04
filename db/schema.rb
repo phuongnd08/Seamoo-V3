@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101230145604) do
+ActiveRecord::Schema.define(:version => 20110104153749) do
 
   create_table "authorizations", :force => true do |t|
     t.integer  "user_id"
@@ -37,6 +37,30 @@ ActiveRecord::Schema.define(:version => 20101230145604) do
     t.integer  "level"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "multiple_choice_options", :force => true do |t|
+    t.integer  "parent_id"
+    t.text     "content"
+    t.boolean  "correct"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "multiple_choices", :force => true do |t|
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "questions", :force => true do |t|
+    t.integer  "subject_id"
+    t.integer  "creator_id"
+    t.integer  "level"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "data_type"
+    t.integer  "data_id"
   end
 
   create_table "users", :force => true do |t|
