@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110104153749) do
+ActiveRecord::Schema.define(:version => 20110104160936) do
 
   create_table "authorizations", :force => true do |t|
     t.integer  "user_id"
@@ -24,6 +24,13 @@ ActiveRecord::Schema.define(:version => 20110104153749) do
     t.string   "alias"
     t.string   "name"
     t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "follow_patterns", :force => true do |t|
+    t.text     "instruction"
+    t.string   "pattern"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
