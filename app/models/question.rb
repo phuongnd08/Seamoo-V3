@@ -1,7 +1,7 @@
 class Question < ActiveRecord::Base
-  belongs_to :subject
+  belongs_to :category
   belongs_to :creator, :class_name => User.name
-  belongs_to :data, :polymorphic => true
+  belongs_to :data, :polymorphic => true, :dependent => :destroy
 
   class << self
     def create_multiple_choices(content, options_hash)

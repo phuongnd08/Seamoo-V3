@@ -35,6 +35,7 @@ group :development, :test do
 	gem 'rspec', ">= 2.0.0.beta.22"
 	gem 'rspec-rails', ">= 2.0.0.beta.22"
   gem 'database_cleaner'
+  gem 'factory_girl_rails'
 	gem 'shoulda'
  	gem 'cucumber'
 	gem 'cucumber-rails', :git => 'git://github.com/aslakhellesoy/cucumber-rails.git'
