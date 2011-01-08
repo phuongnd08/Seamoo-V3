@@ -35,3 +35,25 @@ Then /^I should have (\w+)$/ do |type, table|
   end
   clazz.find(:first, :conditions => hash).should_not be_nil
 end
+
+Given /^I have (\w+)$/ do |type, table|
+  clazz = type.capitalize.constantize
+  hash = table.hashes.inject({}) do |hs, row|
+    hs[row['field'].gsub(/\s+/, '_').downcase.to_sym] = row['value']
+    hs
+  end
+  clazz.create(hash)
+end
+
+When /^I fill in last "([^"]*)" with "([^"]*)"$/ do |locator, content|
+  all(:xpath, XPath::HTML.fillable_field(locator)).last.set(content)
+end
+
+When /^I check last "([^"]*)"$/ do |locator|
+  all(:xpath, XPath::HTML.checkbox(locator)).last.set(true)
+end
+
+When /^I press to remove choice "([^"]*)"$/ do |choice|
+  xpath = "//input[@value='#{choice}']/../a[contains(normalize-space(string(.)), 'Remove')]"
+  find(:xpath, xpath).click
+end

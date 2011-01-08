@@ -9,6 +9,7 @@ gem 'mysql'
 gem 'haml'
 gem 'omniauth'
 gem 'authlogic'
+gem "jquery-rails", :git =>  "https://github.com/indirect/jquery-rails.git"
 # gem "oauth-plugin", :git => "git://github.com/pelle/oauth-plugin.git", :branch => "rails3" 
 
 # Use unicorn as the web server
@@ -47,7 +48,6 @@ end
 group :development do
   gem "rails3-generators"
 	gem 'haml-rails'
-	gem "jquery-rails", :git =>  "https://github.com/indirect/jquery-rails.git"
   gem "ruby-debug"
   gem "heroku"
 	gem "hpricot", :require => false

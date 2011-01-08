@@ -17,4 +17,12 @@ class Question < ActiveRecord::Base
       create(:data => data)
     end
   end
+
+  def content
+    if data.is_a?(MultipleChoice)
+      data.content
+    else
+      data.instruction
+    end
+  end
 end

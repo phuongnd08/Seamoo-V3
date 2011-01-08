@@ -1,0 +1,16 @@
+%p#notice= notice
+
+%p
+  %b Content:
+  = @multiple_choice.content
+  %b Choices:
+  %ul
+    - @multiple_choice.options.each do |option|
+      %li
+        = option.content
+        - if option.correct
+          (correct)
+
+= link_to 'Edit', edit_multiple_choice_path(@multiple_choice)
+\|
+= link_to 'Back', multiple_choices_path

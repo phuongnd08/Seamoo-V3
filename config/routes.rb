@@ -1,4 +1,10 @@
 SeamooV3::Application.routes.draw do
+  resources :multiple_choices
+
+  resources :questions
+
+  get "scaffold/question"
+
   resources :home, :only => [:index] do
     collection do
       get :secured

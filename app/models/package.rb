@@ -28,14 +28,7 @@ class Package < ActiveRecord::Base
       pattern = pattern[1..-1] if pattern.start_with?("*")
       question = Question.create_follow_pattern(parts[0], pattern)
     else
-      options_hash = parts[1..-1].inject({}) do |r, o|
-        if o.start_with?('*')
-          r[o[1..-1]]=true
-        else
-          r[o]=false
-        end
-        r
-      end
+      options_hash = MultipleChoice.array_to_options_hash(parts[1..-1])
       question = Question.create_multiple_choices(parts[0], options_hash)
     end
     question.update_attributes(:category => category, :level => level)
