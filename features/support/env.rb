@@ -60,7 +60,7 @@ end
 class TestEnv
   class << self
     def number
-      @number ||= (ENV["TEST_NO"] || 0).to_i + 1
+      @number ||= (ENV["TEST_ENV_NUMBER"] || 0).to_i + 1
     end
 
     def host

@@ -43,6 +43,7 @@ group :development, :test do
 	gem 'spork'
 	gem 'launchy'
   gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
+	gem 'parallel'
 end
 
 group :development do
