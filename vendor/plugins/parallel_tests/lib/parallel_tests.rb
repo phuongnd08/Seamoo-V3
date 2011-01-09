@@ -50,10 +50,14 @@ class ParallelTests
         if line == "\n"
           print "[#{process_number}]"
           print buffer
+          STDOUT.flush
           buffer = ''
         end
         line = ''
       end
+    end
+    unless buffer.empty?
+      print buffer
       STDOUT.flush
     end
     f.close
