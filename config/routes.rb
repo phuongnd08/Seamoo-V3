@@ -1,9 +1,9 @@
 SeamooV3::Application.routes.draw do
-  resources :multiple_choices
+  resources :follow_patterns, :except => [:index, :destroy]
 
-  resources :questions
+  resources :multiple_choices, :except => [:index, :destroy]
 
-  get "scaffold/question"
+  resources :questions, :except => [:update]
 
   resources :home, :only => [:index] do
     collection do

@@ -5,16 +5,12 @@ class QuestionsController < ApplicationController
 
   def show
     question = Question.find(params[:id])
-    if question.data.is_a?(MultipleChoice)
-      redirect_to multiple_choice_path(question.data)
-    end
+    redirect_to question.data
   end
 
   def edit
     question = Question.find(params[:id])
-    if question.data.is_a?(MultipleChoice)
-      redirect_to edit_multiple_choice_path(question.data)
-    end
+    redirect_to (send(['edit',  ActiveModel::Naming.singular(question.data), 'path'].join('_'), question.data))
   end
 
   def destroy

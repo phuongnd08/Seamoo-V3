@@ -19,7 +19,7 @@ class MultipleChoicesController < ApplicationController
     @multiple_choice = MultipleChoice.new(params[:multiple_choice])
     if @multiple_choice.save
       @question = Question.create(:data => @multiple_choice)
-      redirect_to(@question, :notice => 'Multiple choice was successfully created.')
+      redirect_to(@multiple_choice, :notice => 'Multiple choice was successfully created.')
     else
       render :action => "new"
     end
@@ -36,6 +36,5 @@ class MultipleChoicesController < ApplicationController
   protected
   def load_multiple_choice
     @multiple_choice = MultipleChoice.find(params[:id].to_i)
-    @question = Question.find_by_data_id_and_data_type(@multiple_choice.id, @multiple_choice.class.name)
   end
 end

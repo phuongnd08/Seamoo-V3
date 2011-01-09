@@ -22,10 +22,5 @@ describe MultipleChoicesController do
     it "recognizes and generates #update" do
       { :put => "/multiple_choices/1" }.should route_to(:controller => "multiple_choices", :action => "update", :id => "1")
     end
-
-    it "recognizes and generates #destroy" do
-      { :delete => "/multiple_choices/1" }.should route_to(:controller => "multiple_choices", :action => "destroy", :id => "1")
-    end
-
   end
 end

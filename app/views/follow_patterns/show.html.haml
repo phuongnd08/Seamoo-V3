@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Instruction:
+  = @follow_pattern.instruction
+%p
+  %b Pattern:
+  = @follow_pattern.pattern
+
+= link_to 'Edit', edit_follow_pattern_path(@follow_pattern)
+\|
+= link_to 'Back', follow_patterns_path

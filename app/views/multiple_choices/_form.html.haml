@@ -10,7 +10,7 @@
     = f.label :content
     = f.text_field :content
   %div
-    - f.fields_for :options do |builder|
+    = f.fields_for :options do |builder|
       = render 'option_fields', :f => builder
     %div
       = link_to_add_fields "Add choice", f, :options

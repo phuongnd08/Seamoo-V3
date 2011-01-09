@@ -36,9 +36,9 @@ describe MultipleChoicesController do
         }.should change(Question, :count).by(1)
       end
 
-      it "redirects to the created question" do
+      it "redirects to the created multiple_choice" do
         post :create, :multiple_choice => {'content' => 'Content'}
-        response.should redirect_to(MultipleChoice.find_by_content('Content').question)
+        response.should redirect_to(MultipleChoice.find_by_content('Content'))
       end
     end
 
@@ -47,7 +47,6 @@ describe MultipleChoicesController do
         @multiple_choice = mock_model(MultipleChoice)
         @multiple_choice.stub(:save => false)
         MultipleChoice.stub(:new).with({'these' => 'params'}) { @multiple_choice }
-
       end
       it "assigns a newly created but unsaved multiple_choice as @multiple_choice" do
         post :create, :multiple_choice => {'these' => 'params'}
@@ -74,7 +73,7 @@ describe MultipleChoicesController do
 
       it "redirects to the question" do
         put :update, :id => @multiple_choice.id
-        response.should redirect_to(question_path(@question))
+        response.should redirect_to(@multiple_choice)
       end
     end
 
@@ -92,6 +91,5 @@ describe MultipleChoicesController do
         response.should render_template("edit")
       end
     end
-
   end
 end
