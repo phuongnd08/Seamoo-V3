@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110105163447) do
+ActiveRecord::Schema.define(:version => 20110110154544) do
 
   create_table "authorizations", :force => true do |t|
     t.integer  "user_id"
@@ -42,6 +42,45 @@ ActiveRecord::Schema.define(:version => 20110105163447) do
     t.string   "description"
     t.string   "image_url"
     t.integer  "level"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "match_questions", :force => true do |t|
+    t.integer  "match_id"
+    t.integer  "question_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "match_subscriptions", :force => true do |t|
+    t.integer  "league_id"
+    t.integer  "user_id"
+    t.integer  "match_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "match_user_answers", :force => true do |t|
+    t.integer  "match_user_id"
+    t.integer  "match_question_id"
+    t.text     "answer"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "match_users", :force => true do |t|
+    t.integer  "match_id"
+    t.integer  "user_id"
+    t.integer  "rank"
+    t.float    "score"
+    t.datetime "finished_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "matches", :force => true do |t|
+    t.integer  "league_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

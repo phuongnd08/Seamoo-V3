@@ -1,0 +1,7 @@
+#!/bin/bash
+./recreate_db &
+./recreate_db RAILS_ENV=test TEST_ENV_NUMBER=0 &
+./recreate_db RAILS_ENV=test TEST_ENV_NUMBER=1 &
+./recreate_db RAILS_ENV=test TEST_ENV_NUMBER=2 &
+./recreate_db RAILS_ENV=test TEST_ENV_NUMBER=3 &
+./recreate_db RAILS_ENV=test TEST_ENV_NUMBER=4 &

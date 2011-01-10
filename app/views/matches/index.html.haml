@@ -1,0 +1,13 @@
+%h1 Listing matches
+
+%table
+  %tr
+    %th League
+    %th
+    %th
+    %th
+
+  - @matches.each do |match|
+    %tr
+      %td= match.league_id
+      %td= link_to 'Show', match

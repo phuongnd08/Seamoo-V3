@@ -1,4 +1,6 @@
 SeamooV3::Application.routes.draw do
+  resources :matches, :only => [:index, :show]
+
   resources :follow_patterns, :except => [:index, :destroy]
 
   resources :multiple_choices, :except => [:index, :destroy]
@@ -12,7 +14,11 @@ SeamooV3::Application.routes.draw do
   end
 
   resources :categories
-  resources :leagues
+  resources :leagues do
+    member do
+      get :subscribe
+    end
+  end
 
 
   root :to => "home#index"
