@@ -1,6 +1,6 @@
-class CreateMatchSubscriptions < ActiveRecord::Migration
+class CreateMatchRequests < ActiveRecord::Migration
   def self.up
-    create_table :match_subscriptions do |t|
+    create_table :match_requests do |t|
       t.integer :league_id
       t.integer :user_id
       t.integer :match_id
@@ -10,6 +10,6 @@ class CreateMatchSubscriptions < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :match_subscriptions
+    drop_table :match_requests
   end
 end
