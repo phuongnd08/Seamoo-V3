@@ -6,7 +6,7 @@ class AuthorizationsController < ApplicationController
     provider = omniauth['provider']
     uid = omniauth['uid']
     user_info = {}.merge(omniauth['user_info']).merge((omniauth['extra'] || {})['user_hash'] || {})
-
+    
     if current_user
       flash[:notice] = "Successfully added #{omniauth['provider']} authentication"
       current_user.authorizations.create(:provider => provider, :uid => uid)
@@ -22,12 +22,12 @@ class AuthorizationsController < ApplicationController
 
     redirect_to get_and_reset_return_url
   end
-
+  
   def failure
     flash[:notice] = "Sorry, You din't authorize"
     redirect_to root_path
   end
-
+  
   def destroy
     authorization = current_user.authorizations.find(params[:id])
     flash[:notice] = "Successfully deleted #{authorization.provider} authentication."

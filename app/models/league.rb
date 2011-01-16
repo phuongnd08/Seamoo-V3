@@ -1,5 +1,8 @@
 class League < ActiveRecord::Base
   belongs_to :category
+  def id=(id)
+    debugger
+  end
 
   def request_match(options)
     match_request = MatchRequest.find_by_league_id_and_user_id(id, options[:user].id)

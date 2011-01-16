@@ -32,4 +32,5 @@ SeamooV3::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+  ActiveRecord::Base.logger = Logger.new(STDOUT)
 end

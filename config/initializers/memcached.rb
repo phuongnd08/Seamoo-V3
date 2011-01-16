@@ -1,0 +1,1 @@
+MEMCACHED = YAML::load(ERB.new(IO.read(File.join(Rails.root, 'config', 'memcached.yml'))).result)[Rails.env]
