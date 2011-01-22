@@ -3,6 +3,7 @@ require 'spec_helper'
 describe League do
   describe "relationships" do
     it { should belong_to(:category)}
+    it { should have_many(:matches)}
   end
 
   describe "request_match" do
