@@ -43,14 +43,6 @@ Given /^(?:a|an) (\w+) match between ([\w\s]+) is started$/ do |league_name, use
   end
 end
 
-Given /^(?:a|an) (\w+) match between ([\w\s]+) is finished$/ do |league_name, user_list|
-  users = find_users_by_list(user_list)
-  match = create_match_for_users(League.find_by_name(league_name), users)
-  skip_timestamps(Match) do
-    match.update_attribute(:created_at, Time.now - Matching.started_after.seconds - Matching.finished_after.seconds)
-  end
-end
-
 Then /^(?:a|an) (\w+) match is formed for ([\w\s]+)$/ do |league_name, user_list|
   users = find_users_by_list(user_list)
   League.find_by_name(league_name).matches.detect{|m| m.users.to_set == users.to_set}.should_not == nil

@@ -63,4 +63,4 @@ Feature: Match forming
     And eric want to join Amateur
     And peter still want to join Amateur
     Then an Amateur match is formed for eric and peter
-    And there is 2 Amateur matches for peter
+    And there is 2 Amateur match for peter

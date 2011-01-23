@@ -12,7 +12,6 @@ describe Match do
       Matching.stub(:finished_after).and_return(600)
       Matching.stub(:started_after).and_return(60)
     end
-
     describe "finished" do
       it "should return correct value with respect to Matching constants" do
         Match.new(:created_at => Time.now - 659.seconds).finished?.should == false

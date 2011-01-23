@@ -26,7 +26,7 @@ module Utils
         client.set(serialized_key(key), value)
       end
 
-      def incr(key=:counter, delta=1, default=1)
+      def incr(key = :counter, delta=1, default=1)
         client.incr(serialized_key(key), delta, 0, default) 
       end
 
