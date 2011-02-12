@@ -1,7 +1,0 @@
-describe Matching do
-  it "should contain constant inform of accessor" do
-    Matching.requester_fresh.should == 30
-    Matching.started_after.should == 15
-    Matching.finished_after.should == 60
-  end
-end

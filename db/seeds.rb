@@ -13,3 +13,6 @@ League.create!(:category => english, :alias => 'english_chicken', :name => 'Chic
 League.create!(:category => english, :alias => 'english_eagle', :name => 'Eagle', :description => 'Dành cho người RẤT giỏi')
 Question.create_multiple_choices("What's your name", {'phuong' => true, 'trien' => false, 'toan' => false})
 Question.create_follow_pattern("My name", 'ph[uo]ng')
+
+User.create(:display_name => "phuong", :email => "phuong@seamoo.com")
+User.create(:display_name => "hung", :email => "hung@seamoo.com")

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110114154122) do
+ActiveRecord::Schema.define(:version => 20110212152233) do
 
   create_table "authorizations", :force => true do |t|
     t.integer  "user_id"
@@ -61,19 +61,6 @@ ActiveRecord::Schema.define(:version => 20110114154122) do
     t.datetime "updated_at"
   end
 
-  create_table "match_requests", :force => true do |t|
-    t.integer  "league_id"
-    t.integer  "user_id"
-    t.integer  "match_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "match_requests", ["league_id"], :name => "index_match_requests_on_league_id"
-  add_index "match_requests", ["match_id"], :name => "index_match_requests_on_match_id"
-  add_index "match_requests", ["updated_at"], :name => "index_match_requests_on_updated_at"
-  add_index "match_requests", ["user_id"], :name => "index_match_requests_on_user_id"
-
   create_table "match_user_answers", :force => true do |t|
     t.integer  "match_user_id"
     t.integer  "match_question_id"
@@ -96,6 +83,7 @@ ActiveRecord::Schema.define(:version => 20110114154122) do
     t.integer  "league_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.time     "finished_at"
   end
 
   create_table "multiple_choice_options", :force => true do |t|

@@ -5,16 +5,24 @@ class Match < ActiveRecord::Base
   has_many :questions, :through => :match_questions
   belongs_to :league
 
+  def seconds_until_started
+    [0, (started_at - Time.now).round].max
+  end
+
   def started?
     Time.now >= started_at
   end
 
   def finished?
-    Time.now >= finished_at
+    ended? || (finished_at.present? && Time.now >= finished_at)
   end
 
-  def finished_at
-    started_at + Matching.finished_after.seconds
+  def ended?
+    Time.now >= ended_at
+  end
+
+  def ended_at
+    started_at + Matching.ended_after.seconds
   end
 
   def started_at

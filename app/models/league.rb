@@ -1,5 +1,4 @@
 class League < ActiveRecord::Base
-  include Utils
   belongs_to :category
   has_many :matches
 
@@ -21,7 +20,7 @@ class League < ActiveRecord::Base
     self.class_eval %{
       protected
       def #{field}
-        @mem_hash_for_#{field} ||= Memcached::Hash.new(mem_hash.base_key_hash.merge(:field => :#{field}), :#{identifier})
+        @mem_hash_for_#{field} ||= Utils::Memcached::Hash.new({:category => League.class.name, :id => self.id, :field => :#{field}}, :#{identifier})
       end
     }
     end
@@ -53,6 +52,7 @@ class League < ActiveRecord::Base
       end
       user_ticket[user_id] = user_ticket_counter.incr unless ok
     end
+    match_id[match_ticket] != nil ? Match.find(match_id[match_ticket]) : nil
   end
 
   protected
@@ -81,9 +81,5 @@ class League < ActiveRecord::Base
     b &&= match_id[match_ticket]!=nil
     b &&= !Match.find(match_id[match_ticket]).finished?
     b &&= MatchUser.find_by_match_id_and_user_id(match_id[match_ticket], user_id).present?
-  end
-
-  def mem_hash
-    @mem_hash ||= Memcached::Hash.new(:category => League.class.name, :id => self.id)
   end
 end

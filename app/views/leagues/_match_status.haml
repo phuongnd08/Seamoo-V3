@@ -1,0 +1,9 @@
+%strong
+  - if match==nil
+    Waiting for other players
+  - elsif match.finished?
+    Match finished
+  - elsif match.started?
+    Match started
+  - else
+    Match will be started in #{match.seconds_until_started} seconds

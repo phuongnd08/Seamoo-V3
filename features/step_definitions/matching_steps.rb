@@ -47,7 +47,7 @@ Given /^(?:a|an) (\w+) match between ([\w\s]+) is finished$/ do |league_name, us
   users = find_users_by_list(user_list)
   match = create_match_for_users(League.find_by_name(league_name), users)
   skip_timestamps(Match) do
-    match.update_attribute(:created_at, Time.now - Matching.started_after.seconds - Matching.finished_after.seconds)
+    match.update_attribute(:created_at, Time.now - Matching.started_after.seconds - Matching.ended_after.seconds)
   end
 end
 
@@ -64,7 +64,7 @@ Given /^(\w+) want to join (\w+) (\d+) minutes ago$/ do |username, league_name, 
 end
 
 Given /^all data is fresh$/ do
-  Class.new.extend(Utils::Memcached::Common).client.flush_all
+  Object.new.extend(Utils::Memcached::Common).client.flush_all
 end
 
 Then /^there is (?:only )?(\d+) (\w+) match(?:es)? for (\w+)$/ do |count, league_name, username|
@@ -72,5 +72,39 @@ Then /^there is (?:only )?(\d+) (\w+) match(?:es)? for (\w+)$/ do |count, league
   League.find_by_name(league_name).matches.select{|m| m.users.include?(user)}.count.should == count.to_i
 end
 
+When /^(\w+) match on league (\w+)$/ do |username, league_name|
+  visit "/auth/signin/#{username}"
+  Then %{#{username} should see "Hello #{username}"}
+  visit matching_league_path(League.find_by_name(league_name))
+end
 
+When /^\w{2,} press "([^"]*)"$/ do |button|
+  When %{I press "#{button}"}
+end
+
+Then /^\w{2,} should be on (.+)$/ do |page|
+  Then %{I should be on #{page}}
+end
+
+When /^\w{2,} visit (.+)$/ do |page|
+  Then %{I visit #{page}}
+end
+
+Then /^\w{2,} should see "([^"]*)"$/ do |text|
+  text.split(/\s+[\*\?]\s+/).each do |part|
+    Then %{I should see "#{part}"}
+  end
+end
+
+Given /^first Amateur match use default questions$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^league (\w+) has (\d+) questions$/ do |league_name, count|
+  league = League.find_by_name(league_name)
+  count.to_i.times do |i|
+    question = Question.create_multiple_choices("Question \##{i}", {'Option \#1' => true, 'Option \#2' => false})
+    question.update_attribute(:league, league)
+  end
+end
 

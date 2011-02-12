@@ -1,0 +1,31 @@
+%h1 Welcome to #{@league.name}
+%h2 Let's match
+#status
+:javascript
+  var leagueId = #{@league.id}
+  $(function(){
+    refreshMatchStatus();
+  })
+
+  function refreshMatchStatus(){
+    $.ajax({
+      type: 'post',
+      url: ["/leagues/", leagueId, "/request_match_info"].join(""),
+      dataType: 'json',
+      success: function(data){
+        updateMatchInfo(data);
+      },
+      error: function(data){
+        setTimeout(refreshMatchStatus, 500);
+      }
+    });
+  }
+
+  function updateMatchInfo(info){
+    $('#status').html(info.status)
+    if (info.match != null && info.match.started){
+    } else {
+      setTimeout(refreshMatchStatus, 500);
+    }
+  }
+

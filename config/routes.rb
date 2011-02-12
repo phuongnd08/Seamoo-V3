@@ -16,7 +16,9 @@ SeamooV3::Application.routes.draw do
   resources :categories
   resources :leagues do
     member do
-      get :subscribe
+      get :matching
+      get :request_match_info
+      post :request_match_info
     end
   end
 
@@ -25,6 +27,7 @@ SeamooV3::Application.routes.draw do
 
   match "/auth/:provider/callback" => "authorizations#create"
   match "/auth/failure" => "authorizations#failure"
+  match "/auth/signin/:username" => "authorizations#signin"
   match 'signin' => 'user_sessions#new', :as => :signin
   match 'signout' => 'user_sessions#destroy', :as => :signout
 

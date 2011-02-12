@@ -1,13 +1,13 @@
 development: &development
   requester_fresh: 5
   started_after: 15
-  finished_after: 60
+  ended_after: 60
 test:
   <<: *development
   requester_fresh: 300
   started_after: 600
-  finished_after: 6000
+  ended_after: 6000
 production: &development
   requester_fresh: 5
   started_after: 15
-  finished_after: 60
+  ended_after: 60
