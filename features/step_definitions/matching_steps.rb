@@ -17,8 +17,12 @@ Given /^these users$/ do |table|
   table.raw.each{|row| User.create!(:display_name => row.first, :email => row.first + "@seamoo.com")}
 end
 
+Given /^category (\w+) is available$/ do |category_name|
+  Category.create(:name => category_name)
+end
+
 Given /^league (\w+) is openning$/ do |league_name|
-  League.create(:name => league_name)
+  League.create(:name => league_name, :category => Category.first, :level => 0)
 end
 
 When /^(\w+) (?:still )?want to join (\w+)?$/ do |username, league_name|
@@ -96,15 +100,20 @@ Then /^\w{2,} should see "([^"]*)"$/ do |text|
   end
 end
 
-Given /^first Amateur match use default questions$/ do
-  pending # express the regexp above with the code you wish you had
+Given /^first (\w+) match use default questions$/ do |league_name|
+  league = League.find_by_name(league_name)
+  match = league.matches.first
+  match.questions.clear
+  Matching.questions_per_match.times.each do |i|
+    match.questions << Question.all[i]
+  end
 end
 
 Given /^league (\w+) has (\d+) questions$/ do |league_name, count|
   league = League.find_by_name(league_name)
   count.to_i.times do |i|
-    question = Question.create_multiple_choices("Question \##{i}", {'Option \#1' => true, 'Option \#2' => false})
-    question.update_attribute(:league, league)
+    question = Question.create_multiple_choices("Question \##{i+1}", {'Option #a' => true, 'Option #b' => false})
+    question.update_attributes(:category => league.category, :level => league.level)
   end
 end
 

@@ -1,10 +1,14 @@
 %h1 Welcome to #{@league.name}
 %h2 Let's match
 #status
+#question
 :javascript
-  var leagueId = #{@league.id}
-  $(function(){
-    refreshMatchStatus();
+  var leagueId = #{@league.id};
+  var retried = 0;
+  
+  var MAX_RETRIES = 20; 
+  
+  $(function(){ refreshMatchStatus();
   })
 
   function refreshMatchStatus(){
@@ -14,16 +18,21 @@
       dataType: 'json',
       success: function(data){
         updateMatchInfo(data);
+        retried = 0;
       },
       error: function(data){
-        setTimeout(refreshMatchStatus, 500);
+        if (retried < MAX_RETRIES){
+          retried++;
+          setTimeout(refreshMatchStatus, 500);
+        }
       }
     });
   }
 
   function updateMatchInfo(info){
     $('#status').html(info.status)
-    if (info.match != null && info.match.started){
+    if (info.question){
+      $('#question').html(info.question);
     } else {
       setTimeout(refreshMatchStatus, 500);
     }

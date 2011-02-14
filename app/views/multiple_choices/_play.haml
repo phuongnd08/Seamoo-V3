@@ -1,0 +1,5 @@
+%h3= multiple_choice.content
+%ul
+  - multiple_choice.options.each do |option|
+    %li
+      %button= option.content
