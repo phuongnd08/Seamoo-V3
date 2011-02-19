@@ -19,6 +19,7 @@ SeamooV3::Application.routes.draw do
       get :matching
       get :request_match_info
       post :request_match_info
+      post :submit_answer_and_get_next_question
     end
   end
 

@@ -4,17 +4,17 @@ class Question < ActiveRecord::Base
   belongs_to :data, :polymorphic => true, :dependent => :destroy
 
   class << self
-    def create_multiple_choices(content, options_hash)
+    def create_multiple_choices(content, options_hash, extra = {})
       data = MultipleChoice.create(:content => content)
       options_hash.keys.each{|key|
         data.options.create(:content => key, :correct => options_hash[key])
       }
-      create(:data => data)
+      create(extra.merge(:data => data))
     end
 
-    def create_follow_pattern(instruction, pattern)
+    def create_follow_pattern(instruction, pattern, extra = {})
       data = FollowPattern.create(:instruction => instruction, :pattern => pattern)
-      create(:data => data)
+      create(extra.merge(:data => data))
     end
   end
 

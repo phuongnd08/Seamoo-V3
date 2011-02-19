@@ -1,7 +1,9 @@
+require 'spec_helper'
+
 describe Matching do
   it "should contain constant inform of accessor" do
-    Matching.requester_fresh.should == 300
-    Matching.started_after.should == 600
-    Matching.ended_after.should == 6000
+    Matching.should respond_to(:requester_stale_after)
+    Matching.should respond_to(:started_after)
+    Matching.should respond_to(:ended_after)
   end
 end

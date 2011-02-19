@@ -5,6 +5,10 @@ class MultipleChoice < ActiveRecord::Base
   def question
     Question.find_by_data_id_and_data_type(id, MultipleChoice.name)
   end
+
+  def randomized_options
+    (0...options.size).to_a.shuffle.map{|index| [index, options[index]]}
+  end
   
   class << self
     def string_to_options_hash(str)

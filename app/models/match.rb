@@ -5,8 +5,14 @@ class Match < ActiveRecord::Base
   has_many :questions, :through => :match_questions
   belongs_to :league
 
+  before_create :fetch_question
+
   def seconds_until_started
     [0, (started_at - Time.now).round].max
+  end
+
+  def seconds_until_ended
+    [0, (ended_at- Time.now).round].max
   end
 
   def started?
@@ -27,5 +33,9 @@ class Match < ActiveRecord::Base
 
   def started_at
     created_at + Matching.started_after.seconds
+  end
+
+  def fetch_question
+    league.category.questions[0...Matching.questions_per_match].each { |q| questions << q }
   end
 end

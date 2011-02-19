@@ -1,14 +1,14 @@
 development: &development
-  requester_stale_after: 5
+  requester_stale_after: 50
   started_after: 5
-  ended_after: 15 
+  ended_after: 150
   questions_per_match: 3
 
 test:
   <<: *development
-  requester_stale_after: 2
-  started_after: 4 
-  ended_after: 10
+  requester_stale_after: 6
+  started_after: 3 
+  ended_after: 15
 
 production: &development
   requester_stale_after: 5

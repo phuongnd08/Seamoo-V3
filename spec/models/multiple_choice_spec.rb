@@ -16,4 +16,14 @@ describe MultipleChoice do
       @multiple_choice.reload.options.count.should == 1
     end
   end
+
+  describe "randomized_options" do
+    it "should return options in randomized order" do
+      @multiple_choice = MultipleChoice.create(:content => "What's your name")
+      @multiple_choice.options_attributes = [ { :content => 'Phuong' }, { :content => 'Toan' }, {:content => 'Hung'} ]
+      randomized_options = @multiple_choice.randomized_options
+      randomized_options.map{|index, option| index}.to_set.should == [0, 1, 2].to_set
+      randomized_options.map{|index, option| option.content}.to_set.should == [ 'Phuong', 'Toan', 'Hung'].to_set
+    end
+  end
 end

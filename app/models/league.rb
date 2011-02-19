@@ -5,7 +5,7 @@ class League < ActiveRecord::Base
   def add_user_to_match(match_id, user_id)
     if (match_id != nil)
       match = Match.find(match_id)
-      if (match.started?)
+      if (match.finished?)
         return false # user cannot be added to finished match
       else
         MatchUser.create(:match_id => match.id, :user_id => user_id) unless MatchUser.find_by_match_id_and_user_id(match_id, user_id)

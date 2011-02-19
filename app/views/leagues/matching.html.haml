@@ -5,9 +5,14 @@
 :javascript
   var leagueId = #{@league.id};
   var retried = 0;
-  
+  var currentQuestion;
+  var formedCounterHandle;
+  var secondsUntilStarted;
+
   var MAX_RETRIES = 20; 
-  
+
+  var statusHTML = #{javascript_templates(['waiting', 'formed', 'started', 'finished', 'you_finished'])};
+
   $(function(){ refreshMatchStatus();
   })
 
@@ -18,23 +23,90 @@
       dataType: 'json',
       success: function(data){
         updateMatchInfo(data);
-        retried = 0;
+        resetRetrying();
       },
       error: function(data){
-        if (retried < MAX_RETRIES){
-          retried++;
-          setTimeout(refreshMatchStatus, 500);
-        }
+        retry(refreshMatchStatus, 500);
       }
     });
   }
 
   function updateMatchInfo(info){
-    $('#status').html(info.status)
+    if (info.status){
+      setStatus(info.status, info);
+      if (info.status == 'waiting'){
+        setTimeout(refreshMatchStatus, 500);
+      } else if (info.status == 'formed'){
+        showFormedCounter(info.seconds_until_started);
+      }
+    }
+
     if (info.question){
-      $('#question').html(info.question);
+      setQuestion(info.question, info.current_question_position);
+    } else clearQuestion();
+  }
+
+  function showFormedCounter(tillStarted){
+    if (formedCounterHandle) {clearTimeout(formedCounterHandle);}
+    secondsUntilStarted = tillStarted;
+    formedCounterHandle = setTimeout(refreshFormedCounter, 1000); 
+  }
+
+  function refreshFormedCounter(){
+   if (secondsUntilStarted == 0){
+      refreshMatchStatus();
     } else {
-      setTimeout(refreshMatchStatus, 500);
+      secondsUntilStarted--;
+      setStatus('formed', { seconds_until_started: secondsUntilStarted });
+      formedCounterHandle = setTimeout(refreshFormedCounter, 1000);
     }
   }
 
+  function submitAnswer(answer){
+    $.ajax({
+      type: 'post',
+      url: ["/leagues/", leagueId, "/submit_answer_and_get_next_question"].join(""),
+      dataType: 'json',
+      data: {
+        position: currentQuestionPosition,
+        answer: answer
+      },
+      success: function(data){
+        updateMatchInfo(data);
+      },
+      error: function(data){
+        retry(function(){submitAnswer(answer)}, 100);
+      }
+    })
+  }
+
+  function retry(ajaxMethod, interval){
+    if (retried < MAX_RETRIES){
+      retried++;
+      setTimeout(ajaxMethod, interval);
+    }
+  }
+
+  function resetRetrying(){
+    retried = 0;
+  }
+
+  function setStatus(status, params){
+    var html = statusHTML[status];
+    for (var key in params){
+      html = html.replace(new RegExp('{'+key+'}', 'g'), params[key]);
+    }
+    $('#status').html(html);
+  }
+
+  function setQuestion(question, position){
+    $('#question').html(question);
+    currentQuestionPosition = position
+    $('#question button').click(function(event){
+      submitAnswer($(this).attr('answer'));
+    });
+  }
+
+  function clearQuestion(){
+    $('#question').empty();
+  }

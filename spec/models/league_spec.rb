@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe League do
+  before(:each) do
+    Class.new.extend(Utils::Memcached::Common).client.flush_all # clear memecached
+  end
+
   describe "relationships" do
     it { should belong_to(:category)}
     it { should have_many(:matches)}
@@ -8,9 +12,7 @@ describe League do
 
   describe "dynamic accessor" do
     before(:each) do
-      @user = Factory.create(:user)
-      @league = League.create!
-      Class.new.extend(Utils::Memcached::Common).client.flush_all # clear memecached
+      @league = League.create!(:level => 0)
     end
 
     it "should be maintained correctly" do
@@ -27,9 +29,14 @@ describe League do
 
   describe "request_match" do
     before(:each) do
-      @user1 = Factory.create(:user)
-      @user2 = Factory.create(:user)
-      @league = League.create!
+      @category = Factory(:category)
+      @user1 = Factory(:user)
+      @user2 = Factory(:user)
+      @questions = []
+      (1..3).each do |t|
+        @questions << Factory(:question, :level => 0, :category => @category)
+      end
+      @league = League.create!(:level => 0, :category => @category)
       Class.new.extend(Utils::Memcached::Common).client.flush_all # clear memecached
     end
 
@@ -48,7 +55,7 @@ describe League do
         Time.stub(:now).and_return(initial_time + t.seconds) 
         @league.request_match(@user1.id)
         @league.request_match(@user2.id)
- 
+
       end
 
       Time.stub(:now).and_return(initial_time + (Matching.started_after + Matching.ended_after + 1).seconds) 
@@ -61,6 +68,13 @@ describe League do
       match_2b.should == match_2a
 
       match_2a.id.should == match_1a.id+1
+    end
+
+    it "should assign questions to match" do
+      Matching.stub(:questions_per_match).and_return(3)
+      @league.request_match(@user1.id)
+      match = @league.request_match(@user2.id)
+      match.questions.map(&:id).to_set.should == @questions.map(&:id).to_set
     end
   end
 end

@@ -94,15 +94,16 @@ When /^\w{2,} visit (.+)$/ do |page|
   Then %{I visit #{page}}
 end
 
-Then /^\w{2,} should see "([^"]*)"$/ do |text|
+Then /^\w{2,} should see "([^"]*)"(.*)$/ do |text, scope_definition|
   text.split(/\s+[\*\?]\s+/).each do |part|
-    Then %{I should see "#{part}"}
+    Then %{I should see "#{part}"#{scope_definition}}
   end
 end
 
 Given /^first (\w+) match use default questions$/ do |league_name|
   league = League.find_by_name(league_name)
   match = league.matches.first
+  Rails.logger.warn("But first league match is nil") if match.nil?
   match.questions.clear
   Matching.questions_per_match.times.each do |i|
     match.questions << Question.all[i]

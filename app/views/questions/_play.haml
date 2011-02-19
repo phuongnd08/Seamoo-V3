@@ -1,4 +1,4 @@
-%h3 Question #{current_question + 1}/#{total_question}
+%h3 Question #{current_question_position + 1}/#{total_question}
 - if question.data.is_a?(MultipleChoice)
   = render :partial => "multiple_choices/play", :locals => {:multiple_choice => question.data}
 - elsif question.data.is_a?(FollowPattern)

@@ -11,29 +11,63 @@ class LeaguesController < ApplicationController
 
   def request_match_info
     match = @league.request_match(current_user.id) 
-    if match
-      puts "match.started: #{match.started?}"
-    end
     respond_to do |format|
       format.json{
-        infor = {
-        :status => League.send(:class_variable_get, '@@status') + render_to_string(:partial => "match_status", :format => :html, :locals => {:match => match})
-      }
+        match_user = nil
+        infor = {}
+        infor[:@@status] = League.send(:class_variable_get, '@@status')
+        infor[:status] = if match.nil?
+                           'waiting'
+                         elsif match.finished?
+                           'finished'
+                         elsif match.started?
+                           infor[:seconds_until_ended] = match.seconds_until_ended
+                           match_user = match.match_users.find_by_user_id(current_user.id)
+                           infor[:current_question_position] = match_user.current_question_position
+                           if match_user.finished?
+                             'you_finished'
+                           else
+                             infor[:question] = render_to_string(:partial => "questions/play", :format => :html, 
+                                                                 :locals => { :question => match.questions[match_user.current_question_position], 
+                                                                   :total_question => match.questions.count, 
+                                                                   :current_question_position => match_user.current_question_position })
 
-      unless match.nil? || !match.started?
-        match_user = match.match_users.find_by_user_id(current_user.id)
-        infor[:question] = render_to_string(:partial => "questions/play", :format => :html, 
-                                           :locals => { :question => match.questions[match_user.current_question], 
-                                             :total_question => match.questions.count, 
-                                             :current_question => match_user.current_question })
-      end
-      render :json => infor
+                           end
+                           'started'
+                         else
+                           infor[:seconds_until_started] = match.seconds_until_started
+                           'formed'
+                         end
+
+        render :json => infor
       }
     end
   end
 
-  protected
-  def load_league
-    @league = League.find(params[:id]) 
+  def submit_answer_and_get_next_question
+    match = @league.request_match(current_user.id)
+    match_user = match.match_users.find_by_user_id(current_user.id)
+    match_user.add_answer(params[:position].to_i, params[:answer])   
+    match_user.current_question_position = params[:position].to_i + 1
+    match_user.save!
+    respond_to do |format|
+      format.json{
+        render :json => unless match_user.finished?
+        { :question => render_to_string(:partial => "questions/play", :format => :html, 
+                                        :locals => { :question => match.questions[match_user.current_question_position], 
+                                          :total_question => match.questions.count, 
+                                          :current_question_position => match_user.current_question_position }),
+                                          :current_question_position => match_user.current_question_position
+        }
+    else
+      { :status => :you_finished }
+    end
+      }
   end
+end
+
+protected
+def load_league
+  @league = League.find(params[:id]) 
+end
 end

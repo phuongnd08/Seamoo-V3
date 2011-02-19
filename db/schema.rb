@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110214133930) do
+ActiveRecord::Schema.define(:version => 20110216152018) do
 
   create_table "authorizations", :force => true do |t|
     t.integer  "user_id"
@@ -53,14 +53,6 @@ ActiveRecord::Schema.define(:version => 20110214133930) do
     t.datetime "updated_at"
   end
 
-  create_table "match_user_answers", :force => true do |t|
-    t.integer  "match_user_id"
-    t.integer  "match_question_id"
-    t.text     "answer"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "match_users", :force => true do |t|
     t.integer  "match_id"
     t.integer  "user_id"
@@ -69,7 +61,8 @@ ActiveRecord::Schema.define(:version => 20110214133930) do
     t.datetime "finished_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "current_question", :default => 0
+    t.integer  "current_question_position", :default => 0
+    t.text     "answers"
   end
 
   create_table "matches", :force => true do |t|
