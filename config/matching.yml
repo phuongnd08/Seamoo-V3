@@ -3,6 +3,7 @@ development: &development
   started_after: 5
   ended_after: 150
   questions_per_match: 3
+  users_per_match: 4
 
 test:
   <<: *development
@@ -10,7 +11,8 @@ test:
   started_after: 3 
   ended_after: 150
 
-production: &development
+production: 
+  <<: *development
   requester_stale_after: 5
   started_after: 15
   ended_after: 60

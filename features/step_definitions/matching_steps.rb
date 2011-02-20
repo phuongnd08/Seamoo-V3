@@ -151,3 +151,8 @@ Given /^first (\w+) match will be ended in (\d+) seconds$/ do |league_name, seco
   end
 end
 
+When /^(\w+) request to leave his current (\w+) match$/ do |username, league_name|
+  league = League.find_by_name(league_name)
+  user = User.find_by_display_name(username)
+  league.leave_current_match(user.id)
+end

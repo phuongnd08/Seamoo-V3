@@ -65,3 +65,12 @@ Feature: Match forming
     And peter still want to join Amateur
     Then an Amateur match is formed for eric and peter
     And there is 2 Amateur matches for peter
+
+  Scenario: Request again after explicitly request to leave current match should form a new match
+    Given an Amateur match between peter and mike is started
+    When peter request to leave his current Amateur match
+    And peter want to join Amateur
+    And eric want to join Amateur
+    And peter still want to join Amateur
+    Then an Amateur match is formed for eric and peter
+    And there is 2 Amateur matches for peter

@@ -5,5 +5,7 @@ describe Matching do
     Matching.should respond_to(:requester_stale_after)
     Matching.should respond_to(:started_after)
     Matching.should respond_to(:ended_after)
+    Matching.should respond_to(:questions_per_match)
+    Matching.should respond_to(:users_per_match)
   end
 end

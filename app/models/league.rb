@@ -29,9 +29,12 @@ class League < ActiveRecord::Base
     user_lastseen[user_id] = Time.now.to_i
     ok = false
     while !ok do
-      match_ticket = (user_ticket[user_id] - 1) / 4 + 1
-      match_position = user_ticket[user_id] % 4
-      match_user_id[{:match_ticket => match_ticket, :position => match_position}] = user_id
+      match_ticket = (user_ticket[user_id] - 1) / Matching.users_per_match + 1
+      match_position = ((user_ticket[user_id] - 1) % Matching.users_per_match) + 1
+      # when user leave match through official request, do not add him to the same match
+      unless (1..(match_position - 1)).map{|pos| match_user_id[{:match_ticket => match_ticket, :position => pos}]}.include?(user_id) 
+        match_user_id[{:match_ticket => match_ticket, :position => match_position}] = user_id
+      end
       if participating?(match_ticket, match_position, user_id)
         ok = true
       elsif can_participate?(match_ticket, match_position)
@@ -55,6 +58,11 @@ class League < ActiveRecord::Base
     match_id[match_ticket] != nil ? Match.find(match_id[match_ticket]) : nil
   end
 
+  def leave_current_match(user_id)
+    user_ticket[user_id] = nil
+    user_lastseen[user_id] = nil
+  end
+
   protected
   def can_participate?(match_ticket, match_position)
     if match_position == 1
@@ -64,7 +72,6 @@ class League < ActiveRecord::Base
       first_requester_id = try_until_not_nil_or_timeout(Matching.requester_stale_after) { match_user_id[{:match_ticket => match_ticket, :position => 1}] }
       can = if first_requester_id
               first_requester_lastseen= try_until_not_nil_or_timeout(Matching.requester_stale_after) { user_lastseen[first_requester_id] }
-
               first_requester_lastseen =! nil && first_requester_lastseen > Matching.requester_stale_after.seconds.ago.to_i
             else
               false
