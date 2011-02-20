@@ -7,8 +7,9 @@
   var matchId;
   var retried = 0;
   var currentQuestion;
-  var formedCounterHandle;
-  var secondsUntilStarted;
+  var counterHandle;
+  var counterTemplate;
+  var remainedTime;
 
   var MAX_RETRIES = 20; 
 
@@ -56,10 +57,17 @@
   function updateMatchInfo(info){
     if (info.status){
       setStatus(info.status, info);
-      if (info.status == 'formed'){
-        showFormedCounter(info.seconds_until_started);
-      } else if (info.status == 'you_finished') {
-        setTimeout(getMatchInfo, 1000);
+      switch (info.status){
+        case 'formed':
+          showCounter('formed', info.seconds_until_started);
+          break;
+        case 'you_finished':
+          setTimeout(getMatchInfo, 1000);
+          showCounter('you_finished', info.seconds_until_ended);
+          break;
+        case 'started':
+          showCounter('started', info.seconds_until_ended);
+          break;
       }
     }
 
@@ -68,19 +76,26 @@
     } else clearQuestion();
   }
 
-  function showFormedCounter(tillStarted){
-    if (formedCounterHandle) {clearTimeout(formedCounterHandle);}
-    secondsUntilStarted = tillStarted;
-    formedCounterHandle = setTimeout(refreshFormedCounter, 1000); 
+  function showCounter(template, time){
+    if (counterHandle) {clearTimeout(counterHandle);}
+    remainedTime = time;
+    counterTemplate = template;
+    counterHandle = setTimeout(refreshCounter, 1000); 
   }
 
-  function refreshFormedCounter(){
-   if (secondsUntilStarted == 0){
+  function refreshCounter(){
+   if (remainedTime== 0){
       getMatchInfo();
     } else {
-      secondsUntilStarted--;
-      setStatus('formed', { seconds_until_started: secondsUntilStarted });
-      formedCounterHandle = setTimeout(refreshFormedCounter, 1000);
+      remainedTime--;
+      var params;
+      if (counterTemplate == 'formed'){
+        params = { seconds_until_started: remainedTime}
+      } else {
+        params = { seconds_until_ended: remainedTime}
+      }
+      setStatus(counterTemplate, params);
+      counterHandle = setTimeout(refreshCounter, 1000);
     }
   }
 

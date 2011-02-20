@@ -54,7 +54,10 @@ class MatchesController < ApplicationController
                                           :current_question_position => match_user.current_question_position
         }
     else
-      { :status => :you_finished }
+      { 
+        :status => :you_finished,
+        :seconds_until_ended => @match.seconds_until_ended
+      }
     end
       }
   end

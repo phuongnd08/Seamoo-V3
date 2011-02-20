@@ -55,3 +55,23 @@ Feature: Match Playing
     Then mike should see "You have finished the match" within "#status"
     Given peter finished his match
     Then mike should soon be on the match result of first match page
+
+  Scenario: Fast bird wait for match to end
+    #First make sure both players will be registered in match
+    Given mike is already at the last question
+    When mike match on league Amateur
+    And mike should see "Question 3/3"
+    Then mike should see "Question #3"
+    When mike press "Option #a"
+    Then mike should see "You have finished the match" within "#status"
+    Given first Amateur match is ended
+    Then mike should soon be on the match result of first match page
+
+  Scenario: No players finished before the match ended
+    #First make sure both players will be registered in match
+    Given mike is already at the last question
+    And first Amateur match will be ended in 3 seconds
+    When mike match on league Amateur
+    And mike should see "Question 3/3"
+    And mike should soon be on the match result of first match page
+

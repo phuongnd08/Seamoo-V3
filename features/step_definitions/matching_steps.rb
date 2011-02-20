@@ -137,5 +137,17 @@ Given /^(\w+) finished his match$/ do |username|
   match_user.save!
 end
 
+Given /^first (\w+) match is ended$/ do |league_name|
+  league = League.find_by_name(league_name)
+  skip_timestamps(Match) do
+    league.matches.first.update_attribute(:created_at, (Matching.started_after + Matching.ended_after + 1).seconds.ago)
+  end
+end
 
+Given /^first (\w+) match will be ended in (\d+) seconds$/ do |league_name, seconds|
+  league = League.find_by_name(league_name)
+  skip_timestamps(Match) do
+    league.matches.first.update_attribute(:created_at, (Matching.started_after + Matching.ended_after - seconds.to_i).seconds.ago)
+  end
+end
 
