@@ -21,8 +21,8 @@ Given /^category (\w+) is available$/ do |category_name|
   Category.create(:name => category_name)
 end
 
-Given /^league (\w+) is openning$/ do |league_name|
-  League.create(:name => league_name, :category => Category.first, :level => 0)
+Given /^league (\w+) of (\w+) is openning$/ do |league_name, category_name|
+  League.create(:name => league_name, :category => Category.find_by_name(category_name), :level => 0)
 end
 
 When /^(\w+) (?:still )?want to join (\w+)?$/ do |username, league_name|
@@ -90,6 +90,13 @@ Then /^\w{2,} should be on (.+)$/ do |page|
   Then %{I should be on #{page}}
 end
 
+Then /^\w{2,} should soon be on (.+)$/ do |page|
+  wait_for_true Capybara.default_wait_time, false do
+    URI.parse(current_url).path == path_to(page)
+  end
+  Then %{I should be on #{page}}
+end
+
 When /^\w{2,} visit (.+)$/ do |page|
   Then %{I visit #{page}}
 end
@@ -117,4 +124,18 @@ Given /^league (\w+) has (\d+) questions$/ do |league_name, count|
     question.update_attributes(:category => league.category, :level => league.level)
   end
 end
+
+Given /^(\w+) is already at the last question$/ do |username|
+  match_user = MatchUser.find_by_user_id(User.find_by_display_name(username).id)
+  match_user.send(:current_question_position=, Matching.questions_per_match - 1)
+  match_user.save!
+end
+
+Given /^(\w+) finished his match$/ do |username|
+  match_user = MatchUser.find_by_user_id(User.find_by_display_name(username).id)
+  match_user.add_answer(Matching.questions_per_match - 1, 'u')
+  match_user.save!
+end
+
+
 

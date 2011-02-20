@@ -4,6 +4,7 @@
 #question
 :javascript
   var leagueId = #{@league.id};
+  var matchId;
   var retried = 0;
   var currentQuestion;
   var formedCounterHandle;
@@ -11,33 +12,54 @@
 
   var MAX_RETRIES = 20; 
 
-  var statusHTML = #{javascript_templates(['waiting', 'formed', 'started', 'finished', 'you_finished'])};
+  var statusHTML = #{javascript_templates(['waiting', 'formed', 'started', 'you_finished'])};
 
-  $(function(){ refreshMatchStatus();
+  $(function(){ requestMatch();
   })
 
-  function refreshMatchStatus(){
+  function requestMatch(){
     $.ajax({
       type: 'post',
-      url: ["/leagues/", leagueId, "/request_match_info"].join(""),
+      url: ["/leagues/", leagueId, "/request_match"].join(""),
+      dataType: 'json',
+      success: function(data){
+        if (data.match_id){
+          matchId = data.match_id;
+          getMatchInfo();
+        } else {
+          setStatus('waiting', data);
+          setTimeout(requestMatch, 1000);
+        }
+        resetRetrying();
+      },
+      error: function(data){
+        retry(requestMatch, 500);
+      }
+    });
+  }
+
+  function getMatchInfo(){
+    $.ajax({
+      type: 'post',
+      url: ["/matches/", matchId, "/infor"].join(""),
       dataType: 'json',
       success: function(data){
         updateMatchInfo(data);
         resetRetrying();
       },
       error: function(data){
-        retry(refreshMatchStatus, 500);
+        retry(getMatchInfo, 500);
       }
     });
-  }
+   }
 
   function updateMatchInfo(info){
     if (info.status){
       setStatus(info.status, info);
-      if (info.status == 'waiting'){
-        setTimeout(refreshMatchStatus, 500);
-      } else if (info.status == 'formed'){
+      if (info.status == 'formed'){
         showFormedCounter(info.seconds_until_started);
+      } else if (info.status == 'you_finished') {
+        setTimeout(getMatchInfo, 1000);
       }
     }
 
@@ -54,7 +76,7 @@
 
   function refreshFormedCounter(){
    if (secondsUntilStarted == 0){
-      refreshMatchStatus();
+      getMatchInfo();
     } else {
       secondsUntilStarted--;
       setStatus('formed', { seconds_until_started: secondsUntilStarted });
@@ -65,7 +87,7 @@
   function submitAnswer(answer){
     $.ajax({
       type: 'post',
-      url: ["/leagues/", leagueId, "/submit_answer_and_get_next_question"].join(""),
+      url: ["/matches/", matchId, "/submit_answer_and_get_next_question"].join(""),
       dataType: 'json',
       data: {
         position: currentQuestionPosition,
@@ -92,11 +114,15 @@
   }
 
   function setStatus(status, params){
-    var html = statusHTML[status];
-    for (var key in params){
-      html = html.replace(new RegExp('{'+key+'}', 'g'), params[key]);
+    if (status == 'finished') {
+      window.location = params['match_result_url'];
+    } else {
+      var html = statusHTML[status];
+      for (var key in params){
+        html = html.replace(new RegExp('{'+key+'}', 'g'), params[key]);
+      }
+      $('#status').html(html);
     }
-    $('#status').html(html);
   }
 
   function setQuestion(question, position){

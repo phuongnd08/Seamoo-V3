@@ -21,6 +21,8 @@ module NavigationHelpers
       category_path(Category.find_by_name($1))
     when /the show league "([^"]+)" page/
       league_path(League.find_by_name($1))
+    when /the match result of first match page$/
+      match_path(Match.first)
       # Add more mappings here.
       # Here is an example that pulls values out of the Regexp:
       #
@@ -30,7 +32,7 @@ module NavigationHelpers
     else
       begin
         page_name =~ /the (.*) page/
-        path_components = $1.split(/\s+/)
+          path_components = $1.split(/\s+/)
         self.send(path_components.push('path').join('_').to_sym)
       rescue Object => e
         raise "Can't find mapping from \"#{page_name}\" to a path.\n" +

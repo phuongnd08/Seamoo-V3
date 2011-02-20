@@ -38,4 +38,15 @@ class Match < ActiveRecord::Base
   def fetch_question
     league.category.questions[0...Matching.questions_per_match].each { |q| questions << q }
   end
+
+  def check_if_finished!
+    users_finished_at = self.match_users.map(&:finished_at)
+    self.finished_at = unless users_finished_at.include?(nil)
+      users_finished_at.max
+    else
+      nil
+    end
+
+    self.save!
+  end
 end

@@ -11,7 +11,8 @@ Feature: Match forming
       |jeff|
       |suman|
       |eric|
-    And league Amateur is openning
+    And category English is available
+    And league Amateur of English is openning
     And all data is fresh
 
   Scenario: First user joining

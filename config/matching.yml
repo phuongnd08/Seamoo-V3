@@ -6,9 +6,9 @@ development: &development
 
 test:
   <<: *development
-  requester_stale_after: 6
+  requester_stale_after: 60
   started_after: 3 
-  ended_after: 15
+  ended_after: 150
 
 production: &development
   requester_stale_after: 5

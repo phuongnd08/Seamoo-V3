@@ -46,4 +46,28 @@ describe Match do
       end
     end
   end
+
+  describe "check_if_finished!" do
+    it "should update finished_at according to whether all match users finished" do
+      time1 = Time.mktime(2000, 1, 12)
+      time2 = Time.mktime(2000, 1, 13)
+      match = Match.new
+      match.stub(:save!)
+      match_user1 = MatchUser.create
+      match_user2 = MatchUser.create
+      match.match_users = [match_user1, match_user2]
+      match_user1.finished_at = time1
+      match.check_if_finished!
+      match.finished_at.should be_nil
+      match_user2.finished_at = time2
+      match.check_if_finished!
+      match.finished_at.should == time2
+    end
+
+    it "should re-save the match object" do
+      match = Match.new
+      match.should_receive(:save!)
+      match.check_if_finished!
+    end
+  end
 end
