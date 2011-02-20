@@ -57,3 +57,16 @@ When /^I press to remove choice "([^"]*)"$/ do |choice|
   xpath = "//input[@value='#{choice}']/../a[contains(normalize-space(string(.)), 'Remove')]"
   find(:xpath, xpath).click
 end
+
+Given /^\w+ will confirm "([^"]*)"$/ do |msg|
+  page.execute_script(%{
+    window.confirm = function(msg){
+      window.last_confirm_msg = msg;
+      return (msg == "#{msg}")
+    }
+  })
+end
+
+Then /^\w+ should( not)? be able to see "([^"]*)"$/ do |negative, selector|
+  page.evaluate_script("$('#{selector}').is(':visible')").should == negative.nil?
+end

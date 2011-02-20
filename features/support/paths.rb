@@ -17,11 +17,11 @@ module NavigationHelpers
 
     when /the home\s?page/
       root_path
-    when /the show category "([^"]+)" page/
+    when /the category ([^"]+) page/
       category_path(Category.find_by_name($1))
-    when /the show league "([^"]+)" page/
+    when /the league (\w+) page/
       league_path(League.find_by_name($1))
-    when /the match result of first match page$/
+     when /the match result of first match page$/
       match_path(Match.first)
       # Add more mappings here.
       # Here is an example that pulls values out of the Regexp:

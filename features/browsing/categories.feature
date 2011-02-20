@@ -8,4 +8,4 @@ Scenario: Categories page
     When I am on the categories page
     Then I should see "Math"
     When I follow "Math"
-    Then I should be on the show category "Math" page
+    Then I should be on the category Math page

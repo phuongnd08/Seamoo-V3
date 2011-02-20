@@ -16,7 +16,7 @@ SeamooV3::Application.routes.draw do
     member do
       get :matching
       post :request_match
-      post :submit_answer_and_get_next_question
+      post :leave_current_match
     end
   end
 

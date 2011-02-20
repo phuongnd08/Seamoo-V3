@@ -1,7 +1,13 @@
 %h1 Welcome to #{@league.name}
 %h2 Let's match
 #status
+
+#exit{:style => 'display: none'}
+  = form_tag leave_current_match_league_path(@league), :id => "leave_current_match_form" do |f|
+    = submit_tag "Leave current match"
+
 #question
+
 :javascript
   var leagueId = #{@league.id};
   var matchId;
@@ -15,7 +21,9 @@
 
   var statusHTML = #{javascript_templates(['waiting', 'formed', 'started', 'you_finished'])};
 
-  $(function(){ requestMatch();
+  $(function(){ 
+    $('#leave_current_match_form').submit(function(){return confirm("Leave current match?");});
+    requestMatch();
   })
 
   function requestMatch(){
@@ -137,6 +145,10 @@
         html = html.replace(new RegExp('{'+key+'}', 'g'), params[key]);
       }
       $('#status').html(html);
+      if (status == "waiting")
+        $('#exit').hide();
+      else
+        $('#exit').show();
     }
   }
 

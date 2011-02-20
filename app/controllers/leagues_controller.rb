@@ -18,6 +18,11 @@ class LeaguesController < ApplicationController
     end
   end
 
+  def leave_current_match
+    @league.leave_current_match(current_user.id)
+    redirect_to league_path(@league)
+  end
+
   protected
   def load_league
     @league = League.find(params[:id]) 

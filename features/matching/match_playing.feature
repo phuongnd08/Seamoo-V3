@@ -15,8 +15,10 @@ Feature: Match Playing
     #First make sure both players will be registered in match
     When mike match on league Amateur
     Then mike should see "Waiting for other players"
+    And mike should not be able to see "#exit"
     When peter match on league Amateur
     Then peter should see "Match will be started in ? seconds" within "#status"
+    And peter should be able to see "#exit"
     When mike match on league Amateur
     Then mike should see "Match will be started in ? seconds" within "#status"
     #Then start verify the flow
@@ -75,3 +77,10 @@ Feature: Match Playing
     And mike should see "Question 3/3"
     And mike should soon be on the match result of first match page
 
+  Scenario: Rejoin match after leave
+    #First make sure both players will be registered in match
+    Given mike will confirm "Leave current match?"
+    When mike press "Leave current match"
+    Then mike should soon be on the league Amateur page
+    When mike match on league Amateur
+    Then mike should see "Waiting for other players"
