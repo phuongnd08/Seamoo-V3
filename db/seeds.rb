@@ -12,7 +12,7 @@ League.create!(:category => english, :alias => 'english_chick', :name => 'Chicks
 League.create!(:category => english, :alias => 'english_chicken', :name => 'Chicken', :description => 'Dành cho người giỏi')
 League.create!(:category => english, :alias => 'english_eagle', :name => 'Eagle', :description => 'Dành cho người RẤT giỏi')
 Question.create_multiple_choices("What's your name", {'phuong' => true, 'trien' => false, 'toan' => false}, {:category => english})
-Question.create_follow_pattern("My name", 'ph[uo]ng', {:category => english})
+Question.create_follow_pattern("My name", 'ph[uo]ng ng[uy]en', {:category => english})
 Question.create_multiple_choices("What's your best friend name", {'thuc' => true, 'trien' => false, 'toan' => false}, {:category => english})
 Question.create_multiple_choices("What's your pet name", {'na' => true, 'trien' => false, 'toan' => false}, {:category => english})
 

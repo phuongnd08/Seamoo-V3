@@ -138,6 +138,31 @@
     retried = 0;
   }
 
+  function highlightPattern(input){
+    var hint = $(input).attr('hint');
+    var val = $(input).val();
+    function span(ch, clazz){
+      return ["<span class='", clazz, "'>", ch, "</span>"].join("");
+    }
+
+    var parts = [];
+    for (var i = 0; i < Math.max(hint.length, val.length); i++){
+      if (i >= val.length){
+        parts.push(span(hint.charAt(i), "gray"));
+      } else if (i >= hint.length){
+        parts.push(span(val.charAt(i), "purple"));
+      } else if (hint.charAt(i) == '*') {
+        parts.push(span('*', "green"));
+      } else if (hint.charAt(i) == val.charAt(i)){
+        parts.push(span(hint.charAt(i) == ' ' ? '_' : hint.charAt(i), "green"));
+      } else {/*hint.charAt(i) != val.charAt(i)*/
+        parts.push(span(hint.charAt(i) == ' ' ? '_' : hint.charAt(i), "red"));
+      }
+    }
+
+    $('#question #hint').html(parts.join(""));
+  }
+
   function setStatus(status, params){
     if (status == 'finished') {
       window.location = params['match_result_url'];
@@ -171,6 +196,10 @@
           });
           return false;
         });
+
+        $('#question #answer').keyup(function(event){
+          highlightPattern(this);
+        }).keyup();
         break;
     }
     $('#question #ignore').click(function(event){
