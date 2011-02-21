@@ -2,4 +2,4 @@
 - if question.data.is_a?(MultipleChoice)
   = render :partial => "multiple_choices/play", :locals => {:multiple_choice => question.data}
 - elsif question.data.is_a?(FollowPattern)
-  = render :partial => "follow_pattern/play", :locals => {:follow_pattern => question.data}
+  = render :partial => "follow_patterns/play", :locals => {:follow_pattern => question.data}

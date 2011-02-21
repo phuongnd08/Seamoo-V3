@@ -3,7 +3,7 @@
 #status
 
 #exit{:style => 'display: none'}
-  = form_tag leave_current_match_league_path(@league), :id => "leave_current_match_form" do |f|
+  = form_tag leave_current_match_league_path(@league), :id => "leave_current_match_form" do 
     = submit_tag "Leave current match"
 
 #question
@@ -80,7 +80,7 @@
     }
 
     if (info.question){
-      setQuestion(info.question, info.current_question_position);
+      setQuestion(info.question_type, info.question, info.current_question_position);
     } else clearQuestion();
   }
 
@@ -152,12 +152,25 @@
     }
   }
 
-  function setQuestion(question, position){
+  function setQuestion(questionType, question, position){
     $('#question').html(question);
     currentQuestionPosition = position
-    $('#question button').click(function(event){
-      submitAnswer($(this).attr('answer'));
-    });
+    switch(questionType){
+      case 'MultipleChoice':
+        $('#question button').click(function(event){
+          submitAnswer($(this).attr('answer'));
+        });
+        break;
+      case 'FollowPattern': 
+        $('#question form').submit(function(event){
+          var self = this;
+          setTimeout(function(){
+            submitAnswer($(self).find('#answer').val());
+          });
+          return false;
+        });
+        break;
+    }
   }
 
   function clearQuestion(){

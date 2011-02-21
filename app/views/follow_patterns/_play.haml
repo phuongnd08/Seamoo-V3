@@ -1,0 +1,6 @@
+%h3= follow_pattern.instruction
+%div (Hint: #{follow_pattern.hint}
+%div
+  = form_tag :id => 'follow_pattern_form' do
+    = text_field_tag :answer
+    = submit_tag "Submit"

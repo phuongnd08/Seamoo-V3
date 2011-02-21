@@ -9,7 +9,11 @@ class MultipleChoice < ActiveRecord::Base
   def randomized_options
     (0...options.size).to_a.shuffle.map{|index| [index, options[index]]}
   end
-  
+
+  def realized_answer(user_answer)
+    options[user_answer.to_i].content
+  end
+
   class << self
     def string_to_options_hash(str)
       array_to_options_hash(str.split("|"))

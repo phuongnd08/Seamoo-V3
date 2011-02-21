@@ -120,10 +120,33 @@ end
 Given /^league (\w+) has (\d+) questions$/ do |league_name, count|
   league = League.find_by_name(league_name)
   count.to_i.times do |i|
-    question = Question.create_multiple_choices("Question \##{i+1}", {'Option #a' => true, 'Option #b' => false})
-    question.update_attributes(:category => league.category, :level => league.level)
+    question = Question.create_multiple_choices("Question \##{i+1}", 
+                                                {'Option #a' => true, 'Option #b' => false}, 
+                                                :category => league.category, :level => league.level)
   end
 end
+
+Given /^league (\w+) has (\d+) multiple choice questions$/ do |league_name, count|
+  Given %{league #{league_name} has #{count} questions}
+end
+
+Given /^league (\w+) has (\d+) follow pattern questions$/ do |league_name, count|
+  league = League.find_by_name(league_name)
+  count.to_i.times do |i|
+    question = Question.create_follow_pattern("Follow Pattern \##{i+1}", 'patt[ern]', 
+                                              :category => league.category, :level => league.level)
+  end
+end
+
+Then /^(\w+)'s recorded answer of (\d+)(?:st|nd|rd|th) question should be "([^"]*)"$/ do |username, pos, answer|
+  position = pos.to_i - 1
+  user = User.find_by_display_name(username)
+  match_user = MatchUser.find_by_user_id(user.id)
+  match = match_user.match
+  realized_answer = match.questions[position].data.realized_answer(match_user.answers[position])
+  realized_answer.should == answer
+end
+
 
 Given /^(\w+) is already at the last question$/ do |username|
   match_user = MatchUser.find_by_user_id(User.find_by_display_name(username).id)
@@ -156,3 +179,13 @@ When /^(\w+) request to leave his current (\w+) match$/ do |username, league_nam
   user = User.find_by_display_name(username)
   league.leave_current_match(user.id)
 end
+
+Given /^all match will immediately start$/ do
+  Matching.send(:class_variable_get, '@@matching')['started_after'] = 0
+end
+
+When /^mike fill in "([^"]*)" with "([^"]*)"$/ do |selector, value|
+  When %{I fill in "#{selector}" with "#{value}"}
+end
+
+

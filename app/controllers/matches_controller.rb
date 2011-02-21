@@ -27,6 +27,7 @@ class MatchesController < ApplicationController
                                                                  :locals => { :question => match_user.current_question, 
                                                                    :total_question => @match.questions.count, 
                                                                    :current_question_position => match_user.current_question_position })
+                             infor[:question_type] = match_user.current_question.data.class.name
 
                              :started
                            end
@@ -51,7 +52,8 @@ class MatchesController < ApplicationController
                                         :locals => { :question => match_user.current_question, 
                                           :total_question => @match.questions.count, 
                                           :current_question_position => match_user.current_question_position }),
-                                          :current_question_position => match_user.current_question_position
+                                          :current_question_position => match_user.current_question_position,
+                                          :question_type => match_user.current_question.data.class.name
         }
     else
       { 
