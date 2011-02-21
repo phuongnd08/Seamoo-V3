@@ -23,9 +23,15 @@ Feature: Match using multiple choice question
     #Then start verify the flow
 
   Scenario: Answer multiple choice question
-    And mike should see "Question 1/3"
     And mike should see "Question #1"
     When mike press "Option #a"
-    Then mike's recorded answer of 1st question should be "Option #a"
+    Then mike should see "Question #2"
+    And mike's recorded answer of 1st question should be "Option #a"
+
+  Scenario: Answer multiple choice question
+    And mike should see "Question #1"
+    When mike press "Ignore this question"
+    Then mike should see "Question #2"
+    And mike's recorded answer of 1st question should be empty
 
 

@@ -3,3 +3,6 @@
   = render :partial => "multiple_choices/play", :locals => {:multiple_choice => question.data}
 - elsif question.data.is_a?(FollowPattern)
   = render :partial => "follow_patterns/play", :locals => {:follow_pattern => question.data}
+
+%div
+  %button#ignore Ignore this question

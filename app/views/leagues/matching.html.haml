@@ -108,14 +108,16 @@
   }
 
   function submitAnswer(answer){
+    var data = {
+      position: currentQuestionPosition
+    } 
+    if (answer != null) data.answer = answer;
+
     $.ajax({
       type: 'post',
       url: ["/matches/", matchId, "/submit_answer_and_get_next_question"].join(""),
       dataType: 'json',
-      data: {
-        position: currentQuestionPosition,
-        answer: answer
-      },
+      data: data,
       success: function(data){
         updateMatchInfo(data);
       },
@@ -171,6 +173,9 @@
         });
         break;
     }
+    $('#question #ignore').click(function(event){
+      submitAnswer(null);
+    });
   }
 
   function clearQuestion(){

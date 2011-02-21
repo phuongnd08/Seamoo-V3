@@ -21,10 +21,18 @@ Feature: Match using follow pattern question
     When mike match on league Amateur
     #Then start verify the flow
 
-  Scenario: Answer multiple choice question
+  Scenario: Answer follow pattern question
     And mike should see "Question 1/3"
     And mike should see "Follow Pattern #1"
     When mike fill in "answer" with "myanswer"
     And mike press "Submit"
-    Then mike's recorded answer of 1st question should be "myanswer"
+    Then mike should see "Follow Pattern #2"
+    And mike's recorded answer of 1st question should be "myanswer"
+
+  Scenario: Ignore multiple choice question
+    And mike should see "Question 1/3"
+    And mike should see "Follow Pattern #1"
+    When mike press "Ignore this question"
+    Then mike should see "Follow Pattern #2"
+    And mike's recorded answer of 1st question should be empty
 

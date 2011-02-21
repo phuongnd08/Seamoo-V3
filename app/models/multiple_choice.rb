@@ -11,7 +11,7 @@ class MultipleChoice < ActiveRecord::Base
   end
 
   def realized_answer(user_answer)
-    options[user_answer.to_i].content
+    user_answer.blank? ? nil : options[user_answer.to_i].content
   end
 
   class << self
