@@ -11,6 +11,7 @@ gem 'omniauth'
 gem 'authlogic'
 gem "jquery-rails", :git =>  "https://github.com/indirect/jquery-rails.git"
 gem "dalli"
+gem "delayed_job"
 
 # Use unicorn as the web server
 # gem 'unicorn'
