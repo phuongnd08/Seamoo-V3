@@ -16,11 +16,15 @@ Feature: Match Playing
     When mike match on league Amateur
     Then mike should see "Waiting for other players"
     And mike should not be able to see "#exit"
+    And mike should not be able to see "#players"
     When peter match on league Amateur
     Then peter should see "Match will be started in ? seconds" within "#status"
     And peter should be able to see "#exit"
+    And peter should be able to see "#players"
     When mike match on league Amateur
     Then mike should see "Match will be started in ? seconds" within "#status"
+    And mike should see "peter" within "#players"
+    And mike should see "mike" within "#players"
     #Then start verify the flow
     Given first Amateur match use default questions
 
@@ -29,20 +33,30 @@ Feature: Match Playing
     And mike should see "There are ? seconds left" within "#status"
     And mike should see "Question 1/3"
     And mike should see "Question #1"
+    And mike should see "peter (1/3)"
+    And mike should see "mike (1/3)"
     When mike press "Option #a"
     And mike should see "Question 2/3"
     Then mike should see "Question #2"
     When mike press "Option #b"
     And mike should see "Question 3/3"
     Then mike should see "Question #3"
+    And mike should see "peter (1/3)"
+    And mike should see "mike (3/3)"
     When mike press "Option #a"
     Then mike should see "You have finished the match" within "#status"
+    And mike should see "peter (1/3)"
+    And mike should see "mike (finished)"
     When peter match on league Amateur 
     Then peter should see "Match started" within "#status"
     And peter should see "Question #1"
+    And mike should see "peter (1/3)"
+    And mike should see "mike (finished)"
     When peter press "Option #a"
     Then peter should see "Question #2"
     When peter press "Option #b"
+    And mike should see "peter (3/3)"
+    And mike should see "mike (finished)"
     Then peter should see "Question #3"
     When peter press "Option #a"
     And peter should soon be on the match result of first match page

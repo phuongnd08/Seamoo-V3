@@ -2,6 +2,10 @@
 %h2 Let's match
 #status
 
+#players{:style => 'display: none'}
+  %h3 Players
+  %ul.list
+
 #exit{:style => 'display: none'}
   = form_tag leave_current_match_league_path(@league), :id => "leave_current_match_form" do 
     = submit_tag "Leave current match"
@@ -10,6 +14,7 @@
 
 :javascript
   var leagueId = #{@league.id};
+  var questionsPerMatch = #{Matching.questions_per_match};
   var matchId;
   var retried = 0;
   var currentQuestion;
@@ -82,6 +87,8 @@
     if (info.question){
       setQuestion(info.question_type, info.question, info.current_question_position);
     } else clearQuestion();
+
+    setPlayers(info.players, info.status);
   }
 
   function showCounter(template, time){
@@ -173,10 +180,26 @@
       }
       $('#status').html(html);
       if (status == "waiting")
-        $('#exit').hide();
+        $('#exit, #players').hide();
       else
-        $('#exit').show();
+        $('#exit, #players').show();
     }
+  }
+
+  function setPlayers(players, status){
+    $('#players ul.list').empty();
+    $.each(players, function(index, player){
+      var text = ['<li>', player.display_name, " "];
+      if (status != 'formed'){
+        if (player.current_question_position == questionsPerMatch) {
+          text.push("(finished)");
+        } else {
+          text = text.concat(["(", player.current_question_position + 1, "/", questionsPerMatch, ")"]);
+        }
+      }
+      text.push("</li>");
+      $('#players ul.list').append(text.join(""));
+    });
   }
 
   function setQuestion(questionType, question, position){
