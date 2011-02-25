@@ -32,24 +32,27 @@ gem "dalli"
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
-gem 'test-unit', '1.2.3'
-gem 'rspec', ">= 2.0.0.beta.22"
-gem 'rspec-rails', ">= 2.0.0.beta.22"
-gem 'database_cleaner'
-gem 'factory_girl_rails'
-gem 'shoulda'
-gem 'cucumber'
-gem 'cucumber-rails', :git => 'git://github.com/aslakhellesoy/cucumber-rails.git'
-gem 'spork'
-gem 'launchy'
-gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
-gem 'parallel'
+  gem 'rspec', ">= 2.0.0.beta.22"
+  gem 'rspec-rails', ">= 2.0.0.beta.22"
+end
+
+group :test do
+  gem 'test-unit', '1.2.3'
+  gem 'database_cleaner'
+  gem 'factory_girl_rails'
+  gem 'shoulda'
+  gem 'cucumber'
+  gem 'cucumber-rails', :git => 'git://github.com/aslakhellesoy/cucumber-rails.git'
+  gem 'spork'
+  gem 'launchy'
+  gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
+  gem 'parallel'
 end
 
 group :development do
-gem "rails3-generators"
-gem 'haml-rails'
-gem "ruby-debug"
-gem "heroku"
-gem "hpricot", :require => false
+  gem "rails3-generators"
+  gem 'haml-rails'
+  gem "ruby-debug"
+  gem "heroku"
+  gem "hpricot", :require => false
 end
