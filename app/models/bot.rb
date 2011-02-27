@@ -32,6 +32,7 @@ class Bot < User
         :display_name => new_bot_name, 
         :email => new_bot_name + '@bot.com')
         data[:awaken_ids] = (data[:awaken_ids] || []) + [new_bot.id]
+        new_bot.data[:match_id] = nil
         new_bot.data[:match_request_retried] = 0
         new_bot
     end

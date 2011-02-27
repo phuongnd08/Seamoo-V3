@@ -18,6 +18,17 @@ describe Bot do
       bot.is_a?(Bot).should be_true
       Bot.find(bot.id).should == bot
     end
+
+    it "should reset bot information about past match" do
+      bot = Bot.awake_new
+      Bot.kill(bot)
+      bot.data[:match_id] = 1
+      bot.data[:match_request_retried] = 5
+      new_bot = Bot.awake_new
+      new_bot.should == bot
+      new_bot.data[:match_id].should == nil
+      new_bot.data[:match_request_retried].should == 0
+    end
   end
 
   describe "run" do

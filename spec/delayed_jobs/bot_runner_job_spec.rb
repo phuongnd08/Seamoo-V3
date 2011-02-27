@@ -47,10 +47,15 @@ describe BotRunnerJob do
           Bot.awaken.count.should == 1
         end
 
-        it "should tell the bot which league it should operate on" do
+        it "should cause the bot to leave footprint in league" do
           @league.request_match(@user1.id)
           BotRunnerJob.new.perform
           @league.waiting_user_ids.should == [@user1.id, -Bot.last.id].to_set
+        end
+
+        it "should tell the bot which league it should operate on" do
+          @league.request_match(@user1.id)
+          BotRunnerJob.new.perform
           Bot.last.data[:league_id].should == @league.id
         end
       end
