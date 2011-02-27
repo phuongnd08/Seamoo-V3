@@ -3,4 +3,9 @@ namespace :match do
   task :reset => :environment do
     Object.new.extend(Utils::Memcached::Common).client.flush_all
   end
+
+  desc "Queue a job so that bot can be awaken"
+  task :start_bot => :environment do
+    Delayed::Job.enqueue BotRunnerJob.new
+  end
 end

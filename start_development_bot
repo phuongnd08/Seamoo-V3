@@ -1,0 +1,2 @@
+rake match:start_bot
+rake jobs:work

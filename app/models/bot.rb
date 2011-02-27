@@ -5,18 +5,22 @@ class Bot < User
     self.instance_eval %{
       protected
       def #{field}
-        @@mem_hash_for_#{field} ||= Utils::Memcached::Hash.new({:category => Bot.class.name, :field => :#{field}}, :#{identifier})
+        @@mem_hash_for_#{field} ||= Utils::Memcached::MemHash.new({:category => Bot.name, :field => :#{field}}, :#{identifier})
       end
     }
 
     self.class_eval %{
       def #{field}
-        @inst_mem_hash_for#{field} ||= Utils::Memcached::Hash.new({:category => Bot.class.name, :id => self.id, :field => :#{field}}, :#{identifier})
+        @inst_mem_hash_for#{field} ||= Utils::Memcached::MemHash.new({:category => Bot.name, :id => self.id, :field => :#{field}}, :#{identifier})
       end
     }
   end
 
   class << self
+    def rnd
+      rand
+    end
+
     def awaken
       awaken_ids = (data[:awaken_ids] || [])
       find(awaken_ids)
@@ -28,6 +32,7 @@ class Bot < User
         :display_name => new_bot_name, 
         :email => new_bot_name + '@bot.com')
         data[:awaken_ids] = (data[:awaken_ids] || []) + [new_bot.id]
+        new_bot.data[:match_request_retried] = 0
         new_bot
     end
 
@@ -46,13 +51,20 @@ class Bot < User
           number_of_questions_to_answer = (Time.now - match.started_at)/Matching.bot_time_per_question
           number_of_questions_to_answer = [match.questions.size, number_of_questions_to_answer].min
           (match_user.current_question_position...number_of_questions_to_answer).each do |index|
-            answer = rand > Matching.bot_correctness ? nil : correct_answer(match_user.current_question)
+            answer = Bot.rnd > Matching.bot_correctness ? nil : correct_answer(match_user.current_question)
             match_user.add_answer(index, answer) 
           end
         end
         match_user.save
       else; die; end
-    else; die; end
+    else
+      unless data[:league_id].nil?
+        unless data[:match_request_retried].nil? || data[:match_request_retried] >= Matching.bot_max_match_request_retries
+          data[:match_id] = League.find(data[:league_id]).request_match(self.id, true).try(:id)
+          data[:match_request_retried] += 1
+        else; die; end
+      else; die; end
+    end
   end
 
   def die

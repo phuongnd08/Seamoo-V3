@@ -56,7 +56,7 @@ describe Utils::Memcached do
 
   describe "Hash" do
     before(:each) do
-      @hash = Utils::Memcached::Hash.new({:category => "random", :id => "1"})
+      @hash = Utils::Memcached::MemHash.new({:category => "random", :id => "1"})
       @common_mod.client.flush_all
     end
 

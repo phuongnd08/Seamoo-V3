@@ -37,7 +37,7 @@ describe League do
 
     describe "request_match" do
       it "should never mess up" do
-        initial_time = Time.mktime(2000, 12, 31)
+        initial_time = Time.now
         Time.stub(:now).and_return(initial_time)
         match_1t = @league.request_match(@user1.id)
         match_1a = @league.request_match(@user2.id)
@@ -46,14 +46,11 @@ describe League do
         match_1a.should_not be_nil
         match_1b.should == match_1a
 
-        (Matching.started_after + Matching.ended_after).times.each do |t|
-
+        Matching.started_after.step(Matching.ended_after, Matching.requester_stale_after - 1) do |t|
           Time.stub(:now).and_return(initial_time + t.seconds) 
           @league.request_match(@user1.id)
           @league.request_match(@user2.id)
-
         end
-
         Time.stub(:now).and_return(initial_time + (Matching.started_after + Matching.ended_after + 1).seconds) 
         match_2t = @league.request_match(@user1.id)
         match_2a = @league.request_match(@user2.id)

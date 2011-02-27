@@ -20,7 +20,7 @@ class League < ActiveRecord::Base
     self.class_eval %{
       protected
       def #{field}
-        @mem_hash_for_#{field} ||= Utils::Memcached::Hash.new({:category => League.class.name, :id => self.id, :field => :#{field}}, :#{identifier})
+        @mem_hash_for_#{field} ||= Utils::Memcached::MemHash.new({:category => League.name, :id => self.id, :field => :#{field}}, :#{identifier})
       end
     }
   end
@@ -93,9 +93,9 @@ class League < ActiveRecord::Base
   end
 
   def participating?(match_ticket, match_position, user_id)
-    match_user_id[{:match_ticket => match_ticket, :position => match_position}] == user_id \
-      && match_id[match_ticket]!=nil \
-      && !Match.find(match_id[match_ticket]).finished? \
-      && MatchUser.find_by_match_id_and_user_id(match_id[match_ticket], user_id).present?
+    b = match_user_id[{:match_ticket => match_ticket, :position => match_position}] == user_id
+    b = b && match_id[match_ticket]!=nil 
+    b = b && !Match.find(match_id[match_ticket]).finished?
+    b = b && MatchUser.find_by_match_id_and_user_id(match_id[match_ticket], user_id).present?
   end
 end

@@ -38,29 +38,58 @@ describe Bot do
       @bot = Bot.awake_new
       @now = Time.now
       Time.stub(:now).and_return(@now)
-      @match = Match.create(:league => @league)
-      @bot.data[:match_id] = @match.id
-      @match_user = MatchUser.create(:match => @match, :user => @bot)
     end
 
-    it "should answer questions at predefined speed" do
-      Time.stub(:now).and_return(@now + 4.seconds)
-      @bot.run
-      @match_user.reload.current_question_position.should == 0
-      Time.stub(:now).and_return(@now + 19.seconds)
-      @bot.run
-      @match_user.reload.current_question_position.should == 3
-      Time.stub(:now).and_return(@now + 59.seconds)
-      @bot.run
-      @match_user.reload.current_question_position.should == 10
+    describe "match_id not obtained" do
+      before(:each) do
+        @mocked_league = mock_model(League)
+        League.stub(:find).with(1).and_return(@mocked_league)
+        @bot.data[:league_id] = 1
+      end
+
+      it "should try to query for match_id" do
+        @mocked_league.should_receive(:request_match).and_return(nil)
+        @bot.run
+        @match = Match.create(:league => @league)
+        @mocked_league.should_receive(:request_match).and_return(@match)
+        @bot.run
+        @bot.data[:match_id].should == @match.id
+      end
+
+      it "should die after maximum retries" do
+        Matching.stub(:bot_max_match_request_retries).and_return(3)
+        @mocked_league.should_receive(:request_match).exactly(3).and_return(nil)
+        Bot.awaken.should include(@bot)
+        4.times.each{ @bot.run }
+        Bot.awaken.should_not include(@bot)
+      end
     end
 
-    it "should answer questions at predfined correctness" do
-      Time.stub(:now).and_return(@now + 59.seconds)
-      Kernel.stub(:rand).and_return(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9)
-      @bot.run
-      @match_user.reload.current_question_position.should == 10
-      @match_user.reload.score.should == 8
+    describe "match_id obtained" do
+      before(:each) do
+        @match = Match.create(:league => @league)
+        @bot.data[:match_id] = @match.id
+        @match_user = MatchUser.create(:match => @match, :user => @bot)
+      end
+      it "should answer questions at predefined speed" do
+        Time.stub(:now).and_return(@now + 4.seconds)
+        @bot.run
+        @match_user.reload.current_question_position.should == 0
+        Time.stub(:now).and_return(@now + 19.seconds)
+        @bot.run
+        @match_user.reload.current_question_position.should == 3
+        Time.stub(:now).and_return(@now + 59.seconds)
+        @bot.run
+        @match_user.reload.current_question_position.should == 10
+      end
+
+      it "should answer questions at predfined correctness" do
+        Time.stub(:now).and_return(@now + 59.seconds)
+        Bot.stub(:rnd).and_return(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1)
+        @bot.run
+        @match_user.reload.current_question_position.should == 10
+        @match_user.reload.score.should == 8
+      end
     end
   end
 end

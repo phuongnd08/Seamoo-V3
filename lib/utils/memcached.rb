@@ -11,7 +11,7 @@ module Utils
       end
     end
 
-    class Hash
+    class MemHash
       include Memcached::Common
       def initialize(base_key_hash, default_key = :auto_field)
         @base_key_hash = base_key_hash

@@ -12,3 +12,7 @@ Example settings:
 				</VirtualHost>
 
 Change /etc/hosts also to map seamoo-x.local.com to localhost
+==Importing data
+Data file is located at data/
+To import a file, rake data:import FILE=filename CATEGORY=category_id LEVEL=level
+To unimport a file, rake data:unimport FILE=filename
