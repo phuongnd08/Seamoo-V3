@@ -7,4 +7,11 @@ describe FollowPattern do
       fp.hint.should == "ph**** n***en"
     end
   end
+
+  describe "answer" do
+    it "should return pattern without the markup" do
+      fp = FollowPattern.new(:instruction => "Your name", :pattern => "ph[uong] n[guy]en")
+      fp.answer.should == "phuong nguyen"
+    end
+  end
 end

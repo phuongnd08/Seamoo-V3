@@ -14,6 +14,12 @@ class MultipleChoice < ActiveRecord::Base
     user_answer.blank? ? nil : options[user_answer.to_i].content
   end
 
+  def score_for(answer)
+    if answer.present?
+      options[answer.to_i].correct ? 1 : 0
+    else; 0; end
+  end
+
   class << self
     def string_to_options_hash(str)
       array_to_options_hash(str.split("|"))

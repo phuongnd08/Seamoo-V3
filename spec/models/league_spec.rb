@@ -1,10 +1,6 @@
 require 'spec_helper'
 
 describe League do
-  before(:each) do
-    Class.new.extend(Utils::Memcached::Common).client.flush_all # clear memecached
-  end
-
   describe "relationships" do
     it { should belong_to(:category)}
     it { should have_many(:matches)}
@@ -27,7 +23,7 @@ describe League do
     end
   end
 
-  describe "request_match" do
+  describe "coordinate requests in league" do
     before(:each) do
       @category = Factory(:category)
       @user1 = Factory(:user)
@@ -37,44 +33,66 @@ describe League do
         @questions << Factory(:question, :level => 0, :category => @category)
       end
       @league = League.create!(:level => 0, :category => @category)
-      Class.new.extend(Utils::Memcached::Common).client.flush_all # clear memecached
     end
 
-    it "should never mess up" do
-      initial_time = Time.mktime(2000, 12, 31)
-      Time.stub(:now).and_return(initial_time)
-      match_1t = @league.request_match(@user1.id)
-      match_1a = @league.request_match(@user2.id)
-      match_1b = @league.request_match(@user1.id)
-      match_1t.should be_nil
-      match_1a.should_not be_nil
-      match_1b.should == match_1a
+    describe "request_match" do
+      it "should never mess up" do
+        initial_time = Time.mktime(2000, 12, 31)
+        Time.stub(:now).and_return(initial_time)
+        match_1t = @league.request_match(@user1.id)
+        match_1a = @league.request_match(@user2.id)
+        match_1b = @league.request_match(@user1.id)
+        match_1t.should be_nil
+        match_1a.should_not be_nil
+        match_1b.should == match_1a
 
-      (Matching.started_after + Matching.ended_after).times.each do |t|
+        (Matching.started_after + Matching.ended_after).times.each do |t|
 
-        Time.stub(:now).and_return(initial_time + t.seconds) 
-        @league.request_match(@user1.id)
-        @league.request_match(@user2.id)
+          Time.stub(:now).and_return(initial_time + t.seconds) 
+          @league.request_match(@user1.id)
+          @league.request_match(@user2.id)
 
+        end
+
+        Time.stub(:now).and_return(initial_time + (Matching.started_after + Matching.ended_after + 1).seconds) 
+        match_2t = @league.request_match(@user1.id)
+        match_2a = @league.request_match(@user2.id)
+        match_2b = @league.request_match(@user1.id)
+
+        match_2t.should be_nil
+        match_2a.should_not be_nil
+        match_2b.should == match_2a
+
+        match_2a.id.should == match_1a.id+1
       end
 
-      Time.stub(:now).and_return(initial_time + (Matching.started_after + Matching.ended_after + 1).seconds) 
-      match_2t = @league.request_match(@user1.id)
-      match_2a = @league.request_match(@user2.id)
-      match_2b = @league.request_match(@user1.id)
-
-      match_2t.should be_nil
-      match_2a.should_not be_nil
-      match_2b.should == match_2a
-
-      match_2a.id.should == match_1a.id+1
+      it "should assign questions to match" do
+        Matching.stub(:questions_per_match).and_return(3)
+        @league.request_match(@user1.id)
+        match = @league.request_match(@user2.id)
+        match.questions.map(&:id).to_set.should == @questions.map(&:id).to_set
+      end
     end
 
-    it "should assign questions to match" do
-      Matching.stub(:questions_per_match).and_return(3)
-      @league.request_match(@user1.id)
-      match = @league.request_match(@user2.id)
-      match.questions.map(&:id).to_set.should == @questions.map(&:id).to_set
+    describe "waiting_user_ids" do
+      it "should return number users are waiting for match" do
+        @league.request_match(@user1.id)
+        @league.waiting_user_ids.count.should  == 1
+        @league.request_match(@user1.id)
+        @league.waiting_user_ids.count.should == 1
+        @league.request_match(@user2.id)
+        @league.waiting_user_ids.count.should == 2
+      end
+
+      it "should take into account the time" do
+        now = Time.now
+        Time.stub(:now).and_return(now - Matching.requester_stale_after.seconds)
+        @league.request_match(@user1.id)
+        Time.stub(:now).and_return(now)
+        @league.waiting_user_ids.count.should  == 0
+        @league.request_match(@user1.id)
+        @league.waiting_user_ids.count.should  == 1
+      end
     end
   end
 end

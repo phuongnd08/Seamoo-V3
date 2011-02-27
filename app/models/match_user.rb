@@ -19,6 +19,12 @@ class MatchUser < ActiveRecord::Base
     match.questions[current_question_position]
   end
 
+  def score
+    (0...match.questions.size).map do |index|
+      match.questions[index].data.score_for(answers[index])
+    end.sum
+  end
+
   protected
   def current_question_position=(question_position)
     super(question_position)

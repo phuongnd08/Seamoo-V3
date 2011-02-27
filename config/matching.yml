@@ -4,6 +4,28 @@ development: &development
   ended_after: 150
   questions_per_match: 3
   users_per_match: 4
+  waiting_slots_size: 10 # this slots size used to calculate number of users waiting for match, so that auto bot can be launched
+  bot_life_time: 60
+  bot_sleep_time_between_beats: 1
+  bot_time_per_question: 5
+  bot_correctness: 0.8
+  bot_names:
+    - apollo
+    - ares
+    - hades
+    - nhok_lj
+    - hera
+    - hector
+    - anh_khong_hoi_nach
+    - helen
+    - leitus
+    - be_thuy
+    - rhoeo
+    - zethus
+    - mr_ku_zin
+    - thoon
+    - poseidon
+    - zeus
 
 test:
   <<: *development

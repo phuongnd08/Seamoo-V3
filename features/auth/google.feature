@@ -1,3 +1,4 @@
+@internet
 Feature: Login using Google Federated Login Service
 As a Google User
 I want to authenticated to Seamoo

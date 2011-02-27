@@ -26,4 +26,15 @@ describe MultipleChoice do
       randomized_options.map{|index, option| option.content}.to_set.should == [ 'Phuong', 'Toan', 'Hung'].to_set
     end
   end
+
+  describe "score_for" do
+    it "should return 1 for correct answer and 0 for incorrect answer" do
+      @multiple_choice = MultipleChoice.create(:content => "What's your name")
+      @multiple_choice.options_attributes = [ { :content => 'Phuong', :correct => true }, { :content => 'Toan' }, {:content => 'Hung'} ]
+      @multiple_choice.score_for('0').should == 1
+      @multiple_choice.score_for('1').should == 0
+      @multiple_choice.score_for('2').should == 0
+      @multiple_choice.score_for(nil).should == 0
+    end
+  end
 end

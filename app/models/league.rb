@@ -12,21 +12,25 @@ class League < ActiveRecord::Base
   end
 
 
-  {:user_ticket => :user_id, :user_lastseen => :user_id, :user_ticket_counter => :counter, 
-    :match_id => :match_ticket, :match_user_id => :match_ticket}.each do |field, identifier|
+  {
+    :user_ticket => :user_id, :user_lastseen => :user_id, :user_ticket_counter => :counter, 
+    :match_id => :match_ticket, :match_user_id => :match_ticket,
+    :waiting_counter => :counter, :waiting_user => :position
+  }.each do |field, identifier|
     self.class_eval %{
       protected
       def #{field}
         @mem_hash_for_#{field} ||= Utils::Memcached::Hash.new({:category => League.class.name, :id => self.id, :field => :#{field}}, :#{identifier})
       end
     }
-    end
+  end
 
   include Utils::Waiter
 
-  def request_match(user_id)
+  def request_match(user_id, bot_request = false)
     user_ticket[user_id] = user_ticket_counter.incr if (user_ticket[user_id].nil?)
     user_lastseen[user_id] = Time.now.to_i
+    waiting_user[waiting_counter.incr % Matching.waiting_slots_size] = { :id => user_id * (bot_request ? -1 : 1), :time => Time.now.to_i }
     ok = false
     while !ok do
       match_ticket = (user_ticket[user_id] - 1) / Matching.users_per_match + 1
@@ -58,6 +62,14 @@ class League < ActiveRecord::Base
     match_id[match_ticket] != nil ? Match.find(match_id[match_ticket]) : nil
   end
 
+  def waiting_user_ids
+    min_time = Matching.requester_stale_after.seconds.ago.to_i
+    wusers = (0..Matching.waiting_slots_size-1).
+              map{|index| waiting_user[index]}.
+              select{|user| user!=nil && user[:time] > min_time}
+    (wusers.map{|user| user[:id]}.to_set - [nil].to_set)
+  end
+
   def leave_current_match(user_id)
     user_ticket[user_id] = nil
     user_lastseen[user_id] = nil
@@ -82,8 +94,8 @@ class League < ActiveRecord::Base
 
   def participating?(match_ticket, match_position, user_id)
     match_user_id[{:match_ticket => match_ticket, :position => match_position}] == user_id \
-    && match_id[match_ticket]!=nil \
-    && !Match.find(match_id[match_ticket]).finished? \
-    && MatchUser.find_by_match_id_and_user_id(match_id[match_ticket], user_id).present?
+      && match_id[match_ticket]!=nil \
+      && !Match.find(match_id[match_ticket]).finished? \
+      && MatchUser.find_by_match_id_and_user_id(match_id[match_ticket], user_id).present?
   end
 end

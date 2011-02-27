@@ -1,2 +1,2 @@
 #!/bin/bash
-./cuke features/browsing/ features/matching/ features/questions/
+./cuke features --tag ~@internet

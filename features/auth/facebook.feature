@@ -1,3 +1,4 @@
+@internet
 Feature: Login using Facebook
 As a Facebook User
 I want to authenticated to Seamoo
