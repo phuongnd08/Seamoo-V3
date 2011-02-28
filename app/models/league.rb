@@ -35,23 +35,25 @@ class League < ActiveRecord::Base
     while !ok do
       match_ticket = (user_ticket[user_id] - 1) / Matching.users_per_match + 1
       match_position = ((user_ticket[user_id] - 1) % Matching.users_per_match) + 1
-      # when user leave match through official request, do not add him to the same match
-      unless (1..(match_position - 1)).map{|pos| match_user_id[{:match_ticket => match_ticket, :position => pos}]}.include?(user_id) 
-        match_user_id[{:match_ticket => match_ticket, :position => match_position}] = user_id
-      end
-      if participating?(match_ticket, match_position, user_id)
-        ok = true
-      elsif can_participate?(match_ticket, match_position)
-        case match_position
-        when 2
-          # second user create the match
-          match = Match.create(:league => self)
-          MatchUser.create(:match_id => match.id, :user_id => user_id)
-          match_id[match_ticket] = match.id
-          ok = true
-        else 
-          # other user just register to match 
-          ok = add_user_to_match(match_id[match_ticket], user_id)
+      unless user_finished?(match_ticket, user_id)
+        # when user leave match through official request, do not add him to the same match
+        unless user_joined_before?(match_ticket, user_id, match_position)
+          match_user_id[{:match_ticket => match_ticket, :position => match_position}] = user_id
+          if participating?(match_ticket, match_position, user_id)
+            ok = true
+          elsif can_participate?(match_ticket, match_position)
+            case match_position
+            when 2
+              # second user create the match
+              match = Match.create(:league => self)
+              MatchUser.create(:match_id => match.id, :user_id => user_id)
+              match_id[match_ticket] = match.id
+              ok = true
+            else 
+              # other user just register to match 
+              ok = add_user_to_match(match_id[match_ticket], user_id)
+            end
+          end
         end
       end
       user_ticket[user_id] = user_ticket_counter.incr unless ok
@@ -76,6 +78,19 @@ class League < ActiveRecord::Base
   end
 
   protected
+  def user_finished?(match_ticket, user_id)
+    if match_id[match_ticket].present?
+      match_user = MatchUser.find_by_match_id_and_user_id(match_id[match_ticket], user_id)
+      match_user.present? && match_user.finished?
+    else
+      false
+    end
+  end
+
+  def user_joined_before?(match_ticket, user_id, match_position)
+    (1..(match_position - 1)).map{|pos| match_user_id[{:match_ticket => match_ticket, :position => pos}]}.include?(user_id) 
+  end
+
   def can_participate?(match_ticket, match_position)
     if match_position == 1
       true
@@ -96,6 +111,10 @@ class League < ActiveRecord::Base
     b = match_user_id[{:match_ticket => match_ticket, :position => match_position}] == user_id
     b = b && match_id[match_ticket]!=nil 
     b = b && !Match.find(match_id[match_ticket]).finished?
-    b = b && MatchUser.find_by_match_id_and_user_id(match_id[match_ticket], user_id).present?
+    if (b)
+      match_user = MatchUser.find_by_match_id_and_user_id(match_id[match_ticket], user_id)
+      b = b && match_user.present? && !match_user.finished?
+    end
+    b
   end
 end

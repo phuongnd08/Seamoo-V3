@@ -83,13 +83,13 @@ describe Bot do
         @match_user = MatchUser.create(:match => @match, :user => @bot)
       end
       it "should answer questions at predefined speed" do
-        Time.stub(:now).and_return(@now + 4.seconds)
+        Time.stub(:now).and_return(@now + 6.seconds)
         @bot.run
         @match_user.reload.current_question_position.should == 0
-        Time.stub(:now).and_return(@now + 19.seconds)
+        Time.stub(:now).and_return(@now + 11.seconds)
         @bot.run
-        @match_user.reload.current_question_position.should == 3
-        Time.stub(:now).and_return(@now + 59.seconds)
+        @match_user.reload.current_question_position.should == 1
+        Time.stub(:now).and_return(@now + 56.seconds)
         @bot.run
         @match_user.reload.current_question_position.should == 10
       end
@@ -100,6 +100,27 @@ describe Bot do
         @bot.run
         @match_user.reload.current_question_position.should == 10
         @match_user.reload.score.should == 8
+      end
+
+      describe "Match finished" do
+        before(:each) do
+          Time.stub(:now).and_return(@now + Matching.started_after.seconds + Matching.ended_after.seconds + 1.second)
+        end
+        it "should die" do
+          @bot.run
+          Bot.awaken.should_not include(@bot)
+        end
+      end
+
+      describe "Bot finished" do
+        before(:each) do
+          @match_user.send(:finished_at=, Time.now)
+          @match_user.save
+        end
+        it "should die" do
+          @bot.run
+          Bot.awaken.should_not include(@bot)
+        end
       end
     end
   end

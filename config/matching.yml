@@ -38,6 +38,6 @@ production:
   <<: *development
   requester_stale_after: 5
   started_after: 15
-  ended_after: 60
+  ended_after: 100
   questions_per_match: 20
   bot_life_time: 60

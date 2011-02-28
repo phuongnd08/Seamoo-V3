@@ -189,8 +189,14 @@ Given /^all match will immediately start$/ do
   Matching.send(:class_variable_get, '@@matching')['started_after'] = 0
 end
 
-When /^mike fill in "([^"]*)" with "([^"]*)"$/ do |selector, value|
+When /^\w{2,} fill in "([^"]*)" with "([^"]*)"$/ do |selector, value|
   When %{I fill in "#{selector}" with "#{value}"}
+end
+
+Given /^(\w+) has finished his match$/ do |username|
+  user = User.find_by_display_name(username)
+  match_user = MatchUser.find_by_user_id(user.id)
+  match_user.update_attribute(:finished_at, 1.seconds.ago)
 end
 
 

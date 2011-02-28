@@ -48,14 +48,16 @@ class Bot < User
       match = Match.find_by_id(data[:match_id])
       unless match.nil? || match.finished?
         match_user = match.match_users.find_by_user_id(self.id)
-        if match.started?
-          number_of_questions_to_answer = (Time.now - match.started_at)/Matching.bot_time_per_question
-          number_of_questions_to_answer = [match.questions.size, number_of_questions_to_answer].min
-          (match_user.current_question_position...number_of_questions_to_answer).each do |index|
-            answer = Bot.rnd > Matching.bot_correctness ? nil : correct_answer(match_user.current_question)
-            match_user.add_answer(index, answer) 
+        unless match_user.finished?
+          if match.started?
+            number_of_questions_to_answer = (Time.now - match.started_at)/Matching.bot_time_per_question
+            number_of_questions_to_answer = [match.questions.size, number_of_questions_to_answer.floor].min
+            (match_user.current_question_position...number_of_questions_to_answer).each do |index|
+              answer = Bot.rnd > Matching.bot_correctness ? nil : correct_answer(match_user.current_question)
+              match_user.add_answer(index, answer) 
+            end
           end
-        end
+        else; die; end
         match_user.save
       else; die; end
     else

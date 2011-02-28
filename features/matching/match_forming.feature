@@ -58,6 +58,16 @@ Feature: Match forming
     Then no match is formed for eric
     And there is only 1 Amateur match for peter
 
+  Scenario: Request again after finished a match sooner (than the time the match ended) should form a new match
+    Given an Amateur match between peter and mike is started
+    And peter has finished his match
+    When peter want to join Amateur
+    And eric want to join Amateur
+    And peter still want to join Amateur
+    Then an Amateur match is formed for eric and peter
+    And there is 2 Amateur matches for peter
+
+
   Scenario: Request again after match finished should form a new match
     Given an Amateur match between peter and mike is finished
     When peter want to join Amateur
