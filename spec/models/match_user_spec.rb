@@ -21,6 +21,19 @@ describe MatchUser do
       @match_user = MatchUser.new(:match => @match)
     end
 
+    describe "answers" do
+      it "should default to empty hash" do
+        MatchUser.new.answers.should == {}
+      end
+
+      it "should retains assigned value after persisted" do
+        @match_user = MatchUser.new
+        @match_user.answers = {1 => "0"}
+        @match_user.save!
+        @match_user.reload.answers.should == {1 => "0"}
+      end
+    end
+
     describe "add_answer" do# {{{
       it "should generate a hash entry" do
         @match_user.add_answer(0, 'abc')
@@ -81,7 +94,7 @@ describe MatchUser do
       end
     end# }}}
     describe "score" do
-      it "should return the score of the match user in the match" do
+      before(:each) do
         Matching.stub(:questions_per_match).and_return(3)
         @category = Factory(:category)
         @user = Factory(:user)
@@ -93,13 +106,22 @@ describe MatchUser do
         @league = League.create!(:level => 0, :category => @category)
         @questions.each{|q| q.data.options[0].update_attribute(:correct, true)}
         match = Match.create(:league => @league)
-        match_user = MatchUser.create(:match => match, :user => @user)
+        @match_user = MatchUser.create(:match => match, :user => @user)
         match.questions = Question.all[0..2]
         match.save
-        match_user.add_answer(0, '0')
-        match_user.add_answer(1, '1')
-        match_user.add_answer(1, '0')
-        match_user.score.should == 2
+        @match_user.add_answer(0, '0')
+        @match_user.add_answer(1, '1')
+        @match_user.add_answer(1, '0')
+      end
+
+      it "should return the score of the match user in the match" do
+        @match_user.score.should == 2
+      end
+
+      describe "as percent" do
+        it "should return score as percent of max possible score" do
+          @match_user.score_as_percent.should == 67 
+        end
       end
     end
   end

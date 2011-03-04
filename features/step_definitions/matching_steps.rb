@@ -77,8 +77,7 @@ Then /^there is (?:only )?(\d+) (\w+) match(?:es)? for (\w+)$/ do |count, league
 end
 
 When /^(\w+) match on league (\w+)$/ do |username, league_name|
-  visit "/auth/signin/#{username}"
-  Then %{#{username} should see "Hello #{username}"}
+  Informer.login_as = username
   visit matching_league_path(League.find_by_name(league_name))
 end
 
@@ -105,6 +104,10 @@ Then /^\w{2,} should see "([^"]*)"(.*)$/ do |text, scope_definition|
   text.split(/\s+[\*\?]\s+/).each do |part|
     Then %{I should see "#{part}"#{scope_definition}}
   end
+end
+
+Then /^\w{2,} should not see "([^"]*)"(.*)$/ do |text, scope_definition|
+  Then %{I should not see "#{text}"#{scope_definition}}
 end
 
 Given /^first (\w+) match use default questions$/ do |league_name|
@@ -199,4 +202,29 @@ Given /^(\w+) has finished his match$/ do |username|
   match_user.update_attribute(:finished_at, 1.seconds.ago)
 end
 
+Given /^(\w+) made (\d+) ((?:in)?correct) answers$/ do |username, number, correct|
+  correct = correct == "correct"
+  user = User.find_by_display_name(username)
+  match_user = MatchUser.find_by_user_id(user.id)
+
+  def correct_answer(multiple_choice)
+    multiple_choice.options.find_index{ |o| o.correct }
+  end
+  number.to_i.times.each do
+    question = match_user.current_question
+    multiple_choice = question.data
+    answer = if correct
+               correct_answer(multiple_choice)
+             else 
+               ((0...multiple_choice.options.size).to_a - [correct_answer(multiple_choice)]).first
+             end
+    match_user.add_answer(match_user.current_question_position, answer.to_s)
+  end
+  match_user.save!
+end
+
+When /^(\w{2,}) go to (.+)$/ do |username, path|
+  Informer.login_as = username
+  When %{I go to #{path}}
+end
 

@@ -1,7 +1,39 @@
-%p#notice= notice
-
-%p
-  %b League:
-  = @match.league_id
-
-= link_to 'Back', matches_path
+%h1= @match.league.name
+%h2 Match result
+%h3 Ranking
+%ul
+  - @match.ranked_match_users.each_with_index do |match_user, index|
+    %li 
+      #{index+1}. 
+      - if match_user.user == current_user
+        %strong You
+        (#{match_user.user.display_name})
+      - else
+        #{match_user.user.display_name}
+      \- #{match_user.score_as_percent}% correct
+%h3 Questions
+%ol
+  - @match.questions.each_with_index do |question, qidx|
+    %li= question.content
+    %ul
+      - @have_correct_answer = false
+      - @match.match_users.each do |match_user|
+        %li
+          - if match_user.user == current_user
+            = raw %{<strong>You</strong>:}
+          - else
+            #{match_user.user.display_name}:
+          - @answer = match_user.answers[qidx]
+          - if @answer
+            - unless @hide_all_answers
+              #{question.data.realized_answer(@answer)}
+              \-
+            - if question.data.score_for(@answer) == 1
+              - @have_correct_answer = true
+              correct
+            - else
+              incorrect
+          - else
+            not answered
+      - unless @have_correct_answer || @hide_all_answers
+        %li correct answer: #{question.data.answer}

@@ -49,4 +49,8 @@ class Match < ActiveRecord::Base
 
     self.save!
   end
+
+  def ranked_match_users
+    match_users.map{|mu| [mu, mu.score]}.sort_by{|mus| mus.last}.map{|mus| mus.first}.reverse
+  end
 end

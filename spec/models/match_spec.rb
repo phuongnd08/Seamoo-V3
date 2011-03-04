@@ -70,4 +70,18 @@ describe Match do
       match.check_if_finished!
     end
   end
+
+  describe "ranked_match_users" do
+    it "should return array of user sorted by score descending" do
+      match = Match.new
+      match_user1 = mock_model(MatchUser)
+      match_user2 = mock_model(MatchUser)
+      match_user3 = mock_model(MatchUser)
+      match_user1.stub(:score).and_return(5)
+      match_user2.stub(:score).and_return(10)
+      match_user3.stub(:score).and_return(7)
+      match.match_users = [match_user1, match_user2, match_user3]
+      match.ranked_match_users.should == [match_user2, match_user3, match_user1]
+    end
+  end
 end

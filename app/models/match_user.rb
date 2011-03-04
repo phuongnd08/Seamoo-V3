@@ -2,6 +2,7 @@ class MatchUser < ActiveRecord::Base
   belongs_to :user
   belongs_to :match
   serialize :answers
+  after_initialize :set_default_answers
   after_save :request_match_check
 
   def add_answer(index, answer)
@@ -25,9 +26,17 @@ class MatchUser < ActiveRecord::Base
     end.sum
   end
 
+  def score_as_percent
+    (score * 100.0 / match.questions.size).round
+  end
+
   protected
   def current_question_position=(question_position)
     super(question_position)
+  end
+
+  def set_default_answers
+    self.answers ||= {}
   end
 
   def request_match_check

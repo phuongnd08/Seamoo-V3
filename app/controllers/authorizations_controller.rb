@@ -35,8 +35,10 @@ class AuthorizationsController < ApplicationController
     redirect_to root_path
   end
 
-  def signin
-    UserSession.create(User.find_by_display_name(params[:username]), true)
-    redirect_to root_path
+  if Rails.env == "development"
+    def signin
+      UserSession.create(User.find_by_display_name(params[:username]), true)
+      redirect_to root_path
+    end
   end
 end

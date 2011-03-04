@@ -48,6 +48,8 @@ group :test do
   gem 'launchy'
   gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
   gem 'parallel'
+  gem 'pickle'
+  gem 'webmock', :git => 'git://github.com/phuong-nguyen/webmock.git'
 end
 
 group :development do

@@ -1,0 +1,2 @@
+heroku rake match:start_bot
+heroku workers 1
