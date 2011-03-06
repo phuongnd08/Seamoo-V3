@@ -6,10 +6,13 @@
     = javascript_include_tag :defaults
     = csrf_meta_tag
   %body
+    .tar.fr
+      = link_to "English", url_for(params.merge({:locale => :en, :only_path => true}))
+      |
+      = link_to "Tiếng Việt", url_for(params.merge({:locale => :vi, :only_path => true}))
     - if current_user
-      %h3
-      Hello
-      = current_user.display_name
+      %h3= t '.hello', :name => current_user.display_name
+    .clear
     - if (flash[:notice])
       %div{:style => 'border: solid 1px'}
         = flash[:notice]

@@ -15,9 +15,6 @@ module NavigationHelpers
       url_to(page_name)
 
     when /the home\s?page/
-      '/'
-
-    when /the home\s?page/
       root_path
     when /the category ([^"]+) page/
       category_path(Category.find_by_name($1))

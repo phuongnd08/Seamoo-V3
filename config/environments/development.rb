@@ -20,6 +20,8 @@ SeamooV3::Application.configure do
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
+  config.i18n.fallbacks = false
+
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
 end

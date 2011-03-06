@@ -81,35 +81,6 @@ When /^(\w+) match on league (\w+)$/ do |username, league_name|
   visit matching_league_path(League.find_by_name(league_name))
 end
 
-When /^\w{2,} press "([^"]*)"$/ do |button|
-  When %{I press "#{button}"}
-end
-
-Then /^\w{2,} should be on (.+)$/ do |page|
-  Then %{I should be on #{page}}
-end
-
-Then /^\w{2,} should soon be on (.+)$/ do |page|
-  wait_for_true Capybara.default_wait_time, false do
-    URI.parse(current_url).path == path_to(page)
-  end
-  Then %{I should be on #{page}}
-end
-
-When /^\w{2,} visit (.+)$/ do |page|
-  Then %{I visit #{page}}
-end
-
-Then /^\w{2,} should see "([^"]*)"(.*)$/ do |text, scope_definition|
-  text.split(/\s+[\*\?]\s+/).each do |part|
-    Then %{I should see "#{part}"#{scope_definition}}
-  end
-end
-
-Then /^\w{2,} should not see "([^"]*)"(.*)$/ do |text, scope_definition|
-  Then %{I should not see "#{text}"#{scope_definition}}
-end
-
 Given /^first (\w+) match use default questions$/ do |league_name|
   league = League.find_by_name(league_name)
   match = league.matches.first
@@ -223,11 +194,6 @@ Given /^(\w+) made (\d+) ((?:in)?correct) answers$/ do |username, number, correc
   match_user.save!
 end
 
-When /^(\w{2,}) go to (.+)$/ do |username, path|
-  Informer.login_as = username
-  When %{I go to #{path}}
-end
-
 Given /^submitting answers will be delayed$/ do
   page.execute_script %{
     $.old_ajax = $.ajax;
@@ -246,20 +212,4 @@ Given /^submitting answers is resumed$/ do
   } 
 end
 
-Then /^\w+ should( not)? be able to press "([^"]*)"$/ do |negative, button|
-  if negative.present?
-    ["true", "disabled"].should include(find_button(button)[:disabled])
-  else
-    ["true", "disabled"].should_not include(find_button(button)[:disabled])
-  end
-end
-
-
-Then /^\w+ should( not)? be able to edit "([^"]*)"$/ do |negative, field|
-  if negative.present?
-    ["true", "disabled"].should include(find_field(field)[:disabled])
-  else
-    ["true", "disabled"].should_not include(find_field(field)[:disabled])
-  end
-end
 

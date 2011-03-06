@@ -1,0 +1,19 @@
+.tar{
+  text-align: right;
+}
+
+.tac{
+  text-align: center;
+}
+
+.fr{
+  float: right;
+}
+
+.fl{
+  float: left;
+}
+
+.clear{
+  clear: both;
+}

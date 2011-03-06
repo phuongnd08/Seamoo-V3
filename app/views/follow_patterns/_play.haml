@@ -1,9 +1,9 @@
 %h3= follow_pattern.instruction
 %div 
-  (Hint: 
+  (#{t 'questions.Hint'}: 
   %span#hint
   )
 %div
   = form_tag :id => 'follow_pattern_form' do
     = text_field_tag :answer, nil, :hint => follow_pattern.hint
-    = submit_tag "Submit"
+    = submit_tag t('questions.Submit')

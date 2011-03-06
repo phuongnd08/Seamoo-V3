@@ -2,4 +2,35 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  layouts:
+    application:
+      hello: Hello, %{name}
+
+  matches:
+    match_finished: The match is finished
+    match_formed: Match will be started in {seconds_until_started} seconds  
+    match_started: Match started. There are {seconds_until_ended} seconds left
+    match_waiting: Waiting for other players
+    you_finished: You have finished the match. The match will be ended in {seconds_until_ended} seconds
+    show:
+      result: Match result
+      ranking: Ranking
+      Questions: Ques“Lazy” Lookuptions
+      You: You
+      correct: correct
+      incorrect: incorrect
+      not_answered: not answered
+      correct_answer: correct answer
+  leagues:
+    matching:
+      welcome: Welcome to %{name}
+      lets_match: "Let's match"
+      Players: Players
+      leave_current_match: Leave current match
+  questions:
+    question_position: Question %{current}/%{total}
+    ignore_current_question: Ignore this question
+    Hint: Hint
+    Submit: Submit
+
+    

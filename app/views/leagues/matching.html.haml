@@ -1,14 +1,14 @@
-%h1 Welcome to #{@league.name}
-%h2 Let's match
+%h1= t '.welcome', :name => @league.name
+%h2= t '.lets_match'
 #status
 
 #players{:style => 'display: none'}
-  %h3 Players
+  %h3= t '.Players'
   %ul.list
 
 #exit{:style => 'display: none'}
   = form_tag leave_current_match_league_path(@league), :id => "leave_current_match_form" do 
-    = submit_tag "Leave current match"
+    = submit_tag t '.leave_current_match'
 
 #question
 
@@ -34,7 +34,7 @@
   function requestMatch(){
     $.ajax({
       type: 'post',
-      url: ["/leagues/", leagueId, "/request_match"].join(""),
+      url: ["/#{params[:locale]}/leagues/", leagueId, "/request_match"].join(""),
       dataType: 'json',
       success: function(data){
         if (data.match_id){
@@ -55,7 +55,7 @@
   function getMatchInfo(){
     $.ajax({
       type: 'post',
-      url: ["/matches/", matchId, "/infor"].join(""),
+      url: ["/#{params[:locale]}/matches/", matchId, "/infor"].join(""),
       dataType: 'json',
       success: function(data){
         updateMatchInfo(data);
@@ -123,7 +123,7 @@
 
     $.ajax({
       type: 'post',
-      url: ["/matches/", matchId, "/submit_answer_and_get_next_question"].join(""),
+      url: ["/#{params[:locale]}/matches/", matchId, "/submit_answer_and_get_next_question"].join(""),
       dataType: 'json',
       data: data,
       success: function(data){

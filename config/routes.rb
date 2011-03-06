@@ -1,39 +1,42 @@
 SeamooV3::Application.routes.draw do
-  resources :follow_patterns, :except => [:index, :destroy]
+  scope "(:locale)", :locale => /en|vi/ do
+    resources :follow_patterns, :except => [:index, :destroy]
 
-  resources :multiple_choices, :except => [:index, :destroy]
+    resources :multiple_choices, :except => [:index, :destroy]
 
-  resources :questions, :except => [:update]
+    resources :questions, :except => [:update]
 
-  resources :home, :only => [:index] do
-    collection do
-      get :secured
+    resources :home, :only => [:index] do
+      collection do
+        get :secured
+      end
     end
-  end
 
-  resources :categories
-  resources :leagues do
-    member do
-      get :matching
-      post :request_match
-      post :leave_current_match
+    resources :categories
+    resources :leagues do
+      member do
+        get :matching
+        post :request_match
+        post :leave_current_match
+      end
     end
-  end
 
-  resources :matches, :only => [:index, :show] do
-    member do
-      post :infor
-      post :submit_answer_and_get_next_question
+    resources :matches, :only => [:index, :show] do
+      member do
+        post :infor
+        post :submit_answer_and_get_next_question
+      end
     end
+
+    match 'signin' => 'user_sessions#new', :as => :signin
+    match 'signout' => 'user_sessions#destroy', :as => :signout
   end
 
   root :to => "home#index"
-
+  match "/:locale" => "home#index"
   match "/auth/:provider/callback" => "authorizations#create"
   match "/auth/failure" => "authorizations#failure"
   match "/auth/signin/:username" => "authorizations#signin"
-  match 'signin' => 'user_sessions#new', :as => :signin
-  match 'signout' => 'user_sessions#destroy', :as => :signout
 
 
   # The priority is based upon order of creation:

@@ -1,17 +1,17 @@
 %h1= @match.league.name
-%h2 Match result
-%h3 Ranking
+%h2= t '.result'
+%h3= t '.ranking'
 %ul
   - @match.ranked_match_users.each_with_index do |match_user, index|
     %li 
       #{index+1}. 
       - if match_user.user == current_user
-        %strong You
+        %strong= t '.You'
         (#{match_user.user.display_name})
       - else
         #{match_user.user.display_name}
-      \- #{match_user.score_as_percent}% correct
-%h3 Questions
+      \- #{match_user.score_as_percent}% #{t '.correct'}
+%h3= t '.Questions'
 %ol
   - @match.questions.each_with_index do |question, qidx|
     %li= question.content
@@ -20,7 +20,7 @@
       - @match.match_users.each do |match_user|
         %li
           - if match_user.user == current_user
-            = raw %{<strong>You</strong>:}
+            = raw %{<strong>#{t '.You'}</strong>:}
           - else
             #{match_user.user.display_name}:
           - @answer = match_user.answers[qidx]
@@ -30,10 +30,10 @@
               \-
             - if question.data.score_for(@answer) == 1
               - @have_correct_answer = true
-              correct
+              = t '.correct'
             - else
-              incorrect
+              = t '.incorrect'
           - else
-            not answered
+            = t '.not_answered'
       - unless @have_correct_answer || @hide_all_answers
-        %li correct answer: #{question.data.answer}
+        %li #{t '.correct_answer'}: #{question.data.answer}
