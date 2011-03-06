@@ -228,3 +228,38 @@ When /^(\w{2,}) go to (.+)$/ do |username, path|
   When %{I go to #{path}}
 end
 
+Given /^submitting answers will be delayed$/ do
+  page.execute_script %{
+    $.old_ajax = $.ajax;
+    $.ajax = function(){
+      var args = arguments;
+      window.ajaxDelayedCall = function(){
+        $.old_ajax.apply($, args);
+      } 
+    }
+  }
+end
+
+Given /^submitting answers is resumed$/ do
+  page.execute_script %{
+    window.ajaxDelayedCall();
+  } 
+end
+
+Then /^\w+ should( not)? be able to press "([^"]*)"$/ do |negative, button|
+  if negative.present?
+    ["true", "disabled"].should include(find_button(button)[:disabled])
+  else
+    ["true", "disabled"].should_not include(find_button(button)[:disabled])
+  end
+end
+
+
+Then /^\w+ should( not)? be able to edit "([^"]*)"$/ do |negative, field|
+  if negative.present?
+    ["true", "disabled"].should include(find_field(field)[:disabled])
+  else
+    ["true", "disabled"].should_not include(find_field(field)[:disabled])
+  end
+end
+

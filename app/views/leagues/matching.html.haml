@@ -115,6 +115,7 @@
   }
 
   function submitAnswer(answer){
+    disableQuestionButtonsAndInputs();
     var data = {
       position: currentQuestionPosition
     } 
@@ -205,6 +206,10 @@
   function setQuestion(questionType, question, position){
     $('#question').html(question);
     currentQuestionPosition = position
+    setUpQuestionButtons(questionType);
+  }
+
+  function setUpQuestionButtons(questionType){
     switch(questionType){
       case 'MultipleChoice':
         $('#question button').click(function(event){
@@ -228,6 +233,10 @@
     $('#question #ignore').click(function(event){
       submitAnswer(null);
     });
+  }
+
+  function disableQuestionButtonsAndInputs(){
+    $('#question').find('button, input').attr('disabled', 'disabled');
   }
 
   function clearQuestion(){
