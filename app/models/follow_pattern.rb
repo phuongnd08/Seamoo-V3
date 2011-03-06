@@ -1,7 +1,9 @@
 class FollowPattern < ActiveRecord::Base
   PATTERN_REGEX = /\[([^\]]+)\]/
   def hint
-    pattern.gsub(PATTERN_REGEX){ |chars|'*'*(chars.size - 2) }
+    pattern.split(/[\[|\]]/).each_with_index.map{|part, index|
+      index % 2 == 1 ? part : part.split(/\s/).map{ |sub_part| '*' * sub_part.size }.join(' ')
+    }.join("")
   end
 
   def answer
