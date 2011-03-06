@@ -117,4 +117,20 @@ class League < ActiveRecord::Base
     end
     b
   end
+
+  public
+
+  def random_questions(count)
+    league_questions = category.questions.where(:level => self.level)
+    league_questions_count = league_questions.count
+    raise 'Number of required questions is more than questions in league' if count > league_questions_count
+    used = {}
+    result = []
+    count.times do
+      number = Utils::RndGenerator.next(league_questions_count-1, used)
+      used[number] = true
+      result << league_questions.offset(number).limit(1).first
+    end
+    result
+  end
 end

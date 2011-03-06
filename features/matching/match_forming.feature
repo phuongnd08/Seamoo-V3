@@ -13,6 +13,7 @@ Feature: Match forming
       |eric|
     And category English is available
     And league Amateur of English is openning
+    And league Amateur has 3 questions
     And all data is fresh
 
   Scenario: First user joining

@@ -23,7 +23,7 @@ describe League do
     end
   end
 
-  describe "coordinate requests in league" do
+  describe "coordinate requests in league" do# {{{
     before(:each) do
       @category = Factory(:category)
       @user1 = Factory(:user)
@@ -35,7 +35,7 @@ describe League do
       @league = League.create!(:level => 0, :category => @category)
     end
 
-    describe "request_match" do
+    describe "request_match" do# {{{
       it "should never mess up" do
         initial_time = Time.now
         Time.stub(:now).and_return(initial_time)
@@ -69,9 +69,9 @@ describe League do
         match = @league.request_match(@user2.id)
         match.questions.map(&:id).to_set.should == @questions.map(&:id).to_set
       end
-    end
+    end# }}}
 
-    describe "waiting_user_ids" do
+    describe "waiting_user_ids" do# {{{
       it "should return number users are waiting for match" do
         @league.request_match(@user1.id)
         @league.waiting_user_ids.count.should  == 1
@@ -90,6 +90,27 @@ describe League do
         @league.request_match(@user1.id)
         @league.waiting_user_ids.count.should  == 1
       end
+    end# }}}
+  end# }}}
+  
+  describe "random questions" do
+    before(:each) do
+      @league = Factory(:league, :level => 0)
+      @questions = []
+      2.times do |t|
+        Factory(:question, :category => @league.category, :level => 1)
+      end
+      3.times do |t|
+        @questions << Factory(:question, :category => @league.category, :level => 0)
+      end
+    end
+    it "should return a list of random questions within level of league" do
+      5.times do
+        set = @league.random_questions(2).to_set
+        set.size.should == 2
+        @questions.to_set.should be_superset(set)
+      end
+      @league.random_questions(3).to_set.should == @questions.to_set
     end
   end
 end

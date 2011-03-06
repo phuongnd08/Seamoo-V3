@@ -96,7 +96,7 @@ describe Bot do
 
       it "should answer questions at predfined correctness" do
         Time.stub(:now).and_return(@now + 59.seconds)
-        Bot.stub(:rnd).and_return(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1)
+        Utils::RndGenerator.stub(:rnd).and_return(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1)
         @bot.run
         @match_user.reload.current_question_position.should == 10
         @match_user.reload.score.should == 8

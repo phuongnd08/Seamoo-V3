@@ -5,7 +5,7 @@ class Match < ActiveRecord::Base
   has_many :questions, :through => :match_questions
   belongs_to :league
 
-  before_create :fetch_question
+  before_create :fetch_questions
 
   def seconds_until_started
     [0, (started_at - Time.now).round].max
@@ -35,8 +35,8 @@ class Match < ActiveRecord::Base
     created_at + Matching.started_after.seconds
   end
 
-  def fetch_question
-    league.category.questions[0...Matching.questions_per_match].each { |q| questions << q }
+  def fetch_questions
+    self.questions = league.random_questions(Matching.questions_per_match)
   end
 
   def check_if_finished!

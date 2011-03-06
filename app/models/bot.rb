@@ -17,9 +17,6 @@ class Bot < User
   end
 
   class << self
-    def rnd
-      rand
-    end
 
     def awaken
       awaken_ids = (data[:awaken_ids] || [])
@@ -53,7 +50,7 @@ class Bot < User
             number_of_questions_to_answer = (Time.now - match.started_at)/Matching.bot_time_per_question
             number_of_questions_to_answer = [match.questions.size, number_of_questions_to_answer.floor].min
             (match_user.current_question_position...number_of_questions_to_answer).each do |index|
-              answer = Bot.rnd > Matching.bot_correctness ? nil : correct_answer(match_user.current_question)
+              answer = Utils::RndGenerator.rnd > Matching.bot_correctness ? nil : correct_answer(match_user.current_question)
               match_user.add_answer(index, answer) 
             end
           end
