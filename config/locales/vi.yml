@@ -21,6 +21,7 @@ vi:
       incorrect: sai
       not_answered: không trả lời
       correct_answer: câu trả lời đúng
+      rematch: Đấu trận khác
   leagues:
     matching:
       welcome: Chào mừng đến với %{name}

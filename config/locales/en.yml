@@ -21,6 +21,7 @@ en:
       incorrect: incorrect
       not_answered: not answered
       correct_answer: correct answer
+      rematch: "Let's match again"
   leagues:
     matching:
       welcome: Welcome to %{name}

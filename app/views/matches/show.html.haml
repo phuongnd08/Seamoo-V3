@@ -30,10 +30,13 @@
               \-
             - if question.data.score_for(@answer) == 1
               - @have_correct_answer = true
-              = t '.correct'
+              %span.green= t '.correct'
             - else
-              = t '.incorrect'
+              %span.red= t '.incorrect'
           - else
-            = t '.not_answered'
+            %span.gray= t '.not_answered'
       - unless @have_correct_answer || @hide_all_answers
-        %li #{t '.correct_answer'}: #{question.data.answer}
+        %li 
+          #{t '.correct_answer'}: 
+          %span.green= question.data.answer
+%div= link_to t(".rematch"), matching_league_path(@match.league)
