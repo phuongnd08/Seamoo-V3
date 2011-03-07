@@ -1,11 +1,16 @@
-Given /^I am logged in Google as "([^"]*)"$/ do |account|
-  username, password = account.split("/")
-  visit "http://docs.google.com/logout"
-  visit "https://www.google.com/accounts/ServiceLoginAuth"
-  fill_in("Email", :with => username)
-  fill_in("Passwd", :with => password)
-  click_button("signIn")
-  visit "http://www.google.com/ncr"
+Given /^I am recognized as open id user "([^"]*)" at "([^"]*)"$/ do |name, provider|
+  id = name.split(" ").join(".").downcase
+  first_name, last_name = name.split(" ")
+  OmniAuth.config.mock_auth[:open_id] = {
+    "provider" => provider,
+    "uid" => "http://#{provider.downcase}.com/openid?id=#{id}",
+    "user_info" => {
+      "email" => "#{id}@#{provider.downcase}.com", 
+      "first_name" => first_name, 
+      "last_name" => last_name,
+      "name"=> name
+    }
+  }
 end
 
 Given /^I am logged in Facebook as "([^"]*)"$/ do |account|

@@ -2,7 +2,7 @@ class AuthorizationsController < ApplicationController
   before_filter :require_user, :only => [:destroy]
 
   def create
-    omniauth = request.env['rack.auth'] #this is where you get all the data from your provider through omniauth
+    omniauth = request.env['omniauth.auth'] #this is where you get all the data from your provider through omniauth
     provider = omniauth['provider']
     uid = omniauth['uid']
     user_info = {}.merge(omniauth['user_info']).merge((omniauth['extra'] || {})['user_hash'] || {})

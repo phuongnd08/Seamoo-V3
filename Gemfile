@@ -7,7 +7,7 @@ gem 'rails', '3.0.0'
 
 gem 'mysql'
 gem 'haml'
-gem 'omniauth'
+gem 'omniauth', '0.2.0.beta5'
 gem 'authlogic'
 gem "jquery-rails", :git =>  "https://github.com/indirect/jquery-rails.git"
 gem "dalli"
@@ -38,7 +38,6 @@ group :development, :test do
 end
 
 group :test do
-  gem 'test-unit', '1.2.3'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'shoulda'
@@ -49,7 +48,7 @@ group :test do
   gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
   gem 'parallel'
   gem 'pickle'
-  gem 'webmock', :git => 'git://github.com/phuong-nguyen/webmock.git'
+  gem 'webmock', :require => false
 end
 
 group :development do

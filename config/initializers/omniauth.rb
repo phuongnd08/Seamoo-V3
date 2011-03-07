@@ -3,9 +3,9 @@ require 'openid/store/filesystem'
 OAUTH =  YAML::load(ERB.new(IO.read(File.join(Rails.root, 'config', 'oauth.yml'))).result)[Rails.env]
 
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :twitter,  'KEY', 'SECRET'
-  provider :facebook, OAUTH['facebook']['app_id'], OAUTH['facebook']['app_secret']
-  provider :linked_in, 'KEY', 'SECRET'
+  # provider :facebook, OAUTH['facebook']['app_id'], OAUTH['facebook']['app_secret']
+  # provider :twitter,  'KEY', 'SECRET'
+  # provider :linked_in, 'KEY', 'SECRET'
   provider :open_id,  OpenID::Store::Filesystem.new(File.join(Rails.root, '/tmp'))
 end
 # you will be able to access the above providers by the following url

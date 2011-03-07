@@ -1,50 +1,3 @@
-def wait_for_true(time, die_if_failed = true, &block)
-  sleep_time = 0
-  while sleep_time < time && !block.call
-    sleep 0.1
-    sleep_time += 0.1
-  end
-  block.call.should == true if die_if_failed
-end
-
-Given /^I will$/ do |table|
-  begin
-    wait_time = Capybara.default_wait_time
-    Capybara.default_wait_time = 0
-    wait_for_true wait_time, false do
-      ok = false
-      table.hashes.each do |hash|
-        if page.has_content?(hash['if I see'])
-          Then hash['action'] unless hash['action'].blank?
-          ok = true
-          break
-        end
-      end
-      ok
-    end
-  ensure
-    Capybara.default_wait_time = wait_time
-  end
-end
-
-Then /^I should have (\w+)$/ do |type, table|
-  clazz = type.capitalize.constantize
-  hash = table.hashes.inject({}) do |hs, row|
-    hs[row['field'].gsub(/\s+/, '_').downcase.to_sym] = row['value']
-    hs
-  end
-  clazz.find(:first, :conditions => hash).should_not be_nil
-end
-
-Given /^I have (\w+)$/ do |type, table|
-  clazz = type.capitalize.constantize
-  hash = table.hashes.inject({}) do |hs, row|
-    hs[row['field'].gsub(/\s+/, '_').downcase.to_sym] = row['value']
-    hs
-  end
-  clazz.create(hash)
-end
-
 When /^I fill in last "([^"]*)" with "([^"]*)"$/ do |locator, content|
   all(:xpath, XPath::HTML.fillable_field(locator)).last.set(content)
 end
@@ -77,19 +30,17 @@ When /^(\w{2,}) go to (.+)$/ do |username, path|
 end
 
 Then /^\w+ should( not)? be able to press "([^"]*)"$/ do |negative, button|
-  if negative.present?
-    ["true", "disabled"].should include(find_button(button)[:disabled])
-  else
-    ["true", "disabled"].should_not include(find_button(button)[:disabled])
+  wait_for_true do
+    disabled = ["true", "disabled"].include?(find_button(button)[:disabled])
+    negative.present? ? disabled : !disabled
   end
 end
 
 
 Then /^\w+ should( not)? be able to edit "([^"]*)"$/ do |negative, field|
-  if negative.present?
-    ["true", "disabled"].should include(find_field(field)[:disabled])
-  else
-    ["true", "disabled"].should_not include(find_field(field)[:disabled])
+  wait_for_true do
+    disabled = ["true", "disabled"].include?(find_field(field)[:disabled])
+    negative.present? ? disabled : !disabled
   end
 end
 
@@ -106,10 +57,9 @@ Then /^\w{2,} should be on (.+)$/ do |page|
 end
 
 Then /^\w{2,} should soon be on (.+)$/ do |page|
-  wait_for_true Capybara.default_wait_time, false do
+  wait_for_true do
     URI.parse(current_url).path == path_to(page)
   end
-  Then %{I should be on #{page}}
 end
 
 When /^\w{2,} visit (.+)$/ do |page|

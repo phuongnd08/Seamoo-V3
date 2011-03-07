@@ -17,7 +17,6 @@ require 'capybara/rails'
 require 'capybara/cucumber'
 require 'capybara/session'
 
-require 'webmock/cucumber'
 
 # Capybara defaults to XPath selectors rather than Webrat's default of CSS3. In
 # order to ease the transition to Capybara we set the default here. If you'd
@@ -51,24 +50,5 @@ ActionController::Base.allow_rescue = false
 Cucumber::Rails::World.use_transactional_fixtures = true
 # How to clean your database when transactions are turned off. See
 # http://github.com/bmabey/database_cleaner for more info.
-if defined?(ActiveRecord::Base)
-  begin
-    require 'database_cleaner'
-    DatabaseCleaner.strategy = :truncation
-  rescue LoadError => ignore_if_database_cleaner_not_present
-  end
-end
-
-WebMock.allow_net_connect! if defined?(WebMock) 
-
-class TestEnv
-  class << self
-    def number
-      @number ||= (ENV["TEST_ENV_NUMBER"] || 0).to_i + 1
-    end
-
-    def host
-      @host ||= "seamoo#{number}.local.com"
-    end
-  end
-end
+require 'database_cleaner'
+DatabaseCleaner.strategy = :truncation
