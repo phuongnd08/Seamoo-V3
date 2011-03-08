@@ -2,7 +2,7 @@ module Utils
   module Memcached
     module Common
       def client
-        @@client ||= Dalli::Client.new(MEMCACHED['server'], :namespace => MEMCACHED['namespace'])
+        @@client ||= Dalli::Client.new(MemcachedSettings.server, :namespace => MemcachedSettings.namespace)
       end
 
       def hash_to_key(hash)

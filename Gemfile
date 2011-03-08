@@ -12,6 +12,7 @@ gem 'authlogic'
 gem "jquery-rails", :git =>  "https://github.com/indirect/jquery-rails.git"
 gem "dalli"
 gem "delayed_job"
+gem "settingslogic"
 
 # Use unicorn as the web server
 # gem 'unicorn'

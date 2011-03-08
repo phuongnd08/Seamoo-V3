@@ -228,6 +228,7 @@ GEM
       ffi (~> 0.6.3)
       json_pure
       rubyzip
+    settingslogic (2.0.6)
     shoulda (2.11.3)
     spork (0.8.4)
     term-ansicolor (1.0.5)
@@ -269,6 +270,7 @@ DEPENDENCIES
   rspec (>= 2.0.0.beta.22)
   rspec-rails (>= 2.0.0.beta.22)
   ruby-debug
+  settingslogic
   shoulda
   spork
   webmock
