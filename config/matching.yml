@@ -7,6 +7,7 @@ development: &development
   waiting_slots_size: 10 # this slots size used to calculate number of users waiting for match, so that auto bot can be launched
   questions_per_cache_block: 5 # number of questions will be preloaded in order to make sure user always have smooth experience doing match
   questions_refill_threshold: 3 # number of un-used questions remain in the cache to force another cache request
+  status_recheck_interval: 1
   bot_life_time: 5
   bot_sleep_time_between_beats: 1
   bot_max_match_request_retries: 3
@@ -39,6 +40,7 @@ test:
 production: 
   <<: *development
   requester_stale_after: 5
+  status_recheck_interval: 3
   started_after: 10
   ended_after: 120
   questions_per_match: 15

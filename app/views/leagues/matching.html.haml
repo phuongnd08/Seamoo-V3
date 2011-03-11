@@ -17,6 +17,8 @@
   var questionsPerMatch = #{Matching.questions_per_match};
   var questionsPerCacheBlock = #{Matching.questions_per_cache_block};
   var questionsRefillThreshold = #{Matching.questions_refill_threshold};
+  var statusRecheckInterval = #{Matching.status_recheck_interval} * 1000;
+  var requestingMatchInfo = false;
   var matchId;
   var retried = 0;
   var currentQuestionPosition;
@@ -104,18 +106,22 @@
 
 
   function requestMatchInfo(){
-    $.ajax({
-      type: 'post',
-      url: ["/#{I18n.locale}/matches/", matchId, "/infor"].join(""),
-      dataType: 'json',
-      success: function(data){
-        setMatchInfo(data);
-        resetRetrying();
-      },
-      error: function(data){
-        retry(requestMatchInfo, 500);
-      }
-    });
+    if (!requestingMatchInfo) {
+      $.ajax({
+        type: 'post',
+        url: ["/#{I18n.locale}/matches/", matchId, "/infor"].join(""),
+        dataType: 'json',
+        beforeSend: function(){ requestingMatchInfo = true; },
+        complete: function(){ requestingMatchInfo = false; },
+        success: function(data){
+          setMatchInfo(data);
+          resetRetrying();
+        },
+        error: function(data){
+          retry(requestMatchInfo, 500);
+        }
+      });
+    }
    }
 
   function setMatchInfo(info){
@@ -126,7 +132,6 @@
           showCounter('formed', info.seconds_until_started);
           break;
         case 'you_finished':
-          setTimeout(requestMatchInfo, 1000);
           showCounter('you_finished', info.seconds_until_ended);
           break;
         case 'started':
@@ -141,6 +146,8 @@
     } else clearQuestion();
 
     setPlayers(info.players, info.status);
+    setTimeout(requestMatchInfo, statusRecheckInterval);
+
   }
 
   function showCounter(template, time){
