@@ -1,3 +1,3 @@
 Before do
-  Matching.reload
+  Matching.reload!
 end

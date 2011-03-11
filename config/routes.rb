@@ -24,7 +24,8 @@ SeamooV3::Application.routes.draw do
     resources :matches, :only => [:index, :show] do
       member do
         post :infor
-        post :submit_answer_and_get_next_question
+        post :submit_answer
+        post :more_questions
       end
     end
 

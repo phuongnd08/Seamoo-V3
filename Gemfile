@@ -7,7 +7,7 @@ gem 'rails', '3.0.0'
 
 gem 'mysql'
 gem 'haml'
-gem 'omniauth', :git => 'git://github.com/phuongnd08/omniauth.git'
+gem 'omniauth', '0.2.0.beta5'
 gem 'authlogic'
 gem "jquery-rails", :git =>  "https://github.com/indirect/jquery-rails.git"
 gem "dalli"

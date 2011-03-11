@@ -30,12 +30,6 @@ class MatchesController < ApplicationController
                            if @match_user.finished?
                              :you_finished
                            else
-                             infor[:question] = render_to_string(:partial => "questions/play", :format => :html, 
-                                                                 :locals => { :question => @match_user.current_question, 
-                                                                   :total_question => @match.questions.count, 
-                                                                   :current_question_position => @match_user.current_question_position })
-                             infor[:question_type] = @match_user.current_question.data.class.name
-
                              :started
                            end
                          else
@@ -48,11 +42,33 @@ class MatchesController < ApplicationController
     end
   end
 
-  def submit_answer_and_get_next_question
+  def more_questions
+    respond_to do |format|
+      format.json do
+        loaded = params[:loaded].to_i
+        max = [loaded + Matching.questions_per_cache_block - 1, @match.questions.count - 1].min
+        json = (loaded..max).map do |index|
+          {
+            :content => render_to_string(:partial => "questions/play", :format => :html,
+                                         :locals => {
+                                            :question => @match.questions[index],
+                                            :total_question => @match.questions.count,
+                                            :current_question_position => index
+                                          }),
+            :type => @match.questions[index].data.class.name
+          }
+        end
+
+        render :json => json
+      end
+    end
+  end
+
+  def submit_answer
     @match_user = @match.match_users.find_by_user_id(current_user.id)
     @match_user.add_answer(params[:position].to_i, params[:answer])   
     @match_user.save!
-    infor
+    render :json => {:successful => true}
   end
 
   protected
