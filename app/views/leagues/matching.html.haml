@@ -2,9 +2,14 @@
 %h2= t '.lets_match'
 #status
 
-#players{:style => 'display: none'}
+#match_players{:style => 'display: none'}
   %h3= t '.Players'
   %ul.list
+
+#league_other_active_players{:style => 'float: right'}
+  %h3= t '.League_other_active_players'
+  .no_players{:style => 'display:none'}= t '.Some_maybe_around'
+  %ul.list{:style => 'display:none'}
 
 #exit{:style => 'display: none'}
   = form_tag leave_current_match_league_path(@league), :id => "leave_current_match_form" do 
@@ -52,6 +57,7 @@
           setStatus('waiting', data);
           setTimeout(requestMatch, 1000);
         }
+        setLeagueOtherActivePlayers(data.other_active_players);
         resetRetrying();
       },
       error: function(data){
@@ -237,6 +243,20 @@
     $('#question #hint').html(parts.join(""));
   }
 
+  function setLeagueOtherActivePlayers(otherActivePlayers){
+    if (otherActivePlayers.length == 0){
+      $('#league_other_active_players').find('.no_players').show();
+      $('#league_other_active_players').find('.list').hide();
+    } else {
+      $('#league_other_active_players').find('.no_players').hide();
+      $('#league_other_active_players').find('.list').empty().show();
+      $.each(otherActivePlayers, function(index, player){
+        var html = ['<li>', player.display_name, "</li>"];
+        $('#league_other_active_players ul.list').append(html.join(""));
+      });
+    }
+  }
+
   function setStatus(status, params){
     statusChanged = (status != currentStatus);
     currentStatus = status;
@@ -249,14 +269,14 @@
       }
       $('#status').html(html);
       if (status == "waiting")
-        $('#exit, #players').hide();
+        $('#exit, #match_players').hide();
       else
-        $('#exit, #players').show();
+        $('#exit, #match_players').show();
     }
   }
 
   function setPlayers(players, status){
-    $('#players ul.list').empty();
+    $('#match_players ul.list').empty();
     $.each(players, function(index, player){
       var text = ['<li>', player.display_name, " "];
       if (status != 'formed'){
@@ -267,7 +287,7 @@
         }
       }
       text.push("</li>");
-      $('#players ul.list').append(text.join(""));
+      $('#match_players ul.list').append(text.join(""));
     });
   }
 

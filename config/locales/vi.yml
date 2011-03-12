@@ -27,6 +27,8 @@ vi:
       welcome: Chào mừng đến với %{name}
       lets_match: Chiến đấu thôi
       Players: Người chơi
+      League_other_active_players: Những người chơi khác trong cùng giải đấu
+      Some_maybe_around: Những người chơi khác có thể vẫn còn đâu đây
       leave_current_match: Bỏ trận đấu
   questions:
     question_position: Câu hỏi %{current}/%{total}

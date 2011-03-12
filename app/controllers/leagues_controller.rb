@@ -13,7 +13,12 @@ class LeaguesController < ApplicationController
     match = @league.request_match(current_user.id) 
     respond_to do |format|
       format.json{
-        render :json => {:@@status => League.send(:class_variable_get, '@@status'), :match_id => match.try(:id)}
+        render :json => {
+          :@@status => League.send(:class_variable_get, '@@status'), 
+          :match_id => match.try(:id),
+          :other_active_players => User.find(@league.active_users.map{|u| u[:id]} - [current_user.id]).
+            map{|u| {:display_name => u.display_name}}
+        }
       }
     end
   end

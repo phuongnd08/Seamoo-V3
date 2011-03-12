@@ -13,13 +13,13 @@ describe League do
 
     it "should be maintained correctly" do
       now = Time.now.to_i
-      @league.send(:user_ticket)[1] = "abc_#{now}"        
+      @league.send(:user_match_ticket)[1] = "abc_#{now}"        
       @league.send(:user_lastseen)[1] = "lastseen_#{now}"        
-      @league.send(:user_ticket)[1].should == "abc_#{now}"        
+      @league.send(:user_match_ticket)[1].should == "abc_#{now}"        
       @league.send(:user_lastseen)[1].should == "lastseen_#{now}"        
-      @league.send(:user_ticket_counter).incr.should == 1
-      @league.send(:user_ticket_counter).incr.should == 2
-      @league.send(:user_ticket_counter).incr.should == 3
+      @league.send(:user_match_ticket_counter).incr.should == 1
+      @league.send(:user_match_ticket_counter).incr.should == 2
+      @league.send(:user_match_ticket_counter).incr.should == 3
     end
   end
 
@@ -71,14 +71,14 @@ describe League do
       end
     end# }}}
 
-    describe "waiting_user_ids" do# {{{
+    describe "waiting_users" do# {{{
       it "should return number users are waiting for match" do
         @league.request_match(@user1.id)
-        @league.waiting_user_ids.count.should  == 1
+        @league.waiting_users.count.should  == 1
         @league.request_match(@user1.id)
-        @league.waiting_user_ids.count.should == 1
+        @league.waiting_users.count.should == 1
         @league.request_match(@user2.id)
-        @league.waiting_user_ids.count.should == 2
+        @league.waiting_users.count.should == 2
       end
 
       it "should take into account the time" do
@@ -86,13 +86,33 @@ describe League do
         Time.stub(:now).and_return(now - Matching.requester_stale_after.seconds)
         @league.request_match(@user1.id)
         Time.stub(:now).and_return(now)
-        @league.waiting_user_ids.count.should  == 0
+        @league.waiting_users.count.should  == 0
         @league.request_match(@user1.id)
-        @league.waiting_user_ids.count.should  == 1
+        @league.waiting_users.count.should  == 1
       end
     end# }}}
+
+    describe "active_users" do
+      it "should return number of users are actively waiting or doing match" do
+        @league.request_match(@user1.id)
+        @league.active_users.count.should  == 1
+        @league.request_match(@user1.id)
+        @league.active_users.count.should == 1
+        @league.request_match(@user2.id)
+        @league.active_users.count.should == 2
+      end
+      it "should take into account the time" do
+        now = Time.now
+        Time.stub(:now).and_return(now - Matching.user_inactive_after.seconds)
+        @league.request_match(@user1.id)
+        Time.stub(:now).and_return(now)
+        @league.active_users.count.should  == 0
+        @league.request_match(@user1.id)
+        @league.active_users.count.should  == 1
+      end
+    end
   end# }}}
-  
+
   describe "random questions" do
     before(:each) do
       @league = Factory(:league, :level => 0)

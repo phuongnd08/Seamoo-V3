@@ -7,10 +7,10 @@ class BotRunnerJob
       #   -> If find one, invoke 1 more bot for that league
       #       -> Register the bot to league
       League.all.each do |league|
-        waiting_user_ids = league.waiting_user_ids
-        Delayed::Worker.logger.warn "Watch [#{league.name}]: #{waiting_user_ids.inspect}"
+        waiting_users = league.waiting_users
+        Delayed::Worker.logger.warn "Watch [#{league.name}]: #{waiting_users.inspect}"
         # bot user_id is negative one
-        if (waiting_user_ids.size == 1 && waiting_user_ids.first > 0)
+        if (waiting_users.size == 1 && !waiting_users.first[:bot])
           bot = Bot.awake_new
           bot.data[:league_id] = league.id
         end

@@ -13,9 +13,16 @@ class League < ActiveRecord::Base
 
 
   {
-    :user_ticket => :user_id, :user_lastseen => :user_id, :user_ticket_counter => :counter, 
-    :match_id => :match_ticket, :match_user_id => :match_ticket,
-    :waiting_counter => :counter, :waiting_user => :position
+    :user_match_ticket_counter => :counter, 
+    :user_match_ticket => :user_id, 
+    :user_lastseen => :user_id, 
+    :user_league_ticket_counter => :counter,
+    :user_league_ticket => :user_id,
+    :match_id => :match_ticket, 
+    :match_user_id => :match_ticket,
+    :waiting_counter => :counter, 
+    :waiting_user => :position,
+    :active_user => :position
   }.each do |field, identifier|
     self.class_eval %{
       protected
@@ -28,13 +35,15 @@ class League < ActiveRecord::Base
   include Utils::Waiter
 
   def request_match(user_id, bot_request = false)
-    user_ticket[user_id] = user_ticket_counter.incr if (user_ticket[user_id].nil?)
+    user_match_ticket[user_id] = user_match_ticket_counter.incr if (user_match_ticket[user_id].nil?)
+    user_league_ticket[user_id] = user_league_ticket_counter.incr if (user_league_ticket[user_id].nil?)
     user_lastseen[user_id] = Time.now.to_i
-    waiting_user[waiting_counter.incr % Matching.waiting_slots_size] = { :id => user_id * (bot_request ? -1 : 1), :time => Time.now.to_i }
+    waiting_user[waiting_counter.incr % Matching.waiting_slots_size] = { :id => user_id, :bot => bot_request, :time => Time.now.to_i }
+    active_user[user_league_ticket[user_id] % Matching.active_slots_size] = { :id => user_id, :time => Time.now.to_i }
     ok = false
     while !ok do
-      match_ticket = (user_ticket[user_id] - 1) / Matching.users_per_match + 1
-      match_position = ((user_ticket[user_id] - 1) % Matching.users_per_match) + 1
+      match_ticket = (user_match_ticket[user_id] - 1) / Matching.users_per_match + 1
+      match_position = ((user_match_ticket[user_id] - 1) % Matching.users_per_match) + 1
       unless user_finished?(match_ticket, user_id)
         # when user leave match through official request, do not add him to the same match
         unless user_joined_before?(match_ticket, user_id, match_position)
@@ -56,24 +65,34 @@ class League < ActiveRecord::Base
           end
         end
       end
-      user_ticket[user_id] = user_ticket_counter.incr unless ok
+      user_match_ticket[user_id] = user_match_ticket_counter.incr unless ok
     end
 
-    @@status = "[u] #{user_id}: [ut] #{user_ticket[user_id]} [t] #{match_ticket}, [p] #{match_position}, [mid] #{match_id[match_ticket]}"
+    @@status = "[u] #{user_id}: [ut] #{user_match_ticket[user_id]} [t] #{match_ticket}, [p] #{match_position}, [mid] #{match_id[match_ticket]}"
     # puts @@status
     match_id[match_ticket] != nil ? Match.find(match_id[match_ticket]) : nil
   end
 
-  def waiting_user_ids
+  def waiting_users
     min_time = Matching.requester_stale_after.seconds.ago.to_i
     wusers = (0..Matching.waiting_slots_size-1).
               map{|index| waiting_user[index]}.
-              select{|user| user!=nil && user[:time] > min_time}
-    (wusers.map{|user| user[:id]}.to_set - [nil].to_set)
+              select{|user| user!=nil && user[:time] > min_time}.
+              group_by{|user| user[:id]}.
+              values.map{|group| group.sort_by{|user| user[:time]}.last}
+  end
+
+  def active_users
+    min_time = Matching.user_inactive_after.seconds.ago.to_i
+    ausers = (0..Matching.active_slots_size-1).
+              map{|index| active_user[index]}.
+              select{|user| user!=nil && user[:time] > min_time}.
+              group_by{|user| user[:id]}.
+              values.map{|group| group.sort_by{|user| user[:time]}.last}
   end
 
   def leave_current_match(user_id)
-    user_ticket[user_id] = nil
+    user_match_ticket[user_id] = nil
     user_lastseen[user_id] = nil
   end
 

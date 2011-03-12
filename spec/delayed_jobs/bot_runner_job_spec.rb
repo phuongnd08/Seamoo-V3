@@ -50,7 +50,11 @@ describe BotRunnerJob do
         it "should cause the bot to leave footprint in league" do
           @league.request_match(@user1.id)
           BotRunnerJob.new.perform
-          @league.waiting_user_ids.should == [@user1.id, -Bot.last.id].to_set
+          @league.waiting_users.size.should == 2
+          @league.waiting_users.first[:id].should == @user1.id
+          @league.waiting_users.first[:bot].should be_false
+          @league.waiting_users.last[:id].should == Bot.last.id
+          @league.waiting_users.last[:bot].should be_true
         end
 
         it "should tell the bot which league it should operate on" do

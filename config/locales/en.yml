@@ -27,6 +27,8 @@ en:
       welcome: Welcome to %{name}
       lets_match: "Let's match"
       Players: Players
+      League_other_active_players: Other players in league
+      Some_maybe_around: Some other players maybe around
       leave_current_match: Leave current match
   questions:
     question_position: Question %{current}/%{total}
