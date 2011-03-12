@@ -33,5 +33,12 @@ en:
     ignore_current_question: Ignore this question
     Hint: Hint
     Submit: Submit
+  
+  user_sessions:
+    new:
+      sign_in_with: Sign In With
+
+  application:
+    need_login: You need to login in order to access this page
 
     

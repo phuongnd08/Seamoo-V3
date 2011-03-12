@@ -2,4 +2,4 @@
 %ul
   - multiple_choice.randomized_options.each do |index, option|
     %li
-      %button{:answer => index}= option.content
+      %button.option{:answer => index}= option.content

@@ -160,7 +160,7 @@ When /^(\w+) request to leave his current (\w+) match$/ do |username, league_nam
 end
 
 Given /^all match will immediately start$/ do
-  Matching.send(:class_variable_get, '@@matching')['started_after'] = 0
+  Matching.stub(:started_after).and_return(0)
 end
 
 When /^\w{2,} fill in "([^"]*)" with "([^"]*)"$/ do |selector, value|

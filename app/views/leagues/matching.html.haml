@@ -15,12 +15,19 @@
 :javascript
   var leagueId = #{@league.id};
   var questionsPerMatch = #{Matching.questions_per_match};
+  var questionsPerCacheBlock = #{Matching.questions_per_cache_block};
+  var questionsRefillThreshold = #{Matching.questions_refill_threshold};
+  var statusRecheckInterval = #{Matching.status_recheck_interval} * 1000;
+  var requestingMatchInfo = false;
   var matchId;
   var retried = 0;
-  var currentQuestion;
+  var currentQuestionPosition;
+  var questions = [];
   var counterHandle;
   var counterTemplate;
   var remainedTime;
+  var loadingMoreQuestions = false;
+  var questionsLoadedCallback;
 
   var MAX_RETRIES = 20; 
 
@@ -39,7 +46,7 @@
       success: function(data){
         if (data.match_id){
           matchId = data.match_id;
-          getMatchInfo();
+          requestMatchInfo();
         } else {
           setStatus('waiting', data);
           setTimeout(requestMatch, 1000);
@@ -52,22 +59,72 @@
     });
   }
 
-  function getMatchInfo(){
-    $.ajax({
-      type: 'post',
-      url: ["/#{I18n.locale}/matches/", matchId, "/infor"].join(""),
-      dataType: 'json',
-      success: function(data){
-        updateMatchInfo(data);
-        resetRetrying();
-      },
-      error: function(data){
-        retry(getMatchInfo, 500);
+  function requestCurrentQuestion(callback){
+    if (currentQuestionPosition >= questions.length){
+      loadMoreQuestions(function(){ requestCurrentQuestion(callback) });
+    } else {
+      callback(questions[currentQuestionPosition]);
+      if (currentQuestionPosition >= questions.length - questionsRefillThreshold) {
+        loadMoreQuestions(null);
       }
-    });
+    }
+  }
+
+  function loadMoreQuestions(callback){
+    if (callback != null) questionsLoadedCallback = callback; 
+    if (!loadingMoreQuestions){
+      $.ajax({
+        type: 'post',
+        url: ["/#{I18n.locale}/matches/", matchId, "/more_questions"].join(""),
+        data: {
+          loaded: questions.length
+        },
+        dataType: 'json',
+        beforeSend: function(){
+          loadingMoreQuestions = true;
+        },
+        success:function(data){
+          questions = questions.concat(data);
+          if (questionsLoadedCallback) {
+            var c = questionsLoadedCallback;
+            questionsLoadedCallback = null;
+            c();
+          }
+          resetRetrying();
+        },
+        error: function(data){
+          retry(function(){
+            loadMoreQuestions(callback)
+          }, 500);
+        },
+        complete: function(){
+          loadingMoreQuestions = false;
+        }
+      });
+    }
+  }
+
+
+  function requestMatchInfo(){
+    if (!requestingMatchInfo) {
+      $.ajax({
+        type: 'post',
+        url: ["/#{I18n.locale}/matches/", matchId, "/infor"].join(""),
+        dataType: 'json',
+        beforeSend: function(){ requestingMatchInfo = true; },
+        complete: function(){ requestingMatchInfo = false; },
+        success: function(data){
+          setMatchInfo(data);
+          resetRetrying();
+        },
+        error: function(data){
+          retry(requestMatchInfo, 500);
+        }
+      });
+    }
    }
 
-  function updateMatchInfo(info){
+  function setMatchInfo(info){
     if (info.status){
       setStatus(info.status, info);
       switch (info.status){
@@ -75,7 +132,6 @@
           showCounter('formed', info.seconds_until_started);
           break;
         case 'you_finished':
-          setTimeout(getMatchInfo, 1000);
           showCounter('you_finished', info.seconds_until_ended);
           break;
         case 'started':
@@ -84,11 +140,14 @@
       }
     }
 
-    if (info.question){
-      setQuestion(info.question_type, info.question, info.current_question_position);
+    if (info.status == 'started'){
+      currentQuestionPosition = info.current_question_position
+      requestCurrentQuestion(setQuestion);
     } else clearQuestion();
 
     setPlayers(info.players, info.status);
+    setTimeout(requestMatchInfo, statusRecheckInterval);
+
   }
 
   function showCounter(template, time){
@@ -100,7 +159,7 @@
 
   function refreshCounter(){
    if (remainedTime== 0){
-      getMatchInfo();
+      requestMatchInfo();
     } else {
       remainedTime--;
       var params;
@@ -123,16 +182,21 @@
 
     $.ajax({
       type: 'post',
-      url: ["/#{I18n.locale}/matches/", matchId, "/submit_answer_and_get_next_question"].join(""),
+      url: ["/#{I18n.locale}/matches/", matchId, "/submit_answer"].join(""),
       dataType: 'json',
       data: data,
-      success: function(data){
-        updateMatchInfo(data);
+      success: function(){
+        if (currentQuestionPosition == questionsPerMatch) requestMatchInfo();
       },
       error: function(data){
         retry(function(){submitAnswer(answer)}, 100);
       }
     })
+
+    currentQuestionPosition++;
+    if (currentQuestionPosition < questionsPerMatch){
+      requestCurrentQuestion(setQuestion);
+    }
   }
 
   function retry(ajaxMethod, interval){
@@ -203,16 +267,15 @@
     });
   }
 
-  function setQuestion(questionType, question, position){
-    $('#question').html(question);
-    currentQuestionPosition = position
-    setUpQuestionButtons(questionType);
+  function setQuestion(question){
+    $('#question').html(question.content);
+    setUpQuestionButtons(question.type);
   }
 
   function setUpQuestionButtons(questionType){
     switch(questionType){
       case 'MultipleChoice':
-        $('#question button').click(function(event){
+        $('#question button.option').click(function(event){
           submitAnswer($(this).attr('answer'));
         });
         break;

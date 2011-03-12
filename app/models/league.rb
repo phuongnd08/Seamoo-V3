@@ -123,7 +123,7 @@ class League < ActiveRecord::Base
   def random_questions(count)
     league_questions = category.questions.where(:level => self.level)
     league_questions_count = league_questions.count
-    raise 'Number of required questions is more than questions in league' if count > league_questions_count
+    raise "Number of required questions(#{count}) is more than questions in league(#{league_questions_count})" if count > league_questions_count
     used = {}
     result = []
     count.times do

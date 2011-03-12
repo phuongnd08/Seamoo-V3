@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
 
   def require_user
     unless current_user
-      flash[:notice] = "You must be logged in to access this page"
+      flash[:notice] = t "application.need_login"
       redirect_to signin_path(:return_url => request.fullpath)
       return false
     end

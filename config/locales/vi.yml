@@ -33,3 +33,11 @@ vi:
     ignore_current_question: Bỏ qua câu hỏi này
     Hint: Gợi ý
     Submit: Trả lời
+
+  user_sessions:
+    new:
+      sign_in_with: Đăng nhập với
+
+  application:
+    need_login: Bạn cần đăng nhập để truy cập vào trang này
+
