@@ -76,4 +76,11 @@ Then /^\w{2,} should not see "([^"]*)"(.*)$/ do |text, scope_definition|
   Then %{I should not see "#{text}"#{scope_definition}}
 end
 
-
+Given /^question submission is delayed$/ do
+  page.execute_script %{
+    $.old_ajax = $.ajax;
+    $.ajax = function(options){
+      if (!/submit_answer$/.test(options.url)) $.old_ajax(options);
+    }
+  }
+end

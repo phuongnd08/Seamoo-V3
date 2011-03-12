@@ -7,6 +7,6 @@ When /^debugging is turned (on|off)/ do |flag|
   Utils::Informer.debugging = (flag == "on")
 end
 
-When /^I wait ([\d\.]+) seconds?$/ do |time|
+When /^\w+ wait for ([\d\.]+) seconds?$/ do |time|
   sleep time.to_f
 end

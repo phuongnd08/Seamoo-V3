@@ -91,6 +91,7 @@ Feature: Match Playing
     And mike should see "Question 3/3"
     And mike should soon be on the match result of first match page
 
+  @screenshot
   Scenario: Rejoin match after leave
     #First make sure both players will be registered in match
     Given mike will confirm "Leave current match?"
@@ -98,3 +99,10 @@ Feature: Match Playing
     Then mike should soon be on the league Amateur page
     When mike match on league Amateur
     Then mike should see "Waiting for other players"
+
+  Scenario: Questions should not be messed up due to match infor updates
+    Given question submission is delayed
+    When mike press "Option #a"
+    Then mike should see "Question 2/3"
+    When mike wait for 2 seconds
+    Then mike should see "Question 2/3"

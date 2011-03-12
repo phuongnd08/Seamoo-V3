@@ -24,10 +24,11 @@
   var currentQuestionPosition;
   var questions = [];
   var counterHandle;
-  var counterTemplate;
   var remainedTime;
   var loadingMoreQuestions = false;
   var questionsLoadedCallback;
+  var statusChanged = false;
+  var currentStatus;
 
   var MAX_RETRIES = 20; 
 
@@ -129,31 +130,32 @@
       setStatus(info.status, info);
       switch (info.status){
         case 'formed':
-          showCounter('formed', info.seconds_until_started);
+          showCounter(info.seconds_until_started);
           break;
         case 'you_finished':
-          showCounter('you_finished', info.seconds_until_ended);
+          showCounter(info.seconds_until_ended);
           break;
         case 'started':
-          showCounter('started', info.seconds_until_ended);
+          showCounter(info.seconds_until_ended);
           break;
       }
     }
 
-    if (info.status == 'started'){
-      currentQuestionPosition = info.current_question_position
-      requestCurrentQuestion(setQuestion);
-    } else clearQuestion();
+    if (statusChanged){
+      if (info.status == 'started'){
+        //switch from no question -> current questions
+        currentQuestionPosition = info.current_question_position
+        requestCurrentQuestion(setQuestion);
+      } else clearQuestion();
+    }
 
     setPlayers(info.players, info.status);
     setTimeout(requestMatchInfo, statusRecheckInterval);
-
   }
 
-  function showCounter(template, time){
+  function showCounter(time){
     if (counterHandle) {clearTimeout(counterHandle);}
     remainedTime = time;
-    counterTemplate = template;
     counterHandle = setTimeout(refreshCounter, 1000); 
   }
 
@@ -163,12 +165,12 @@
     } else {
       remainedTime--;
       var params;
-      if (counterTemplate == 'formed'){
+      if (currentStatus == 'formed'){
         params = { seconds_until_started: remainedTime}
       } else {
         params = { seconds_until_ended: remainedTime}
       }
-      setStatus(counterTemplate, params);
+      setStatus(currentStatus, params);
       counterHandle = setTimeout(refreshCounter, 1000);
     }
   }
@@ -236,6 +238,8 @@
   }
 
   function setStatus(status, params){
+    statusChanged = (status != currentStatus);
+    currentStatus = status;
     if (status == 'finished') {
       window.location = params['match_result_url'];
     } else {
