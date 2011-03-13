@@ -17,7 +17,7 @@ class LeaguesController < ApplicationController
           :@@status => League.send(:class_variable_get, '@@status'), 
           :match_id => match.try(:id),
           :other_active_players => User.find(@league.active_users.map{|u| u[:id]} - [current_user.id]).
-            map{|u| {:display_name => u.display_name}}
+            map{|u| {:display_name => u.display_name, :avatar_url => u.gravatar_url}}
         }
       }
     end

@@ -38,6 +38,7 @@
   var MAX_RETRIES = 20; 
 
   var statusHTML = #{javascript_templates(['waiting', 'formed', 'started', 'you_finished'])};
+  var avatarHTML = #{render(:partial => "users/avatar", :locals => { :avatar_size => '{avatar_size}', :avatar_url => '{avatar_url}', :text => '{text}'}).to_json};
 
   $(function(){ 
     $('#leave_current_match_form').submit(function(){return confirm("Leave current match?");});
@@ -243,6 +244,14 @@
     $('#question #hint').html(parts.join(""));
   }
 
+  function formatString(template, variables){
+    var formatted = template;
+    for (var key in variables){
+      formatted = formatted.replace(new RegExp('{'+key+'}', 'g'), variables[key]);
+    }
+    return formatted;
+  }
+
   function setLeagueOtherActivePlayers(otherActivePlayers){
     if (otherActivePlayers.length == 0){
       $('#league_other_active_players').find('.no_players').show();
@@ -251,8 +260,7 @@
       $('#league_other_active_players').find('.no_players').hide();
       $('#league_other_active_players').find('.list').empty().show();
       $.each(otherActivePlayers, function(index, player){
-        var html = ['<li>', player.display_name, "</li>"];
-        $('#league_other_active_players ul.list').append(html.join(""));
+        $('#league_other_active_players ul.list').append(formatString(avatarHTML, $.extend({}, player, { text: player.display_name, avatar_size: 32 } )));
       });
     }
   }
@@ -263,11 +271,7 @@
     if (status == 'finished') {
       window.location = params['match_result_url'];
     } else {
-      var html = statusHTML[status];
-      for (var key in params){
-        html = html.replace(new RegExp('{'+key+'}', 'g'), params[key]);
-      }
-      $('#status').html(html);
+      $('#status').html(formatString(statusHTML[status], params));
       if (status == "waiting")
         $('#exit, #match_players').hide();
       else
@@ -278,16 +282,16 @@
   function setPlayers(players, status){
     $('#match_players ul.list').empty();
     $.each(players, function(index, player){
-      var text = ['<li>', player.display_name, " "];
+      var text = [player.display_name];
       if (status != 'formed'){
         if (player.current_question_position == questionsPerMatch) {
-          text.push("(finished)");
+          text.push(" (finished)");
         } else {
-          text = text.concat(["(", player.current_question_position + 1, "/", questionsPerMatch, ")"]);
+          text = text.concat([" (", player.current_question_position + 1, "/", questionsPerMatch, ")"]);
         }
       }
-      text.push("</li>");
-      $('#match_players ul.list').append(text.join(""));
+      html = formatString(avatarHTML, $.extend({}, player, { avatar_size: 40, text: text.join("") }));
+      $('#match_players ul.list').append(html);
     });
   }
 

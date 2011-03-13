@@ -1,4 +1,4 @@
-@javascript
+@javascript @screenshot
 Feature: Match Playing
   In order to play match
   As a user
@@ -27,8 +27,7 @@ Feature: Match Playing
     And peter should be able to see "#league_other_active_players .list"
     And peter should see "mike" within "#league_other_active_players"
     When mike match on league Amateur
-    Then mike should see "Match will be started in ? seconds" within "#status"
-    And mike should see "peter" within "#match_players"
+    Then mike should see "peter" within "#match_players"
     And mike should see "mike" within "#match_players"
     #Then start verify the flow
     Given first Amateur match use default questions

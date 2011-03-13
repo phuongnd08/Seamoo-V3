@@ -1,5 +1,5 @@
 After do |scenario|
-  if scenario.source_tag_names.include?("@screenshot")
+  if scenario.failed? && scenario.source_tag_names.include?("@screenshot")
     feature_name = scenario.feature.name.split("\n").first
     path = File.join(Rails.root, 'features', 'screenshots', feature_name.split(' ').join('_').downcase)
     unless File.exists?(path) && File.directory?(path)

@@ -17,6 +17,7 @@ class MatchesController < ApplicationController
         infor[:players] = @match.match_users.map{ |mu| 
           { 
             :display_name => mu.user.display_name, 
+            :avatar_url => mu.user.gravatar_url,
             :current_question_position => mu.current_question_position
           } 
         }
