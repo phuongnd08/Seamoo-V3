@@ -1,4 +1,4 @@
-@javascript @screenshot
+@javascript @screenshot @focus
 Feature: Match Playing
   In order to play match
   As a user

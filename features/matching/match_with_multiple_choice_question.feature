@@ -1,4 +1,4 @@
-@javascript @focus
+@javascript
 Feature: Match using multiple choice question
   In order to play match
   As a user

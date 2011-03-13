@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe Bot do
+  describe "avatar" do
+    it "should have gravatar like users" do
+      Bot.new(:email => "bot@seamoo.com").gravatar_url.should_not be_nil
+    end
+  end
+
   describe "awake new" do
     it "should awake new bot" do
       Matching.stub(:bot_names).and_return(["abc", "xyz"])

@@ -1,16 +1,16 @@
 %h1= @match.league.name
 %h2= t '.result'
 %h3= t '.ranking'
-%ul
+%ol
   - @match.ranked_match_users.each_with_index do |match_user, index|
-    %li 
-      #{index+1}. 
+    - text = capture do
       - if match_user.user == current_user
         %strong= t '.You'
         (#{match_user.user.display_name})
       - else
         #{match_user.user.display_name}
       \- #{match_user.score_as_percent}% #{t '.correct'}
+    = render :partial => 'users/avatar', :locals => { :avatar_url => match_user.user.gravatar_url, :text => text, :avatar_size => 40 }
 %h3= t '.Questions'
 %ol
   - @match.questions.each_with_index do |question, qidx|

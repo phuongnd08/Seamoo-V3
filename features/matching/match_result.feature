@@ -20,8 +20,8 @@ Feature: Match Result
 
   Scenario: Peter viewing match result
     When peter go to the match page
-    Then peter should see "1. You (peter) - 67% correct"
-    And peter should see "2. mike - 33% correct"
+    Then peter should see "You (peter) - 67% correct"
+    And peter should see "mike - 33% correct"
     And peter should see "Question #1"
     And peter should see "You: Option #a - correct"
     And peter should see "mike: Option #a - correct"
@@ -35,8 +35,8 @@ Feature: Match Result
 
   Scenario: Eric viewing match result
     When eric go to the match page
-    Then eric should see "1. peter - 67% correct"
-    And eric should see "2. mike - 33% correct"
+    Then eric should see "peter - 67% correct"
+    And eric should see "mike - 33% correct"
     And eric should see "Question #1"
     And eric should see "peter: correct"
     And eric should see "mike: correct"

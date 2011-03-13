@@ -1,4 +1,7 @@
 class Bot < User
+  include Gravtastic
+  gravtastic :default => Styling.default_gravatar
+
   {
     :data => :type
   }.each do |field, identifier|

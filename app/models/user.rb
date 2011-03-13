@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   include Gravtastic
-  gravtastic :default => 'wavatar'
+  gravtastic :default => Styling.default_gravatar
   acts_as_authentic do |c|
   end
 

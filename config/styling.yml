@@ -1,0 +1,7 @@
+development: &development
+  default_gravatar: wavatar
+test: 
+  <<: *development
+
+production: 
+  <<: *development
