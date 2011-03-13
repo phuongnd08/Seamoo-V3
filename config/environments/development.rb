@@ -21,6 +21,7 @@ SeamooV3::Application.configure do
   config.active_support.deprecation = :log
 
   config.i18n.fallbacks = false
+  config.i18n.default_locale = :vi
 
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin

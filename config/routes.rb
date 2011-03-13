@@ -29,6 +29,8 @@ SeamooV3::Application.routes.draw do
       end
     end
 
+    resources :users
+
     match 'signin' => 'user_sessions#new', :as => :signin
     match 'signout' => 'user_sessions#destroy', :as => :signout
   end

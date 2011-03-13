@@ -17,3 +17,126 @@
 .clear{
   clear: both;
 }
+
+.site_name .first {
+  color: #008fe0;
+}
+
+.site_name .last {
+  color: #ff9600;
+}
+
+.option_box {
+  width: 40%;
+  min-height: 100px;
+  border: solid 2px silver;
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: top;
+  margin: 5px;
+}
+
+.description_box {
+  margin: 5px;
+  padding: 5px;
+  border: solid 1px silver;
+}
+
+.hw {
+  width: 50%;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+  margin: 5px;
+}
+
+.sc {
+  padding-left: 50px;
+}
+
+.ib {
+  display: inline-block;
+}
+
+.tar {
+  text-align: right;
+}
+
+.tac {
+  text-align: center;
+}
+
+table.fw td,table.fw th {
+  padding: 5px;
+}
+
+table.grid td {
+  border: solid 1px silver;
+}
+
+table.grid th {
+  border: solid 1px silver;
+}
+
+td.logo-cell {
+  width: 96px;
+}
+
+.user-gravatar64 {
+  width: 64px;
+  height: 64px;
+}
+
+.user-gravatar128 {
+  width: 128px;
+  height: 128px;
+}
+
+.user-about {
+  background: silver;
+}
+
+.question-personal-info {
+  padding-left: 30px;
+  font-style: italic;
+}
+
+.answer-correct {
+  display: inline-block;
+  background: url(images/answer-correct.png) no-repeat center center;
+  width: 16px;
+  height: 16px;
+}
+
+.answer-wrong {
+  display: inline-block;
+  background: url(images/answer-wrong.png) no-repeat center center;
+  width: 16px;
+  height: 16px;
+}
+
+.answer-ignore {
+  display: inline-block;
+  background: url(images/answer-ignore.png) no-repeat center center;
+  width: 16px;
+  height: 16px;
+}
+
+.answer-review-grade-column {
+  width: 50px;
+  text-align: center;
+}
+
+.match-review-answer-content {
+  font-weight: bold;
+}
+
+.match-review-answer-time {
+  background: #c0c0c0;
+  font-style: italic;
+}

@@ -4,7 +4,16 @@
 vi:
   layouts:
     application:
-      hello: Xin chào, %{name}
+      competition_system: Hệ thống thi đấu
+      users: Thành viên
+      training: Luyện tập
+
+    header:
+      hello: xin chào,
+      competition_system: Hệ thống thi đấu
+      users: Thành viên
+      training: Luyện tập
+
 
   matches:
     match_finished: Trận đấu đã kết thúc
@@ -42,10 +51,12 @@ vi:
 
   application:
     need_login: Bạn cần đăng nhập để truy cập vào trang này
+    signin: đăng nhập
+    signout: đăng xuất
 
   home:
     index:
-      fields_of_tournament: Những nội dung thuộc hệ thống thi đấu %{site_name}
+      competition_system: Hệ thống thi đấu của %{site_name}
   
   common:
     join_now: Tham gia ngay

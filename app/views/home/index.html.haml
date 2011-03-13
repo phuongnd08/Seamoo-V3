@@ -1,11 +1,21 @@
-%h3= raw(t ".fields_of_tournament", :site_name => site_name)
+%h2= raw(t ".competition_system", :site_name => site_name)
 - @categories.each do |category|
-  .category{:id => category.dom_name, :class => category.status}
-    .header
-      - if category.available?
-        = link_to category.name, category
-      - else
-        = category.name
-    .description= category.description
-    - if category.available?
-      .main_link= link_to t('common.join_now'), category
+  %div{:id => category.dom_name, :class => "option_box #{category.status}"}
+    %table.fw
+      %tr
+        %td
+          - img = image_tag category.image
+          - if category.available?
+            = link_to img, category
+          - else
+            = img
+        %td
+          %div
+            - if category.available?
+              = link_to category.name, category
+            - else
+              = category.name
+          %div
+            .description= category.description
+            - if category.available?
+              .main_link= link_to t('common.join_now'), category  

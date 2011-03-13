@@ -8,8 +8,8 @@ Feature: Switch between locales
 
   Scenario: Switch back and forth between English & Vietnamese
     When mike go to the home page
-    Then mike should see "Hello, mike"
+    Then mike should see "hello, mike"
     When mike follow "Tiếng Việt"
-    Then mike should see "Xin chào, mike"
+    Then mike should see "xin chào, mike"
     When mike follow "English"
-    Then mike should see "Hello, mike"
+    Then mike should see "hello, mike"

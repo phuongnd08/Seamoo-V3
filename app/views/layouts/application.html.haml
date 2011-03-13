@@ -1,19 +1,21 @@
-!!!
+!!! Strict
 %html
   %head
-    %title SeamooV3
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title #{@title.present? ? "#{@title} - " : ""}dautri.net
+    %link{:href => "${themeRoot}/all.css", :rel => "stylesheet"}/
     = stylesheet_link_tag :all
     = javascript_include_tag :defaults
     = csrf_meta_tag
   %body
-    .tar.fr
-      = link_to "English", url_for(params.merge({:locale => :en, :only_path => true}))
-      |
-      = link_to "Tiếng Việt", url_for(params.merge({:locale => :vi, :only_path => true}))
-    - if current_user
-      %h3= t '.hello', :name => current_user.display_name
-    .clear
-    - if (flash[:notice])
-      %div{:style => 'border: solid 1px'}
-        = flash[:notice]
-    = yield
+    = render :partial => 'layouts/notifier'
+    %br/
+    .container
+      = render :partial => 'layouts/header'
+      #content-wrapper
+        - if @title.present?
+          #content-header
+            %h2
+              %a.question-hyperlink{:href => "#", :onclick => "window.location.reload(); return false;"}= @title
+        = yield
+      = render :partial => 'layouts/footer'

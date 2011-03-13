@@ -1,5 +1,6 @@
 Factory.define :category do |s|
   s.sequence(:name) {|n| "Category #{n}"}
+  s.sequence(:image) {|n| "categories/#{n}.png"}
 end
 
 Factory.define :active_category, :parent => :category do |s|

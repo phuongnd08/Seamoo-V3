@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110313100744) do
+ActiveRecord::Schema.define(:version => 20110313162852) do
 
   create_table "authorizations", :force => true do |t|
     t.integer  "user_id"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(:version => 20110313100744) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "status",      :default => "active"
+    t.string   "image"
   end
 
   create_table "debugger_signals", :force => true do |t|

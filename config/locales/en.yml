@@ -4,7 +4,11 @@
 en:
   layouts:
     application:
-      hello: Hello, %{name}
+    header:
+      hello: hello,
+      competition_system: Competition System
+      users: Users
+      training: Training
 
   matches:
     match_finished: The match is finished
@@ -42,10 +46,12 @@ en:
 
   application:
     need_login: You need to login in order to access this page
+    signin: sign in
+    signout: sign out
 
   home:
     index:
-      fields_of_tournament: Fields of %{site_name} tournament
+      competition_system: Competition system of %{site_name}
 
   common:
     join_now: Join now

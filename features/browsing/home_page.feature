@@ -10,7 +10,7 @@ Feature: Home Page
     And I am on the home page
 
   Scenario: Introduction
-    Then I should see "Fields of dautri.net tournament"
+    Then I should see "Competition system of dautri.net"
 
   Scenario: See And Follow Active Categories Headers
     Then I should see "Language"

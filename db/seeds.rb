@@ -5,8 +5,25 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
-english = Category.create!(:alias => 'english', :name=>'English', :description => 'Thử sức sự thành thạo Anh ngữ của bạn')
-math = Category.create!(:alias => 'math', :name=>'Toán', :description => 'Thử sức kĩ năng toán học của bạn')
+english = Category.create!(
+  :alias => 'english', 
+  :name=>'English', 
+  :description => %{Bạn biết và nhận diện bao nhiêu từ tiếng Anh? 
+    Bạn có thể nghe, ráp một câu tiếng anh hoàn chỉnh? 
+    Câu trả lời sẽ có ở đây},
+  :image => 'categories/english.png'
+)
+
+math = Category.create!(
+  :alias => 'math', 
+  :name=>'Toán', 
+  :description => %{Bạn am hiểu bao nhiêu nguyên lí toán học? 
+    Tốc độ phán đoán và luận logic của bạn? 
+    Câu trả lời sẽ có ở đây},
+  :image => 'categories/math.png',
+  :status => 'coming_soon'
+)
+
 League.create!(:category => english, :alias => 'english_eggs', :name => 'Eggs', :description => 'Dành cho người mới bắt đầu', :level => 0)
 League.create!(:category => english, :alias => 'english_chick', :name => 'Chicks', :description => 'Dành cho người khá', :level => 1)
 League.create!(:category => english, :alias => 'english_chicken', :name => 'Chicken', :description => 'Dành cho người giỏi', :level => 2)
