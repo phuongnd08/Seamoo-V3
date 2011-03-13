@@ -43,3 +43,11 @@ vi:
   application:
     need_login: Bạn cần đăng nhập để truy cập vào trang này
 
+  home:
+    index:
+      fields_of_tournament: Những nội dung thuộc hệ thống thi đấu %{site_name}
+  
+  common:
+    join_now: Tham gia ngay
+
+  

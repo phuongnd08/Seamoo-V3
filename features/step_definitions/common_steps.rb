@@ -84,3 +84,7 @@ Given /^question submission is delayed$/ do
     }
   }
 end
+
+Then /^"([^"]*)" is not a link$/ do |text|
+  page.should have_no_xpath(XPath::HTML.link(text))
+end

@@ -1,13 +1,11 @@
-%h1 Introduction
-%table
-  %tr
-    %th Name
-    %th Description
-    %th
-    %th
-    %th
-
-  - @categories.each do |category|
-    %tr
-      %td= link_to category.name, category
-%br
+%h3= raw(t ".fields_of_tournament", :site_name => site_name)
+- @categories.each do |category|
+  .category{:id => category.dom_name, :class => category.status}
+    .header
+      - if category.available?
+        = link_to category.name, category
+      - else
+        = category.name
+    .description= category.description
+    - if category.available?
+      .main_link= link_to t('common.join_now'), category

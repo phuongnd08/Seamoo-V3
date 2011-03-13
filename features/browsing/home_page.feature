@@ -1,16 +1,26 @@
+@javascript
 Feature: Home Page
-In order to know what SeaMoo is about
-As a visitor
-I would like to see introduction and link
+  In order to know what SeaMoo is about
+  As a visitor
+  I would like to see introduction and link
 
-Background:
-    Given There is a category named "Math"
+  Background:
+    Given a coming soon category: "math" exists with name: "Math"
+    And an active category: "language" exists with name: "Language"
     And I am on the home page
 
-Scenario: Introduction
-    Then I should see "Introduction"
+  Scenario: Introduction
+    Then I should see "Fields of dautri.net tournament"
 
-Scenario: See And Follow Categories
+  Scenario: See And Follow Active Categories Headers
+    Then I should see "Language"
+    When I follow "Language"
+    Then I should be on the category: "language" page
+
+  Scenario: See And Follow Active Categories Main Links
+    When I follow "Join now" within "#language"
+    Then I should be on the category: "language" page
+
+  Scenario: Coming soon category is unnavigatable
     Then I should see "Math"
-    When I follow "Math"
-    Then I should be on the category Math page
+    And "Math" is not a link

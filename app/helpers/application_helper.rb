@@ -10,4 +10,8 @@ module ApplicationHelper
     end
     link_to_function(name, raw("addFields(this, \"#{association}\", \"#{escape_javascript(fields)}\")"))
   end
+
+  def site_name
+    render('misc/site_name')
+  end
 end

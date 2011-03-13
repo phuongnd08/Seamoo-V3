@@ -43,4 +43,11 @@ en:
   application:
     need_login: You need to login in order to access this page
 
+  home:
+    index:
+      fields_of_tournament: Fields of %{site_name} tournament
+
+  common:
+    join_now: Join now
+
     
