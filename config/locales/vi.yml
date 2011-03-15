@@ -56,7 +56,7 @@ vi:
 
   home:
     index:
-      competition_system: Hệ thống thi đấu của %{site_name}
+      competition_system: Hệ thống thi đấu
   
   common:
     join_now: Tham gia ngay

@@ -1,0 +1,8 @@
+- content_for :content do
+  #left-sidebar{ :style => "width: 220px;" }
+    = yield :left
+  #mainbar
+    #content
+      .page-description
+        = yield
+= render :file => 'layouts/application'

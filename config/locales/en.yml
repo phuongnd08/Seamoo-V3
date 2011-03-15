@@ -51,7 +51,7 @@ en:
 
   home:
     index:
-      competition_system: Competition system of %{site_name}
+      competition_system: Competition system
 
   common:
     join_now: Join now

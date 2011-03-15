@@ -1,6 +1,9 @@
-%h1= @category.name
-%b Description:
-= @category.description
+- content_for :left do
+  .module
+    .description-box
+      = image_tag @category.image, :class => 'fl', :size => "96x64"
+    %p= @category.description
+- @title = @category.name
 %ul
   - @category.leagues.each do |league|
     %li= link_to league.name, league

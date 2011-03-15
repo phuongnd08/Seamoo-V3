@@ -3,7 +3,6 @@
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title #{@title.present? ? "#{@title} - " : ""}dautri.net
-    %link{:href => "${themeRoot}/all.css", :rel => "stylesheet"}/
     = stylesheet_link_tag :all
     = javascript_include_tag :defaults
     = csrf_meta_tag
@@ -16,6 +15,15 @@
         - if @title.present?
           #content-header
             %h2
-              %a.question-hyperlink{:href => "#", :onclick => "window.location.reload(); return false;"}= @title
-        = yield
+              = link_to @title, "#", :class => "reload"
+
+        = content_for?(:content) ? yield(:content) : yield
       = render :partial => 'layouts/footer'
+
+  :javascript
+    $(function(){
+      $('.reload').click(function(){ 
+        window.location.reload(); 
+        return false;
+      });
+    });
