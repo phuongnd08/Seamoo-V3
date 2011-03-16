@@ -1,14 +1,15 @@
+@javascript
 Feature: Home Page
-In order to know what leagues a category contains
-As a visitor
-I would like to see link
+  In order to know what leagues a category contains
+  As a visitor
+  I would like to see link
 
-Background:
-    Given There is a category named "Math"
-    And There is a league named "Intermediate" in "Math"
-    When I am on the category Math page
+  Background:
+    Given a category: "math" exists with name: "Math"
+    And a league: "intermediate" exists with name: "Intermediate", category: category "math"
+    When I am on the category: "math" page
 
-Scenario: See And Follow League
+  Scenario: See And Follow League
     Then I should see "Intermediate"
     When I follow "Intermediate"
-    Then I should be on the league Intermediate page
+    Then I should be on the league: "intermediate" page

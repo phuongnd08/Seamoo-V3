@@ -11,7 +11,7 @@ Feature: Match using multiple choice question
     And category English is available
     And league Amateur of English is openning
     And league Amateur has 3 multiple choice questions
-    And all match will immediately start
+    And all matches will immediately start
     And all data is fresh
     #First make sure both players will be registered in match and the preferred questions loaded
     When mike match on league Amateur

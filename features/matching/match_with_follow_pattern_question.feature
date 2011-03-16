@@ -11,7 +11,7 @@ Feature: Match using follow pattern question
     And category English is available
     And league Amateur of English is openning
     And league Amateur has 3 follow pattern questions 
-    And all match will immediately start
+    And all matches will immediately start
     And all data is fresh
     When mike match on league Amateur
     Then mike should see "Waiting for other players"

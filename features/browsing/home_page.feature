@@ -10,7 +10,7 @@ Feature: Home Page
     And I am on the home page
 
   Scenario: Introduction
-    Then I should see "Competition system of dautri.net"
+    Then I should see "Competition system"
 
   Scenario: See And Follow Active Categories Headers
     Then I should see "Language"

@@ -145,6 +145,8 @@
         case 'started':
           showCounter(info.seconds_until_ended);
           break;
+        default:
+          stopCounter();
       }
     }
 
@@ -160,8 +162,12 @@
     setTimeout(requestMatchInfo, statusRecheckInterval);
   }
 
-  function showCounter(time){
+  function stopCounter(){
     if (counterHandle) {clearTimeout(counterHandle);}
+  }
+
+  function showCounter(time){
+    stopCounter();
     remainedTime = time;
     counterHandle = setTimeout(refreshCounter, 1000); 
   }

@@ -12,29 +12,20 @@ Feature: Match Playing
     And league Amateur of English is openning
     And league Amateur has 3 questions
     And all data is fresh
+    And all matches will immediately start
     #First make sure both players will be registered in match
     When mike match on league Amateur
     Then mike should see "Waiting for other players"
-    And mike should not be able to see "#exit"
-    And mike should not be able to see "#match_players"
-    And mike should be able to see "#league_other_active_players .no_players"
-    And mike should not be able to see "#league_other_active_players .list"
     When peter match on league Amateur
-    Then peter should see "Match will be started in ? seconds" within "#status"
-    And peter should be able to see "#exit"
-    And peter should be able to see "#match_players"
-    And peter should not be able to see "#league_other_active_players .no_players"
-    And peter should be able to see "#league_other_active_players .list"
-    And peter should see "mike" within "#league_other_active_players"
-    When mike match on league Amateur
-    Then mike should see "peter" within "#match_players"
-    And mike should see "mike" within "#match_players"
-    #Then start verify the flow
+    Then peter should see "Match started" within "#status"
+    #Second make sure match use predictable questions
     Given first Amateur match use default questions
+    When mike match on league Amateur
+    Then mike should see "Match started" within "#status"
+    #Then start verify the flow
 
   Scenario: Normal matching flow
-    Then mike should see "Match started" within "#status"
-    And mike should see "There are ? seconds left" within "#status"
+    Then mike should see "There are ? seconds left" within "#status"
     And mike should see "Question 1/3"
     And mike should see "Question #1"
     And mike should see "peter (1/3)"

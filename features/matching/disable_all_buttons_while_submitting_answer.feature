@@ -11,7 +11,7 @@ Feature: Disable al buttons while submitting answer
     And category English is available
     And league Amateur of English is openning
     And all data is fresh
-    And all match will immediately start
+    And all matches will immediately start
     
   Scenario: Disable buttons for multiple choice
     Given league Amateur has 3 multiple choice questions

@@ -159,8 +159,12 @@ When /^(\w+) request to leave his current (\w+) match$/ do |username, league_nam
   league.leave_current_match(user.id)
 end
 
-Given /^all match will immediately start$/ do
-  Matching.stub(:started_after).and_return(0)
+Given /^all matches will be started after (\d+) seconds$/ do |seconds|
+  Matching.stub(:started_after).and_return(seconds.to_f)
+end
+
+Given /^all matches will immediately start$/ do
+  Given %{all matches will be started after 0 seconds}
 end
 
 When /^\w{2,} fill in "([^"]*)" with "([^"]*)"$/ do |selector, value|
