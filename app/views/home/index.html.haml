@@ -3,18 +3,11 @@
   .option_box{:id => category.dom_name}
     %table.fw
       %tr
+        %td.logo_cell
+          - img = image_tag category.image, :size => "96x64"
+          = category.available? ? link_to(img, category) : img
         %td
-          - img = image_tag category.image
-          - if category.available?
-            = link_to img, category
-          - else
-            = img
-        %td
-          %div
-            - if category.available?
-              = link_to category.name, category
-            - else
-              = category.name
+          %div= category.available? ? link_to(category.name, category) : category.name
           %div
             .description= category.description
             - if category.available?

@@ -1,6 +1,11 @@
 class League < ActiveRecord::Base
   belongs_to :category
   has_many :matches
+  validates :status, :inclusion => { :in => ['active', 'coming_soon'] }
+
+  def available?
+    self.status == 'active'
+  end
 
   def add_user_to_match(match_id, user_id)
     if match_id.present? && Match.find(match_id).finished?

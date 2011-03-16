@@ -96,60 +96,46 @@ table.grid th {
   border: solid 1px silver;
 }
 
-td.logo-cell {
+td.logo_cell {
   width: 96px;
 }
 
-.user-gravatar64 {
+.user_gravatar64 {
   width: 64px;
   height: 64px;
 }
 
-.user-gravatar128 {
+.user_gravatar128 {
   width: 128px;
   height: 128px;
 }
 
-.user-about {
+.user_about {
   background: silver;
 }
 
-.question-personal-info {
+.question_personal_info {
   padding-left: 30px;
   font-style: italic;
 }
 
-.answer-correct {
+.answer_correct {
   display: inline-block;
   background: url(images/answer-correct.png) no-repeat center center;
   width: 16px;
   height: 16px;
 }
 
-.answer-wrong {
+.answer_wrong {
   display: inline-block;
   background: url(images/answer-wrong.png) no-repeat center center;
   width: 16px;
   height: 16px;
 }
 
-.answer-ignore {
+.answer_ignore {
   display: inline-block;
   background: url(images/answer-ignore.png) no-repeat center center;
   width: 16px;
   height: 16px;
-}
-
-.answer-review-grade-column {
-  width: 50px;
-  text-align: center;
-}
-
-.match-review-answer-content {
-  font-weight: bold;
-}
-
-.match-review-answer-time {
-  background: #c0c0c0;
-  font-style: italic;
 }

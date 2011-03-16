@@ -24,19 +24,56 @@ math = Category.create!(
   :status => 'coming_soon'
 )
 
-League.create!(:category => english, :alias => 'english_eggs', :name => 'Eggs', :description => 'Dành cho người mới bắt đầu', :level => 0)
-League.create!(:category => english, :alias => 'english_chick', :name => 'Chicks', :description => 'Dành cho người khá', :level => 1)
-League.create!(:category => english, :alias => 'english_chicken', :name => 'Chicken', :description => 'Dành cho người giỏi', :level => 2)
-League.create!(:category => english, :alias => 'english_eagle', :name => 'Eagle', :description => 'Dành cho người RẤT giỏi', :level => 3)
+League.create!(
+  :category => english, 
+  :alias => 'english_eggs',
+  :name => 'Basic English',
+  :description => 'Dành cho người mới bắt đầu',
+  :image => 'leagues/eng-eggs.png',
+  :level => 0
+)
+
+League.create!(
+  :category => english,
+  :alias => 'english_chick',
+  :name => 'Intermediate English',
+  :description => 'Dành cho người khá',
+  :image => 'leagues/eng-chick.png',
+  :level => 1,
+  :status => 'coming_soon'
+)
+
+League.create!(
+  :category => english,
+  :alias => 'english_rooster',
+  :name => 'Advanced English',
+  :description => 'Dành cho người giỏi',
+  :image => 'leagues/eng-rooster.png',
+  :level => 2,
+  :status => 'coming_soon'
+)
+
+League.create!(
+  :category => english,
+  :alias => 'english_eagle',
+  :name => 'Pro English',
+  :description => 'Dành cho người *pro',
+  :image => 'leagues/eng-eagle.png',
+  :level => 3,
+  :status => 'coming_soon'
+)
+
 Question.create_multiple_choices(
   "What's your name", 
   {'phuong' => true, 'trien' => false, 'toan' => false}, 
   {:category => english, :level => 0}
 )
+
 Question.create_follow_pattern(
   "My name", 'ph[uo]ng ng[uy]en', 
   {:category => english, :level => 0}
 )
+
 Question.create_multiple_choices(
   "What's your best friend name", 
   {'thuc' => true, 'trien' => false, 'toan' => false}, 

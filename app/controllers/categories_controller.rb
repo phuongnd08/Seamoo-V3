@@ -1,5 +1,4 @@
 class CategoriesController < ApplicationController
-  layout 'fixed_left'
 
   def index
     @categories = Category.all
@@ -7,5 +6,6 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find(params[:id])
+    render :layout => 'fixed_left'
   end
 end

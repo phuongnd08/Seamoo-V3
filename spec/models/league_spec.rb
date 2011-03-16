@@ -133,4 +133,12 @@ describe League do
       @league.random_questions(3).to_set.should == @questions.to_set
     end
   end
+
+  describe "status" do
+    it "should only accept certain values" do
+      League.new(:status => "active").should be_valid
+      League.new(:status => "coming_soon").should be_valid
+      League.new(:status => "else").should_not be_valid
+    end
+  end
 end

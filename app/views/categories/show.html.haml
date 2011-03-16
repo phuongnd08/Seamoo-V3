@@ -1,10 +1,20 @@
+- @title = @category.name
 - content_for :left do
   .module
-    .description-box
+    .description_box
       = image_tag @category.image, :class => 'fl', :size => "96x64"
-    %p= @category.description
-- @title = @category.name
+      %p= @category.description
+      .cbt
 %ul
   - @category.leagues.each do |league|
-    %li= link_to league.name, league
-= link_to 'Back', categories_path
+    .option_box
+      %table.fw
+        %tr
+          %td.logo-cell
+            - img = image_tag(league.image, :size => "96x64")
+            = league.available? ? link_to(img, league) : img
+          %td
+            %div= league.available? ? link_to(league.name, league) : league.name
+            %div= league.description
+      - unless league.available?
+        .coming_soon{:style => "background-image: url('/stylesheets/imgs/coming_soon_#{I18n.locale}.png');"}
