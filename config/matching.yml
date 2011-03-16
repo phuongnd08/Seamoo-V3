@@ -1,12 +1,12 @@
 development: &development
   requester_stale_after: 50
-  user_inactive_after: 200
+  user_inactive_after: 400
   started_after: 5
   ended_after: 150
   questions_per_match: 3
   users_per_match: 4
   waiting_slots_size: 10 # this slots size used to calculate number of users waiting for match, so that auto bot can be launched
-  active_slots_size: 20 # this slots size used to store 20 very last active users of league
+  active_slots_size: 50 # this slots size used to store 50 very last active users of league
   questions_per_cache_block: 5 # number of questions will be preloaded in order to make sure user always have smooth experience doing match
   questions_refill_threshold: 3 # number of un-used questions remain in the cache to force another cache request
   status_recheck_interval: 1
