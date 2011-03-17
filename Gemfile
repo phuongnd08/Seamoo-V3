@@ -14,6 +14,9 @@ gem "dalli"
 gem "delayed_job"
 gem "settingslogic"
 gem "gravtastic"
+gem "sass"
+gem "compass"
+gem "compass-susy-plugin"
 
 # Use unicorn as the web server
 # gem 'unicorn'

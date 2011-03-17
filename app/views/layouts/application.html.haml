@@ -3,21 +3,22 @@
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title #{@title.present? ? "#{@title} - " : ""}dautri.net
-    = stylesheet_link_tag :all
+    = stylesheet_link_tag 'compiled/screen.css', :media => 'screen, projection'
+    = stylesheet_link_tag 'compiled/print.css', :media => 'print'
+    = stylesheet_link_tag 'compiled/ie.css', :media => 'screen, projection'
+    -#= stylesheet_link_tag :all
     = javascript_include_tag :defaults
     = csrf_meta_tag
   %body
-    = render :partial => 'layouts/notifier'
-    %br/
     .container
+      = render :partial => 'layouts/notifier'
+      %br/
       = render :partial => 'layouts/header'
-      #content-wrapper
+      .span-24.last
         - if @title.present?
           #content-header
-            %h2
-              = link_to @title, "#", :class => "reload"
-
-        = content_for?(:content) ? yield(:content) : yield
+            %h2= link_to @title, "#", :class => "reload"
+          = content_for?(:content) ? yield(:content) : yield
       = render :partial => 'layouts/footer'
 
   :javascript
