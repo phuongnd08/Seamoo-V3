@@ -72,6 +72,10 @@ GEM
     childprocess (0.1.4)
       ffi (~> 0.6.3)
     columnize (0.3.2)
+    compass (0.10.6)
+      haml (>= 3.0.4)
+    compass-susy-plugin (0.8.1)
+      compass (>= 0.10.0)
     configuration (1.2.0)
     crack (0.1.8)
     cucumber (0.9.4)
@@ -224,6 +228,7 @@ GEM
       ruby-openid (>= 2.1.7)
     rubyntlm (0.1.1)
     rubyzip (0.9.4)
+    sass (3.1.0.alpha.249)
     selenium-webdriver (0.1.0)
       childprocess (= 0.1.4)
       ffi (~> 0.6.3)
@@ -250,6 +255,8 @@ PLATFORMS
 DEPENDENCIES
   authlogic
   capybara!
+  compass
+  compass-susy-plugin
   cucumber
   cucumber-rails!
   dalli
@@ -272,6 +279,7 @@ DEPENDENCIES
   rspec (>= 2.0.0.beta.22)
   rspec-rails (>= 2.0.0.beta.22)
   ruby-debug
+  sass
   settingslogic
   shoulda
   spork
