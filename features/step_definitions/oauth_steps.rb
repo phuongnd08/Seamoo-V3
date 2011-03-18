@@ -13,10 +13,17 @@ Given /^I am recognized as open id user "([^"]*)" at "([^"]*)"$/ do |name, provi
   }
 end
 
-Given /^I am logged in Facebook as "([^"]*)"$/ do |account|
-  email, password = account.split("/")
-  visit "http://www.facebook.com"
-  fill_in("email", :with => email)
-  fill_in("pass", :with => password)
-  click_button("Login")
+Given /^I am recognized as facebook user "([^"]*)"$/ do |name|
+  id = name.split(" ").join(".").downcase
+  first_name, last_name = name.split(" ")
+  OmniAuth.config.mock_auth[:facebook] = {
+    "user_info"=>{
+      "name" => name,
+      "last_name" => last_name,
+      "first_name" => first_name,
+      "email" => "#{id}@fbmail.com"
+    }, 
+    "uid" => id,
+    "provider" => "facebook"
+  }
 end

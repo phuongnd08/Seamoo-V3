@@ -18,7 +18,7 @@
         - if @title.present?
           #content-header
             %h2= link_to @title, "#", :class => "reload"
-          = content_for?(:content) ? yield(:content) : yield
+        = content_for?(:content) ? yield(:content) : yield
       = render :partial => 'layouts/footer'
 
   :javascript
