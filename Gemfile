@@ -17,6 +17,7 @@ gem "gravtastic"
 gem "sass"
 gem "compass"
 gem "compass-susy-plugin"
+gem "compass-colors"
 
 # Use unicorn as the web server
 # gem 'unicorn'

@@ -119,21 +119,21 @@ body {
 /* line 55, ../../../app/stylesheets/_defaults.sass */
 ::-moz-selection {
   color: white;
-  background: #005498;
+  background: #008fe0;
   text-shadow: none;
 }
 
 /* line 60, ../../../app/stylesheets/_defaults.sass */
 ::selection {
   color: white;
-  background: #005498;
+  background: #008fe0;
   text-shadow: none;
 }
 
 /* Links -------------------------------------------------------------- */
 /* line 68, ../../../app/stylesheets/_defaults.sass */
 a:link, a:visited {
-  color: #005498;
+  color: #008fe0;
 }
 /* line 70, ../../../app/stylesheets/_defaults.sass */
 a:link, a:visited, a:hover, a:active {
@@ -141,7 +141,7 @@ a:link, a:visited, a:hover, a:active {
 }
 /* line 72, ../../../app/stylesheets/_defaults.sass */
 a:focus, a:hover, a:active {
-  color: #984400;
+  color: #e05100;
   text-decoration: none;
 }
 /* line 75, ../../../app/stylesheets/_defaults.sass */
@@ -426,7 +426,7 @@ html > body {
   font-size: 16px;
 }
 
-/* line 13, ../../../app/stylesheets/screen.sass */
+/* line 14, ../../../app/stylesheets/screen.sass */
 .container {
   *zoom: 1;
   margin-left: auto;
@@ -445,6 +445,54 @@ html > body {
   clear: both;
   overflow: hidden;
   visibility: hidden;
+}
+
+/* line 18, ../../../app/stylesheets/screen.sass */
+.notice {
+  clear: both;
+  margin-right: 1.639%;
+  margin-left: 1.639%;
+  border: solid 2px;
+  border-color: #cccccc;
+  background-color: #8c8c8c;
+  color: #61c6ff;
+  text-align: center;
+}
+
+/* line 26, ../../../app/stylesheets/screen.sass */
+.header {
+  clear: both;
+  margin-right: 1.639%;
+  margin-left: 1.639%;
+}
+/* line 28, ../../../app/stylesheets/screen.sass */
+.header .logo {
+  display: inline;
+  float: left;
+  width: 32.203%;
+  margin-right: 1.695%;
+}
+/* line 30, ../../../app/stylesheets/screen.sass */
+.header .topbar {
+  display: inline;
+  float: left;
+  width: 66.102%;
+  margin-right: 1.695%;
+  display: inline;
+  float: right;
+  margin-right: 0;
+  #margin-left: -1em;
+}
+/* line 33, ../../../app/stylesheets/screen.sass */
+.header .hmenus {
+  display: inline;
+  float: left;
+  width: 66.102%;
+  margin-right: 1.695%;
+  display: inline;
+  float: right;
+  margin-right: 0;
+  #margin-left: -1em;
 }
 
 /* Styles -------------------------------------------------------------- */

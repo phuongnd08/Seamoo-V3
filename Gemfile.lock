@@ -74,6 +74,8 @@ GEM
     columnize (0.3.2)
     compass (0.10.6)
       haml (>= 3.0.4)
+    compass-colors (0.3.1)
+      compass (>= 0.8.7)
     compass-susy-plugin (0.8.1)
       compass (>= 0.10.0)
     configuration (1.2.0)
@@ -256,6 +258,7 @@ DEPENDENCIES
   authlogic
   capybara!
   compass
+  compass-colors
   compass-susy-plugin
   cucumber
   cucumber-rails!

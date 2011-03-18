@@ -119,21 +119,21 @@ body {
 /* line 55, ../../../app/stylesheets/_defaults.sass */
 ::-moz-selection {
   color: white;
-  background: #005498;
+  background: #008fe0;
   text-shadow: none;
 }
 
 /* line 60, ../../../app/stylesheets/_defaults.sass */
 ::selection {
   color: white;
-  background: #005498;
+  background: #008fe0;
   text-shadow: none;
 }
 
 /* Links -------------------------------------------------------------- */
 /* line 68, ../../../app/stylesheets/_defaults.sass */
 a:link, a:visited {
-  color: #005498;
+  color: #008fe0;
 }
 /* line 70, ../../../app/stylesheets/_defaults.sass */
 a:link, a:visited, a:hover, a:active {
@@ -141,7 +141,7 @@ a:link, a:visited, a:hover, a:active {
 }
 /* line 72, ../../../app/stylesheets/_defaults.sass */
 a:focus, a:hover, a:active {
-  color: #984400;
+  color: #e05100;
   text-decoration: none;
 }
 /* line 75, ../../../app/stylesheets/_defaults.sass */

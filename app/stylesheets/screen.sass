@@ -3,6 +3,7 @@
 // Imports --------------------------------------------------------------
 
 @import defaults
+@import theme
 
 /* Layout --------------------------------------------------------------
 
@@ -13,6 +14,25 @@
 .container
   +container
   +show-grid("grid.png")
+
+.notice
+  +full
+  border: solid 2px
+  border-color: $lighter_base_color
+  background-color: $light_base_color
+  color: $light_alt_color
+  text-align: center
+
+.header
+  +full
+  .logo
+    +columns(4, 12)
+  .topbar
+    +columns(8, 12)
+    +omega(12)
+  .hmenus
+    +columns(8, 12)
+    +omega(12)
 
 // show-grid loads a 64+16x24 grid image by default
 // For other grid settings, run `compass grid-img 30+10x20`
