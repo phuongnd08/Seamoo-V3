@@ -1,8 +1,10 @@
 %h3= t 'questions.question_position', :current => current_question_position + 1, :total => total_question
-- if question.data.is_a?(MultipleChoice)
-  = render :partial => "multiple_choices/play", :locals => {:multiple_choice => question.data}
-- elsif question.data.is_a?(FollowPattern)
-  = render :partial => "follow_patterns/play", :locals => {:follow_pattern => question.data}
+.side
+  %button#ignore.sad.idontknow{:title => t('questions.ignore_current_question')}
+    = image_tag "smileys/idontknow.gif"  
+.content
+  - if question.data.is_a?(MultipleChoice)
+    = render :partial => "multiple_choices/play", :locals => {:multiple_choice => question.data}
+  - elsif question.data.is_a?(FollowPattern)
+    = render :partial => "follow_patterns/play", :locals => {:follow_pattern => question.data}
 
-%div
-  %button#ignore= t 'questions.ignore_current_question'

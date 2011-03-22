@@ -31,6 +31,6 @@ Feature: Match using follow pattern question
   Scenario: Ignore multiple choice question
     And mike should see "Question 1/3"
     And mike should see "Follow Pattern #1"
-    When mike press "Ignore this question"
+    When mike press "ignore"
     Then mike's recorded answer of 1st question should be empty
 

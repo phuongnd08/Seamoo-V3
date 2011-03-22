@@ -15,7 +15,7 @@
     .container
       = render :partial => 'layouts/notifier'
       = render :partial => 'layouts/header'
-      .content
+      .body
         - if @title.present?
           .subheader
             %h2= link_to @title, "#", :class => "reload"

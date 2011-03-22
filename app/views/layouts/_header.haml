@@ -11,7 +11,6 @@
   .right
     .user_info
       - if current_user
-        = t ".hello"
         = link_to current_user.display_name, current_user
         %span.lsep= "|"
         = link_to t("application.signout"), signout_path

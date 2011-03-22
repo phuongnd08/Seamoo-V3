@@ -28,11 +28,11 @@ Feature: Disable al buttons while submitting answer
     When mike press "Option #a"
     Then mike should not be able to press "Option #a"
     And mike should not be able to press "Option #b"
-    And mike should not be able to press "Ignore this question"
+    And mike should not be able to press "ignore"
     Given submitting answers is resumed
     Then mike should be able to press "Option #a"
     And mike should be able to press "Option #a"
-    And mike should be able to press "Ignore this question"
+    And mike should be able to press "ignore"
 
   Scenario: Disable buttons & inputs for multiple choice
     Given league Amateur has 3 follow pattern questions 
@@ -49,10 +49,10 @@ Feature: Disable al buttons while submitting answer
     And mike press "Submit"
     Then mike should not be able to edit "answer"
     And mike should not be able to press "Submit"
-    And mike should not be able to press "Ignore this question"
+    And mike should not be able to press "ignore"
     Given submitting answers is resumed
     Then mike should be able to edit "answer"
     And mike should be able to press "Submit"
-    And mike should be able to press "Ignore this question"
+    And mike should be able to press "ignore"
 
 

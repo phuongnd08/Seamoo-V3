@@ -1,5 +1,6 @@
-%h3= multiple_choice.content
-%ul
-  - multiple_choice.randomized_options.each do |index, option|
-    %li
-      %button.option{:answer => index}= option.content
+.multiple_choice
+  .instruction= multiple_choice.content
+  %ul
+    - multiple_choice.randomized_options.each do |index, option|
+      %li
+        %button.option{:answer => index}= option.content

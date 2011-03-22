@@ -16,11 +16,11 @@ vi:
 
 
   matches:
-    match_finished: Trận đấu đã kết thúc
-    match_formed: Trận đấu sẽ bắt đầu trong vòng {seconds_until_started} giây  
-    match_started: Trận đấu đã bắt đầu. Thời gian còn {seconds_until_ended} giây
-    match_waiting: Chờ các đấu thủ khác
-    you_finished: Bạn đã hoàn thành trận đấu của mình. Trận đấu sẽ kết thúc sau {seconds_until_ended} giây
+    finished: Trận đấu đã kết thúc
+    formed: Trận đấu sẽ bắt đầu trong vòng <span class='counter'>{seconds_until_started}</span> giây  
+    started: Trận đấu đã bắt đầu. Thời gian còn <span class='counter'>{seconds_until_ended}</span> giây
+    waiting: Chờ các đấu thủ khác
+    you_finished: Bạn đã hoàn thành trận đấu của mình. Trận đấu sẽ kết thúc sau <span class='counter'>{seconds_until_ended}</span> giây
     show:
       result: Kết quả
       ranking: Xếp hạng

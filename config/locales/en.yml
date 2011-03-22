@@ -11,11 +11,11 @@ en:
       training: Training
 
   matches:
-    match_finished: The match is finished
-    match_formed: Match will be started in {seconds_until_started} seconds  
-    match_started: Match started. There are {seconds_until_ended} seconds left
-    match_waiting: Waiting for other players
-    you_finished: You have finished the match. The match will be ended in {seconds_until_ended} seconds
+    finished: The match is finished
+    formed: Match will be started in <span class='counter'>{seconds_until_started}</span> seconds  
+    started: Match started. There are <span class='counter'>{seconds_until_ended}</span> seconds left
+    waiting: Waiting for other players
+    you_finished: You have finished the match. The match will be ended in <span class='counter'>{seconds_until_ended}</span> seconds
     show:
       result: Match result
       ranking: Ranking

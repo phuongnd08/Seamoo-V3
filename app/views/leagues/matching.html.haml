@@ -1,23 +1,22 @@
 - @title = @league.name
 .matching
   .left
-    #status
-    #match_players{:style => 'display: none'}
-      %h3= t '.Players'
-      %ul.list
-    #question
+    .internal
+      #status
+      #match_players{:style => 'display: none'}
+        %h3= t '.Players'
+        %ul.list
+      #exit{:style => 'display: none'}
+        = form_tag leave_current_match_league_path(@league), :id => "leave_current_match_form" do 
+          = submit_tag t('.leave_current_match'), :class => "sad"
 
-  .right
     .internal
       #league_other_active_players
         %h3= t '.League_other_active_players'
         .no_players{:style => 'display:none'}= t '.Some_maybe_around'
         %ul.list{:style => 'display:none'}
-
-      #exit{:style => 'display: none'}
-        = form_tag leave_current_match_league_path(@league), :id => "leave_current_match_form" do 
-          = submit_tag t '.leave_current_match'
-
+  .right
+    #question
 :javascript
   var leagueId = #{@league.id};
   var questionsPerMatch = #{Matching.questions_per_match};
@@ -38,7 +37,7 @@
 
   var MAX_RETRIES = 20; 
 
-  var statusHTML = #{javascript_templates(['waiting', 'formed', 'started', 'you_finished'])};
+  var statusHTML = #{['waiting', 'formed', 'started', 'you_finished'].inject({}){|hash, key| hash[key] = t "matches.#{key}"; hash}.to_json};
   var avatarHTML = #{render(:partial => "users/avatar", :locals => { :avatar_size => '{avatar_size}', :avatar_url => '{avatar_url}', :text => '{text}'}).to_json};
 
   $(function(){ 

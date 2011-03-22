@@ -27,9 +27,9 @@ Feature: Match using multiple choice question
     When mike press "Option #a"
     Then mike's recorded answer of 1st question should be "Option #a"
 
-  Scenario: Answer multiple choice question
+  Scenario: Ignore multiple choice question
     And mike should see "Question #1"
-    When mike press "Ignore this question"
+    When mike press "ignore"
     Then mike's recorded answer of 1st question should be empty
 
 
