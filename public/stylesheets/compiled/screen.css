@@ -411,7 +411,7 @@ button {
 
 /* incase an inverted custom gradient isn't specified */
 /* line 177, ../../../../../.rvm/gems/ruby-1.8.7-p302@seamoov3/gems/fancy-buttons-1.1.0.alpha.1/lib/stylesheets/_fancy-buttons.sass */
-.fancy-button-reset-base-class, .matching button, .matching input[type="button"], .matching input[type="submit"], .matching input[type="submit"].sad, .matching button.sad {
+.fancy-button-reset-base-class, #question button, #question input[type="button"], #question input[type="submit"], #question input[type="submit"].sad, #question button.sad {
   font-family: "Lucida Grande", Lucida, Arial, sans-serif;
   background: url('/images/button_bg.png?1300638715') repeat-x bottom left;
   margin: 0;
@@ -424,12 +424,12 @@ button {
   font-weight: bold;
 }
 /* line 165, ../../../../../.rvm/gems/ruby-1.8.7-p302@seamoov3/gems/fancy-buttons-1.1.0.alpha.1/lib/stylesheets/_fancy-buttons.sass */
-.fancy-button-reset-base-class::-moz-focus-inner, .matching button::-moz-focus-inner, .matching input[type="button"]::-moz-focus-inner, .matching input[type="submit"]::-moz-focus-inner, .matching input[type="submit"].sad::-moz-focus-inner, .matching button.sad::-moz-focus-inner {
+.fancy-button-reset-base-class::-moz-focus-inner, #question button::-moz-focus-inner, #question input[type="button"]::-moz-focus-inner, #question input[type="submit"]::-moz-focus-inner, #question input[type="submit"].sad::-moz-focus-inner, #question button.sad::-moz-focus-inner {
   border: none;
   padding: 0;
 }
 /* line 168, ../../../../../.rvm/gems/ruby-1.8.7-p302@seamoov3/gems/fancy-buttons-1.1.0.alpha.1/lib/stylesheets/_fancy-buttons.sass */
-.fancy-button-reset-base-class:focus, .matching button:focus, .matching input[type="button"]:focus, .matching input[type="submit"]:focus, .matching input[type="submit"].sad:focus, .matching button.sad:focus {
+.fancy-button-reset-base-class:focus, #question button:focus, #question input[type="button"]:focus, #question input[type="submit"]:focus, #question input[type="submit"].sad:focus, #question button.sad:focus {
   outline: none;
 }
 
@@ -787,8 +787,33 @@ html > body {
   line-height: 1.5em;
   color: #008fe0;
 }
-/* line 17, ../../../app/stylesheets/_matching.sass */
-.matching button, .matching input[type="button"], .matching input[type="submit"] {
+
+/* line 1, ../../../app/stylesheets/_question.sass */
+#question {
+  clear: both;
+}
+/* line 3, ../../../app/stylesheets/_question.sass */
+#question h3 {
+  display: inline;
+  float: left;
+  width: 87.179%;
+  margin-right: 2.564%;
+  margin-bottom: 0.75em;
+}
+/* line 6, ../../../app/stylesheets/_question.sass */
+#question .side {
+  display: inline;
+  float: left;
+  width: 10.256%;
+  margin-right: 2.564%;
+  display: inline;
+  float: right;
+  margin-right: 0;
+  #margin-left: -1em;
+  text-align: right;
+}
+/* line 10, ../../../app/stylesheets/_question.sass */
+#question button, #question input[type="button"], #question input[type="submit"] {
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   -o-border-radius: 6px;
@@ -817,11 +842,11 @@ html > body {
   background-clip: padding-box;
 }
 /* line 116, ../../../../../.rvm/gems/ruby-1.8.7-p302@seamoov3/gems/fancy-buttons-1.1.0.alpha.1/lib/stylesheets/_fancy-buttons.sass */
-.matching button, .matching button:visited, .matching input[type="button"], .matching input[type="button"]:visited, .matching input[type="submit"], .matching input[type="submit"]:visited {
+#question button, #question button:visited, #question input[type="button"], #question input[type="button"]:visited, #question input[type="submit"], #question input[type="submit"]:visited {
   color: white;
 }
 /* line 31, ../../../../../.rvm/gems/ruby-1.8.7-p302@seamoov3/gems/fancy-buttons-1.1.0.alpha.1/lib/stylesheets/_fancy-buttons.sass */
-.matching button:hover, .matching button:focus, .matching input[type="button"]:hover, .matching input[type="button"]:focus, .matching input[type="submit"]:hover, .matching input[type="submit"]:focus {
+#question button:hover, #question button:focus, #question input[type="button"]:hover, #question input[type="button"]:focus, #question input[type="submit"]:hover, #question input[type="submit"]:focus {
   background-color: #003452;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #009ffb), color-stop(10%, #00659f), color-stop(50%, #002b42), color-stop(50%, #002133), color-stop(100%, #004266));
   background-image: -moz-linear-gradient(#009ffb, #00659f 10%, #002b42 50%, #002133 50%, #004266);
@@ -830,11 +855,11 @@ html > body {
   text-shadow: black 0px 1px 1px;
 }
 /* line 116, ../../../../../.rvm/gems/ruby-1.8.7-p302@seamoov3/gems/fancy-buttons-1.1.0.alpha.1/lib/stylesheets/_fancy-buttons.sass */
-.matching button:hover, .matching button:hover:visited, .matching button:focus, .matching button:focus:visited, .matching input[type="button"]:hover, .matching input[type="button"]:hover:visited, .matching input[type="button"]:focus, .matching input[type="button"]:focus:visited, .matching input[type="submit"]:hover, .matching input[type="submit"]:hover:visited, .matching input[type="submit"]:focus, .matching input[type="submit"]:focus:visited {
+#question button:hover, #question button:hover:visited, #question button:focus, #question button:focus:visited, #question input[type="button"]:hover, #question input[type="button"]:hover:visited, #question input[type="button"]:focus, #question input[type="button"]:focus:visited, #question input[type="submit"]:hover, #question input[type="submit"]:hover:visited, #question input[type="submit"]:focus, #question input[type="submit"]:focus:visited {
   color: white;
 }
 /* line 36, ../../../../../.rvm/gems/ruby-1.8.7-p302@seamoov3/gems/fancy-buttons-1.1.0.alpha.1/lib/stylesheets/_fancy-buttons.sass */
-.matching button:active, .matching input[type="button"]:active, .matching input[type="submit"]:active {
+#question button:active, #question input[type="button"]:active, #question input[type="submit"]:active {
   background-color: #002a42;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #002b42), color-stop(30%, #00324c), color-stop(50%, #002437), color-stop(50%, #001a28), color-stop(100%, #00466a));
   background-image: -moz-linear-gradient(#002b42, #00324c 30%, #002437 50%, #001a28 50%, #00466a);
@@ -847,11 +872,11 @@ html > body {
   box-shadow: #000d14 0 0.08em 0.2em 1px inset;
 }
 /* line 116, ../../../../../.rvm/gems/ruby-1.8.7-p302@seamoov3/gems/fancy-buttons-1.1.0.alpha.1/lib/stylesheets/_fancy-buttons.sass */
-.matching button:active, .matching button:active:visited, .matching input[type="button"]:active, .matching input[type="button"]:active:visited, .matching input[type="submit"]:active, .matching input[type="submit"]:active:visited {
+#question button:active, #question button:active:visited, #question input[type="button"]:active, #question input[type="button"]:active:visited, #question input[type="submit"]:active, #question input[type="submit"]:active:visited {
   color: white;
 }
-/* line 19, ../../../app/stylesheets/_matching.sass */
-.matching input[type="submit"].sad, .matching button.sad {
+/* line 12, ../../../app/stylesheets/_question.sass */
+#question input[type="submit"].sad, #question button.sad {
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   -o-border-radius: 6px;
@@ -880,11 +905,11 @@ html > body {
   background-clip: padding-box;
 }
 /* line 116, ../../../../../.rvm/gems/ruby-1.8.7-p302@seamoov3/gems/fancy-buttons-1.1.0.alpha.1/lib/stylesheets/_fancy-buttons.sass */
-.matching input[type="submit"].sad, .matching input[type="submit"].sad:visited, .matching button.sad, .matching button.sad:visited {
+#question input[type="submit"].sad, #question input[type="submit"].sad:visited, #question button.sad, #question button.sad:visited {
   color: white;
 }
 /* line 31, ../../../../../.rvm/gems/ruby-1.8.7-p302@seamoov3/gems/fancy-buttons-1.1.0.alpha.1/lib/stylesheets/_fancy-buttons.sass */
-.matching input[type="submit"].sad:hover, .matching input[type="submit"].sad:focus, .matching button.sad:hover, .matching button.sad:focus {
+#question input[type="submit"].sad:hover, #question input[type="submit"].sad:focus, #question button.sad:hover, #question button.sad:focus {
   background-color: #444444;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #989898), color-stop(10%, #6a6a6a), color-stop(50%, #3d3d3d), color-stop(50%, #353535), color-stop(100%, #4f4f4f));
   background-image: -moz-linear-gradient(#989898, #6a6a6a 10%, #3d3d3d 50%, #353535 50%, #4f4f4f);
@@ -893,11 +918,11 @@ html > body {
   text-shadow: #040404 0px 1px 1px;
 }
 /* line 116, ../../../../../.rvm/gems/ruby-1.8.7-p302@seamoov3/gems/fancy-buttons-1.1.0.alpha.1/lib/stylesheets/_fancy-buttons.sass */
-.matching input[type="submit"].sad:hover, .matching input[type="submit"].sad:hover:visited, .matching input[type="submit"].sad:focus, .matching input[type="submit"].sad:focus:visited, .matching button.sad:hover, .matching button.sad:hover:visited, .matching button.sad:focus, .matching button.sad:focus:visited {
+#question input[type="submit"].sad:hover, #question input[type="submit"].sad:hover:visited, #question input[type="submit"].sad:focus, #question input[type="submit"].sad:focus:visited, #question button.sad:hover, #question button.sad:hover:visited, #question button.sad:focus, #question button.sad:focus:visited {
   color: white;
 }
 /* line 36, ../../../../../.rvm/gems/ruby-1.8.7-p302@seamoov3/gems/fancy-buttons-1.1.0.alpha.1/lib/stylesheets/_fancy-buttons.sass */
-.matching input[type="submit"].sad:active, .matching button.sad:active {
+#question input[type="submit"].sad:active, #question button.sad:active {
   background-color: #3d3d3d;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #3d3d3d), color-stop(30%, #424242), color-stop(50%, #383838), color-stop(50%, #313131), color-stop(100%, #525252));
   background-image: -moz-linear-gradient(#3d3d3d, #424242 30%, #383838 50%, #313131 50%, #525252);
@@ -910,87 +935,63 @@ html > body {
   box-shadow: #262626 0 0.08em 0.2em 1px inset;
 }
 /* line 116, ../../../../../.rvm/gems/ruby-1.8.7-p302@seamoov3/gems/fancy-buttons-1.1.0.alpha.1/lib/stylesheets/_fancy-buttons.sass */
-.matching input[type="submit"].sad:active, .matching input[type="submit"].sad:active:visited, .matching button.sad:active, .matching button.sad:active:visited {
+#question input[type="submit"].sad:active, #question input[type="submit"].sad:active:visited, #question button.sad:active, #question button.sad:active:visited {
   color: white;
 }
-/* line 21, ../../../app/stylesheets/_matching.sass */
-.matching button.idontknow {
+/* line 14, ../../../app/stylesheets/_question.sass */
+#question button.idontknow {
   padding: 0px;
 }
-/* line 24, ../../../app/stylesheets/_matching.sass */
-.matching #question {
+/* line 16, ../../../app/stylesheets/_question.sass */
+#question .content {
   clear: both;
 }
-/* line 26, ../../../app/stylesheets/_matching.sass */
-.matching #question h3 {
-  display: inline;
-  float: left;
-  width: 87.179%;
-  margin-right: 2.564%;
-  margin-bottom: 0.75em;
-}
-/* line 29, ../../../app/stylesheets/_matching.sass */
-.matching #question .side {
-  display: inline;
-  float: left;
-  width: 10.256%;
-  margin-right: 2.564%;
-  display: inline;
-  float: right;
-  margin-right: 0;
-  #margin-left: -1em;
-  text-align: right;
-}
-/* line 33, ../../../app/stylesheets/_matching.sass */
-.matching #question .content {
-  clear: both;
-}
-/* line 38, ../../../app/stylesheets/_matching.sass */
-.matching #question .content .multiple_choice ul li {
+/* line 21, ../../../app/stylesheets/_question.sass */
+#question .content .multiple_choice ul li {
   list-style-type: none;
   margin-bottom: 0.5em;
 }
-/* line 42, ../../../app/stylesheets/_matching.sass */
-.matching #question .content .follow_pattern .hint_container {
+/* line 25, ../../../app/stylesheets/_question.sass */
+#question .content .follow_pattern .hint_container {
   overflow-x: hidden;
 }
-/* line 44, ../../../app/stylesheets/_matching.sass */
-.matching #question .content .follow_pattern .hint_container #hint {
+/* line 27, ../../../app/stylesheets/_question.sass */
+#question .content .follow_pattern .hint_container #hint {
   font-size: 150%;
 }
-/* line 46, ../../../app/stylesheets/_matching.sass */
-.matching #question .content .follow_pattern .hint_container #hint .green {
+/* line 29, ../../../app/stylesheets/_question.sass */
+#question .content .follow_pattern .hint_container #hint .green {
   color: green;
 }
-/* line 48, ../../../app/stylesheets/_matching.sass */
-.matching #question .content .follow_pattern .hint_container #hint .red {
+/* line 31, ../../../app/stylesheets/_question.sass */
+#question .content .follow_pattern .hint_container #hint .red {
   color: red;
 }
-/* line 50, ../../../app/stylesheets/_matching.sass */
-.matching #question .content .follow_pattern .hint_container #hint .gray {
+/* line 33, ../../../app/stylesheets/_question.sass */
+#question .content .follow_pattern .hint_container #hint .gray {
   color: gray;
 }
-/* line 52, ../../../app/stylesheets/_matching.sass */
-.matching #question .content .follow_pattern .hint_container #hint .purple {
+/* line 35, ../../../app/stylesheets/_question.sass */
+#question .content .follow_pattern .hint_container #hint .purple {
   color: purple;
 }
-/* line 54, ../../../app/stylesheets/_matching.sass */
-.matching #question .content .follow_pattern .text_field {
+/* line 37, ../../../app/stylesheets/_question.sass */
+#question .content .follow_pattern .text_field {
   display: inline;
   float: left;
   width: 74.359%;
   margin-right: 2.564%;
 }
-/* line 56, ../../../app/stylesheets/_matching.sass */
-.matching #question .content .follow_pattern .text_field input[type=text] {
+/* line 39, ../../../app/stylesheets/_question.sass */
+#question .content .follow_pattern .text_field input[type=text] {
   font-size: 150%;
   padding-top: 0px;
   padding-bottom: 0px;
   line-height: 1em;
   height: auto;
 }
-/* line 62, ../../../app/stylesheets/_matching.sass */
-.matching #question .content .follow_pattern .submit {
+/* line 45, ../../../app/stylesheets/_question.sass */
+#question .content .follow_pattern .submit {
   display: inline;
   float: left;
   width: 23.077%;
@@ -1000,7 +1001,31 @@ html > body {
   margin-right: 0;
   #margin-left: -1em;
 }
-/* line 65, ../../../app/stylesheets/_matching.sass */
-.matching #question .content .follow_pattern .submit input[type=submit] {
+/* line 48, ../../../app/stylesheets/_question.sass */
+#question .content .follow_pattern .submit input[type=submit] {
   width: 100%;
+}
+
+/* line 2, ../../../app/stylesheets/_players.sass */
+#match_players .internal {
+  border-top: none;
+  border-bottom: none;
+  border-left: solid 0.3em #008fe0;
+  border-right: solid 0.3em #ff9600;
+}
+/* line 7, ../../../app/stylesheets/_players.sass */
+#match_players .internal ul {
+  padding: 0px;
+  margin: 0px;
+}
+/* line 10, ../../../app/stylesheets/_players.sass */
+#match_players .internal ul li {
+  margin: 0px;
+  list-style-type: none;
+  border-top: dashed 2px #4c4c4c;
+  border-bottom: dashed 2px #4c4c4c;
+}
+/* line 15, ../../../app/stylesheets/_players.sass */
+#match_players .internal ul li.notfirst {
+  border-top: none;
 }

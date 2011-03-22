@@ -4,8 +4,8 @@
     .internal
       #status
       #match_players{:style => 'display: none'}
-        %h3= t '.Players'
-        %ul.list
+        .internal
+          %ul.list
       #exit{:style => 'display: none'}
         = form_tag leave_current_match_league_path(@league), :id => "leave_current_match_form" do 
           = submit_tag t('.leave_current_match'), :class => "sad"
@@ -289,15 +289,29 @@
     $('#match_players ul.list').empty();
     $.each(players, function(index, player){
       var text = [player.display_name];
-      if (status != 'formed'){
-        if (player.current_question_position == questionsPerMatch) {
+      var started = status != 'formed';
+      var finished = started && player.current_question_position == questionsPerMatch;
+      if (started){
+        if (finished){
           text.push(" (finished)");
         } else {
           text = text.concat([" (", player.current_question_position + 1, "/", questionsPerMatch, ")"]);
         }
       }
-      html = formatString(avatarHTML, $.extend({}, player, { avatar_size: 40, text: text.join("") }));
-      $('#match_players ul.list').append(html);
+      var html = formatString(avatarHTML, $.extend({}, player, { avatar_size: 40, text: text.join("") }));
+      var li = $(html);
+      if (index > 0) li.addClass("notfirst");
+      if (started){
+        var img = li.find('img');
+        if (finished){
+          li.css({textAlign: "right"});
+        } else {
+          var iw = img.width();
+          var fw = $('#match_players ul.list').width();
+        }
+        img.css({marginLeft: (fw - iw) * player.current_question_position / questionsPerMatch + "px"})
+      }
+      $('#match_players ul.list').append(li);
     });
   }
 

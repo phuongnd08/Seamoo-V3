@@ -13,57 +13,5 @@
   .counter
     +adjust-font-size-to(2 * $base_font_size)
     color: $alt_color
-  #question
-  button, input[type="button"], input[type="submit"]
-    +fancy-button($dark_alt_color, $base_font_size)
-  input[type="submit"].sad, button.sad
-    +fancy-button($complementary_color)
-  button.idontknow
-    padding: 0px
-
-  #question
-    +full(8)
-    h3
-      +columns(7, 8)
-      +trailer(0.5)
-    .side
-      +columns(1, 8)
-      +omega(8)
-      text-align: right
-    .content
-      +full(8)
-      .multiple_choice
-        .instruction
-        ul
-          li
-            list-style-type: none
-            margin-bottom: 0.5em
-      .follow_pattern
-        .hint_container
-          overflow-x: hidden
-          #hint
-            font-size: 150%
-            .green
-              color: green
-            .red
-              color: red
-            .gray
-              color: gray
-            .purple
-              color: purple
-        .text_field
-          +columns(6, 8)
-          input[type=text]
-            font-size: 150%
-            padding-top: 0px
-            padding-bottom: 0px
-            line-height: 1em
-            height: auto
-        .submit
-          +columns(2, 8)
-          +omega(8)
-          input[type=submit]
-            width: 100%
-
-
-
+@import question 
+@import players
