@@ -4,6 +4,7 @@
 
 @import defaults
 @import theme
+@import fancy-buttons
 
 /* Layout --------------------------------------------------------------
 
@@ -18,25 +19,158 @@
 .notice
   +full
   border: solid 2px
-  border-color: $lighter_base_color
-  background-color: $light_base_color
-  color: $light_alt_color
+  background-color: $dark_alt_color
+  color: $lightest_complementary_color
   text-align: center
 
+=langselector
+  width: 16px
+  height: 11px
+  text-indent: -8000px
+  float: left
+  margin-right: 5px
 .header
   +full
-  .logo
+  .left
     +columns(4, 12)
+    .logo// {{{
+      +columns(1, 4)
+    .extra
+      +columns(3,4)
+      +omega(4)
+      .site_name
+        text-decoration: none
+        color: $base-color
+        +full(4)
+        +adjust-font-size-to(2 * $base-font-size)
+        .first
+          color: $alt-color
+        .last
+          color: $alt2-color
+      .slogan
+        +full(4)
+        +leader(-0.5)
+      .langbar
+        +full(4)
+        .en
+          +langselector
+          background: url("/images/languages/en.png") no-repeat
+        .vi
+          +langselector
+          background: url("/images/languages/vi.png") no-repeat// }}}
+  .right// {{{
+    +columns(8, 12)
+    +omega(12)
+    .user_info
+      +full(8)
+      text-align: right
+    .features
+      +full(8)
+      +leader(1)
+      ul
+        margin: 0
+        li
+          background: $dark_alt_color
+          display: block
+          float: right
+          margin-left: 7px
+          a
+            color: $lightest_complementary_color
+            display: block
+            font-weight: bold
+            padding: 3px 6px 3px 6px
+            text-decoration: none
+        li.youarehere
+          background: $alt2_color
+        li:hover
+          background-color: $alt2_color
+        li.disabled 
+          background-color: silver
+          a
+            cursor: default
+        li.disabled:hover
+          background-color: silver
   .topbar
     +columns(8, 12)
     +omega(12)
   .hmenus
     +columns(8, 12)
-    +omega(12)
+    +omega(12)// }}}
 
+=coming_soon
+  position: absolute
+  width: 100%
+  height: 100%
+  background: $darkest-base-color
+  background-position: top right
+  background-repeat: no-repeat
+  opacity: 0.7
+  left: 0px
+  top: 0px
+
+.content
+  +full
+  padding-top: $base-font-size
+  .subheader// {{{
+    border-bottom: 1px solid $base-color
+    h2
+      margin-bottom: 0px
+      a:link, a:hover
+        text-decoration: none
+    margin-bottom: 1em// }}}
+  .item
+    +full(12)
+    position: relative
+    border: solid 2px $light_base_color
+    +trailer(1)
+    table// {{{
+      width: 100%
+      +trailing-border(0px)
+      +padding-trailer(0)
+      +margin-trailer(0)
+      .logo_cell
+        width: 96px
+    .coming_soon
+      +coming_soon
+    .sub_link
+      font-size: 80%// }}}
+    .main_link// {{{
+      font-size: 120%
+      a, a:link, a:visited
+        background: $dark_alt_color
+        display: block
+        float: left
+        text-decoration: none
+        span
+          color: $lightest_complementary_color
+          display: block
+          font-weight: bold
+          padding: 3px 6px 3px 6px
+          text-decoration: none
+      a:hover
+        span
+          background-color: $alt2_color// }}}
+    .main_link:after
+      clear: both
+  .subcontent
+    +full(12)
+    +prefix(1, 12)
+
+.footer
+  +leader(1)
+  border-top: solid 1px $base_color
+  font-size: 80%
+  +full
+  .links
+    +columns(4, 12)
+  .copyright
+    +columns(8, 12)
+    +omega(12)
+    text-align: right
 // show-grid loads a 64+16x24 grid image by default
 // For other grid settings, run `compass grid-img 30+10x20`
 // Where 30 is the column width, 10 is the gutter width,
 // and 20 is the (optional) line-height.
 
 /* Styles --------------------------------------------------------------
+@import matching

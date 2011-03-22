@@ -34,6 +34,8 @@ en:
       League_other_active_players: Other players in league
       Some_maybe_around: Some other players maybe around
       leave_current_match: Leave current match
+    show:
+      start: Start
   questions:
     question_position: Question %{current}/%{total}
     ignore_current_question: Ignore this question
@@ -48,6 +50,11 @@ en:
     need_login: You need to login in order to access this page
     signin: sign in
     signout: sign out
+    slogan: Together we learn
+    copyright: Developed by Cold Alpha
+    signed_out: You have signed out
+    welcome: Welcome to dautri.net, %{display_name}
+    welcome_back: Welcome back, %{display_name}
 
   home:
     index:

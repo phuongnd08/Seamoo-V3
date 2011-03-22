@@ -1,20 +1,25 @@
 - @title = @category.name
-- content_for :left do
-  .module
-    .description_box
-      = image_tag @category.image, :class => 'fl', :size => "96x64"
-      %p= @category.description
-      .cbt
-%ul
+.item{:id => @category.dom_name}
+  %table
+    %tr
+      %td.logo_cell
+        = image_tag @category.image, :size => "96x64"
+      %td
+        .description= @category.description
+.subcontent
   - @category.leagues.each do |league|
-    .option_box
-      %table.fw
+    .item
+      %table
         %tr
-          %td.logo-cell
+          %td.logo_cell
             - img = image_tag(league.image, :size => "96x64")
             = league.available? ? link_to(img, league) : img
           %td
             %div= league.available? ? link_to(league.name, league) : league.name
             %div= league.description
+            - if league.available?
+              .main_link
+                %a{:href => matching_league_path(league)}
+                  %span= t('common.join_now')
       - unless league.available?
         .coming_soon{:style => "background-image: url('/stylesheets/imgs/coming_soon_#{I18n.locale}.png');"}

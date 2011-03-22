@@ -1,13 +1,15 @@
 .header
-  .logo
-    = link_to image_tag("logo.png", :height => 78), root_path
-  .topbar
-    .hlinks{:style => "margin-right: 20px;"}
-      = link_to "English", url_for(params.merge({:locale => :en, :only_path => true}))
-      %span.lsep= "|"
-      = link_to "Tiếng Việt", url_for(params.merge({:locale => :vi, :only_path => true}))
-
-    .hlinks.personal
+  .left
+    .logo
+      = link_to image_tag("logo.png"), root_path
+    .extra
+      %a.site_name{:href => root_path}= site_name
+      .slogan= t("application.slogan")
+      .langbar
+        = link_to "English", url_for(params.merge({:locale => :en, :only_path => true})), :class => "en"
+        = link_to "Tiếng Việt", url_for(params.merge({:locale => :vi, :only_path => true})), :class => "vi"
+  .right
+    .user_info
       - if current_user
         = t ".hello"
         = link_to current_user.display_name, current_user
@@ -15,13 +17,11 @@
         = link_to t("application.signout"), signout_path
       - else
         = link_to t("application.signin"), signin_path(:return_url => request.fullpath)
-  .hmenus
-    .nav
+    .features
       %ul
-        %li.youarehere
-          = link_to t(".competition_system"), root_path
-        %li
-          = link_to t(".users"), users_path
         %li.disabled
           = link_to t(".training"), '#'
-    .cbt
+        %li
+          = link_to t(".users"), users_path
+        %li.youarehere
+          = link_to t(".competition_system"), root_path

@@ -1,7 +1,7 @@
 - @title = t ".competition_system"
 - @categories.each do |category|
-  .option_box{:id => category.dom_name}
-    %table.fw
+  .item{:id => category.dom_name}
+    %table
       %tr
         %td.logo_cell
           - img = image_tag category.image, :size => "96x64"
@@ -11,6 +11,8 @@
           %div
             .description= category.description
             - if category.available?
-              .main_link= link_to t('common.join_now'), category  
+              .main_link
+                %a{:href => category_path(category)}
+                  %span= t('common.join_now')
     - unless category.available?
       .coming_soon{:style => "background-image: url('/stylesheets/imgs/coming_soon_#{I18n.locale}.png');"}

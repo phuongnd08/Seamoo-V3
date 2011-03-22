@@ -2,7 +2,7 @@ Given /^I am recognized as open id user "([^"]*)" at "([^"]*)"$/ do |name, provi
   id = name.split(" ").join(".").downcase
   first_name, last_name = name.split(" ")
   OmniAuth.config.mock_auth[:open_id] = {
-    "provider" => provider,
+    "provider" => "open_id",
     "uid" => "http://#{provider.downcase}.com/openid?id=#{id}",
     "user_info" => {
       "email" => "#{id}@#{provider.downcase}.com", 

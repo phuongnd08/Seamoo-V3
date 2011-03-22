@@ -7,6 +7,10 @@ class League < ActiveRecord::Base
     self.status == 'active'
   end
 
+  def dom_name
+    name.downcase.split(/\s+/).join("_")
+  end
+
   def add_user_to_match(match_id, user_id)
     if match_id.present? && Match.find(match_id).finished?
       false # user cannot be added to finished match

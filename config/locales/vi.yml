@@ -39,6 +39,8 @@ vi:
       League_other_active_players: Những người chơi khác trong cùng giải đấu
       Some_maybe_around: Những người chơi khác có thể vẫn còn đâu đây
       leave_current_match: Bỏ trận đấu
+    show:
+      start: Bắt đầu
   questions:
     question_position: Câu hỏi %{current}/%{total}
     ignore_current_question: Bỏ qua câu hỏi này
@@ -53,6 +55,11 @@ vi:
     need_login: Bạn cần đăng nhập để truy cập vào trang này
     signin: đăng nhập
     signout: đăng xuất
+    slogan: Cùng nhau ta học
+    copyright: Phát triển bởi Cold Alpha
+    signed_out: Bạn đã đăng xuất
+    welcome: Mừng bạn đến với dautri.net, %{display_name}
+    welcome_back: Mừng bạn quay lại, %{display_name}
 
   home:
     index:

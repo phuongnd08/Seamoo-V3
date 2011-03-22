@@ -6,18 +6,19 @@ gem 'rails', '3.0.0'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql'
-gem 'haml'
+gem 'haml', ">=3.1.alpha.147"
 gem 'omniauth', '0.2.0.beta5'
 gem 'authlogic'
-gem "jquery-rails", :git =>  "https://github.com/indirect/jquery-rails.git"
+gem "jquery-rails"
 gem "dalli"
 gem "delayed_job"
 gem "settingslogic"
 gem "gravtastic"
 gem "sass"
-gem "compass"
-gem "compass-susy-plugin"
+gem "compass", ">=0.11.beta.3"
+gem "compass-susy-plugin", ">=0.9.beta.3"
 gem "compass-colors"
+gem "fancy-buttons", ">=1.1.0.alpha.1"
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -48,10 +49,10 @@ group :test do
   gem 'factory_girl_rails'
   gem 'shoulda'
   gem 'cucumber'
-  gem 'cucumber-rails', :git => 'git://github.com/aslakhellesoy/cucumber-rails.git'
+  gem 'cucumber-rails'
   gem 'spork'
   gem 'launchy'
-  gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
+  gem 'capybara'
   gem 'parallel'
   gem 'pickle'
   gem 'webmock', :require => false

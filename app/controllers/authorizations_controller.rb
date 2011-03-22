@@ -11,12 +11,12 @@ class AuthorizationsController < ApplicationController
       flash[:notice] = "Successfully added #{omniauth['provider']} authentication"
       current_user.authorizations.create(:provider => provider, :uid => uid)
     elsif (auth = Authorization.find_by_provider_and_uid(provider, uid))
-      flash[:notice] = "Welcome back #{omniauth['provider']} user"
+      flash[:notice] = t "application.welcome_back", :display_name => auth.user.display_name
       UserSession.create(auth.user, true) #User is present. Login the user with his social account
     else
       user = User.create_from_omni_info(user_info)
       user.authorizations.create(:provider => provider, :uid => uid)
-      flash[:notice] = "Welcome #{omniauth['provider']} user. Your account has been created."
+      flash[:notice] = t "application.welcome", :display_name => user.display_name
       UserSession.create(user, true) #Log the authorizing user in.
     end
 
@@ -24,7 +24,7 @@ class AuthorizationsController < ApplicationController
   end
 
   def failure
-    flash[:notice] = "Sorry, You din't authorize"
+    flash[:notice] = "Sorry, You didn't authorize"
     redirect_to root_path
   end
 

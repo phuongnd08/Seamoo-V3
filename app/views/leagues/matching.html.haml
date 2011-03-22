@@ -1,21 +1,22 @@
-%h1= t '.welcome', :name => @league.name
-%h2= t '.lets_match'
-#status
+- @title = @league.name
+.matching
+  .left
+    #status
+    #match_players{:style => 'display: none'}
+      %h3= t '.Players'
+      %ul.list
+    #question
 
-#match_players{:style => 'display: none'}
-  %h3= t '.Players'
-  %ul.list
+  .right
+    .internal
+      #league_other_active_players
+        %h3= t '.League_other_active_players'
+        .no_players{:style => 'display:none'}= t '.Some_maybe_around'
+        %ul.list{:style => 'display:none'}
 
-#league_other_active_players{:style => 'float: right'}
-  %h3= t '.League_other_active_players'
-  .no_players{:style => 'display:none'}= t '.Some_maybe_around'
-  %ul.list{:style => 'display:none'}
-
-#exit{:style => 'display: none'}
-  = form_tag leave_current_match_league_path(@league), :id => "leave_current_match_form" do 
-    = submit_tag t '.leave_current_match'
-
-#question
+      #exit{:style => 'display: none'}
+        = form_tag leave_current_match_league_path(@league), :id => "leave_current_match_form" do 
+          = submit_tag t '.leave_current_match'
 
 :javascript
   var leagueId = #{@league.id};

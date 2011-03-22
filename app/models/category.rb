@@ -5,7 +5,7 @@ class Category < ActiveRecord::Base
   validates :status, :inclusion => {:in => ['active', 'coming_soon']}
   
   def dom_name
-    name.downcase.split(/s+/).join("_")
+    name.downcase.split(/\s+/).join("_")
   end
   
   def available?

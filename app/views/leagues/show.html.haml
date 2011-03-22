@@ -1,14 +1,11 @@
-%p
-  %b Category:
-  = link_to @league.category.name, @league.category
-%p
-  %b Name:
-  = @league.name
-%p
-  %b Description:
-  = @league.description
-%p
-  %b Level:
-  = @league.level
-
-= link_to 'Play some matches', matching_league_path(@league)
+- @title = @league.name
+.item
+  %table
+    %tr
+      %td.logo_cell
+        = image_tag(@league.image, :size => "96x64")
+      %td
+        %div= @league.description
+        .main_link
+          %a{:href => matching_league_path(@league)}
+            %span= t('.start') 

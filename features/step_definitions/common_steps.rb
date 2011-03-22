@@ -66,9 +66,9 @@ When /^\w{2,} visit (.+)$/ do |page|
   Then %{I visit #{page}}
 end
 
-Then /^\w{2,} should see "([^"]*)"(.*)$/ do |text, scope_definition|
+Then /^\w{2,} should see "([^"]*)"$/ do |text|
   text.split(/\s+[\*\?]\s+/).each do |part|
-    Then %{I should see "#{part}"#{scope_definition}}
+    Then %{I should see "#{part}"}
   end
 end
 
@@ -83,6 +83,10 @@ Given /^question submission is delayed$/ do
       if (!/submit_answer$/.test(options.url)) $.old_ajax(options);
     }
   }
+end
+
+When /^I should see link "([^"]*)"$/ do |text|
+  page.should have_xpath(XPath::HTML.link(text))
 end
 
 Then /^"([^"]*)" is not a link$/ do |text|
