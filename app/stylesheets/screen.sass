@@ -23,6 +23,28 @@
   color: $lightest_complementary_color
   text-align: center
 
+=main_link
+  font-size: 120%
+  a, a:link, a:visited
+    background: $dark_alt_color
+    display: block
+    float: left
+    text-decoration: none
+    span
+      color: $lightest_complementary_color
+      display: block
+      font-weight: bold
+      padding: 3px 6px 3px 6px
+      text-decoration: none
+  a:hover
+    span
+      background-color: $alt2_color// }}}
+  &:after
+    clear: both
+    content: " "
+    height: 0
+    display: block
+
 =langselector
   width: 16px
   height: 11px
@@ -135,23 +157,7 @@
     .sub_link
       font-size: 80%// }}}
     .main_link// {{{
-      font-size: 120%
-      a, a:link, a:visited
-        background: $dark_alt_color
-        display: block
-        float: left
-        text-decoration: none
-        span
-          color: $lightest_complementary_color
-          display: block
-          font-weight: bold
-          padding: 3px 6px 3px 6px
-          text-decoration: none
-      a:hover
-        span
-          background-color: $alt2_color// }}}
-    .main_link:after
-      clear: both
+      +main_link
   .subcontent
     +full(12)
     +prefix(1, 12)
@@ -174,3 +180,4 @@
 
 /* Styles --------------------------------------------------------------
 @import matching
+@import match_result

@@ -24,12 +24,12 @@ Feature: Disable al buttons while submitting answer
     When mike match on league Amateur
     #Then start verify the flow
     Then mike should see "Question #1"
-    Given submitting answers will be delayed
+    Given next question rendering will be delayed
     When mike press "Option #a"
     Then mike should not be able to press "Option #a"
     And mike should not be able to press "Option #b"
     And mike should not be able to press "ignore"
-    Given submitting answers is resumed
+    Given next question rendering is resumed
     Then mike should be able to press "Option #a"
     And mike should be able to press "Option #a"
     And mike should be able to press "ignore"
@@ -44,13 +44,13 @@ Feature: Disable al buttons while submitting answer
     Given first Amateur match use default questions
     When mike match on league Amateur
     And mike should see "Follow Pattern #1"
-    Given submitting answers will be delayed
+    Given next question rendering will be delayed
     When mike fill in "answer" with "myanswer"
     And mike press "Submit"
     Then mike should not be able to edit "answer"
     And mike should not be able to press "Submit"
     And mike should not be able to press "ignore"
-    Given submitting answers is resumed
+    Given next question rendering is resumed
     Then mike should be able to edit "answer"
     And mike should be able to press "Submit"
     And mike should be able to press "ignore"

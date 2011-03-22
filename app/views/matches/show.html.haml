@@ -1,42 +1,47 @@
-%h1= @match.league.name
-%h2= t '.result'
-%h3= t '.ranking'
-%ol
-  - @match.ranked_match_users.each_with_index do |match_user, index|
-    - text = capture do
-      - if match_user.user == current_user
-        %strong= t '.You'
-        (#{match_user.user.display_name})
-      - else
-        #{match_user.user.display_name}
-      \- #{match_user.score_as_percent}% #{t '.correct'}
-    = render :partial => 'users/avatar', :locals => { :avatar_url => match_user.user.gravatar_url, :text => text, :avatar_size => 40 }
-%h3= t '.Questions'
-%ol
-  - @match.questions.each_with_index do |question, qidx|
-    %li= question.content
-    %ul
-      - @have_correct_answer = false
-      - @match.match_users.each do |match_user|
-        %li
-          - if match_user.user == current_user
-            = raw %{<strong>#{t '.You'}</strong>:}
-          - else
-            #{match_user.user.display_name}:
-          - @answer = match_user.answers[qidx]
-          - if @answer
-            - unless @hide_all_answers
-              #{question.data.realized_answer(@answer)}
-              \-
-            - if question.data.score_for(@answer) == 1
-              - @have_correct_answer = true
-              %span.green= t '.correct'
+- @title = t '.result'
+.match_result
+  .left
+    .internal
+      %h3= t '.ranking'
+      %ol
+        - @match.ranked_match_users.each_with_index do |match_user, index|
+          - text = capture do
+            - if match_user.user == current_user
+              %strong= t '.You'
+              (#{match_user.user.display_name})
             - else
-              %span.red= t '.incorrect'
-          - else
-            %span.gray= t '.not_answered'
-      - unless @have_correct_answer || @hide_all_answers
-        %li 
-          #{t '.correct_answer'}: 
-          %span.green= question.data.answer
-%div= link_to t(".rematch"), matching_league_path(@match.league)
+              #{match_user.user.display_name}
+            \- #{match_user.score_as_percent}% #{t '.correct'}
+          = render :partial => 'users/avatar', :locals => { :avatar_url => match_user.user.gravatar_url, :text => text, :title => "", :avatar_size => 40 }
+      .rematch
+        %a{:href => matching_league_path(@match.league)}
+          %span= t(".rematch")
+  .right
+    %h3= t '.Questions'
+    %ol
+      - @match.questions.each_with_index do |question, qidx|
+        %li= question.content
+        %ul
+          - @have_correct_answer = false
+          - @match.match_users.each do |match_user|
+            %li
+              - if match_user.user == current_user
+                = raw %{<strong>#{t '.You'}</strong>:}
+              - else
+                #{match_user.user.display_name}:
+              - @answer = match_user.answers[qidx]
+              - if @answer
+                - unless @hide_all_answers
+                  #{question.data.realized_answer(@answer)}
+                  \-
+                - if question.data.score_for(@answer) == 1
+                  - @have_correct_answer = true
+                  %span.green= t '.correct'
+                - else
+                  %span.red= t '.incorrect'
+              - else
+                %span.gray= t '.not_answered'
+          - unless @have_correct_answer || @hide_all_answers
+            %li 
+              #{t '.correct_answer'}: 
+              %span.green= question.data.answer

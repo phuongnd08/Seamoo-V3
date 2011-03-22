@@ -28,5 +28,5 @@ Feature: Match Waiting
     And peter should be able to see "#league_other_active_players .list"
     And peter should see "mike" within "#league_other_active_players"
     When mike match on league Amateur
-    Then mike should see "peter" within "#match_players"
-    And mike should see "mike" within "#match_players"
+    Then mike should see indicator of "peter" within "#match_players"
+    And mike should see indicator of "mike" within "#match_players"

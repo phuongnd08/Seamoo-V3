@@ -13,5 +13,11 @@
   .counter
     +adjust-font-size-to(2 * $base_font_size)
     color: $alt_color
+  button, input[type="button"], input[type="submit"]
+    +fancy-button($dark_alt_color, $base_font_size)
+  input[type="submit"].sad, button.sad
+    +fancy-button($complementary_color)
+  button.idontknow
+    padding: 0px
 @import question 
 @import players

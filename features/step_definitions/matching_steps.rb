@@ -201,22 +201,26 @@ Given /^(\w+) made (\d+) ((?:in)?correct) answers$/ do |username, number, correc
   match_user.save!
 end
 
-Given /^submitting answers will be delayed$/ do
+Given /^next question rendering will be delayed$/ do
   page.execute_script %{
-    $.old_ajax = $.ajax;
-    $.ajax = function(){
+    window.oldSetQuestion = window.setQuestion;
+    window.setQuestion = function(){
       var args = arguments;
-      window.ajaxDelayedCall = function(){
-        $.old_ajax.apply($, args);
+      window.setQuestionDelayedCall = function(){
+        window.oldSetQuestion.apply($, args);
       } 
     }
   }
 end
 
-Given /^submitting answers is resumed$/ do
+Given /^next question rendering is resumed$/ do
   page.execute_script %{
-    window.ajaxDelayedCall();
+    window.setQuestionDelayedCall();
   } 
+end
+
+Then /^\w+ should see indicator of "([^"]*)"$/ do |text|
+  page.should have_css("img[title='#{text}']")
 end
 
 

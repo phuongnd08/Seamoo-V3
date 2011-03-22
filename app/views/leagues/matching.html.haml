@@ -38,7 +38,7 @@
   var MAX_RETRIES = 20; 
 
   var statusHTML = #{['waiting', 'formed', 'started', 'you_finished'].inject({}){|hash, key| hash[key] = t "matches.#{key}"; hash}.to_json};
-  var avatarHTML = #{render(:partial => "users/avatar", :locals => { :avatar_size => '{avatar_size}', :avatar_url => '{avatar_url}', :text => '{text}'}).to_json};
+  var avatarHTML = #{render(:partial => "users/avatar", :locals => { :avatar_size => '{avatar_size}', :avatar_url => '{avatar_url}', :text => '{text}', :title => '{title}'}).to_json};
 
   $(function(){ 
     $('#leave_current_match_form').submit(function(){return confirm("Leave current match?");});
@@ -266,7 +266,7 @@
       $('#league_other_active_players').find('.no_players').hide();
       $('#league_other_active_players').find('.list').empty().show();
       $.each(otherActivePlayers, function(index, player){
-        $('#league_other_active_players ul.list').append(formatString(avatarHTML, $.extend({}, player, { text: player.display_name, avatar_size: 32 } )));
+        $('#league_other_active_players ul.list').append(formatString(avatarHTML, $.extend({}, player, { text: player.display_name, avatar_size: 32 , title: ""} )));
       });
     }
   }
@@ -298,7 +298,7 @@
           text = text.concat([" (", player.current_question_position + 1, "/", questionsPerMatch, ")"]);
         }
       }
-      var html = formatString(avatarHTML, $.extend({}, player, { avatar_size: 40, text: text.join("") }));
+      var html = formatString(avatarHTML, $.extend({}, player, { avatar_size: 40, title: text.join(""), text: "" }));
       var li = $(html);
       if (index > 0) li.addClass("notfirst");
       if (started){
