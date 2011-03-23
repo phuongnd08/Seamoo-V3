@@ -47,10 +47,6 @@ vi:
     Hint: Gợi ý
     Submit: Trả lời
 
-  user_sessions:
-    new:
-      sign_in_with: Đăng nhập với
-
   application:
     need_login: Bạn cần đăng nhập để truy cập vào trang này
     signin: đăng nhập
@@ -68,4 +64,16 @@ vi:
   common:
     join_now: Tham gia ngay
 
-  
+  user_sessions:
+    new:
+      sign_in_with: Đăng nhập với
+
+  user:
+    edit: Sửa
+  users:
+    show:
+      display_name: Tên hiển thị
+      email: Email
+      age: Tuổi
+      email_wont_be_shown: Email sẽ không được hiển thị, chỉ dùng cho gravatar
+ 

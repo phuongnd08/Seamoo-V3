@@ -1,8 +1,7 @@
 class User < ActiveRecord::Base
   include Gravtastic
   gravtastic :default => Styling.default_gravatar
-  acts_as_authentic do |c|
-  end
+  acts_as_authentic
 
   has_many :authorizations, :dependent => :destroy
   
@@ -11,5 +10,9 @@ class User < ActiveRecord::Base
       :display_name => user_info['name'],
       :email => user_info['email']
     )
+  end
+
+  def age
+    Time.now.year - self.date_of_birth.year
   end
 end

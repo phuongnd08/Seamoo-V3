@@ -42,10 +42,6 @@ en:
     Hint: Hint
     Submit: Submit
   
-  user_sessions:
-    new:
-      sign_in_with: Sign In With
-
   application:
     need_login: You need to login in order to access this page
     signin: sign in
@@ -62,5 +58,18 @@ en:
 
   common:
     join_now: Join now
+
+  user_sessions:
+    new:
+      sign_in_with: Sign In With
+
+  user:
+    edit: Edit
+  users:
+    show:
+      display_name: Display name
+      email: Email
+      age: Age
+      email_wont_be_shown: "Email won't be shown. Used for gravatar only"
 
     

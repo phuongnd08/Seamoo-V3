@@ -7,10 +7,6 @@ class Informer
   end
 end
 
-Before do
-  Informer.reset
-end
-
 class ApplicationController < ActionController::Base
   prepend_before_filter :set_user
   protected

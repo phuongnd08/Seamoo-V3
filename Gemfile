@@ -40,8 +40,7 @@ gem "fancy-buttons", ">=1.1.0.alpha.1"
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
-  gem 'rspec', ">= 2.0.0.beta.22"
-  gem 'rspec-rails', ">= 2.0.0.beta.22"
+  gem 'rspec-rails', "~> 2.5"
 end
 
 group :test do
@@ -52,7 +51,7 @@ group :test do
   gem 'cucumber-rails'
   gem 'spork'
   gem 'launchy'
-  gem 'capybara'
+  gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
   gem 'parallel'
   gem 'pickle'
   gem 'webmock', :require => false

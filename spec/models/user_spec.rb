@@ -30,4 +30,13 @@ describe User do
       @user.gravatar_url(:size => 40).should include("&s=40")
     end
   end
+
+  describe "age" do
+    before(:each) do
+      @user = Factory(:user, :date_of_birth => 10.years.ago)
+    end
+    it "should return offset between year of birth and current year" do
+      @user.age.should == 10  
+    end
+  end
 end

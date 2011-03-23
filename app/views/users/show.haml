@@ -1,0 +1,17 @@
+#info
+  .avatar
+    = image_tag @user.gravatar_url(:size => 96)
+  .entry
+    = t ".display_name"
+    %strong= @user.display_name
+  - if current_user == @user
+    .entry
+      = t ".email"
+      %strong= @user.email
+      = t ".email_wont_be_shown"
+  .entry
+    = t ".age"
+    %strong= @user.age
+  - if current_user == @user
+    .links
+      = link_to t("user.edit"), edit_user_path(@user)
