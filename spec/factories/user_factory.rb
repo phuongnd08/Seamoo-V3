@@ -2,6 +2,7 @@ Factory.define :user do |u|
   u.sequence(:email) {|n| "user#{n}@email.com"}
   u.sequence(:display_name) {|n| "user#{n}"}
   u.authorizations { |as| [as.association(:authorization)] }
+  u.date_of_birth 20.years.ago
 end
 
 Factory.define :bot do |u|

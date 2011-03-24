@@ -39,4 +39,35 @@ describe User do
       @user.age.should == 10  
     end
   end
+
+  describe "validation" do
+    before(:each) { @user = Factory.build(:user) }
+    describe "date_of_birth" do
+      it "should accept invalid value as nil" do
+        @user.date_of_birth = "x"
+        @user.date_of_birth.should be_nil
+      end
+
+      it "should accept proper date format as correct value" do
+        @user.date_of_birth = "2000/12/31"
+        @user.date_of_birth.should == Date.new(2000, 12, 31)
+      end
+    end
+
+    describe "display_name" do
+      it "should not accept empty value" do
+        @user.display_name = ""
+        @user.valid?
+        @user.errors[:display_name].should_not be_empty
+      end
+    end
+
+    describe "email" do
+      it "should not accept empty value" do
+        @user.email = ""
+        @user.valid?
+        @user.errors[:email].should_not be_empty
+      end
+    end
+  end
 end

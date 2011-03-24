@@ -1,0 +1,23 @@
+= form_for @user do |f|
+  -if @user.errors.any?
+    #errorExplanation
+      %h2= "#{pluralize(@user.errors.count, "error")} prohibited this league from being saved:"
+      %ul
+        - @user.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.label :display_name
+    = f.text_field :display_name
+  .field
+    = f.label :email
+    = f.text_field :email
+    .explanation
+      = t '.email_wont_be_shown'
+  .field
+    = f.label :date_of_birth
+    = f.text_field :date_of_birth, :value => @user.try(:date_of_birth).try(:strftime,'%Y/%m/%d')
+    .hint= t '.date_of_birth_format'
+    .explanation
+      = t '.date_of_birth_wont_be_shown'
+  .actions
+    = f.submit 'Save'

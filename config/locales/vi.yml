@@ -75,5 +75,8 @@ vi:
       display_name: Tên hiển thị
       email: Email
       age: Tuổi
-      email_wont_be_shown: Email sẽ không được hiển thị, chỉ dùng cho gravatar
+    edit:
+      email_wont_be_shown: sẽ không được hiển thị. Chỉ dùng cho gravatar
+      date_of_birth_wont_be_shown: sẽ không được hiển thị. Chỉ dùng để tính tuổi
+      date_of_birth_format: năm/tháng/ngày
  

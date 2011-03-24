@@ -9,9 +9,10 @@
       = t ".email"
       %strong= @user.email
       = t ".email_wont_be_shown"
-  .entry
-    = t ".age"
-    %strong= @user.age
+  - if @user.date_of_birth.present?
+    .entry
+      = t ".age"
+      %strong= @user.age
   - if current_user == @user
     .links
       = link_to t("user.edit"), edit_user_path(@user)
