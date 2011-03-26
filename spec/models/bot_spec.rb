@@ -10,12 +10,13 @@ describe Bot do
   describe "awake new" do
     it "should awake new bot" do
       Matching.stub(:bot_names).and_return(["abc", "xyz"])
+      Utils::RndGenerator.stub(:rnd).and_return(1, 0)
       Bot.awake_new
       Bot.awaken.count.should == 1
-      Bot.awaken.first.display_name.should == "abc"
+      Bot.awaken.first.display_name.should == "xyz"
       Bot.awake_new
       Bot.awaken.count.should == 2
-      Bot.awaken.last.display_name.should == "xyz"
+      Bot.awaken.last.display_name.should == "abc"
     end
 
     it "should return the new awakened bot" do
@@ -26,6 +27,8 @@ describe Bot do
     end
 
     it "should reset bot information about past match" do
+      #make sure same bot will be reused
+      Utils::RndGenerator.stub(:rnd).and_return(1)
       bot = Bot.awake_new
       Bot.kill(bot)
       bot.data[:match_id] = 1

@@ -5,7 +5,7 @@ module Utils
         rand
       end
 
-      def next(max, used)
+      def next(max, used = {})
         value = nil
         begin
           value = (rnd * max).round

@@ -27,7 +27,8 @@ class Bot < User
     end
 
     def awake_new
-      new_bot_name = (Matching.bot_names - awaken.map(&:display_name)).first
+      available_bot_names = (Matching.bot_names - awaken.map(&:display_name))
+      new_bot_name = available_bot_names[Utils::RndGenerator.next(available_bot_names.size - 1)]
       new_bot = find_or_create_by_display_name(
         :display_name => new_bot_name, 
         :email => new_bot_name + '@bot.com')
