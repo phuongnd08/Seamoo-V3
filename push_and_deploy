@@ -9,5 +9,6 @@ echo "RESTART"
 heroku restart
 echo "RESET MATCHES"
 heroku match:reset
+echo "START BOT"
 heroku rake match:start_bot
-
+echo "DONE"
