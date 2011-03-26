@@ -1,0 +1,35 @@
+=user_motif
+  +full(12)
+  &:after
+    clear: both
+    display: block
+    content: " "
+  .left
+    +columns(2, 12)
+    overflow-x: hidden
+  .right
+    +columns(10, 12)
+    +omega(12)
+.show_user
+  +user_motif
+
+div.edit_user
+  +user_motif
+  .left
+    .link
+      text-align: center
+  .right
+    .field
+      +full(10)
+      label
+        +full(10)
+        display: block
+      input[type=text]
+        +columns(6, 10)
+      .hint
+        +columns(4, 10)
+        +omega(10)
+      .explanation
+        +full(10)
+    input[type=submit]
+      +fancy-button

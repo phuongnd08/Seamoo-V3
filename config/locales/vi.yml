@@ -79,4 +79,8 @@ vi:
       email_wont_be_shown: sẽ không được hiển thị. Chỉ dùng cho gravatar
       date_of_birth_wont_be_shown: sẽ không được hiển thị. Chỉ dùng để tính tuổi
       date_of_birth_format: năm/tháng/ngày
+      edit_user: Sửa thông tin cá nhân của %{display_name}
+      save: Lưu
+      cancel: bỏ qua
+      change_gravatar: Đổi avatar
  

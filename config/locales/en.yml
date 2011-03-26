@@ -74,3 +74,7 @@ en:
       email_wont_be_shown: "won't be shown. Used for gravatar only"
       date_of_birth_wont_be_shown: "won't be shown. Used to calculate age"
       date_of_birth_format: year/month/day
+      edit_user: Edit %{display_name} profile
+      save: Save
+      cancel: cancel
+      change_gravatar: Change your avatar

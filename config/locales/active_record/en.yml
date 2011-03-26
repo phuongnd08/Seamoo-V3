@@ -3,5 +3,5 @@ en:
     attributes:
       user:
         date_of_birth: Date of birth
-      
+        display_name: Display name 
 

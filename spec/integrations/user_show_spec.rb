@@ -17,13 +17,13 @@ describe 'view phuong profile' do
       end
 
       it "should show age" do
-        within("#info") do
+        within(".show_user") do
           page.should have_content("Age 10")
         end
       end
 
       it "should have a link to edit user information" do
-        within("#info") do
+        within(".show_user") do
           edit_link = page.find(:xpath, XPath::HTML.link("Edit"))
           edit_link.should_not be_nil
           path_of(edit_link[:href]).should == edit_user_path(@phuong)
@@ -37,7 +37,7 @@ describe 'view phuong profile' do
         visit user_path(@phuong)
       end
       it "should not show age" do
-        within("#info") do
+        within(".show_user") do
           page.should_not have_content("Age")
         end
       end
@@ -56,7 +56,7 @@ describe 'view phuong profile' do
       visit user_path(@phuong)
     end
     it "should show some user information but not email" do
-      within("#info") do
+      within(".show_user") do
         page.should have_content("Display name phuong")
         page.should have_no_content("Email phuong@gmail.com")
         page.should have_content("Age 10")
@@ -64,7 +64,7 @@ describe 'view phuong profile' do
     end
 
     it "should not show a link to edit user information" do
-      within("#info") do
+      within(".show_user") do
         page.should have_no_xpath(XPath::HTML.link("Edit"))
       end
     end
