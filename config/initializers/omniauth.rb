@@ -10,7 +10,7 @@ Rails.application.config.middleware.use OmniAuth::Strategies::OpenID,
   #use OmniAuth::Strategies::OpenID, OpenID::Store::Filesystem.new('/tmp'), :name => "yahoo",   :identifier => "https://me.yahoo.com"
 
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :facebook, OauthSettings.facebook.app_id, OauthSettings.facebook.app_secret
+  provider :facebook, OauthSettings.facebook.app_id, OauthSettings.facebook.app_secret, :scope => OauthSettings.facebook.scope
   # provider :twitter,  'KEY', 'SECRET'
   # provider :linked_in, 'KEY', 'SECRET'
   provider :open_id, OpenID::Store::Memcache.new(Dalli::Client.new(MemcachedSettings.server, :namespace => MemcachedSettings.namespace))

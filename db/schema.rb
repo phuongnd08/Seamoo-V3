@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110323141426) do
+ActiveRecord::Schema.define(:version => 20110326043905) do
 
   create_table "authorizations", :force => true do |t|
     t.integer  "user_id"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(:version => 20110323141426) do
     t.string   "uid"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "omniauth"
   end
 
   create_table "categories", :force => true do |t|
@@ -67,6 +68,14 @@ ActiveRecord::Schema.define(:version => 20110323141426) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "status",      :default => "active"
+  end
+
+  create_table "links", :force => true do |t|
+    t.string   "name"
+    t.string   "url"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "match_questions", :force => true do |t|

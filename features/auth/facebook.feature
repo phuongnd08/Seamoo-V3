@@ -10,7 +10,9 @@ Feature: Login using Facebook Connect
     And I follow "Facebook"
     Then I should be on the secured home index page
     And I should see link "Seamoo Test"
-    And a user should exist with display_name: "Seamoo Test", email: "seamoo.test@fbmail.com"
+    And a user should exist with display_name: "Seamoo Test", email: "seamoo.test@fbmail.com", date_of_birth: "1990/1/1"
+    And an authorization should exist with user: the user, provider: "facebook", uid: "seamoo.test"
+    And a link should exist with user: the user, name: "Facebook", url: "http://www.facebook.com/seamoo.test"
 
   Scenario: Relogin using Facebook Account
     Given I am recognized as facebook user "Seamoo Test"

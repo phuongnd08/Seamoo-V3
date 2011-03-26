@@ -21,8 +21,15 @@ Given /^I am recognized as facebook user "([^"]*)"$/ do |name|
       "name" => name,
       "last_name" => last_name,
       "first_name" => first_name,
-      "email" => "#{id}@fbmail.com"
+      "email" => "#{id}@fbmail.com",
+      "urls" => {"Facebook"=>"http://www.facebook.com/#{id}", "Website"=>nil},
+      "image" => "http://graph.facebook.com/581175558/picture?type=square"
     }, 
+    "extra" => {
+      "user_hash" => {
+        "birthday" => "01/01/1990"
+      }
+    },
     "uid" => id,
     "provider" => "facebook"
   }

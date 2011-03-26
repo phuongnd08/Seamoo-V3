@@ -3,6 +3,7 @@ require 'spec_helper'
 describe User do
   describe "relationships" do
     it{should have_many(:authorizations)}
+    it{should have_many(:links)}
   end
 
   describe "destroy" do
