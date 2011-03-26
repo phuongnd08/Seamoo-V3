@@ -20,7 +20,7 @@
       %ul
         %li.disabled
           = link_to t(".training"), '#'
-        %li
-          = link_to t(".users"), users_path
-        %li.youarehere
+        %li.disabled
+          = link_to t(".users"), '#'
+        %li{:class => in_competition_system? ? "youarehere" : ""}
           = link_to t(".competition_system"), root_path

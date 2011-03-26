@@ -14,4 +14,12 @@ module ApplicationHelper
   def site_name
     render('misc/site_name')
   end
+
+  def in_competition_system?
+    ["categories", "leagues", "matches"].include?(params[:controller]) || in_home_page?
+  end
+
+  def in_home_page?
+    params[:controller] == "home" && params[:action] == "index"
+  end
 end
