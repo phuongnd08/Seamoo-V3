@@ -8,7 +8,7 @@ heroku rake db:migrate
 echo "RESTART"
 heroku restart
 echo "RESET MATCHES"
-heroku match:reset
+heroku rake match:reset
 echo "START BOT"
 heroku rake match:start_bot
 echo "DONE"
