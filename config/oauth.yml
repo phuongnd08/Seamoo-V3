@@ -6,8 +6,8 @@ development: &development
 test:
   <<: *development
 production:
-  <<: *development
   facebook:
     app_id: "124666697598786"
     app_secret: "6d75c0c023e7dbc9dd009f1140c93e79"
+    scope: email,user_birthday
 
