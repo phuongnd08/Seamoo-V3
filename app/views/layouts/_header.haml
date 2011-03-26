@@ -6,8 +6,8 @@
       %a.site_name{:href => root_path}= site_name
       .slogan= t("application.slogan")
       .langbar
-        = link_to "English", url_for(params.merge({:locale => :en, :only_path => true})), :class => "en"
-        = link_to "Tiếng Việt", url_for(params.merge({:locale => :vi, :only_path => true})), :class => "vi"
+        = link_to image_tag("languages/en.png"), url_for(params.merge({:locale => :en, :only_path => true})), :title => "English"
+        = link_to image_tag("languages/vi.png"), url_for(params.merge({:locale => :vi, :only_path => true})), :title => "Tiếng Việt"
   .right
     .user_info
       - if current_user
