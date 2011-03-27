@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe BotRunnerJob do
+describe BotRunnerJob, :memcached => true do
   describe "perform" do
     before(:each) do
       Matching.stub(:bot_life_time).and_return(0)

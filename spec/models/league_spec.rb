@@ -6,7 +6,7 @@ describe League do
     it { should have_many(:matches)}
   end
 
-  describe "dynamic accessor" do
+  describe "dynamic accessor", :memcached => true do
     before(:each) do
       @league = League.create!(:level => 0)
     end
@@ -23,7 +23,7 @@ describe League do
     end
   end
 
-  describe "coordinate requests in league" do# {{{
+  describe "coordinate requests in league", :memcached => true do# {{{
     before(:each) do
       @category = Factory(:category)
       @user1 = Factory(:user)

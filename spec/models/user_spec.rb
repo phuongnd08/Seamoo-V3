@@ -4,6 +4,7 @@ describe User do
   describe "relationships" do
     it{should have_many(:authorizations)}
     it{should have_many(:links)}
+    it{should have_many(:memberships)}
   end
 
   describe "destroy" do

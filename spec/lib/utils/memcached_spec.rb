@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Utils::Memcached do
+describe Utils::Memcached, :memcached => true do
   before(:each) do
     @common_mod = Class.new.extend(Utils::Memcached::Common)
   end

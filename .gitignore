@@ -7,3 +7,4 @@ database.yml
 *.swp
 *.swo
 tags
+features/screenshots/

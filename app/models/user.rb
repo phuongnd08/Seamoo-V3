@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 
   has_many :authorizations, :dependent => :destroy
   has_many :links, :dependent => :destroy
+  has_many :memberships, :dependent => :destroy
 
   def self.create_from_omni_info(user_info)
     user = User.create(
