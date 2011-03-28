@@ -25,20 +25,11 @@
 
 =main_link
   font-size: 120%
-  a, a:link, a:visited
-    background: $dark_alt_color
+  a
+    +common-button($alt2_color)
     display: block
     float: left
     text-decoration: none
-    span
-      color: $lightest_complementary_color
-      display: block
-      font-weight: bold
-      padding: 3px 6px 3px 6px
-      text-decoration: none
-  a:hover
-    span
-      background-color: $alt2_color// }}}
   &:after
     clear: both
     content: " "
@@ -91,26 +82,21 @@
       ul
         margin: 0
         li
-          background: $dark_alt_color
           display: block
           float: right
           margin-left: 7px
           a
-            color: $lightest_complementary_color
+            +common-button($alt_color)
             display: block
-            font-weight: bold
-            padding: 3px 6px 3px 6px
-            text-decoration: none
         li.youarehere
-          background: $alt2_color
-        li:hover
-          background-color: $alt2_color
+          a
+            +common-button-structure
+            +fancy-button-colors(adjust-hue($alt_color, -120), adjust-hue($alt_color, -120), darken(adjust-hue($alt_color, -120), 6))
         li.disabled 
-          background-color: silver
           a
             cursor: default
-        li.disabled:hover
-          background-color: silver
+            +common-button-structure
+            +disable-fancy-button($light_base_color)
   .topbar
     +columns(8, 12)
     +omega(12)

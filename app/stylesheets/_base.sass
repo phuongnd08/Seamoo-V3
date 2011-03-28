@@ -39,3 +39,11 @@ $alt2: #ff9600
 // OTHER MIXINS --------------------------------------------------------------
 // Mixins set here will be available in defaults, screen, print and IE
 // Or anywhere you import either base.sass or defaults.sass
+=common-button-structure
+  +fancy-button-structure($base_font_size, 1em, 1px)
+=common-button($color, $disabled_color: $lighter_base_color)
+  +common-button-structure
+  +fancy-button-colors($color, adjust-hue($color, -120), darken(adjust-hue($color, -120), 6))
+  &[disabled]
+    +disable-fancy-button($disabled_color)
+

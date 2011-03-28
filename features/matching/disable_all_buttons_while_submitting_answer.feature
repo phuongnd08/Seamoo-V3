@@ -34,7 +34,7 @@ Feature: Disable al buttons while submitting answer
     And mike should be able to press "Option #a"
     And mike should be able to press "ignore"
 
-  Scenario: Disable buttons & inputs for multiple choice
+  Scenario: Disable buttons & inputs for follow pattern
     Given league Amateur has 3 follow pattern questions 
     When mike match on league Amateur
     Then mike should see "Waiting for other players"
@@ -50,6 +50,7 @@ Feature: Disable al buttons while submitting answer
     Then mike should not be able to edit "answer"
     And mike should not be able to press "Submit"
     And mike should not be able to press "ignore"
+    And I pause
     Given next question rendering is resumed
     Then mike should be able to edit "answer"
     And mike should be able to press "Submit"

@@ -21,9 +21,14 @@ class MatchUser < ActiveRecord::Base
   end
 
   def score
-    (0...match.questions.size).map do |index|
-      match.questions[index].data.score_for(answers[index])
-    end.sum
+    value = super
+    if value.nil?
+      value = self.score = (0...match.questions.size).map do |index|
+        match.questions[index].data.score_for(answers[index])
+      end.sum
+      self.save
+    end
+    value
   end
 
   def score_as_percent

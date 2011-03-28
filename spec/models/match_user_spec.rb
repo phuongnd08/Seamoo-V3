@@ -21,7 +21,7 @@ describe MatchUser do
       @match_user = MatchUser.new(:match => @match)
     end
 
-    describe "answers" do
+    describe "answers" do# {{{
       it "should default to empty hash" do
         MatchUser.new.answers.should == {}
       end
@@ -32,7 +32,7 @@ describe MatchUser do
         @match_user.save!
         @match_user.reload.answers.should == {1 => "0"}
       end
-    end
+    end# }}}
 
     describe "add_answer" do# {{{
       it "should generate a hash entry" do
