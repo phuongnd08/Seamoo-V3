@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110327100218) do
+ActiveRecord::Schema.define(:version => 20110328155740) do
 
   create_table "authorizations", :force => true do |t|
     t.integer  "user_id"
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(:version => 20110327100218) do
     t.datetime "updated_at"
     t.integer  "current_question_position", :default => 0
     t.text     "answers"
+    t.boolean  "recorded",                  :default => false
   end
 
   create_table "matches", :force => true do |t|

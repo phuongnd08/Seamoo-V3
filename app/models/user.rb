@@ -28,4 +28,8 @@ class User < ActiveRecord::Base
   def age
     Time.now.year - self.date_of_birth.year
   end
+
+  def membership_in(league)
+    memberships.where(:league_id => league.id).first
+  end
 end

@@ -72,4 +72,18 @@ describe User do
       end
     end
   end
+
+  describe "membership_in" do
+    before(:each) do
+      @user = Factory(:user) 
+      @league1 = Factory(:league) 
+      @league2 = Factory(:league) 
+      @membership1 = Membership.create(:user => @user, :league=> @league1)
+      @membership2 = Membership.create(:user => @user, :league=> @league2)
+    end
+    it "should return the membership in the given league" do
+      @user.membership_in(@league1).should == @membership1
+      @user.membership_in(@league2).should == @membership2
+    end
+  end
 end

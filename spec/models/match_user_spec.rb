@@ -16,6 +16,7 @@ describe MatchUser do
   describe "deal with questions" do
     before(:each) do
       #create the match with 3 questions
+      @league = mock_model(League)
       @match = mock_model(Match)
       @match.stub(:questions).and_return(['q0', 'q1', 'q2'])
       @match_user = MatchUser.new(:match => @match)
@@ -93,7 +94,7 @@ describe MatchUser do
         end
       end
     end# }}}
-    describe "score" do
+    describe "score" do# {{{
       before(:each) do
         Matching.stub(:questions_per_match).and_return(3)
         @category = Factory(:category)
@@ -123,6 +124,22 @@ describe MatchUser do
           @match_user.score_as_percent.should == 67 
         end
       end
-    end
+      describe "record" do
+        before(:each) do
+          @membership = Membership.new
+          @user.should_receive(:membership_in).with(@league).and_return(@membership)
+          @match_user.record
+        end
+        it "should mark itself as recorded" do
+          @match_user.reload.recorded.should be_true
+        end
+
+        it "should change user membership score" do
+          @membership.reload
+          @membership.matches_count.should == 1
+          @membership.matches_score.should == 67
+        end
+      end
+    end# }}}
   end
 end
