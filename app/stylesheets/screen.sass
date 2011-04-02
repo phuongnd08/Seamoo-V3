@@ -10,8 +10,18 @@
 
 +susy
 
-// change '.container' to match your HTML container element
-// or @extend it to apply multiple containers on your site.
+// return symetric color
+@function symetric($color)
+  @return adjust-hue($color, -120)
+
+=common-button-structure
+  +fancy-button-structure($base_font_size, 1em, 1px)
+=common-button($color, $disabled_color: $lighter_base_color)
+  +common-button-structure
+  +fancy-button-colors($color, symetric($color), darken(symetric($color), 6))
+  &[disabled]
+    +disable-fancy-button($disabled_color)
+
 .container
   +container
   +show-grid("grid.png")
@@ -167,3 +177,4 @@
 @import matching
 @import match_result
 @import users
+@import pagination

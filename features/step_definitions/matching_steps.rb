@@ -14,7 +14,7 @@ def create_match_for_users(league, users)
 end
 
 Given /^these users$/ do |table|
-  table.raw.each{|row| User.create!(:display_name => row.first, :email => row.first + "@seamoo.com")}
+  table.raw.each{|row| User.create!(:display_name => row.first, :email => row.first + "@#{Site.domain}")}
 end
 
 Given /^category (\w+) is available$/ do |category_name|

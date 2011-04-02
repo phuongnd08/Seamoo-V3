@@ -1,7 +1,9 @@
 development: &development
   default_gravatar: wavatar
+  memberships_per_page: 5
 test: 
   <<: *development
 
 production: 
   <<: *development
+  memberships_per_page: 20

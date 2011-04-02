@@ -1,17 +1,17 @@
 ==Setting up testing environment
 Enable proxy & proxy_http modules for apache (by symlink proxy.load & proxy_http.load from /etc/apache2/mods-available/ to /etc/apache2/mods-enabled/
-Set up proxy for seamoo-1.local.com to seamoo-8.local.com (since parallel tests will running on 8 domains simultaneously)
+Set up proxy for dautri-1.local.com to dautri-8.local.com (since parallel tests will running on 8 domains simultaneously)
 Example settings:
 
 				<VirtualHost *:80>
-				ServerName seamoo.local.com
-				ServerAdmin admin@seamoo.local.com
+				ServerName dautri.local.com
+				ServerAdmin admin@dautri.local.com
 				ProxyPreserveHost On
 				ProxyPass / http://localhost:3000/
 				ProxyPassReverse / http://localhost:3000/
 				</VirtualHost>
 
-Change /etc/hosts also to map seamoo-x.local.com to localhost
+Change /etc/hosts also to map dautri-x.local.com to localhost
 ==Importing data
 Data file is located at data/
 To import a file, rake data:import FILE=filename CATEGORY=category_id LEVEL=level

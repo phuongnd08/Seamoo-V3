@@ -4,6 +4,7 @@ describe League do
   describe "relationships" do
     it { should belong_to(:category)}
     it { should have_many(:matches)}
+    it { should have_many(:memberships)}
   end
 
   describe "dynamic accessor", :memcached => true do

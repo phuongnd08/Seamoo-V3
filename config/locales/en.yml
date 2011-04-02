@@ -2,6 +2,8 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  next: Next
+  previous: Prev
   layouts:
     application:
     header:
@@ -27,6 +29,13 @@ en:
       correct_answer: correct answer
       rematch: "Let's match again"
   leagues:
+    show:
+      rank: Rank
+      member: Member
+      score: Score
+      matches: Matches
+      rank_score: Index
+      start: Start
     matching:
       welcome: Welcome to %{name}
       lets_match: "Let's match"
@@ -34,8 +43,6 @@ en:
       League_other_active_players: Other players in league
       Some_maybe_around: Some other players maybe around
       leave_current_match: Leave current match
-    show:
-      start: Start
   questions:
     question_position: Question %{current}/%{total}
     ignore_current_question: Ignore this question

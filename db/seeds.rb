@@ -24,7 +24,7 @@ math = Category.create!(
   :status => 'coming_soon'
 )
 
-League.create!(
+english_eggs = League.create!(
   :category => english, 
   :alias => 'english_eggs',
   :name => 'Basic English',
@@ -85,5 +85,7 @@ Question.create_multiple_choices(
   {:category => english, :level => 0}
 )
 
-User.create(:display_name => "phuong", :email => "phuong@seamoo.com")
-User.create(:display_name => "hung", :email => "hung@seamoo.com")
+["phuong", "hung", "thuc", "trien", "toan", "quan", "tien", "huy", "cuong", "mai", "thuy", "hoa"].each_with_index do |name, index|
+  user = User.create(:display_name => name, :email => "#{name}@#{Site.domain}")
+  Membership.create(:league => english_eggs, :user => user, :matches_count => index, :matches_score => index * 75)
+end

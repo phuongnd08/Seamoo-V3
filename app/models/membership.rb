@@ -2,6 +2,8 @@ class Membership < ActiveRecord::Base
   belongs_to :user
   belongs_to :league
   before_save :calculate_rank_score
+  cattr_accessor :per_page
+  @@per_page = Styling.memberships_per_page
 
   def add_match_score(score)
     self.update_attributes(:matches_score => self.matches_score + score, :matches_count => self.matches_count + 1)

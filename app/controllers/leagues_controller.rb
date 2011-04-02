@@ -5,7 +5,9 @@ class LeaguesController < ApplicationController
     @leagues = League.all
   end
 
-  def show; end
+  def show
+    @membership = @league.memberships.paginate :per_page => Membership.per_page, :page => params[:page], :order => 'rank_score DESC'
+  end
 
   def matching; end
 

@@ -5,7 +5,7 @@ class TestEnv
     end
 
     def host
-      @host ||= "seamoo#{number}.local.com"
+      @host ||= "#{Site.name}#{number}.local.com"
     end
   end
 end

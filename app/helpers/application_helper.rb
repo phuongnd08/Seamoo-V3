@@ -22,4 +22,16 @@ module ApplicationHelper
   def in_home_page?
     params[:controller] == "home" && params[:action] == "index"
   end
+
+  def avatar(user, size)
+    image_tag user.gravatar_url(:size => size), :size => "#{size}x#{size}"
+  end
+
+  include WillPaginate::ViewHelpers::ActionView
+ 
+  def will_paginate_with_i18n(collection, options = {}) 
+    will_paginate_without_i18n(collection, options.merge(:previous_label => I18n.t(:previous), :next_label => I18n.t(:next))) 
+  end
+
+  alias_method_chain :will_paginate, :i18n
 end

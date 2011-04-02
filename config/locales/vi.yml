@@ -2,6 +2,8 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 vi:
+  next: Kế tiếp
+  previous: Kế trước
   layouts:
     application:
       competition_system: Hệ thống thi đấu
@@ -32,6 +34,13 @@ vi:
       correct_answer: câu trả lời đúng
       rematch: Đấu trận khác
   leagues:
+    show:
+      rank: Thứ hạng
+      member: Thành viên
+      score: Tổng điểm
+      matches: Số trận
+      rank_score: Chỉ số
+      start: Bắt đầu
     matching:
       welcome: Chào mừng đến với %{name}
       lets_match: Chiến đấu thôi
@@ -39,8 +48,6 @@ vi:
       League_other_active_players: Những người chơi khác trong cùng giải đấu
       Some_maybe_around: Những người chơi khác có thể vẫn còn đâu đây
       leave_current_match: Bỏ trận đấu
-    show:
-      start: Bắt đầu
   questions:
     question_position: Câu hỏi %{current}/%{total}
     ignore_current_question: Bỏ qua câu hỏi này
@@ -83,4 +90,3 @@ vi:
       save: Lưu
       cancel: bỏ qua
       change_gravatar: Đổi avatar
- 

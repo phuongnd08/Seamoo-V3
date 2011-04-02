@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Bot, :memcached => true do
   describe "avatar" do
     it "should have gravatar like users" do
-      Bot.new(:email => "bot@seamoo.com").gravatar_url.should_not be_nil
+      Bot.new(:email => "bot@#{Site.domain}").gravatar_url.should_not be_nil
     end
   end
 

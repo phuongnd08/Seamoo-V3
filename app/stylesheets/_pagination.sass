@@ -1,0 +1,26 @@
+.pagination
+  :text-align left
+  :padding .3em .3em .3em 0em
+  a, span
+    :padding .2em .5em
+  span.disabled
+    :color $lighter_base_color
+  em
+    :font-weight bold
+    :color $alt_color
+  a
+    :border 1px solid $light_base_color
+    :color $alt2_color
+    :text-decoration none
+    &:hover, &:focus
+      :border-color $dark_base_color
+      :color $alt_color
+  .page_info
+    :color #aaa
+    :padding-top .8em
+  .prev_page, .next_page
+    :border-width 2px
+  .prev_page
+    :margin-right 1em
+  .next_page
+    :margin-left 1em

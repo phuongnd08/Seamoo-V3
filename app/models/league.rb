@@ -1,6 +1,7 @@
 class League < ActiveRecord::Base
   belongs_to :category
   has_many :matches
+  has_many :memberships
   validates :status, :inclusion => { :in => ['active', 'coming_soon'] }
 
   def available?
