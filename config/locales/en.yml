@@ -58,6 +58,8 @@ en:
     signed_out: You have signed out
     welcome: Welcome to dautri.net, %{display_name}
     welcome_back: Welcome back, %{display_name}
+    signin_error:
+      email_used: "Cannot log you in because email %{email} is already registered for another user. Perhaps it's just you, but in different service (Facebook/Google). Please try again"
 
   home:
     index:

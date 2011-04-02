@@ -15,9 +15,21 @@ class AuthorizationsController < ApplicationController
       UserSession.create(auth.user, true) #User is present. Login the user with his social account
     else
       user = User.create_from_omni_info(user_info)
-      user.authorizations.create(:provider => provider, :uid => uid)
+      if user.valid?
+      user.authorizations.create(:provider => provider, :uid => uid, :omniauth => omniauth)
       flash[:notice] = t "application.welcome", :display_name => user.display_name
       UserSession.create(user, true) #Log the authorizing user in.
+      else
+        if user.errors[:email].present?
+          flash[:error] = t "application.signin_error.email_used", :email => user.email
+          Rails.logger.warn("Cannot log user in")
+          Rails.logger.warn(user.to_yaml)
+          redirect_to signin_path
+          return
+        else
+          raise "Cannot log you in"
+        end
+      end
     end
 
     redirect_to get_and_reset_return_url

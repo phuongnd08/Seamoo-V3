@@ -26,12 +26,17 @@
   +container
   +show-grid("grid.png")
 
-.notice
+=flash
   +full
-  border: solid 2px
   background-color: $dark_alt_color
-  color: $lightest_complementary_color
   text-align: center
+
+.notice
+  +flash
+  color: $lightest_complementary_color
+.error
+  +flash
+  color: red
 
 =main_link
   font-size: 120%

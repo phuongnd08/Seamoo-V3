@@ -63,6 +63,8 @@ vi:
     signed_out: Bạn đã đăng xuất
     welcome: Mừng bạn đến với dautri.net, %{display_name}
     welcome_back: Mừng bạn quay lại, %{display_name}
+    signin_error:
+      email_used: Bạn không thể đăng nhập vì email %{email} đã được đăng kí cho thành viên khác. Có thể đó chính là bạn, nhưng trên một dịch vụ khác (Google/Facebook). Vui lòng thử lại.
 
   home:
     index:
