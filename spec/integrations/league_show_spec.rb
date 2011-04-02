@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "League show page", :js => true do
+describe "League show page" do
   before(:each) do
     Membership.stub(:per_page).and_return(5)
     @league = Factory(:league)

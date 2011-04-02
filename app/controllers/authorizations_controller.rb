@@ -24,6 +24,7 @@ class AuthorizationsController < ApplicationController
           flash[:error] = t "application.signin_error.email_used", :email => user.email
           Rails.logger.warn("Cannot log user in")
           Rails.logger.warn(user.to_yaml)
+          Rails.logger.warn(omniauth.to_yaml)
           redirect_to signin_path
           return
         else

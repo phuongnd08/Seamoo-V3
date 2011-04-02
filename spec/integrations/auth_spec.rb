@@ -41,7 +41,7 @@ describe "Authorization" do
     end
 
     describe "Using emails that already exists" do
-      it "should notify user gratefully", :js => true do
+      it "should notify user gratefully" do
         User.create(:email => "test@google.com", :display_name => "Test_User").
           authorizations.create(:provider => "some_provider", :uid => "some uid")
         click_link("Google")
@@ -85,7 +85,7 @@ describe "Authorization" do
     end
 
     describe "Second Time" do
-      it "should welcome user back", :js => true do
+      it "should welcome user back" do
         User.create(:email => "test@facebook.com", :display_name => "Test User").
           authorizations.create(:provider => "facebook", :uid => "http://www.facebook.com/test")
         click_link("Facebook")
