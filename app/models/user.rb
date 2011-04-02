@@ -30,6 +30,6 @@ class User < ActiveRecord::Base
   end
 
   def membership_in(league)
-    memberships.where(:league_id => league.id).first
+    Membership.find_or_create_by_league_id_and_user_id(:league_id => league.id, :user_id => self.id)
   end
 end

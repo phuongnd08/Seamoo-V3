@@ -22,7 +22,7 @@ describe MatchUser do
       @match_user = MatchUser.new(:match => @match)
     end
 
-    describe "answers" do# {{{
+    describe "answers" do
       it "should default to empty hash" do
         MatchUser.new.answers.should == {}
       end
@@ -33,9 +33,9 @@ describe MatchUser do
         @match_user.save!
         @match_user.reload.answers.should == {1 => "0"}
       end
-    end# }}}
+    end
 
-    describe "add_answer" do# {{{
+    describe "add_answer" do
       it "should generate a hash entry" do
         @match_user.add_answer(0, 'abc')
         @match_user.add_answer(2, 'xyz')
@@ -58,8 +58,8 @@ describe MatchUser do
         @match_user.current_question_position.should == 3
       end
     end
-    # }}}
-    describe "finished" do# {{{
+    
+    describe "finished" do
       it "should return value according to whether finished_at is set" do
         @match_user.finished_at = nil
         @match_user.should_not be_finished
@@ -67,8 +67,8 @@ describe MatchUser do
         @match_user.should be_finished
       end
     end
-    # }}}
-    describe "current_question" do# {{{
+    
+    describe "current_question" do
       it "should return according to current_question_position" do
         @match_user.current_question_position= 0
         @match_user.current_question.should == "q0" 
@@ -76,8 +76,8 @@ describe MatchUser do
         @match_user.current_question.should == "q1" 
       end
     end
-    # }}}
-    describe "after_save" do# {{{
+    
+    describe "after_save" do
       describe "match user finished" do
         it "should request match to check if it has finished" do
           @match.should_receive(:check_if_finished!)
@@ -93,23 +93,13 @@ describe MatchUser do
           @match_user.save
         end
       end
-    end# }}}
-    describe "score" do# {{{
+    end
+    describe "score" do
       before(:each) do
         Matching.stub(:questions_per_match).and_return(3)
-        @category = Factory(:category)
+        @match= Factory(:match)
         @user = Factory(:user)
-        @questions = []
-        (1..3).each do |t|
-          @questions << Factory(:question, :level => 0, :category => @category)
-        end
-
-        @league = League.create!(:level => 0, :category => @category)
-        @questions.each{|q| q.data.options[0].update_attribute(:correct, true)}
-        match = Match.create(:league => @league)
-        @match_user = MatchUser.create(:match => match, :user => @user)
-        match.questions = Question.all[0..2]
-        match.save
+        @match_user = MatchUser.create(:match => @match, :user => @user)
         @match_user.add_answer(0, '0')
         @match_user.add_answer(1, '1')
         @match_user.add_answer(1, '0')
@@ -124,22 +114,38 @@ describe MatchUser do
           @match_user.score_as_percent.should == 67 
         end
       end
-      describe "record" do
+      describe "record!" do
         before(:each) do
-          @membership = Membership.new
-          @user.should_receive(:membership_in).with(@league).and_return(@membership)
-          @match_user.record
+          @membership = Membership.create(:user => @user, :league => @match.league)
         end
-        it "should mark itself as recorded" do
-          @match_user.reload.recorded.should be_true
+        describe "when not recorded" do
+          before(:each) do
+            @match_user.record!
+          end
+
+          it "should mark itself as recorded" do
+            @match_user.reload.recorded.should be_true
+          end
+
+          it "should change user membership score" do
+            @membership.reload
+            @membership.matches_count.should == 1
+            @membership.matches_score.should == 67
+          end
         end
 
-        it "should change user membership score" do
-          @membership.reload
-          @membership.matches_count.should == 1
-          @membership.matches_score.should == 67
+        describe "when recorded" do
+          before(:each) do
+            @match_user.recorded = true
+            @match_user.record!
+          end
+          it "should not change user membership score" do
+            @membership.reload
+            @membership.matches_count.should == 0
+            @membership.matches_score.should == 0
+          end
         end
       end
-    end# }}}
+    end
   end
 end

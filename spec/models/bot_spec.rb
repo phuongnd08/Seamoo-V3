@@ -42,6 +42,7 @@ describe Bot, :memcached => true do
 
   describe "run" do
     before(:each) do
+      Matching.started_after #trigger settings logic accessor initilization to prevent re-override rspec stub
       Matching.stub(:started_after).and_return(5)
       Matching.stub(:bot_time_per_question).and_return(5)
       Matching.stub(:bot_correctness).and_return(0.8)

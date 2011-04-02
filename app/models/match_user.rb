@@ -35,10 +35,12 @@ class MatchUser < ActiveRecord::Base
     (score * 100.0 / match.questions.size).round
   end
 
-  def record
-    membership = self.user.membership_in(self.match.league)
-    membership.record_match_result(self.score_as_percent)
-    self.update_attribute(:recorded, true)
+  def record!
+    unless self.recorded
+      membership = self.user.membership_in(self.match.league)
+      membership.add_match_score(self.score_as_percent)
+      self.update_attribute(:recorded, true)
+    end
   end
 
   protected

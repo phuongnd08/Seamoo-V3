@@ -7,6 +7,9 @@ class MatchesController < ApplicationController
 
   def show
     @hide_all_answers = @match.users.exclude?(current_user)
+    unless @hide_all_answers
+      @match.match_users.detect{|mu| mu.user == current_user}.record!
+    end
   end
 
   def infor

@@ -15,9 +15,9 @@ describe Membership do
       it { @membership.rank_score.should == 0 }
     end
 
-    describe "record_match_result" do
+    describe "add match score" do
       it "should update matches count and matches score" do
-        @membership.record_match_result(4)
+        @membership.add_match_score(4)
         @membership.matches_count.should == 1
         @membership.matches_score.should == 4
       end

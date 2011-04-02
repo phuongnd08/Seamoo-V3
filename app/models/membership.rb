@@ -3,7 +3,7 @@ class Membership < ActiveRecord::Base
   belongs_to :league
   before_save :calculate_rank_score
 
-  def record_match_result(score)
+  def add_match_score(score)
     self.update_attributes(:matches_score => self.matches_score + score, :matches_count => self.matches_count + 1)
   end
 

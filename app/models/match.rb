@@ -36,7 +36,7 @@ class Match < ActiveRecord::Base
   end
 
   def fetch_questions
-    self.questions = league.random_questions(Matching.questions_per_match)
+    self.questions = league.random_questions(Matching.questions_per_match) if self.questions.empty?
   end
 
   def check_if_finished!

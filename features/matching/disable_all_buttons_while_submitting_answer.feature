@@ -50,7 +50,6 @@ Feature: Disable al buttons while submitting answer
     Then mike should not be able to edit "answer"
     And mike should not be able to press "Submit"
     And mike should not be able to press "ignore"
-    And I pause
     Given next question rendering is resumed
     Then mike should be able to edit "answer"
     And mike should be able to press "Submit"

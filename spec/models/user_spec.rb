@@ -85,5 +85,9 @@ describe User do
       @user.membership_in(@league1).should == @membership1
       @user.membership_in(@league2).should == @membership2
     end
+
+    it "should create the membership incase not exists" do
+      @user.membership_in(Factory(:league)).should_not be_nil
+    end
   end
 end

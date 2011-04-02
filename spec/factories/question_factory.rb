@@ -4,7 +4,7 @@ end
 
 Factory.define :multiple_choice do |m|
   m.sequence(:content) {|n| "Multiple choice \##{n}"}
-  m.options { |os| [os.association(:multiple_choice_option), os.association(:multiple_choice_option)] }
+  m.options { |os| [os.association(:multiple_choice_option, :correct => true), os.association(:multiple_choice_option)] }
 end
 
 Factory.define :multiple_choice_option do |o|
