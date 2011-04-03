@@ -9,18 +9,20 @@ describe Bot, :memcached => true do
 
   describe "awake new" do
     it "should awake new bot" do
-      Matching.stub(:bot_names).and_return(["abc", "xyz"])
+      Matching.stub(:bots).and_return({"abc" => "Abc User", "xyz" => "xyz"})
       Utils::RndGenerator.stub(:rnd).and_return(1, 0)
       Bot.awake_new
       Bot.awaken.count.should == 1
       Bot.awaken.first.display_name.should == "xyz"
+      Bot.awaken.first.email.should == "xyz@#{Site.bot_domain}"
       Bot.awake_new
       Bot.awaken.count.should == 2
-      Bot.awaken.last.display_name.should == "abc"
+      Bot.awaken.last.display_name.should == "Abc User"
+      Bot.awaken.last.email.should == "abc@#{Site.bot_domain}"
     end
 
     it "should return the new awakened bot" do
-      Matching.stub(:bot_names).and_return(["abc", "xyz"])
+      Matching.stub(:bots).and_return({"abc" => "abc", "xyz" => "xyz"})
       bot = Bot.awake_new
       bot.is_a?(Bot).should be_true
       Bot.find(bot.id).should == bot

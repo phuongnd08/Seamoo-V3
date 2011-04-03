@@ -9,4 +9,4 @@ development: &development
   namespace: dev
 test:
   <<: *development
-  namespace: test<%=(ENV["TEST_ENV_NUMBER"] || 0).to_i + 1%>
+  namespace: test<%=(ENV["TEST_ENV_NUMBER"] || -1).to_i + 1%>

@@ -27,10 +27,10 @@ class Bot < User
     end
 
     def awake_new
-      available_bot_names = (Matching.bot_names - awaken.map(&:display_name))
+      available_bot_names = (Matching.bots.keys - awaken.map(&:display_name))
       new_bot_name = available_bot_names[Utils::RndGenerator.next(available_bot_names.size - 1)]
       new_bot = find_or_create_by_display_name(
-        :display_name => new_bot_name, 
+        :display_name => Matching.bots[new_bot_name], 
         :email => new_bot_name + "@#{Site.bot_domain}")
         data[:awaken_ids] = (data[:awaken_ids] || []) + [new_bot.id]
         new_bot.data[:match_id] = nil

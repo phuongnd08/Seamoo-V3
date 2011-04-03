@@ -21,7 +21,9 @@ Given /^\w+ will confirm "([^"]*)"$/ do |msg|
 end
 
 Then /^\w+ should( not)? be able to see "([^"]*)"$/ do |negative, selector|
-  page.evaluate_script("$('#{selector}').is(':visible')").should == negative.nil?
+  wait_for_true do
+    page.evaluate_script("$('#{selector}').is(':visible')") == negative.nil?
+  end
 end
 
 When /^(\w{2,}) go to (.+)$/ do |username, path|

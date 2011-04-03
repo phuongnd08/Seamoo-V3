@@ -42,6 +42,7 @@ gem "will_paginate", "~> 3.0.pre2"
 # and rake tasks are available in development mode:
 group :development, :test do
   gem 'rspec-rails', "~> 2.5"
+  gem 'parallel_tests'
 end
 
 group :test do
@@ -53,7 +54,6 @@ group :test do
   gem 'spork'
   gem 'launchy'
   gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
-  gem 'parallel'
   gem 'pickle'
   gem 'webmock', :require => false
 end

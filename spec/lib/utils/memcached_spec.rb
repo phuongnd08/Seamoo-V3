@@ -39,8 +39,18 @@ describe Utils::Memcached, :memcached => true do
         it "should wipe out all memcached data" do
           key = "test_reset_key"
           @common_mod.client.set(key, 100)
-          @common_mod.client.flush_all
+          @common_mod.client.flush
           @common_mod.client.get(key).should == nil
+        end
+
+        it "should honor namespace" do
+          pending
+          #@client1 = Dalli::Client.new(MemcachedSettings.server, :namespace => "ns1")
+          #@client2 = Dalli::Client.new(MemcachedSettings.server, :namespace => "ns2")
+          #key = "test_honor_ns_key"
+          #@client1.set(key, 100)
+          #@client2.flush
+          #@client1.get(key).should == 100
         end
       end
     end

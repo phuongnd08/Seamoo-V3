@@ -8,4 +8,15 @@ describe Matching do
     Matching.questions_per_match.should_not be_nil
     Matching.users_per_match.should_not be_nil
   end
+
+  describe "bots" do
+    it "should have correct size" do
+      Matching.bots.size.should == 100
+    end
+
+    it "should contains proper key/value pairs" do
+      Matching.bots["than_dong_daiso"].should == "Thần đồng đại số"
+      Matching.bots["ban_messi"].should == "ban_messi"
+    end
+  end
 end
