@@ -1,0 +1,4 @@
+%h3= t 'leagues.active_players'
+.active_players
+  -@active_players.each do |user|
+    =avatar(user, 40, :title => user.display_name)

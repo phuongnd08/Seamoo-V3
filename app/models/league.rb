@@ -156,7 +156,7 @@ class League < ActiveRecord::Base
     used = {}
     result = []
     count.times do
-      number = Utils::RndGenerator.next(league_questions_count-1, used)
+      number = Utils::RndGenerator.next(league_questions_count, used)
       used[number] = true
       result << league_questions.offset(number).limit(1).first
     end

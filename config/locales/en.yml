@@ -29,6 +29,7 @@ en:
       correct_answer: correct answer
       rematch: "Let's match again"
   leagues:
+    active_players: Members playing now
     show:
       rank: Rank
       member: Member
@@ -40,7 +41,6 @@ en:
       welcome: Welcome to %{name}
       lets_match: "Let's match"
       Players: Players
-      League_other_active_players: Other players in league
       Some_maybe_around: Some other players maybe around
       leave_current_match: Leave current match
   questions:

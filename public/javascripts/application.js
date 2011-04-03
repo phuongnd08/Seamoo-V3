@@ -10,3 +10,20 @@ function addFields(link, association, content) {
   var regexp = new RegExp("new_" + association, "g")
   $(link).parent().before(content.replace(regexp, new_id));
 }
+
+function Retrier(options){
+  this.retried = 0;
+  this.options = $.extend({ interval: 500, max: 20 }, options || {});
+}
+
+$.extend(Retrier.prototype, {
+      retry: function(callback){
+        if (this.retried < this.options.max) {
+          this.retried++;
+          setTimeout(callback, this.options.interval);
+        }
+      },
+      reset: function(){
+        this.retried = 0;
+      }
+    });

@@ -18,6 +18,7 @@ SeamooV3::Application.routes.draw do
         get :matching
         post :request_match
         post :leave_current_match
+        post :active_players
       end
     end
 

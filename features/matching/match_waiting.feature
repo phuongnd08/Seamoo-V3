@@ -18,15 +18,12 @@ Feature: Match Waiting
     Then mike should see "Waiting for other players"
     And mike should not be able to see "#exit"
     And mike should not be able to see "#match_players"
-    And mike should be able to see "#league_other_active_players .no_players"
-    And mike should not be able to see "#league_other_active_players .list"
     When peter match on league Amateur
     Then peter should see "Match will be started in ? seconds" within "#status"
     And peter should be able to see "#exit"
     And peter should be able to see "#match_players"
-    And peter should not be able to see "#league_other_active_players .no_players"
-    And peter should be able to see "#league_other_active_players .list"
-    And peter should see "mike" within "#league_other_active_players"
+    And peter should see indicator of "mike" within "#league_active_players"
+    And peter should see indicator of "peter" within "#league_active_players"
     When mike match on league Amateur
     Then mike should see indicator of "peter" within "#match_players"
     And mike should see indicator of "mike" within "#match_players"

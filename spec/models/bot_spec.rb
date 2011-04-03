@@ -73,6 +73,7 @@ describe Bot, :memcached => true do
       it "should try to query for match_id" do
         @mocked_league.should_receive(:request_match).and_return(nil)
         @bot.run
+        debugger
         @match = Match.create(:league => @league)
         @mocked_league.should_receive(:request_match).and_return(@match)
         @bot.run

@@ -23,8 +23,8 @@ module ApplicationHelper
     params[:controller] == "home" && params[:action] == "index"
   end
 
-  def avatar(user, size)
-    image_tag user.gravatar_url(:size => size), :size => "#{size}x#{size}"
+  def avatar(user, size, extra = {})
+    image_tag user.gravatar_url(:size => size), extra.reverse_merge(:size => "#{size}x#{size}")
   end
 
   include WillPaginate::ViewHelpers::ActionView

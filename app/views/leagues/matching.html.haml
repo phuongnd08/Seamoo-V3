@@ -11,10 +11,9 @@
           = submit_tag t('.leave_current_match'), :class => "sad"
 
     .internal
-      #league_other_active_players
-        %h3= t '.League_other_active_players'
-        .no_players{:style => 'display:none'}= t '.Some_maybe_around'
-        %ul.list{:style => 'display:none'}
+      #league_active_players
+        = render :partial => 'active_players'
+      = render :partial => 'refresh_active_players'
   .right
     #question
 :javascript
@@ -45,27 +44,30 @@
     requestMatch();
   })
 
-  function requestMatch(){
-    $.ajax({
-      type: 'post',
-      url: ["/#{I18n.locale}/leagues/", leagueId, "/request_match"].join(""),
-      dataType: 'json',
-      success: function(data){
-        if (data.match_id){
-          matchId = data.match_id;
-          requestMatchInfo();
-        } else {
-          setStatus('waiting', data);
-          setTimeout(requestMatch, 1000);
+  var requestMatch = (function(){
+    var retrier = new Retrier();
+    var caller = function(){
+      $.ajax({
+        type: 'post',
+        url: ["/#{I18n.locale}/leagues/", leagueId, "/request_match"].join(""),
+        dataType: 'json',
+        success: function(data){
+          if (data.match_id){
+            matchId = data.match_id;
+            requestMatchInfo();
+          } else {
+            setStatus('waiting', data);
+            setTimeout(requestMatch, 1000);
+          }
+          retrier.reset();
+        },
+        error: function(data){
+          retrier.retry(requestMatch);
         }
-        setLeagueOtherActivePlayers(data.other_active_players);
-        resetRetrying();
-      },
-      error: function(data){
-        retry(requestMatch, 500);
-      }
-    });
-  }
+      });
+    }
+    return caller;
+  })();
 
   function requestCurrentQuestion(callback){
     if (currentQuestionPosition >= questions.length){
@@ -78,59 +80,67 @@
     }
   }
 
-  function loadMoreQuestions(callback){
-    if (callback != null) questionsLoadedCallback = callback; 
-    if (!loadingMoreQuestions){
-      $.ajax({
-        type: 'post',
-        url: ["/#{I18n.locale}/matches/", matchId, "/more_questions"].join(""),
-        data: {
-          loaded: questions.length
-        },
-        dataType: 'json',
-        beforeSend: function(){
-          loadingMoreQuestions = true;
-        },
-        success:function(data){
-          questions = questions.concat(data);
-          if (questionsLoadedCallback) {
-            var c = questionsLoadedCallback;
-            questionsLoadedCallback = null;
-            c();
+  var loadMoreQuestions = (function(){
+    var retrier = new Retrier();
+    var caller = function(callback){
+      if (callback != null) questionsLoadedCallback = callback; 
+      if (!loadingMoreQuestions){
+        $.ajax({
+          type: 'post',
+          url: ["/#{I18n.locale}/matches/", matchId, "/more_questions"].join(""),
+          data: {
+            loaded: questions.length
+          },
+          dataType: 'json',
+          beforeSend: function(){
+            loadingMoreQuestions = true;
+          },
+          success:function(data){
+            questions = questions.concat(data);
+            if (questionsLoadedCallback) {
+              var c = questionsLoadedCallback;
+              questionsLoadedCallback = null;
+              c();
+            }
+            retrier.reset();
+          },
+          error: function(data){
+            retrier.retry(function(){
+              loadMoreQuestions(callback)
+            });
+          },
+          complete: function(){
+            loadingMoreQuestions = false;
           }
-          resetRetrying();
-        },
-        error: function(data){
-          retry(function(){
-            loadMoreQuestions(callback)
-          }, 500);
-        },
-        complete: function(){
-          loadingMoreQuestions = false;
-        }
-      });
+        });
+      }
     }
-  }
+    return caller;
+  })();
 
 
-  function requestMatchInfo(){
-    if (!requestingMatchInfo) {
-      $.ajax({
-        type: 'post',
-        url: ["/#{I18n.locale}/matches/", matchId, "/infor"].join(""),
-        dataType: 'json',
-        beforeSend: function(){ requestingMatchInfo = true; },
-        complete: function(){ requestingMatchInfo = false; },
-        success: function(data){
-          setMatchInfo(data);
-          resetRetrying();
-        },
-        error: function(data){
-          retry(requestMatchInfo, 500);
-        }
-      });
-    }
-   }
+  var requestMatchInfo = (function(){
+    var retrier = new Retrier();
+    var caller = function(){
+      if (!requestingMatchInfo) {
+        $.ajax({
+          type: 'post',
+          url: ["/#{I18n.locale}/matches/", matchId, "/infor"].join(""),
+          dataType: 'json',
+          beforeSend: function(){ requestingMatchInfo = true; },
+          complete: function(){ requestingMatchInfo = false; },
+          success: function(data){
+            setMatchInfo(data);
+            retrier.reset();
+          },
+          error: function(data){
+            retrier.retry(requestMatchInfo);
+          }
+        });
+      }
+     }
+     return caller;
+   })();
 
   function setMatchInfo(info){
     if (info.status){
@@ -188,42 +198,36 @@
     }
   }
 
-  function submitAnswer(answer){
-    disableQuestionButtonsAndInputs();
-    var data = {
-      position: currentQuestionPosition
-    } 
-    if (answer != null) data.answer = answer;
+  var submitAnswer = (function(){
+    var retrier = new Retrier();
+    var caller = function (answer){
+      disableQuestionButtonsAndInputs();
+      var data = {
+        position: currentQuestionPosition
+      } 
+      if (answer != null) data.answer = answer;
 
-    $.ajax({
-      type: 'post',
-      url: ["/#{I18n.locale}/matches/", matchId, "/submit_answer"].join(""),
-      dataType: 'json',
-      data: data,
-      success: function(){
-        if (currentQuestionPosition == questionsPerMatch) requestMatchInfo();
-      },
-      error: function(data){
-        retry(function(){submitAnswer(answer)}, 100);
+      $.ajax({
+        type: 'post',
+        url: ["/#{I18n.locale}/matches/", matchId, "/submit_answer"].join(""),
+        dataType: 'json',
+        data: data,
+        success: function(){
+          if (currentQuestionPosition == questionsPerMatch) requestMatchInfo();
+          retrier.reset();
+        },
+        error: function(data){
+          retrier.retry(function(){submitAnswer(answer)});
+        }
+      })
+
+      currentQuestionPosition++;
+      if (currentQuestionPosition < questionsPerMatch){
+        requestCurrentQuestion(setQuestion);
       }
-    })
-
-    currentQuestionPosition++;
-    if (currentQuestionPosition < questionsPerMatch){
-      requestCurrentQuestion(setQuestion);
     }
-  }
-
-  function retry(ajaxMethod, interval){
-    if (retried < MAX_RETRIES){
-      retried++;
-      setTimeout(ajaxMethod, interval);
-    }
-  }
-
-  function resetRetrying(){
-    retried = 0;
-  }
+    return caller;
+  })();
 
   function highlightPattern(input){
     var hint = $(input).attr('hint');
@@ -256,19 +260,6 @@
       formatted = formatted.replace(new RegExp('{'+key+'}', 'g'), variables[key]);
     }
     return formatted;
-  }
-
-  function setLeagueOtherActivePlayers(otherActivePlayers){
-    if (otherActivePlayers.length == 0){
-      $('#league_other_active_players').find('.no_players').show();
-      $('#league_other_active_players').find('.list').hide();
-    } else {
-      $('#league_other_active_players').find('.no_players').hide();
-      $('#league_other_active_players').find('.list').empty().show();
-      $.each(otherActivePlayers, function(index, player){
-        $('#league_other_active_players ul.list').append(formatString(avatarHTML, $.extend({}, player, { text: player.display_name, avatar_size: 32 , title: ""} )));
-      });
-    }
   }
 
   function setStatus(status, params){
