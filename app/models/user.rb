@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
+  require 'digest/md5'
   include Gravtastic
+
   gravtastic :default => Styling.default_gravatar
   acts_as_authentic
   validates :display_name, :presence => true
@@ -31,5 +33,9 @@ class User < ActiveRecord::Base
 
   def membership_in(league)
     Membership.find_or_create_by_league_id_and_user_id(:league_id => league.id, :user_id => self.id)
+  end
+
+  def email_hash
+    Digest::MD5.hexdigest(self.email)
   end
 end

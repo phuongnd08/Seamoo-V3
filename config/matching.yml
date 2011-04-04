@@ -15,7 +15,7 @@ development: &development
   bot_max_match_request_retries: 3
   bot_time_per_question: 5
   bot_correctness: 0.8
-  fake_active_users_count: 40
+  fake_active_users_slot: 40
 
 test:
   <<: *development

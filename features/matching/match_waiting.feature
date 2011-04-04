@@ -15,7 +15,7 @@ Feature: Match Waiting
     And all matches will be started after 10 seconds
     #First make sure both players will be registered in match
     When mike match on league Amateur
-    Then mike should see "Waiting for other players"
+    Then mike should see "Waiting for other players" within "#status"
     And mike should not be able to see "#exit"
     And mike should not be able to see "#match_players"
     When peter match on league Amateur

@@ -26,7 +26,7 @@ describe LeaguesController do
     it "assign many fake active players as @active_players" do
       @league = Factory(:league)
       get :active_players, :id => @league.id
-      assigns(:active_players).size.should >= 20
+      assigns(:active_players).size.should >= 1
     end
 
     it "should always include the real active players" do
@@ -35,7 +35,7 @@ describe LeaguesController do
       League.stub(:find).with(@league.id).and_return(@league)
       @league.stub(:active_users).and_return([{:id => user1.id}])
       get :active_players, :id => @league.id
-      assigns(:active_players).should include(user1)
+      assigns(:active_players).values.should include(user1)
     end
   end
 end

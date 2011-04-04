@@ -1,4 +1,49 @@
-%h3= t 'leagues.active_players'
-.active_players
-  -@active_players.each do |user|
-    =avatar(user, 40, :title => user.display_name)
+#league_active_players
+  %h3= t 'leagues.active_players'
+  .active_players
+:javascript
+  var activePlayers = {};
+  var retrier = new Retrier({ interval: 2500 });
+  var refreshActivePlayers = (function(){
+    var caller = function(){
+      $.ajax({
+        type: 'post',
+        url: #{active_players_league_path(@league.id).to_json},
+        success: function(data){
+          updateActivePlayers(data);
+          setTimeout(refreshActivePlayers, 5000);
+          retrier.reset();
+        },
+        error: function(){
+          retrier.retry(refreshActivePlayers);
+        }
+      })
+    }
+
+    return caller;
+  })();
+
+  function updateActivePlayers(players){
+    var container = $('#league_active_players .active_players')
+    // show new active players
+    for(var hash in players){
+      if (activePlayers[hash] == undefined){
+        var item = $(['<div class=player id=', hash, '><img src="', players[hash].avatar_url, '"/></div>'].join(""))
+        item.find('img').attr('title', players[hash].display_name);
+        container.append(item.hide().fadeIn(1000));
+      }
+    }
+    
+    // hide players that nolonger active
+    for(var hash in activePlayers){
+      if (players[hash] == undefined){
+        container.find("#"+hash).fadeOut(1000, function(){
+          $(this).remove();
+        });
+      }
+    }
+
+    activePlayers = players;
+  }
+
+  $(refreshActivePlayers);

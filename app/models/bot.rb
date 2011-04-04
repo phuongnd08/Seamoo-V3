@@ -1,5 +1,6 @@
 class Bot < User
   include Gravtastic
+
   gravtastic :default => Styling.default_gravatar
 
   {
@@ -17,6 +18,16 @@ class Bot < User
         @inst_mem_hash_for#{field} ||= Utils::Memcached::MemHash.new({:category => Bot.name, :id => self.id, :field => :#{field}}, :#{identifier})
       end
     }
+  end
+
+  attr_accessor :name
+
+  def initialize(*attr)
+    super
+    unless self.name.blank?
+      self.display_name = Matching.bots[self.name] unless self.display_name.present?
+      self.email = [self.name, '@', Site.bot_domain].join("") unless self.email.present?
+    end
   end
 
   class << self

@@ -15,7 +15,7 @@ Feature: Match Playing
     And all matches will immediately start
     #First make sure both players will be registered in match
     When mike match on league Amateur
-    Then mike should see "Waiting for other players"
+    Then mike should see "Waiting for other players" within "#status"
     When peter match on league Amateur
     Then peter should see "Match started" within "#status"
     #Second make sure match use predictable questions
@@ -93,7 +93,7 @@ Feature: Match Playing
     When mike press "Leave current match"
     Then mike should soon be on the league Amateur page
     When mike match on league Amateur
-    Then mike should see "Waiting for other players"
+    Then mike should see "Waiting for other players" within "#status"
 
   Scenario: Questions should not be messed up due to match infor updates
     Given question submission is delayed

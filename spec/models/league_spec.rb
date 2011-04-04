@@ -24,7 +24,7 @@ describe League do
     end
   end
 
-  describe "coordinate requests in league", :memcached => true do# {{{
+  describe "coordinate requests in league", :memcached => true do
     before(:each) do
       @category = Factory(:category)
       @user1 = Factory(:user)
@@ -36,7 +36,7 @@ describe League do
       @league = League.create!(:level => 0, :category => @category)
     end
 
-    describe "request_match" do# {{{
+    describe "request_match" do
       it "should never mess up" do
         initial_time = Time.now
         Time.stub(:now).and_return(initial_time)
@@ -70,9 +70,9 @@ describe League do
         match = @league.request_match(@user2.id)
         match.questions.map(&:id).to_set.should == @questions.map(&:id).to_set
       end
-    end# }}}
+    end
 
-    describe "waiting_users" do# {{{
+    describe "waiting_users" do
       it "should return number users are waiting for match" do
         @league.request_match(@user1.id)
         @league.waiting_users.count.should  == 1
@@ -91,7 +91,7 @@ describe League do
         @league.request_match(@user1.id)
         @league.waiting_users.count.should  == 1
       end
-    end# }}}
+    end
 
     describe "active_users" do
       it "should return number of users are actively waiting or doing match" do
@@ -112,7 +112,7 @@ describe League do
         @league.active_users.count.should  == 1
       end
     end
-  end# }}}
+  end
 
   describe "random questions" do
     before(:each) do
@@ -140,6 +140,28 @@ describe League do
       League.new(:status => "active").should be_valid
       League.new(:status => "coming_soon").should be_valid
       League.new(:status => "else").should_not be_valid
+    end
+  end
+
+  describe "fake_active_users", :memcached => true do
+    before(:each) do
+      @league = Factory(:league)
+      Matching.stub(:fake_active_users_slot).and_return(3)
+    end
+
+    it "should increase number of user as requests submitted" do
+      Utils::RndGenerator.stub(:rnd).and_return(1, 2, 3)
+      @league.fake_active_users.size.should == 1
+      @league.fake_active_users.size.should == 2
+      @league.fake_active_users.size.should == 3
+    end
+
+    it "should never return more than desired number of users" do
+      Utils::RndGenerator.stub(:rnd).and_return(1, 2, 3, 4)
+      @league.fake_active_users.size.should == 1
+      @league.fake_active_users.size.should == 2
+      @league.fake_active_users.size.should == 3
+      @league.fake_active_users.size.should == 3
     end
   end
 end

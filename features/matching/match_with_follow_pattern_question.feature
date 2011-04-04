@@ -2,7 +2,7 @@
 Feature: Match using follow pattern question
   In order to play match
   As a user
-  I want to be able to answer multiple choice question
+  I want to be able to answer follow pattern question
 
   Background:
     Given these users
@@ -14,7 +14,7 @@ Feature: Match using follow pattern question
     And all matches will immediately start
     And all data is fresh
     When mike match on league Amateur
-    Then mike should see "Waiting for other players"
+    Then mike should see "Waiting for other players" within "#status"
     When peter match on league Amateur
     Then peter should see "Question 1/3"
     Given first Amateur match use default questions

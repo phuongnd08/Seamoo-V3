@@ -30,7 +30,7 @@ class LeaguesController < ApplicationController
   end
 
   def active_players
-    render :partial => 'active_players'
+    render :json => secured_players(@active_players)
   end
 
   protected
@@ -39,14 +39,15 @@ class LeaguesController < ApplicationController
   end
 
   def load_active_players
-    real_players = User.find(@league.active_users.map{|u| u[:id]})
-    fake_players_count = Matching.fake_active_users_count - Utils::RndGenerator.rnd(Matching.fake_active_users_count / 2)
-    fake_players = Utils::RndGenerator.rnd_subset(Matching.bots.each_pair.to_a, fake_players_count)
-    fake_hash = Hash[fake_players.map do |name, display_name| 
-      u = Bot.new(:email => "#{name}@#{Site.bot_domain}", :display_name => display_name)
-      [u.email, u]
-    end]
-    real_hash = Hash[real_players.map{|u| [u.email, u]}]
-    @active_players = Utils::RndGenerator.shuffle(fake_hash.merge(real_hash).values)
+    real_hash = Hash[User.find(@league.active_users.map{|u| u[:id]}).
+      map{|u| [u.email_hash, u]}]
+    fake_hash = Hash[@league.fake_active_users.map{|u| [u.email_hash, u]}]
+    @active_players = fake_hash.merge(real_hash)
   end
+
+  def secured_players(hash)
+    hash.merge(hash){|email_hash, u| {:avatar_url => u.gravatar_url, :display_name => u.display_name}}
+  end
+
+  helper_method :secured_players
 end

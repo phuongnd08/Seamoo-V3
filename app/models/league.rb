@@ -32,7 +32,9 @@ class League < ActiveRecord::Base
     :match_user_id => :match_ticket,
     :waiting_counter => :counter, 
     :waiting_user => :position,
-    :active_user => :position
+    :active_user => :position,
+    :fake_user_counter => :counter,
+    :fake_user => :position
   }.each do |field, identifier|
     self.class_eval %{
       protected
@@ -99,6 +101,15 @@ class League < ActiveRecord::Base
               select{|user| user!=nil && user[:time] > min_time}.
               group_by{|user| user[:id]}.
               values.map{|group| group.sort_by{|user| user[:time]}.last}
+  end
+
+  def fake_active_users
+    position = fake_user_counter.incr
+    fake_user[position % Matching.fake_active_users_slot] = Matching.bots_arr[Utils::RndGenerator.rnd(Matching.bots_arr.size)].first
+    (0...Matching.fake_active_users_slot).map{|index| fake_user[index]}.
+      select{|bot_name| bot_name.present?}.
+      to_set.
+      map{|name| Bot.new(:name => name)}
   end
 
   def leave_current_match(user_id)

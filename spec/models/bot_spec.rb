@@ -7,6 +7,27 @@ describe Bot, :memcached => true do
     end
   end
 
+  describe "new" do
+    it "should generate email & display_name based on name if set" do
+      Matching.stub(:bots).and_return({"abc" => "User Abc"})
+      bot = Bot.new(:name => "abc")
+      bot.display_name.should == "User Abc"
+      bot.email.should == "abc@#{Site.bot_domain}"
+    end
+
+    it "should not touch email & display_name if name unset" do
+      bot = Bot.new
+      bot.display_name.should be_blank
+      bot.email.should be_blank
+    end
+
+    it "should not interfere email & display_name if already set" do
+      bot = Bot.new(:name => "abc", :display_name => "Some name", :email => "some_email@domain.com")
+      bot.display_name.should == "Some name"
+      bot.email.should == "some_email@domain.com"
+    end
+  end
+
   describe "awake new" do
     it "should awake new bot" do
       Matching.stub(:bots).and_return({"abc" => "Abc User", "xyz" => "xyz"})
@@ -73,7 +94,6 @@ describe Bot, :memcached => true do
       it "should try to query for match_id" do
         @mocked_league.should_receive(:request_match).and_return(nil)
         @bot.run
-        debugger
         @match = Match.create(:league => @league)
         @mocked_league.should_receive(:request_match).and_return(@match)
         @bot.run

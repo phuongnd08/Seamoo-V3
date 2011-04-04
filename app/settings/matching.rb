@@ -2,6 +2,7 @@ class Matching < Settingslogic
   source File.join(Rails.root, "config", "matching.yml")
   namespace Rails.env
   cattr_reader :bots
+  cattr_reader :bots_arr
 
   def self.read_bots
     hash = {}
@@ -19,4 +20,5 @@ class Matching < Settingslogic
   end
 
   @@bots = read_bots
+  @@bots_arr = @@bots.each_pair.to_a
 end

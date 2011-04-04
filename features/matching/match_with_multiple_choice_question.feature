@@ -15,7 +15,7 @@ Feature: Match using multiple choice question
     And all data is fresh
     #First make sure both players will be registered in match and the preferred questions loaded
     When mike match on league Amateur
-    Then mike should see "Waiting for other players"
+    Then mike should see "Waiting for other players" within "#status"
     When peter match on league Amateur
     Then peter should see "Question 1/3"
     Given first Amateur match use default questions
