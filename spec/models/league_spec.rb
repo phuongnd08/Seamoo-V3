@@ -164,4 +164,12 @@ describe League do
       @league.fake_active_users.size.should == 3
     end
   end
+
+  describe "active" do
+    it "should only return active leagues" do
+      @active_league = Factory(:league, :status => "active")
+      @inactive_league = Factory(:league, :status => "coming_soon")
+      League.active.should == [@active_league]
+    end
+  end
 end

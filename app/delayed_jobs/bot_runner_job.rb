@@ -6,7 +6,7 @@ class BotRunnerJob
       # Find all league that have only 1 waiting users sofar, and this waiting users is not a bot
       #   -> If find one, invoke 1 more bot for that league
       #       -> Register the bot to league
-      League.all.each do |league|
+      League.active.each do |league|
         waiting_users = league.waiting_users
         Delayed::Worker.logger.warn "Watch [#{league.name}]: #{waiting_users.inspect}"
         # bot user_id is negative one

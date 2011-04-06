@@ -6,7 +6,7 @@ describe "League show page" do
     @league = Factory(:league)
     @users = []
     (1..10).each do |index|
-      @user = Factory(:user) 
+      @user = (index % 2 == 0)? Factory(:user) : Factory(:bot)
       Membership.create(:user => @user, :league => @league, :matches_count => 20, :matches_score => index)
       @users << @user
     end

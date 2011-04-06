@@ -26,8 +26,8 @@
           %tr{:class => cycle('odd', 'even')}
             %td.rank= @membership.offset + index + 1
             %td.user
-              =link_to avatar(membership.user, 40), membership.user
-              =link_to membership.user.display_name, membership.user
+              =link_to avatar(membership.user, 40), user_path(membership.user)
+              =link_to membership.user.display_name, user_path(membership.user)
             %td.score= membership.matches_score
             %td.matches= membership.matches_count
             %td.rank_score= membership.rank_score

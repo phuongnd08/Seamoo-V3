@@ -2,7 +2,7 @@ module Utils
   module Memcached
     class Common
       cattr_reader :client
-      options = { :namespace => MemcachedSettings.namespace }
+      options = { :namespace => MemcachedSettings.nspace }
       options.merge!(:username => MemcachedSettings.username) if MemcachedSettings["username"]
       @@client = Dalli::Client.new(MemcachedSettings.server, options)
 

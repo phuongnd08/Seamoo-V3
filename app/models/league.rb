@@ -3,6 +3,7 @@ class League < ActiveRecord::Base
   has_many :matches
   has_many :memberships
   validates :status, :inclusion => { :in => ['active', 'coming_soon'] }
+  scope :active, where(:status => 'active')
 
   def available?
     self.status == 'active'

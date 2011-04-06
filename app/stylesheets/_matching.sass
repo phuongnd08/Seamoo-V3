@@ -13,6 +13,10 @@
 
 .matching
   +paper
+  .counter
+    +adjust-font-size-to(2 * $base_font_size)
+    color: $alt_color
+
   button, input[type="button"], input[type="submit"]
     +common-button($alt2_color)
   input[type="submit"].sad, button.sad
