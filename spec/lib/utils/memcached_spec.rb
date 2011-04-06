@@ -2,31 +2,31 @@ require 'spec_helper'
 
 describe Utils::Memcached, :memcached => true do
   before(:each) do
-    @common_mod = Class.new.extend(Utils::Memcached::Common)
+    @client = Utils::Memcached::Common.client
   end
   describe "Common" do
     describe "client" do
       describe "get & set" do
         it "should manipulate string correctly" do
-          @common_mod.client.set("key", "abcx")
-          @common_mod.client.get("key").should == "abcx"
+          @client.set("key", "abcx")
+          @client.get("key").should == "abcx"
         end
 
         it "should manipulate object correctly" do
-          @common_mod.client.set("key", {:a => 100, :b => :c})
-          @common_mod.client.get("key").should == {:a => 100, :b => :c}
+          @client.set("key", {:a => 100, :b => :c})
+          @client.get("key").should == {:a => 100, :b => :c}
         end
       end
 
       describe "incr" do
         it "should perform atomic action over a key" do
           key = "memcached_spec_counter"
-          @common_mod.client.delete(key)
+          @client.delete(key)
           queue = Queue.new
           threads = []
           (0..10).each do |index|
             threads << Thread.new do
-              queue.enq @common_mod.client.incr(key, 1, 0, 1)
+              queue.enq @client.incr(key, 1, 0, 1)
             end
           end  
           threads.each{|t| t.join}
@@ -38,19 +38,9 @@ describe Utils::Memcached, :memcached => true do
       describe "flush" do
         it "should wipe out all memcached data" do
           key = "test_reset_key"
-          @common_mod.client.set(key, 100)
-          @common_mod.client.flush
-          @common_mod.client.get(key).should == nil
-        end
-
-        it "should honor namespace" do
-          pending
-          #@client1 = Dalli::Client.new(MemcachedSettings.server, :namespace => "ns1")
-          #@client2 = Dalli::Client.new(MemcachedSettings.server, :namespace => "ns2")
-          #key = "test_honor_ns_key"
-          #@client1.set(key, 100)
-          #@client2.flush
-          #@client1.get(key).should == 100
+          @client.set(key, 100)
+          @client.flush
+          @client.get(key).should == nil
         end
       end
     end
@@ -58,7 +48,7 @@ describe Utils::Memcached, :memcached => true do
     describe "hash_to_key" do
       it "should return key that concat hash key & value" do
         (0..10).each do |index|
-          @common_mod.hash_to_key({:category => "abc", :id => 123, :league_id => 1234}).should == "category@abc_id@123_league_id@1234"
+          Utils::Memcached::Common.hash_to_key({:category => "abc", :id => 123, :league_id => 1234}).should == "category@abc_id@123_league_id@1234"
         end
       end
     end
@@ -67,7 +57,7 @@ describe Utils::Memcached, :memcached => true do
   describe "Hash" do
     before(:each) do
       @hash = Utils::Memcached::MemHash.new({:category => "random", :id => "1"})
-      @common_mod.client.flush_all
+      @client.flush_all
     end
 
     describe "getter && setter" do

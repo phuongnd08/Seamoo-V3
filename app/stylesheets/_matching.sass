@@ -1,4 +1,4 @@
-.matching
+=paper
   +full(12)
   .left
     +columns(4, 12)
@@ -10,14 +10,16 @@
     +columns(8, 12)
     +omega(12)
     +trailer(1)
-  .counter
-    +adjust-font-size-to(2 * $base_font_size)
-    color: $alt_color
+
+.matching
+  +paper
   button, input[type="button"], input[type="submit"]
     +common-button($alt2_color)
   input[type="submit"].sad, button.sad
     +common-button($alt_color)
   button.idontknow
     padding: 0px
+.league_info
+  +paper
 @import question 
 @import players

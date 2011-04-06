@@ -9,23 +9,27 @@
         .main_link
           %a{:href => matching_league_path(@league)}
             %span= t('.start') 
-.subcontent
-  #membership
-    %table
-      %tr
-        %th= t '.rank'
-        %th= t '.member'
-        %th= t '.score'
-        %th= t '.matches'
-        %th= t '.rank_score'
-      - @membership.each_with_index do |membership, index|
-        %tr{:class => cycle('odd', 'even')}
-          %td.rank= @membership.offset + index + 1
-          %td.user
-            =link_to avatar(membership.user, 40), membership.user
-            =link_to membership.user.display_name, membership.user
-          %td.score= membership.matches_score
-          %td.matches= membership.matches_count
-          %td.rank_score= membership.rank_score
-    .pagination= will_paginate @membership
-   
+.league_info
+  .left
+    .internal
+      = render :partial => 'active_players'
+  .right
+    #membership
+      %table
+        %tr
+          %th= t '.rank'
+          %th= t '.member'
+          %th= t '.score'
+          %th= t '.matches'
+          %th= t '.rank_score'
+        - @membership.each_with_index do |membership, index|
+          %tr{:class => cycle('odd', 'even')}
+            %td.rank= @membership.offset + index + 1
+            %td.user
+              =link_to avatar(membership.user, 40), membership.user
+              =link_to membership.user.display_name, membership.user
+            %td.score= membership.matches_score
+            %td.matches= membership.matches_count
+            %td.rank_score= membership.rank_score
+      .pagination= will_paginate @membership
+     

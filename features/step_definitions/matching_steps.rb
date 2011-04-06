@@ -68,7 +68,7 @@ Given /^(\w+) want to join (\w+) (\d+) minutes ago$/ do |username, league_name, 
 end
 
 Given /^all data is fresh$/ do
-  Object.new.extend(Utils::Memcached::Common).client.flush_all
+  Utils::Memcached::Common.client.flush_all
 end
 
 Then /^there is (?:only )?(\d+) (\w+) match(?:es)? for (\w+)$/ do |count, league_name, username|

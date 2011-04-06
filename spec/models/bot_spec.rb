@@ -114,6 +114,7 @@ describe Bot, :memcached => true do
         @match = Match.create(:league => @league)
         @bot.data[:match_id] = @match.id
         @match_user = MatchUser.create(:match => @match, :user => @bot)
+        MatchUser.create(:match => @match, :user => Factory(:user)) # match have 2 users
       end
       it "should answer questions at predefined speed" do
         Time.stub(:now).and_return(@now + 6.seconds)
@@ -138,21 +139,34 @@ describe Bot, :memcached => true do
       describe "Match finished" do
         before(:each) do
           Time.stub(:now).and_return(@now + Matching.started_after.seconds + Matching.ended_after.seconds + 1.second)
+          @bot.run
         end
         it "should die" do
-          @bot.run
           Bot.awaken.should_not include(@bot)
+        end
+
+        it "should record match score into league membership" do
+          ms = Membership.find_by_league_id_and_user_id(@league.id, @bot.id)
+          ms.should_not be_nil
+          ms.matches_count.should == 1
         end
       end
 
       describe "Bot finished" do
         before(:each) do
-          @match_user.send(:finished_at=, Time.now)
+          @match_user.stub(:request_match_check)
+          @match_user.send(:finished_at=, Time.now) 
           @match_user.save
+          @bot.run
         end
         it "should die" do
-          @bot.run
           Bot.awaken.should_not include(@bot)
+        end
+
+        it "should record match score into league membership" do
+          ms = Membership.find_by_league_id_and_user_id(@league.id, @bot.id)
+          ms.should_not be_nil
+          ms.matches_count.should == 1
         end
       end
     end

@@ -58,9 +58,9 @@ class Bot < User
     # try to answer un-answered question at a predefined speed
     unless data[:match_id].nil?
       match = Match.find_by_id(data[:match_id])
-      unless match.nil? || match.finished?
+      unless match.nil?
         match_user = match.match_users.find_by_user_id(self.id)
-        unless match_user.finished?
+        unless match_user.finished? || match.finished?
           if match.started?
             number_of_questions_to_answer = (Time.now - match.started_at)/Matching.bot_time_per_question
             number_of_questions_to_answer = [match.questions.size, number_of_questions_to_answer.floor].min
@@ -68,9 +68,9 @@ class Bot < User
               answer = Utils::RndGenerator.rnd > Matching.bot_correctness ? nil : correct_answer(match_user.current_question)
               match_user.add_answer(index, answer) 
             end
+            match_user.save
           end
-        else; die; end
-        match_user.save
+        else; match_user.record!; die; end
       else; die; end
     else
       unless data[:league_id].nil?

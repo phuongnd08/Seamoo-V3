@@ -164,8 +164,6 @@ GEM
       oa-oauth (= 0.2.0.beta5)
       oa-openid (= 0.2.0.beta5)
     parallel (0.5.3)
-    parallel_tests (0.4.12)
-      parallel
     pickle (0.4.6)
       cucumber (>= 0.8)
       rake
@@ -266,7 +264,7 @@ DEPENDENCIES
   launchy
   mysql
   omniauth (= 0.2.0.beta5)
-  parallel_tests
+  parallel
   pickle
   rails (= 3.0.0)
   rails3-generators

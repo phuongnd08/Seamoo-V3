@@ -1,0 +1,2 @@
+#!/bin/bash
+rake parallel:spec && rake parallel:features
