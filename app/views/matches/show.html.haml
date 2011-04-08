@@ -20,7 +20,9 @@
     %h3= t '.Questions'
     %ol
       - @match.questions.each_with_index do |question, qidx|
-        %li= question.content
+        %li{:id => "question_#{question.id}"}
+          .edit_link= link_to t(".edit"), edit_question_path(question)
+          =question.content
         %ul
           - @have_correct_answer = false
           - @match.match_users.each do |match_user|

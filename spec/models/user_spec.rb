@@ -90,4 +90,10 @@ describe User do
       @user.membership_in(Factory(:league)).should_not be_nil
     end
   end
+
+  describe "admin" do
+    it "should default to false" do
+      User.new.admin.should be_false
+    end
+  end
 end

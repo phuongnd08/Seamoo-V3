@@ -33,6 +33,7 @@ vi:
       not_answered: không trả lời
       correct_answer: câu trả lời đúng
       rematch: Đấu trận khác
+      edit: Sửa
   leagues:
     active_players: Những thành viên đang thi đấu
     show:

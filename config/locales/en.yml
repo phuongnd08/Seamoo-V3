@@ -28,6 +28,7 @@ en:
       not_answered: not answered
       correct_answer: correct answer
       rematch: "Let's match again"
+      edit: Edit
   leagues:
     active_players: Members playing now
     show:

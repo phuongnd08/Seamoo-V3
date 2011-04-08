@@ -6,9 +6,10 @@ class MatchesController < ApplicationController
   end
 
   def show
-    @hide_all_answers = @match.users.exclude?(current_user)
+    @show_admin_link = current_user.try(:admin)
+    @hide_all_answers = !@show_admin_link && @match.users.exclude?(current_user)
     unless @hide_all_answers
-      @match.match_users.detect{|mu| mu.user == current_user}.record!
+      @match.match_users.detect{|mu| mu.user == current_user}.try(:record!)
     end
   end
 
