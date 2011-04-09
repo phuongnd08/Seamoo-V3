@@ -23,33 +23,35 @@
   - chat_info_template = capture_haml do
     .chat_info {message}
 :javascript
-  $(function(){
-    var channel = '#{Rails.env}_league_#{@league.id}';
-    var templates = { 
-      chatEntry: #{chat_entry_template.to_json}, 
-      error: #{chat_error_template.to_json},
-      info: #{chat_info_template.to_json}
-    }
-    var pubnub = PUBNUB.init({
-      publish_key   : #{Site.pubnub.publish_key.to_json},
+  var pubnub = PUBNUB.init({
+    publish_key   : #{Site.pubnub.publish_key.to_json},
       subscribe_key : #{Site.pubnub.subscribe_key.to_json},
       ssl           : false,
       origin        : #{Site.pubnub.origin.to_json}
     });
+  var channel = '#{Rails.env}_league_#{@league.id}';
 
-    function addLog(type, message){
-      var entry = $(formatString(templates[type], { message: message }));
-      $('#chat_log').append(entry.hide().fadeIn(1000));
-      setTimeout(function(){
-        entry.fadeOut(1000, function(){ $(this).remove()});
-      }, 5000);
-    }
+  var templates = { 
+    chatEntry: #{chat_entry_template.to_json}, 
+    error: #{chat_error_template.to_json},
+    info: #{chat_info_template.to_json}
+  }
 
-    function addMessage(message){
-      var entry = $(formatString(templates.chatEntry, message)).hide().fadeIn(500)
-      $('#chat_box').append(entry).scrollTop(entry.position().top);
-    }
+  function addMessage(message){
+    var entry = $(formatString(templates.chatEntry, message)).hide().fadeIn(500)
+    $('#chat_box').append(entry);
+    entry[0].scrollIntoView();
+  }
 
+  function addLog(type, message){
+    var entry = $(formatString(templates[type], { message: message }));
+    $('#chat_log').append(entry.hide().fadeIn(1000));
+    setTimeout(function(){
+      entry.fadeOut(1000, function(){ $(this).remove()});
+    }, 5000);
+  }
+
+  $(function(){
     pubnub.subscribe({
       channel  : channel,
       callback : function(message) {
@@ -68,29 +70,30 @@
         });
       }
     });
+  });
 - if current_user.present?
   :javascript
-    $('#chat_form').submit(function(){
-      setTimeout(function(){
-        pubnub.publish({
-          channel  : channel,
-          message  : { 
-            display_name: #{current_user.display_name.to_json},
-            link: #{user_path(current_user).to_json},
-            avatar_url: #{current_user.gravatar_url(:size => 32).to_json},
-            content: $('#chat_form #message').val()
-          },
-          callback : function(info) {
-            if (info[0])
-              addLog('info', #{t("chat.message_sent").to_json});
-            else
-              addLog("error", formatString(#{t("chat.message_not_sent").to_json}, { error: info[1] }));
-          }
-        });
-        $('#chat_form #message').val('');
-      }, 0);
-      return false;
+    $(function(){
+      $('#chat_form').submit(function(){
+        setTimeout(function(){
+          pubnub.publish({
+            channel  : channel,
+            message  : { 
+              display_name: #{current_user.display_name.to_json},
+              link: #{user_path(current_user).to_json},
+              avatar_url: #{current_user.gravatar_url(:size => 32).to_json},
+              content: $('#chat_form #message').val()
+            },
+            callback : function(info) {
+              if (info[0])
+                addLog('info', #{t("chat.message_sent").to_json});
+              else
+                addLog("error", formatString(#{t("chat.message_not_sent").to_json}, { error: info[1] }));
+            }
+          });
+          $('#chat_form #message').val('');
+        }, 0);
+        return false;
+      });
     });
-:javascript
-  });
 
