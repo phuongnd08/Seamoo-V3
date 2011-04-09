@@ -4,6 +4,7 @@
 en:
   next: Next
   previous: Prev
+  you_chat_here: You chat here
   layouts:
     application:
     header:

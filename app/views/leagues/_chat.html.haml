@@ -1,0 +1,76 @@
+#pubnub{"pub-key" => Site.pubnub.publish_key, "sub-key" => Site.pubnub.subscribe_key, :ssl => "off", :origin => "pubsub.pubnub.com"}
+#chat_box
+- form_tag "/", :id => "chat_form", :onsubmit => "return false;" do
+  = text_field_tag :message, "", :placeholder => t("you_chat_here")
+#chat_log
+= javascript_include_tag "http://cdn.pubnub.com/pubnub-3.1.min.js"
+
+%div{:style => "display: none"}
+  - chat_entry_template = capture_haml do
+    .chat_entry
+      %a{:href => "{link}", :title => "{display_name}"}
+        %img{:src => "{avatar_url}"}
+      %span.msg {content}
+
+  - chat_error_template = capture_haml do
+    .chat_error {message}
+
+  - chat_info_template = capture_haml do
+    .chat_info {message}
+:javascript
+  $(function(){
+    var channel = 'league_#{@league.id}';
+    var templates = { 
+      chatEntry: #{chat_entry_template.to_json}, 
+      error: #{chat_error_template.to_json},
+      info: #{chat_info_template.to_json}
+    }
+    var pubnub = PUBNUB.init({
+      publish_key   : #{Site.pubnub.publish_key.to_json},
+      subscribe_key : #{Site.pubnub.subscribe_key.to_json},
+      ssl           : false,
+      origin        : #{Site.pubnub.origin.to_json}
+    });
+
+    function addLog(type, message){
+      var entry = $(formatString(templates[type], { message: message }));
+      $('#chat_log').append(entry.hide().fadeIn(1000));
+      setTimeout(function(){
+        entry.fadeOut(1000, function(){ $(this).remove()})
+      }, 5000);
+    }
+
+    pubnub.subscribe({
+      channel  : channel,
+      callback : function(message) {
+        $('#chat_box').append(
+          $(formatString(templates.chatEntry, message))
+        );
+      },
+      error : function() {
+        addLog("error", "Connection lost");
+      }
+    });
+
+    $('#chat_form').submit(function(){
+      setTimeout(function(){
+        pubnub.publish({
+          channel  : channel,
+          message  : { 
+            display_name: #{current_user.display_name.to_json},
+            link: #{user_path(current_user).to_json},
+            avatar_url: #{current_user.gravatar_url(:size => 32).to_json},
+            content: $('#chat_form #message').val()
+          },
+          callback : function(info) {
+            if (info[0])
+              addLog('info', "Message sent");
+            else
+              addLog("error", "Failed! - " + info[1]);
+          }
+        });
+        $('#chat_form #message').val('');
+      }, 0);
+      return false;
+    });
+  });

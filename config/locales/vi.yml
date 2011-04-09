@@ -4,6 +4,7 @@
 vi:
   next: Kế tiếp
   previous: Kế trước
+  you_chat_here: Nói chuyện ở đây
   layouts:
     application:
       competition_system: Hệ thống thi đấu

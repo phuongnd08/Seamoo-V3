@@ -27,3 +27,12 @@ $.extend(Retrier.prototype, {
         this.retried = 0;
       }
     });
+
+
+function formatString(template, variables){
+  var formatted = template;
+  for (var key in variables){
+    formatted = formatted.replace(new RegExp('{'+key+'}', 'g'), variables[key]);
+  }
+  return formatted;
+}
