@@ -26,7 +26,7 @@ test:
 production: 
   <<: *development
   requester_stale_after: 5
-  user_inactive_after: 135
+  user_inactive_after: 300
   status_recheck_interval: 3
   started_after: 10
   ended_after: 120
