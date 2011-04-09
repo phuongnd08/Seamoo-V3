@@ -5,4 +5,4 @@ pubnub:
   publish_key: "pub-558d2ffe-e056-47d2-b219-bd8aa9a25bc6"
   subscribe_key: "sub-93a637d1-6281-11e0-8b7b-15c9dd26f7ff"
   origin: "pubsub.pubnub.com"
-  history: 50
+  history_limit: 50

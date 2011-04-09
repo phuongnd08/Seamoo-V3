@@ -11,10 +11,10 @@
             %span= t('.start') 
 .league_info
   .left
+    .internal.chatting
+      = render :partial => 'chat'
     .internal
       = render :partial => 'active_players'
-    #league_chat.internal
-      = render :partial => 'chat'
   .right
     #membership
       %table

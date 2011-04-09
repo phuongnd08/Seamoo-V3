@@ -1,12 +1,17 @@
+%h3=t('chat.header')
 #pubnub{"pub-key" => Site.pubnub.publish_key, "sub-key" => Site.pubnub.subscribe_key, :ssl => "off", :origin => "pubsub.pubnub.com"}
 #chat_box
-- form_tag "/", :id => "chat_form", :onsubmit => "return false;" do
-  = text_field_tag :message, "", :placeholder => t("you_chat_here")
+- if current_user.present?
+  = form_tag "/", :id => "chat_form", :onsubmit => "return false;" do
+    %div= text_field_tag :message, "", :placeholder => t("you_chat_here")
+    #chat_hint= t("chat.hint")
+- else
+  %div= raw t("chat.need_signin", :signin_path => signin_path)
 #chat_log
 = javascript_include_tag "http://cdn.pubnub.com/pubnub-3.1.min.js"
 
-%div{:style => "display: none"}
-  - chat_entry_template = capture_haml do
+%div{:style => "display:none"}
+  - chat_entry_template = capture_haml(true) do
     .chat_entry
       %a{:href => "{link}", :title => "{display_name}"}
         %img{:src => "{avatar_url}"}
@@ -19,7 +24,7 @@
     .chat_info {message}
 :javascript
   $(function(){
-    var channel = 'league_#{@league.id}';
+    var channel = '#{Rails.env}_league_#{@league.id}';
     var templates = { 
       chatEntry: #{chat_entry_template.to_json}, 
       error: #{chat_error_template.to_json},
@@ -36,22 +41,35 @@
       var entry = $(formatString(templates[type], { message: message }));
       $('#chat_log').append(entry.hide().fadeIn(1000));
       setTimeout(function(){
-        entry.fadeOut(1000, function(){ $(this).remove()})
+        entry.fadeOut(1000, function(){ $(this).remove()});
       }, 5000);
+    }
+
+    function addMessage(message){
+      var entry = $(formatString(templates.chatEntry, message)).hide().fadeIn(500)
+      $('#chat_box').append(entry).scrollTop(entry.position().top);
     }
 
     pubnub.subscribe({
       channel  : channel,
       callback : function(message) {
-        $('#chat_box').append(
-          $(formatString(templates.chatEntry, message))
-        );
+        addMessage(message);
       },
       error : function() {
-        addLog("error", "Connection lost");
+        addLog("error", #{t("chat.connection_lost").to_json});
       }
     });
-
+    pubnub.history({
+      channel: channel,
+      limit: #{Site.pubnub.history_limit},
+      callback: function(messages){
+        $.each(messages, function(index, message){
+          addMessage(message);
+        });
+      }
+    });
+- if current_user.present?
+  :javascript
     $('#chat_form').submit(function(){
       setTimeout(function(){
         pubnub.publish({
@@ -64,13 +82,15 @@
           },
           callback : function(info) {
             if (info[0])
-              addLog('info', "Message sent");
+              addLog('info', #{t("chat.message_sent").to_json});
             else
-              addLog("error", "Failed! - " + info[1]);
+              addLog("error", formatString(#{t("chat.message_not_sent").to_json}, { error: info[1] }));
           }
         });
         $('#chat_form #message').val('');
       }, 0);
       return false;
     });
+:javascript
   });
+

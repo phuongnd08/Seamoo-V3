@@ -9,7 +9,8 @@
       #exit{:style => 'display: none'}
         = form_tag leave_current_match_league_path(@league), :id => "leave_current_match_form" do 
           = submit_tag t('.leave_current_match'), :class => "sad"
-
+    .internal.chatting
+      = render :partial => 'chat'
     .internal
       = render :partial => 'active_players'
   .right

@@ -5,6 +5,13 @@ vi:
   next: Kế tiếp
   previous: Kế trước
   you_chat_here: Nói chuyện ở đây
+  chat:
+    header: Trò chuyện
+    connection_lost: Đứt kết nối
+    message_sent: Tin nhắn đã được gửi
+    message_not_sent: 'Tin nhắn không gửi được vì bị lỗi "{error}"'
+    hint: Tin nhắn sẽ được gửi nếu bạn nhấn Enter
+    need_signin: Vui lòng <a href='%{signin_path}'>đăng nhập</a> để tham gia trò chuyện
   layouts:
     application:
       competition_system: Hệ thống thi đấu

@@ -5,6 +5,13 @@ en:
   next: Next
   previous: Prev
   you_chat_here: You chat here
+  chat:
+    header: Chatting
+    connection_lost: Connection lost
+    message_sent: Chat sent
+    message_not_sent: 'Chat cannot be sent due to "{error}"'
+    hint: Chat will be sent if you press Enter
+    need_signin: Please <a href='%{signin_path}'>signin</a> to chat
   layouts:
     application:
     header:
