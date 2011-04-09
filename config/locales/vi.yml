@@ -42,6 +42,7 @@ vi:
       correct_answer: câu trả lời đúng
       rematch: Đấu trận khác
       edit: Sửa
+      return_to: Hoặc quay lại
   leagues:
     active_players: Những thành viên đang thi đấu
     show:

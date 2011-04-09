@@ -116,4 +116,12 @@ describe "Matching Result" do
       end
     end
   end
+
+  describe "links" do
+    it "should show an exit back to league" do
+      visit match_path(@match)
+      page.should have_content("Or return to " + @match.league.name)
+      page.find_link(@match.league.name)[:href].should == league_path(@match.league)
+    end
+  end
 end

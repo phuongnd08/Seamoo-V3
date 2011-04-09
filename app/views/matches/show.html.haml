@@ -16,6 +16,9 @@
       .rematch
         %a{:href => matching_league_path(@match.league)}
           %span= t(".rematch")
+      .exit
+        = t(".return_to")
+        = link_to @match.league.name, league_path(@match.league)
   .right
     %h3= t '.Questions'
     %ol

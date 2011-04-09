@@ -37,6 +37,7 @@ en:
       correct_answer: correct answer
       rematch: "Let's match again"
       edit: Edit
+      return_to: Or return to
   leagues:
     active_players: Members playing now
     show:
