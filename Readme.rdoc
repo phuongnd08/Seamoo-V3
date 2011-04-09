@@ -1,17 +1,31 @@
-==Setting up testing environment
+==Setting up development environment
+===Install Ruby Version Manager (RVM)
+Follow tutorial on beginrescueend.org
+Install ruby 1.8.7
+  rvm install 1.8.7
+Install bundler
+  gem install bundler
+Install all other gems
+  bundle install
+===Config database
+  Copy config/database.example.yml to config/database.yml
+  Run ./recreate_all_dbs
+===Run webserver
+  rails s
+===To use facebook in development server
 Enable proxy & proxy_http modules for apache (by symlink proxy.load & proxy_http.load from /etc/apache2/mods-available/ to /etc/apache2/mods-enabled/
-Set up proxy for dautri-1.local.com to dautri-8.local.com (since parallel tests will running on 8 domains simultaneously)
-Example settings:
+Set up proxy for dautri.local.com 
+  <VirtualHost *:80>
+  ServerName dautri.local.com
+  ProxyPreserveHost On
+  ProxyPass / http://localhost:3000/
+  ProxyPassReverse / http://localhost:3000/
+  </VirtualHost>
 
-				<VirtualHost *:80>
-				ServerName dautri.local.com
-				ServerAdmin admin@dautri.local.com
-				ProxyPreserveHost On
-				ProxyPass / http://localhost:3000/
-				ProxyPassReverse / http://localhost:3000/
-				</VirtualHost>
-
-Change /etc/hosts also to map dautri-x.local.com to localhost
+Change /etc/hosts also to map dautri.local.com to localhost
+===Install membase-server
+Install membase-server
+Create bucket dev, test1, test2, test3, test4, test5 with empty password
 ==Importing data
 Data file is located at data/
 To import a file, rake data:import FILE=filename CATEGORY=category_id LEVEL=level
