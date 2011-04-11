@@ -1,8 +1,14 @@
-name: dautri
-domain: dautri.net
-bot_domain: dautri.net
-pubnub:
-  publish_key: "pub-558d2ffe-e056-47d2-b219-bd8aa9a25bc6"
-  subscribe_key: "sub-93a637d1-6281-11e0-8b7b-15c9dd26f7ff"
-  origin: "pubsub.pubnub.com"
-  history_limit: 50
+development: &development
+  name: dautri
+  domain: dautri.net
+  bot_domain: dautri.net
+  chat: &chat
+    server: "http://localhost:9292"
+    client_js: "chat.js"
+    mount_point: "chat"
+    history_limit: 50
+test:
+  <<: *development
+
+production:
+  <<: *development

@@ -1,5 +1,4 @@
 %h3=t('chat.header')
-#pubnub{"pub-key" => Site.pubnub.publish_key, "sub-key" => Site.pubnub.subscribe_key, :ssl => "off", :origin => "pubsub.pubnub.com"}
 #chat_box
 - if current_user.present?
   = form_tag "/", :id => "chat_form", :onsubmit => "return false;" do
@@ -8,7 +7,7 @@
 - else
   %div= raw t("chat.need_signin", :signin_path => signin_path)
 #chat_log
-= javascript_include_tag "http://cdn.pubnub.com/pubnub-3.1.min.js"
+  = javascript_include_tag "#{Site.chat.server}/#{Site.chat.client_js}"
 
 %div{:style => "display:none"}
   - chat_entry_template = capture_haml(true) do
@@ -23,13 +22,8 @@
   - chat_info_template = capture_haml do
     .chat_info {message}
 :javascript
-  var pubnub = PUBNUB.init({
-    publish_key   : #{Site.pubnub.publish_key.to_json},
-      subscribe_key : #{Site.pubnub.subscribe_key.to_json},
-      ssl           : false,
-      origin        : #{Site.pubnub.origin.to_json}
-    });
-  var channel = '#{Rails.env}_league_#{@league.id}';
+  var client = new Faye.Client("#{Site.chat.server}/#{Site.chat.mount_point}");
+  var channel = '/leagues/#{@league.id}';
 
   var templates = { 
     chatEntry: #{chat_entry_template.to_json}, 
@@ -40,7 +34,9 @@
   function addMessage(message){
     var entry = $(formatString(templates.chatEntry, message)).hide().fadeIn(500)
     $('#chat_box').append(entry);
-    entry[0].scrollIntoView();
+    setTimeout(function(){
+      $("#chat_box").attr({ scrollTop: $("#chat_box").attr("scrollHeight") })
+    }, 0);
   }
 
   function addLog(type, message){
@@ -51,49 +47,21 @@
     }, 5000);
   }
 
-  $(function(){
-    pubnub.subscribe({
-      channel  : channel,
-      callback : function(message) {
-        addMessage(message);
-      },
-      error : function() {
-        addLog("error", #{t("chat.connection_lost").to_json});
-      }
-    });
-    pubnub.history({
-      channel: channel,
-      limit: #{Site.pubnub.history_limit},
-      callback: function(messages){
-        $.each(messages, function(index, message){
-          addMessage(message);
-        });
-      }
-    });
+  client.subscribe(channel, function(message) {
+    addMessage(message);
   });
 - if current_user.present?
   :javascript
-    $(function(){
-      $('#chat_form').submit(function(){
-        setTimeout(function(){
-          pubnub.publish({
-            channel  : channel,
-            message  : { 
-              display_name: #{current_user.display_name.to_json},
-              link: #{user_path(current_user).to_json},
-              avatar_url: #{current_user.gravatar_url(:size => 32).to_json},
-              content: $('#chat_form #message').val()
-            },
-            callback : function(info) {
-              if (info[0])
-                addLog('info', #{t("chat.message_sent").to_json});
-              else
-                addLog("error", formatString(#{t("chat.message_not_sent").to_json}, { error: info[1] }));
-            }
-          });
-          $('#chat_form #message').val('');
-        }, 0);
-        return false;
-      });
+    $('#chat_form').submit(function(){
+      setTimeout(function(){
+        client.publish(channel, { 
+          display_name: #{current_user.display_name.to_json},
+          link: #{user_path(current_user).to_json},
+          avatar_url: #{current_user.gravatar_url(:size => 32).to_json},
+          content: $('#chat_form #message').val()
+        });
+        $('#chat_form')[0].reset();
+      }, 0);
+      return false;
     });
 
