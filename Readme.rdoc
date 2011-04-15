@@ -30,3 +30,14 @@ Create bucket dev, test1, test2, test3, test4, test5 with empty password
 Data file is located at data/
 To import a file, rake data:import FILE=filename CATEGORY=category_id LEVEL=level
 To unimport a file, rake data:unimport FILE=filename
+===Ubuntu installation
+Require packages: 
+for nokogiri
+  libxml2 libxml2-dev libxslt1-dev
+for nginx
+  libc6 libpcre3 libpcre3-dev libpcrecpp0 libssl0.9.8 libssl-dev zlib1g zlib1g-dev lsb-base
+  Then install nginx from source
+  sudo cp neccessities/nginx/init.d-script /etc/init.d/nginx
+  sudo /usr/sbin/update-rc.d -f nginx defaults
+  use neccessities/nginx/nginx.conf as example to modify the system nginx.conf
+  restart the server and telnet into localhost 80 to make sure nginx config to run at start

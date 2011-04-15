@@ -5,7 +5,7 @@ gem 'rails', '3.0.0'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql'
+gem 'mysql2'
 gem 'haml', ">=3.1.alpha.147"
 gem 'omniauth', '0.2.0.beta5'
 gem 'authlogic'
@@ -22,7 +22,7 @@ gem "fancy-buttons", ">=1.1.0.alpha.1"
 gem "will_paginate", "~> 3.0.pre2"
 
 # Use unicorn as the web server
-# gem 'unicorn'
+gem 'unicorn', :require => false
 
 # Deploy with Capistrano
 # gem 'capistrano'
@@ -64,4 +64,5 @@ group :development do
   gem "ruby-debug"
   gem "heroku"
   gem "hpricot", :require => false
+  gem "capistrano", :require => false
 end

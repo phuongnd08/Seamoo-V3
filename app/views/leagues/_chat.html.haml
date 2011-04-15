@@ -9,18 +9,18 @@
 #chat_log
   = javascript_include_tag "#{Site.chat.server}/#{Site.chat.client_js}"
 
-%div{:style => "display:none"}
-  - chat_entry_template = capture_haml(true) do
-    .chat_entry
-      %a{:href => "{link}", :title => "{display_name}"}
-        %img{:src => "{avatar_url}"}
-      %span.msg {content}
+- chat_entry_template = capture do
+  .chat_entry
+    %a{:href => "{link}", :title => "{display_name}"}
+      %img{:src => "{avatar_url}"}
+    %span.msg {content}
 
-  - chat_error_template = capture_haml do
-    .chat_error {message}
+- chat_error_template = capture do
+  .chat_error {message}
 
-  - chat_info_template = capture_haml do
-    .chat_info {message}
+- chat_info_template = capture do
+  .chat_info {message}
+
 :javascript
   var client = new Faye.Client("#{Site.chat.server}/#{Site.chat.mount_point}");
   var channel = '/leagues/#{@league.id}';
