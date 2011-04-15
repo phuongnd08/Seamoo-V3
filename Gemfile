@@ -5,7 +5,7 @@ gem 'rails', '3.0.0'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql'
+gem 'mysql2'
 gem 'haml', ">=3.1.alpha.147"
 gem 'omniauth', '0.2.0.beta5'
 gem 'authlogic'
@@ -20,6 +20,7 @@ gem "compass-susy-plugin", ">=0.9.beta.3"
 gem "compass-colors"
 gem "fancy-buttons", ">=1.1.0.alpha.1"
 gem "will_paginate", "~> 3.0.pre2"
+#gem "unicorn"
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -42,6 +43,7 @@ gem "will_paginate", "~> 3.0.pre2"
 # and rake tasks are available in development mode:
 group :development, :test do
   gem 'rspec-rails', "~> 2.5"
+  gem "ruby-debug19"
 end
 
 group :test do
@@ -61,7 +63,6 @@ end
 group :development do
   gem "rails3-generators"
   gem 'haml-rails'
-  gem "ruby-debug"
   gem "heroku"
   gem "hpricot", :require => false
 end

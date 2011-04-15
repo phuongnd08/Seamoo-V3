@@ -10,7 +10,7 @@
   = javascript_include_tag "#{Site.chat.server}/#{Site.chat.client_js}"
 
 %div{:style => "display:none"}
-  - chat_entry_template = capture_haml(true) do
+  - chat_entry_template = capture_haml do
     .chat_entry
       %a{:href => "{link}", :title => "{display_name}"}
         %img{:src => "{avatar_url}"}

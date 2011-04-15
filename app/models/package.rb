@@ -6,7 +6,7 @@ class Package < ActiveRecord::Base
     error = nil
     pos = 0
     self.entries = []
-    File.open(path){|f| f.readlines }.each do |line|
+    File.open(path, "r:utf-8"){|f| f.readlines }.each do |line|
       pos += 1
       parts = line.squish.split("|")
       if (parts.length <= 1)

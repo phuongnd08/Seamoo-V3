@@ -30,3 +30,7 @@ Create bucket dev, test1, test2, test3, test4, test5 with empty password
 Data file is located at data/
 To import a file, rake data:import FILE=filename CATEGORY=category_id LEVEL=level
 To unimport a file, rake data:unimport FILE=filename
+===Ubuntu installation
+Require packages: 
+for nokogiri
+libxml2 libxml2-dev libxslt1-dev

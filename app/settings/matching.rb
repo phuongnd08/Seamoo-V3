@@ -6,7 +6,7 @@ class Matching < Settingslogic
 
   def self.read_bots
     hash = {}
-    File.open(File.join(Rails.root, "config", "bots.txt"), "r").each do |line|
+    File.open(File.join(Rails.root, "config", "bots.txt"), "r:utf-8").each do |line|
       line.squish!
       unless line.blank?
         if (line =~ /^(\w+)\s(.+)$/)

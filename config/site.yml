@@ -3,7 +3,7 @@ development: &development
   domain: dautri.net
   bot_domain: dautri.net
   chat: &chat
-    server: "http://localhost:9292"
+    server: "http://localhost:3500"
     client_js: "chat.js"
     mount_point: "chat"
     history_limit: 50
