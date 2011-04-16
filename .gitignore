@@ -8,3 +8,4 @@ database.yml
 *.swo
 tags
 features/screenshots/
+dautri.pem

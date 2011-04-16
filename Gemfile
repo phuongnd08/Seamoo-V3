@@ -41,6 +41,7 @@ gem 'unicorn', :require => false
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
+  gem 'capistrano'
   gem 'rspec-rails', "~> 2.5"
 end
 
