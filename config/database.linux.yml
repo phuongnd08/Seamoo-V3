@@ -2,7 +2,7 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: true
-  database: seamoo_development 
+  database: dautri_dev
   pool: 5
   username: root
   password:
@@ -14,7 +14,7 @@ test: &test
   adapter: mysql2
   encoding: utf8
   reconnect: true
-  database: seamoo_test_<%=(ENV["TEST_ENV_NUMBER"] || 0).to_i + 1%>
+  database: dautri_test_<%=(ENV["TEST_ENV_NUMBER"] || 0).to_i + 1%>
   pool: 5
   username: root
   password:
@@ -24,7 +24,7 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: true
-  database: seamoo_production
+  database: dautri_dev
   pool: 5
   username: root
   password: 

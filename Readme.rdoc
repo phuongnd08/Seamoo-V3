@@ -41,3 +41,5 @@ for nginx
   sudo /usr/sbin/update-rc.d -f nginx defaults
   use neccessities/nginx/nginx.conf as example to modify the system nginx.conf
   restart the server and telnet into localhost 80 to make sure nginx config to run at start
+for mysql2
+  libmysqlclient-dev

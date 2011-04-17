@@ -1,3 +1,4 @@
+require 'bundler/capistrano'
 set :application, "main_app"
 set :repository,  "git@github.com:phuongnd08/Seamoo-V3.git"
 
@@ -35,3 +36,12 @@ task :echo, :role => :app do
   puts "freem -mt"
   run "free -mt"
 end
+
+namespace :symlink do
+  desc "Symlink database.yml from database.linux.yml"
+  task :db_settings, :role => :app do
+    run "cd #{current_path}/config && ln -s database.linux.yml database.yml"
+  end
+end
+
+after "deploy:update_code", "symlink:db_settings"
