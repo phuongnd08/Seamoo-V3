@@ -44,4 +44,4 @@ namespace :symlink do
   end
 end
 
-after "deploy:finalize_update", "symlink:database"
+after "deploy:symlink", "symlink:database"
