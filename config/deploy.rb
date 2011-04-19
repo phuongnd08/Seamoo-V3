@@ -1,6 +1,7 @@
 require 'bundler/capistrano'
 set :application, "main_app"
 set :repository,  "git@github.com:phuongnd08/Seamoo-V3.git"
+set :rails_env, :production
 
 set :scm, :git
 set :branch, :master
@@ -13,6 +14,8 @@ set :deploy_to, "/home/#{user}/#{application}"
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
 role :app, "chat.dautri.net"                          # Your HTTP server, Apache/etc
+role :db, "chat.dautri.net", :primary => true                          # Your HTTP server, Apache/etc
+role :web, "chat.dautri.net"                          # Your HTTP server, Apache/etc
 
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
@@ -35,6 +38,8 @@ task :echo, :role => :app do
   run "ruby -v"
   puts "freem -mt"
   run "free -mt"
+  puts "try_sudo"
+  puts try_sudo
 end
 
 namespace :symlink do
@@ -44,4 +49,27 @@ namespace :symlink do
   end
 end
 
-after "deploy:update_code", "symlink:db_settings"
+before "deploy:migrate", "symlink:db_settings"
+
+set :unicorn_binary, "bundle exec unicorn_rails"
+set :unicorn_config, "#{current_path}/config/unicorn.rb"
+set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
+
+namespace :deploy do
+  task :start, :roles => :app, :except => { :no_release => true } do 
+    run "cd #{current_path} && sudo #{unicorn_binary} -c #{unicorn_config} -E #{rails_env} -D"
+  end
+  task :stop, :roles => :app, :except => { :no_release => true } do 
+    run "sudo kill `cat #{unicorn_pid}`"
+  end
+  task :graceful_stop, :roles => :app, :except => { :no_release => true } do
+    run "sudo kill -s QUIT `cat #{unicorn_pid}`"
+  end
+  task :reload, :roles => :app, :except => { :no_release => true } do
+    run "sudo kill -s USR2 `cat #{unicorn_pid}`"
+  end
+  task :restart, :roles => :app, :except => { :no_release => true } do
+    stop
+    start
+  end
+end
