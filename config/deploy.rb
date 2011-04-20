@@ -1,4 +1,4 @@
-require 'bundler/capistrano'
+require "bundler/capistrano"
 set :application, "main_app"
 set :repository,  "git@github.com:phuongnd08/Seamoo-V3.git"
 set :rails_env, :production
@@ -73,3 +73,12 @@ namespace :deploy do
     start
   end
 end
+
+namespace :symlink do
+  desc "Symlink database.yml"
+  task :database do
+    run "cd #{current_path}/config && ln -fs database.linux.yml database.yml"
+  end
+end
+
+after "deploy:symlink", "symlink:database"
