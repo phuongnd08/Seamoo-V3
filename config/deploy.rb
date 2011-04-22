@@ -1,4 +1,5 @@
 require "bundler/capistrano"
+require "delayed/recipes"
 set :application, "main_app"
 set :repository,  "git@github.com:phuongnd08/Seamoo-V3.git"
 set :rails_env, :production
@@ -74,6 +75,13 @@ namespace :deploy do
   end
 end
 
+namespace :bots do
+  desc "Start bots by queue delayed jobs in db"
+  task :awake, :roles => :app do
+    run "export RAILS_ENV=#{rails_env} && cd #{current_path} && bundle exec rake match:reset && bundle exec rake match:start_bot"
+  end
+end
+
 namespace :symlink do
   desc "Symlink database.yml"
   task :database do
@@ -82,3 +90,9 @@ namespace :symlink do
 end
 
 after "deploy:symlink", "symlink:database"
+# Delayed Job  
+
+after "deploy:stop",  "delayed_job:stop"
+after "deploy:start", "delayed_job:start"
+after "deploy:start", "bots:awake"
+
