@@ -1,5 +1,5 @@
 # 16 workers and 1 master
-worker_processes (ENV["RAILS_ENV"] == 'production' ? 2 : 2)
+worker_processes (ENV["RAILS_ENV"] == 'production' ? 2 : 3)
 
 # Load rails into the master before forking workers
 # for super-fast worker spawn times
