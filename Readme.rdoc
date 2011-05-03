@@ -43,3 +43,12 @@ for nginx
   restart the server and telnet into localhost 80 to make sure nginx config to run at start
 for mysql2
   libmysqlclient-dev
+===Install ruby from source
+  Download ruby & rubygems sources
+  Install zlib
+    package: zlib1g-dev
+    ruby-sources/ext/zlib
+  Install openssl
+    package: libssl-dev
+    ruby-sources/ext/openssl
+

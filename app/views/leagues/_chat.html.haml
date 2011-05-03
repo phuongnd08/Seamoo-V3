@@ -39,6 +39,14 @@
     }, 0);
   }
 
+  function addMessages(messages){
+    if (messages != null){
+      for (var i = 0; i < messages.length; i++){
+        addMessage(messages[i]);
+      }
+    }
+  }
+
   function addLog(type, message){
     var entry = $(formatString(templates[type], { message: message }));
     $('#chat_log').append(entry.hide().fadeIn(1000));
@@ -47,9 +55,24 @@
     }, 5000);
   }
 
+  $(function(){
+    $.ajax({
+      url: "#{Site.chat.server}/#{Site.chat.history_mount_point}",
+      dataType: "jsonp",
+      data: {
+        count: #{Site.chat.history_limit},
+        channel: channel,
+      },
+      success: function(messages){
+        addMessages(messages);
+      }
+    });
+  });
+
   client.subscribe(channel, function(message) {
     addMessage(message);
   });
+
 - if current_user.present?
   :javascript
     $('#chat_form').submit(function(){
@@ -64,4 +87,3 @@
       }, 0);
       return false;
     });
-
