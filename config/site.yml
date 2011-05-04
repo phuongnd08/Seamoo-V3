@@ -15,4 +15,4 @@ production:
   <<: *development
   chat:
     <<: *chat
-    server: "http://chat.dautri.net:3500" 
+    server: "http://chat.dautri.net" 
