@@ -32,6 +32,6 @@
               =link_to membership.user.display_name, user_path(membership.user)
             %td.score= membership.matches_score
             %td.matches= membership.matches_count
-            %td.rank_score= membership.rank_score
+            %td.rank_score= "%.1f" % membership.rank_score
       .pagination= will_paginate @membership
      
