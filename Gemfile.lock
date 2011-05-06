@@ -110,6 +110,9 @@ GEM
       launchy (>= 0.3.2)
       rest-client (< 2.0.0, >= 1.2.0)
     highline (1.6.1)
+    hoptoad_notifier (2.4.9)
+      activesupport
+      builder
     hpricot (0.8.4)
     i18n (0.4.2)
     jquery-rails (0.2.7)
@@ -278,6 +281,7 @@ DEPENDENCIES
   haml (>= 3.1.alpha.147)
   haml-rails
   heroku
+  hoptoad_notifier
   hpricot
   jquery-rails
   launchy

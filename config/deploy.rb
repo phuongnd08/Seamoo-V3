@@ -1,5 +1,6 @@
 require "bundler/capistrano"
 require "delayed/recipes"
+require 'hoptoad_notifier/capistrano'
 set :application, "main_app"
 set :repository,  "git@github.com:phuongnd08/Seamoo-V3.git"
 set :rails_env, :production
@@ -95,4 +96,3 @@ after "deploy:symlink", "symlink:database"
 after "deploy:stop",  "delayed_job:stop"
 after "deploy:start", "delayed_job:start"
 after "deploy:start", "bots:awake"
-

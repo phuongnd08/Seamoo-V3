@@ -20,6 +20,7 @@ gem "compass-susy-plugin", ">=0.9.beta.3"
 gem "compass-colors"
 gem "fancy-buttons", ">=1.1.0.alpha.1"
 gem "will_paginate", "~> 3.0.pre2"
+gem "hoptoad_notifier"
 
 # Use unicorn as the web server
 gem 'unicorn', :require => false
