@@ -7,7 +7,7 @@
   %ul
     - @multiple_choice.options.each do |option|
       %li
-        = option.content
+        = raw(option.content)
         - if option.correct
           (correct)
 
