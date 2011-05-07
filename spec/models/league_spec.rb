@@ -77,6 +77,19 @@ describe League do
         match = @league.request_match(@user2.id)
         match.questions.map(&:id).to_set.should == @questions.map(&:id).to_set
       end
+
+      it "should handle situation where first_requester_last_seen evaluated to nil" do
+        now = Time.now
+        Time.stub(:now).and_return(now)
+        @league.request_match(@user1.id)
+        @league.send(:user_lastseen)[@user1.id] = nil
+        Matching.stub(:requester_stale_after).and_return(0.1)
+        @league.request_match(@user2.id)
+        match_1 = @league.request_match(@user1.id)
+        match_2 = @league.request_match(@user2.id)
+        match_1.should_not be_nil
+        match_2.should == match_1
+      end
     end
 
     describe "waiting_users" do
