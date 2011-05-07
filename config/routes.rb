@@ -13,7 +13,7 @@ SeamooV3::Application.routes.draw do
     end
 
     resources :categories
-    resources :leagues do
+    resources :leagues, :only => [:show] do
       member do
         get :matching
         post :request_match

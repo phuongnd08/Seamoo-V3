@@ -2,9 +2,6 @@ class LeaguesController < ApplicationController
   before_filter :require_user, :only => [:matching, :request_match_info]
   before_filter :load_league, :except => [:index]
   before_filter :load_active_players, :only => [:matching, :active_players]
-  def index
-    @leagues = League.all
-  end
 
   def show
     @membership = @league.memberships.paginate :per_page => Membership.per_page, :page => params[:page], :order => 'rank_score DESC'
