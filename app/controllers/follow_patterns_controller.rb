@@ -2,6 +2,7 @@ class FollowPatternsController < ApplicationController
   before_filter :load_follow_pattern, :only => [:show, :edit, :update]
 
   def show
+    @use_formulae = true
   end
 
   def new

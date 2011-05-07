@@ -308,6 +308,7 @@
   function setQuestion(question){
     $('#question').html(question.content);
     setUpQuestionButtons(question.type);
+    if (window.refreshMathFormulae) refreshMathFormulae('question');
   }
 
   function setUpQuestionButtons(questionType){

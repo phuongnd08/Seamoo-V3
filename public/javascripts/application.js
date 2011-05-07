@@ -36,8 +36,3 @@ function formatString(template, variables){
   }
   return formatted;
 }
-
-function refreshMathFormular(containerId){
-  var math = $(containerId);
-  MathJax.Hub.Queue(["Typeset", MathJax.Hub, math]);
-}

@@ -5,6 +5,15 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
+math = Category.create!(
+  :alias => 'math', 
+  :name=>'Toán', 
+  :description => %{Bạn am hiểu bao nhiêu nguyên lí toán học? 
+    Tốc độ phán đoán và luận logic của bạn? 
+    Câu trả lời sẽ có ở đây},
+  :image => 'categories/math.png'
+)
+
 english = Category.create!(
   :alias => 'english', 
   :name=>'English', 
@@ -14,23 +23,16 @@ english = Category.create!(
   :image => 'categories/english.png'
 )
 
-math = Category.create!(
-  :alias => 'math', 
-  :name=>'Toán', 
-  :description => %{Bạn am hiểu bao nhiêu nguyên lí toán học? 
-    Tốc độ phán đoán và luận logic của bạn? 
-    Câu trả lời sẽ có ở đây},
-  :image => 'categories/math.png',
-  :status => 'coming_soon'
-)
 
-english_eggs = League.create!(
-  :category => english, 
-  :alias => 'english_eggs',
-  :name => 'Basic English',
+
+math_eggs = League.create!(
+  :category => math, 
+  :alias => 'math_eggs',
+  :name => 'Basic Math',
   :description => 'Dành cho người mới bắt đầu',
   :image => 'leagues/eng-eggs.png',
-  :level => 0
+  :level => 0,
+  :use_formulae => true
 )
 
 League.create!(
@@ -64,28 +66,28 @@ League.create!(
 )
 
 Question.create_multiple_choices(
-  "What's your name", 
-  {'phuong' => true, 'trien' => false, 'toan' => false}, 
-  {:category => english, :level => 0}
+  "What's your formulae of $\\pi$", 
+  {'$\\sigma$' => true, '$\\beta$' => false, '$\\alpha$' => false}, 
+  {:category => math, :level => 0}
 )
 
 Question.create_follow_pattern(
-  "My name", 'ph[uo]ng ng[uy]en', 
-  {:category => english, :level => 0}
+  "My $\\lambda$", 'ph[uo]ng ng[uy]en', 
+  {:category => math, :level => 0}
 )
 
 Question.create_multiple_choices(
-  "What's your best friend name", 
-  {'thuc' => true, 'trien' => false, 'toan' => false}, 
-  {:category => english, :level => 0}
+  "What's your best $\\omega$", 
+  {'thuc$\\omega$' => true, 'trien' => false, 'toan' => false}, 
+  {:category => math, :level => 0}
 )
 Question.create_multiple_choices(
-  "What's your pet name",
-  {'na' => true, 'trien' => false, 'toan' => false},
-  {:category => english, :level => 0}
+  "What's your pet $\\sigma$ name",
+  {'na' => true, 'trien$\\omega$' => false, 'toan' => false},
+  {:category => math, :level => 0}
 )
 
 ["phuong", "hung", "thuc", "trien", "toan", "quan", "tien", "huy", "cuong", "mai", "thuy", "hoa"].each_with_index do |name, index|
   user = User.create(:display_name => name, :email => "#{name}@#{Site.domain}")
-  Membership.create(:league => english_eggs, :user => user, :matches_count => index, :matches_score => index * 75)
+  Membership.create(:league => math_eggs, :user => user, :matches_count => index, :matches_score => index * 75)
 end

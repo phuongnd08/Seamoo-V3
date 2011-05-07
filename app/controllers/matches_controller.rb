@@ -11,6 +11,7 @@ class MatchesController < ApplicationController
     unless @hide_all_answers
       @match.match_users.detect{|mu| mu.user == current_user}.try(:record!)
     end
+    @use_formulae = @match.league.use_formulae
   end
 
   def infor

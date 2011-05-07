@@ -38,4 +38,23 @@ describe LeaguesController do
       assigns(:active_players).values.should include(user1)
     end
   end
+
+  describe "GET matching" do
+    render_views
+    before(:each) do
+      controller.stub(:current_user).and_return(Factory(:user))
+    end
+
+    it "should not provide mathjax only if not required" do
+      @league = Factory(:league)
+      get :matching, :id => @league.id 
+      response.body.should_not include("MathJax.js")
+    end
+
+    it "should provide mathjax if required" do
+      @league = Factory(:league, :use_formulae => true)
+      get :matching, :id => @league.id 
+      response.body.should include("MathJax.js")
+    end
+  end
 end

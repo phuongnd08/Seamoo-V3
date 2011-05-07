@@ -12,6 +12,11 @@ describe FollowPatternsController do
       get :show, :id => @follow_pattern
       assigns(:follow_pattern).should == @follow_pattern
     end
+
+    it "should require mathjax" do
+      get :show, :id => @follow_pattern.id
+      assigns(:use_formulae).should be_true
+    end
   end
 
   describe "GET new" do

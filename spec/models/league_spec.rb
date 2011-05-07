@@ -7,6 +7,13 @@ describe League do
     it { should have_many(:memberships)}
   end
 
+  describe "default values" do
+    it "should have desired default values" do
+      league = League.new
+      league.use_formulae.should be_false
+    end
+  end
+
   describe "dynamic accessor", :memcached => true do
     before(:each) do
       @league = League.create!(:level => 0)

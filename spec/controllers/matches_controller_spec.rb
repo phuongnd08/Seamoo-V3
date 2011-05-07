@@ -23,6 +23,12 @@ describe MatchesController do
       @match.users << @user
     end
 
+    it "should require use_formulae if the league do so" do
+      @match.league.update_attribute(:use_formulae, true);
+      get :show, :id => @match.id
+      assigns(:use_formulae).should be_true
+    end
+
     it "assigns the requested match as @match" do
       get :show, :id => @match.id
       assigns(:match).should == @match

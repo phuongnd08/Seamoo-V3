@@ -4,7 +4,10 @@ Factory.define :category do |c|
 end
 
 Factory.define :category_with_questions, :parent => :category do |c|
-  c.questions { |qs| [qs.association(:question, :level => 0), qs.association(:question, :level => 0), qs.association(:question, :level => 0)] }
+  c.questions { |qs| [
+    qs.association(:question, :level => 0), 
+    qs.association(:question, :level => 0), 
+    qs.association(:question, :level => 0)] }
 end
 
 Factory.define :active_category, :parent => :category do |s|

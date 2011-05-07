@@ -6,6 +6,7 @@ class MultipleChoicesController < ApplicationController
   end
 
   def show
+    @use_formulae = true
   end
 
   def new

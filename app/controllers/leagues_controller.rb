@@ -10,7 +10,9 @@ class LeaguesController < ApplicationController
     @membership = @league.memberships.paginate :per_page => Membership.per_page, :page => params[:page], :order => 'rank_score DESC'
   end
 
-  def matching; end
+  def matching; 
+    @use_formulae = @league.use_formulae
+  end
 
   def request_match
     match = @league.request_match(current_user.id) 
