@@ -79,7 +79,7 @@ end
 namespace :bots do
   desc "Start bots by queue delayed jobs in db"
   task :awake, :roles => :app do
-    run "export RAILS_ENV=#{rails_env} && cd #{current_path} && bundle exec rake match:reset && bundle exec rake match:start_bot"
+    run "export RAILS_ENV=#{rails_env} && cd #{current_path} && bundle exec rake match:reset match:start_bot"
   end
 end
 
