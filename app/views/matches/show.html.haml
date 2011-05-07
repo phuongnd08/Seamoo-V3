@@ -24,7 +24,8 @@
     %ol
       - @match.questions.each_with_index do |question, qidx|
         %li{:id => "question_#{question.id}"}
-          .edit_link= link_to t(".edit"), edit_question_path(question)
+          - if @show_admin_link
+            .edit_link= link_to t(".edit"), edit_question_path(question)
           =question.content
         %ul
           - @have_correct_answer = false

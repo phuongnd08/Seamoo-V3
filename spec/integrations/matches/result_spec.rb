@@ -58,6 +58,12 @@ describe "Matching Result" do
           end
         end
       end
+
+      it "should not show edit link" do
+        within "#question_#{@match.questions.first.id}" do
+          link = page.should have_no_xpath(XPath::HTML.link("Edit"))
+        end
+      end
     end
     describe "non-match-player" do
       describe "regular user" do
@@ -81,6 +87,12 @@ describe "Matching Result" do
               page.should have_content "mike: not answered"
               page.should_not have_content "correct answer: #{question.data.options.first.content}"
             end
+          end
+        end
+
+        it "should not show edit link" do
+          within "#question_#{@match.questions.first.id}" do
+            link = page.should have_no_xpath(XPath::HTML.link("Edit"))
           end
         end
       end
