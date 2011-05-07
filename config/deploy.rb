@@ -44,15 +44,6 @@ task :echo, :role => :app do
   puts try_sudo
 end
 
-namespace :symlink do
-  desc "Symlink database.yml from database.linux.yml"
-  task :db_settings, :role => :app do
-    run "cd #{current_path}/config && ln -s database.linux.yml database.yml"
-  end
-end
-
-before "deploy:migrate", "symlink:db_settings"
-
 set :unicorn_binary, "bundle exec unicorn_rails"
 set :unicorn_config, "#{current_path}/config/unicorn.rb"
 set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
@@ -85,12 +76,12 @@ end
 
 namespace :symlink do
   desc "Symlink database.yml"
-  task :database do
-    run "cd #{current_path}/config && ln -fs database.linux.yml database.yml"
+  task :database, :role => :app do
+    run "cd #{release_path}/config && ln -fs database.linux.yml database.yml"
   end
 end
 
-after "deploy:symlink", "symlink:database"
+after "deploy:finalize_update", "symlink:database"
 # Delayed Job  
 
 after "deploy:stop",  "delayed_job:stop"

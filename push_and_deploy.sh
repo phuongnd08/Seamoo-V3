@@ -1,0 +1,1 @@
+cap deploy:migrations
