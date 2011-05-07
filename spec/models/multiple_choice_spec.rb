@@ -37,4 +37,17 @@ describe MultipleChoice do
       @multiple_choice.score_for(nil).should == 0
     end
   end
+
+
+  describe "answer" do
+    it "should report multiple_choice id if error happen" do
+      @multiple_choice = MultipleChoice.create(:content => "What's your name")
+      HoptoadNotifier.should_receive(:notify).with do |data|
+        data[:error_class].should == "MultipleChoice"
+        data[:error_message].should include("Exception")
+        data[:parameters].should == {:multiple_choice_id => @multiple_choice.id}
+      end
+      @multiple_choice.answer.should be_nil
+    end
+  end
 end

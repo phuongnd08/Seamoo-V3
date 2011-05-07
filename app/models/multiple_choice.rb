@@ -16,6 +16,13 @@ class MultipleChoice < ActiveRecord::Base
 
   def answer
     options.detect{|o| o.correct}.content
+  rescue => e
+    HoptoadNotifier.notify(
+      :error_class   => "MultipleChoice",
+      :error_message => "Exception while call #answer: #{e.message}",
+      :parameters    => {:multiple_choice_id => self.id}
+    )
+    nil
   end
 
   def score_for(answer)
