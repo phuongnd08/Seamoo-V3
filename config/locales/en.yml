@@ -5,6 +5,10 @@ en:
   next: Next
   previous: Prev
   you_chat_here: You chat here
+  maintenance:
+    from: System will be down from
+    to: to
+    after: for maintenance
   chat:
     header: Chatting
     connection_lost: Connection lost

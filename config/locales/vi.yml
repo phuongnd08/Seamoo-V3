@@ -5,6 +5,10 @@ vi:
   next: Kế tiếp
   previous: Kế trước
   you_chat_here: Nói chuyện ở đây
+  maintenance:
+    from: Hệ thống sẽ ngừng hoạt động từ
+    to: đến
+    after: để nâng cấp
   chat:
     header: Trò chuyện
     connection_lost: Đứt kết nối

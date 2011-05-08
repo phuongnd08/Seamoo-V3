@@ -2,3 +2,7 @@
   .notice= flash[:notice]
 - elsif flash[:error]
   .error= flash[:error]
+- cache :expires_in => 2.minutes do
+  - maintenance_schedule = MaintenanceSchedule.next
+  - if maintenance_schedule
+    = render :partial => 'layouts/maintenance_schedule', :locals => {:maintenance_schedule => maintenance_schedule}
