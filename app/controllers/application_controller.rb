@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
                     if params[:locale] =~ /^(en|vi)$/
                       params[:locale]
                     else
-                      HoptoadNotifier.notify(
+                      notify_hoptoad(
                         :error_class => "Malform Locale",
                         :parameters => params
                       )

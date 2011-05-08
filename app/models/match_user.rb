@@ -10,6 +10,7 @@ class MatchUser < ActiveRecord::Base
     self.answers[index] = answer
     self.current_question_position= index + 1
     self.finished_at = Time.now if (current_question_position== match.questions.size)
+    save!
   end
 
   def finished?

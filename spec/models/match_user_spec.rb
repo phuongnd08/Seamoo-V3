@@ -19,6 +19,7 @@ describe MatchUser do
       @league = mock_model(League)
       @match = mock_model(Match)
       @match.stub(:questions).and_return(['q0', 'q1', 'q2'])
+      @match.stub(:check_if_finished!)
       @match_user = MatchUser.new(:match => @match)
     end
 

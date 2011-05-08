@@ -71,9 +71,8 @@ class MatchesController < ApplicationController
   end
 
   def submit_answer
-    @match_user = @match.match_users.find_by_user_id(current_user.id)
+    @match_user = @match.match_user_for(current_user.id)
     @match_user.add_answer(params[:position].to_i, params[:answer])   
-    @match_user.save!
     render :json => {:successful => true}
   end
 

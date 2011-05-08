@@ -68,7 +68,6 @@ class Bot < User
               answer = Utils::RndGenerator.rnd > Matching.bot_correctness ? nil : correct_answer(match_user.current_question)
               match_user.add_answer(index, answer) 
             end
-            match_user.save
           end
         else; match_user.record!; die; end
       else; die; end

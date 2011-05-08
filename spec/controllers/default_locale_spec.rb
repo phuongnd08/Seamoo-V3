@@ -3,7 +3,7 @@ require 'spec_helper'
 describe HomeController do
   describe "get index with malformed locale" do
     it "should report wrong locale and reset to default_locale" do
-      HoptoadNotifier.should_receive(:notify).with do |arg|
+      controller.should_receive(:notify_hoptoad).with do |arg|
         arg[:error_class].should == "Malform Locale"
         arg[:parameters][:locale].should == "a"
       end

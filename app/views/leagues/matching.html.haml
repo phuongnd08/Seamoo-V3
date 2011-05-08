@@ -296,10 +296,10 @@
         if (finished){
           li.css({textAlign: "right"});
         } else {
-          var iw = img.width();
+          var iw = 40;
           var fw = $('#match_players ul.list').width();
+          img.css({marginLeft: (fw - iw) * player.current_question_position / questionsPerMatch + "px"})
         }
-        img.css({marginLeft: (fw - iw) * player.current_question_position / questionsPerMatch + "px"})
       }
       $('#match_players ul.list').append(li);
     });
