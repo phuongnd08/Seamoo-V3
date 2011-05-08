@@ -10,7 +10,17 @@ class ApplicationController < ActionController::Base
 
   def set_locale
     # if params[:locale] is nil then I18n.default_locale will be used
-    I18n.locale = params[:locale]
+    I18n.locale = if params[:locale].present?
+                    if params[:locale] =~ /^(en|vi)$/
+                      params[:locale]
+                    else
+                      HoptoadNotifier.notify(
+                        :error_class => "Malform Locale",
+                        :parameters => params
+                      )
+                      I18n.default_locale
+                    end
+                  else I18n.default_locale; end
   end
 
   def current_user_session
