@@ -1,2 +1,9 @@
-git push origin master
-cap deploy:migrations
+#!/usr/bin/ruby
+puts `git push origin master`
+puts `cap maintenance:schedule`
+(30*60).downto(1) do |time|
+  puts "Deploy in #{time/60}:#{'%02d' % (time % 60)}"
+  sleep 1
+end
+puts `cap deploy:migrations`
+puts `cap maintenance:stop`

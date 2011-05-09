@@ -81,6 +81,16 @@ namespace :symlink do
   end
 end
 
+namespace :maintenance do
+  task :schedule do
+    run "cd #{current_path} && bundle exec rake maintenance:schedule"
+  end
+
+  task :stop do
+    run "cd #{current_path} && bundle exec rake maintenance:stop"
+  end
+end
+
 after "deploy:finalize_update", "symlink:database"
 # Delayed Job  
 
