@@ -5,5 +5,7 @@ puts `cap maintenance:schedule`
   puts "Deploy in #{time/60}:#{'%02d' % (time % 60)}"
   sleep 1
 end
+puts `cap deploy:web:disable UNTIL="#{(Time.now + 15 * 60).strftime("%Y/%-m/%-d %-H:%M")}"`
 puts `cap deploy:migrations`
+puts `cap deploy:web:enable`
 puts `cap maintenance:stop`
