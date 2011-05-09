@@ -83,11 +83,11 @@ end
 
 namespace :maintenance do
   task :schedule do
-    run "cd #{current_path} && bundle exec rake maintenance:schedule"
+    run "export RAILS_ENV=#{rails_env} && cd #{current_path} && bundle exec rake maintenance:schedule"
   end
 
   task :stop do
-    run "cd #{current_path} && bundle exec rake maintenance:stop"
+    run "export RAILS_ENV=#{rails_env} && cd #{current_path} && bundle exec rake maintenance:stop"
   end
 end
 
