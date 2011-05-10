@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110508093205) do
+ActiveRecord::Schema.define(:version => 20110510115423) do
 
   create_table "authorizations", :force => true do |t|
     t.integer  "user_id"
@@ -50,6 +50,12 @@ ActiveRecord::Schema.define(:version => 20110508093205) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
+  create_table "fill_in_the_blanks", :force => true do |t|
+    t.string   "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "follow_patterns", :force => true do |t|
     t.text     "instruction"
