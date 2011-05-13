@@ -16,6 +16,11 @@ class Question < ActiveRecord::Base
       data = FollowPattern.create(:instruction => instruction, :pattern => pattern)
       create(extra.merge(:data => data))
     end
+
+    def create_fill_in_blank(content, extra = {})
+      data = FillInTheBlank.create(:content => content)
+      create(extra.merge(:data => data))
+    end
   end
 
   def content

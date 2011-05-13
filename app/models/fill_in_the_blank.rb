@@ -25,7 +25,7 @@ class FillInTheBlank < ActiveRecord::Base
       parts = chunk.split("|")
       {:pattern => parts.first, :highlight_as_typing => false, :answer => parts.last}
     else
-      parts = chunk.split(/[\{\}]/)
+      parts = chunk.split(/[\[\]]/)
       index = 0
       {
         :pattern => parts.map{|p|
@@ -39,7 +39,7 @@ class FillInTheBlank < ActiveRecord::Base
 
   def segments
     index = 0
-    content.split(/[\[\]]/).map{|chunk|
+    content.split(/[\{\}]/).map{|chunk|
       index +=1
       index % 2 == 1 ? hint_segment(chunk) : input_segment(chunk)
     }

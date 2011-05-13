@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe FillInTheBlank do
   before(:each) do
-    @fib = FillInTheBlank.new(:content => "Once day I was [travel|travelling] on the [s{tr}eet] seeing a [girl] washing her stuff")
+    @fib = FillInTheBlank.new(:content => "Once day I was {travel|travelling} on the {s[tr]eet} seeing a {girl} washing her stuff")
   end
   describe "answer" do
     it "should return the answers without the markup" do

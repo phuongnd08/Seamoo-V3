@@ -1,0 +1,11 @@
+.follow_pattern
+  .instruction= follow_pattern.instruction
+  .hint_container
+    (#{t 'questions.Hint'}: 
+    %span#hint
+    )
+  = form_tag :id => 'follow_pattern_form' do
+    .text_field
+      = text_field_tag :answer, nil, :hint => follow_pattern.hint
+    .submit
+      = submit_tag t('questions.Submit')

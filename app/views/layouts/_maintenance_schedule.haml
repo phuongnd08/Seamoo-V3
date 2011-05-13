@@ -6,8 +6,8 @@
     }
     function writeDate(stamp){
       var date = new Date(stamp * 1000);
-      document.write('' + date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate() + " " + 
-        date.getHours() + ":" + twoDigits(date.getMinutes()));
+      document.write('' + date.getFullYear() + "/" + twoDigits(date.getMonth() + 1) + "/" + twoDigits(date.getDate()) + " " + 
+        twoDigits(date.getHours()) + ":" + twoDigits(date.getMinutes()));
     }
     writeDate(#{maintenance_schedule.started_at.to_i});
   = t "maintenance.to"

@@ -1,8 +1,8 @@
 SeamooV3::Application.routes.draw do
   scope "(:locale)", :locale => /en|vi/ do
-    resources :follow_patterns, :except => [:index, :destroy]
-
-    resources :multiple_choices, :except => [:index, :destroy]
+    [:follow_patterns, :multiple_choices, :fill_in_the_blanks].each do |res|
+      resources res, :except => [:index, :destroy]
+    end
 
     resources :questions, :except => [:update]
 
