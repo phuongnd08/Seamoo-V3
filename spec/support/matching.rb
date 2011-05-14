@@ -25,12 +25,29 @@ module RSpec
       end
       league.matches.last
     end
+
+    def assert_recorded_answer(username, position, answer)
+      user = User.find_by_display_name(username)
+      match_user = MatchUser.find_by_user_id(user.id)
+      match = match_user.match
+      wait_for_true{
+        match_user.reload.answers.has_key?(position)
+      }
+      realized_answer = match.questions[position].data.realized_answer(match_user.answers[position])
+      realized_answer.should == answer
+    end
   end
 end
 
 RSpec.configure do |config|
   # empty memcache before every spec
   config.include(RSpec::Matching)
+end
+
+begin
+World(RSpec::Matching)
+rescue NoMethodError => e
+  # it's ok, cucumber is not loaded
 end
 
 

@@ -62,4 +62,11 @@ describe Question do
       end
     end
   end
+
+  describe "content_type" do
+    it "should return according to question data" do
+      Question.create_multiple_choices("Who are you", {"a" => false, "b" => false, "c" => false, "d" => true}).content_type.should == "multiple_choice"
+      Question.create_follow_pattern("Your name", "ph[uong]").content_type.should == "follow_pattern"
+    end
+  end
 end

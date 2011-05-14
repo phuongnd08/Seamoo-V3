@@ -3,32 +3,38 @@ class FillInTheBlank < ActiveRecord::Base
     segments.select{|s| s[:type] == "input"}.map{|segment|segment[:answer]}.join(", ")
   end
 
-  def parts
-    segments.map{|segment|
-      segment[:type] == "hint" ? segment : segment.dup.delete_if{|key, value| key == :answer}
+  def segments
+    index = 0
+    @segments ||= content.split(/[\{\}]/).map{|chunk|
+      index +=1
+      index % 2 == 1 ? text_segment(chunk) : input_segment(chunk)
     }
   end
 
   def preview
     segments.map{|segment|
-      segment[:type] == "hint" ? segment[:text] : "(#{segment[:pattern]})"
+      segment[:type] == "text" ? segment[:text] : "(#{segment[:hint]})"
     }.join("")
   end
 
+  def realized_answer(answer)
+    answer
+  end
+
   private
-  def hint_segment(text)
-    {:type => "hint", :text => text}
+  def text_segment(text)
+    {:type => "text", :text => text}
   end
 
   def input_segment(chunk)
     if chunk.include?("|")
       parts = chunk.split("|")
-      {:pattern => parts.first, :highlight_as_typing => false, :answer => parts.last}
+      {:hint => parts.first, :no_highlight => true, :answer => parts.last}
     else
       parts = chunk.split(/[\[\]]/)
       index = 0
       {
-        :pattern => parts.map{|p|
+        :hint => parts.map{|p|
           index +=1
           index % 2 == 1 ? '*' * p.length : p
         }.join(""),
@@ -37,11 +43,4 @@ class FillInTheBlank < ActiveRecord::Base
     end.merge(:type => "input")
   end
 
-  def segments
-    index = 0
-    content.split(/[\{\}]/).map{|chunk|
-      index +=1
-      index % 2 == 1 ? hint_segment(chunk) : input_segment(chunk)
-    }
-  end
 end

@@ -9,15 +9,15 @@ describe FillInTheBlank do
       @fib.answer.should == "travelling, street, girl"
     end
   end
-  describe "parts" do
-    it "should return all the parts in format of type, and text or hint" do
-      @fib.parts.should == [{:type => "hint", :text => "Once day I was "},
-        {:type => "input", :pattern => "travel", :highlight_as_typing => false},
-        {:type => "hint", :text => " on the "},
-        {:type => "input", :pattern => "*tr***"},
-        {:type => "hint", :text => " seeing a "},
-        {:type => "input", :pattern => "****"},
-        {:type => "hint", :text => " washing her stuff"}]
+  describe "segments" do
+    it "should return all the segments in format of type, and text or text" do
+      @fib.segments.should == [{:type => "text", :text => "Once day I was "},
+        {:type => "input", :hint => "travel", :no_highlight => true, :answer => "travelling"},
+        {:type => "text", :text => " on the "},
+        {:type => "input", :hint => "*tr***", :answer => "street"},
+        {:type => "text", :text => " seeing a "},
+        {:type => "input", :hint => "****", :answer => "girl"},
+        {:type => "text", :text => " washing her stuff"}]
     end
   end
 

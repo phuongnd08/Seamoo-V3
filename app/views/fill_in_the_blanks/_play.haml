@@ -1,11 +1,23 @@
-.follow_pattern
-  .instruction= follow_pattern.instruction
-  .hint_container
-    (#{t 'questions.Hint'}: 
-    %span#hint
-    )
-  = form_tag :id => 'follow_pattern_form' do
-    .text_field
-      = text_field_tag :answer, nil, :hint => follow_pattern.hint
+.fill_in_the_blank
+  = form_tag '#', :id => "fill_in_the_blank_form" do
+    - fill_in_the_blank.segments.each_with_index do |segment, index|
+      - if segment[:type] == "text"
+        .text= raw segment[:text]
+      - else
+        .input
+          = text_field_tag "entry_#{index}", nil, :class => segment[:no_highlight] ? "": "highlight"
+          (
+          %span.hint{:class => "entry_#{index}"}>
+            %span.gray>= segment[:hint]
+          )
     .submit
       = submit_tag t('questions.Submit')
+    :javascript
+      $('#fill_in_the_blank_form input[type=text].highlight').each(function(index, element){
+        bindHighlight($(element), $('.hint.' + $(element).attr('id')));
+      });
+
+      function getAnswer(){
+        return $('#fill_in_the_blank_form input[type=text]').
+          map(function(index, element) { return $(element).val() }).get().join(", ");
+      }

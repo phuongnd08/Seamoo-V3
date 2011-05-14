@@ -3,7 +3,7 @@ require 'spec_helper'
 describe FillInTheBlanksController do
 
   before(:each) do
-    @question = Question.create_fill_in_blank("Your name is {ph[uo]ng}")
+    @question = Question.create_fill_in_the_blank("Your name is {ph[uo]ng}")
     @fill_in_the_blank = @question.data
   end
 

@@ -17,7 +17,7 @@ class Question < ActiveRecord::Base
       create(extra.merge(:data => data))
     end
 
-    def create_fill_in_blank(content, extra = {})
+    def create_fill_in_the_blank(content, extra = {})
       data = FillInTheBlank.create(:content => content)
       create(extra.merge(:data => data))
     end
@@ -29,5 +29,9 @@ class Question < ActiveRecord::Base
     else
       data.instruction
     end
+  end
+
+  def content_type
+    ActiveModel::Naming.singular(self.data)
   end
 end
