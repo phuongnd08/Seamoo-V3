@@ -3,36 +3,40 @@ class Package < ActiveRecord::Base
   belongs_to :category
   
   def import
-    error = nil
+    error = ""
     pos = 0
     self.entries = []
     File.open(path){|f| f.readlines }.each do |line|
       pos += 1
-      parts = line.squish.split("|")
-      if (parts.length <= 1)
-        error = "#{path}:#{pos} - Invalid data line"
-      else
-        question = create_question_from_parts(parts)
+      question = create_question_from_line(line.squish)
+      unless question.nil?
         self.entries << question.id
+      else
+        error << "#{path}:#{pos} - Invalid data line\n"
       end
     end
     self.done = true
     self.save!
-    raise error if error.present?
+    raise error unless error.blank?
   end
 
-  def create_question_from_parts(parts)
-    question = nil
-    if (parts.length == 2)
-      pattern = parts[1]
-      pattern = pattern[1..-1] if pattern.start_with?("*")
-      question = Question.create_follow_pattern(parts[0], pattern)
+  def create_question_from_line(line)
+    extra = {:category => category, :level => level}
+    if line =~ /\{[\w\s\[\|]+\}/
+        Question.create_fill_in_the_blank(line, extra)
     else
-      options_hash = MultipleChoice.array_to_options_hash(parts[1..-1])
-      question = Question.create_multiple_choices(parts[0], options_hash)
+      parts = line.split("|")
+      if (parts.length > 2)
+        options_hash = MultipleChoice.array_to_options_hash(parts[1..-1])
+        Question.create_multiple_choices(parts[0], options_hash, extra)
+      elsif parts.length == 2
+        pattern = parts[1]
+        pattern = pattern[1..-1] if pattern.start_with?("*")
+        Question.create_follow_pattern(parts[0], pattern, extra)
+      else
+        nil
+      end
     end
-    question.update_attributes(:category => category, :level => level)
-    question
   end
 
   def unimport!
