@@ -2,10 +2,10 @@
   = form_tag '#', :id => "fill_in_the_blank_form" do
     - fill_in_the_blank.segments.each_with_index do |segment, index|
       - if segment[:type] == "text"
-        .text= raw segment[:text]
+        %span.text= raw segment[:text]
       - else
-        .input
-          = text_field_tag "entry_#{index}", nil, :class => segment[:no_highlight] ? "": "highlight"
+        %span.input
+          = text_field_tag "entry_#{index}", nil, :size => segment[:hint].length,:class => segment[:no_highlight] ? "": "highlight"
           (
           %span.hint{:class => "entry_#{index}"}>
             %span.gray>= segment[:hint]
