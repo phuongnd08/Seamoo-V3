@@ -23,14 +23,6 @@ class Question < ActiveRecord::Base
     end
   end
 
-  def content
-    if data.is_a?(MultipleChoice)
-      data.content
-    else
-      data.instruction
-    end
-  end
-
   def content_type
     ActiveModel::Naming.singular(self.data)
   end

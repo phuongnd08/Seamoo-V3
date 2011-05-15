@@ -18,7 +18,6 @@ describe "matching with fill in the blank", :js => true, :memcached => true do
     def check_hightlight(input_selector, highlight_html)
       input_id = page.evaluate_script(%{$('#{input_selector}').attr('id')})
       page.execute_script(%{$('#{input_selector}').keyup()})
-      puts page.evaluate_script(%{$('.hint.#{input_id}').html()})
       page.evaluate_script(%{$('.hint.#{input_id}').html()}).should == highlight_html
     end
     within "#question" do

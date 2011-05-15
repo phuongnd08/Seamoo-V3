@@ -26,7 +26,7 @@
         %li{:id => "question_#{question.id}"}
           - if @show_admin_link
             .edit_link= link_to t(".edit"), edit_question_path(question)
-          =question.content
+          =question.data.preview
         %ul
           - @have_correct_answer = false
           - @match.match_users.each do |match_user|
@@ -40,9 +40,12 @@
                 - unless @hide_all_answers
                   #{question.data.realized_answer(@answer)}
                   \-
-                - if question.data.score_for(@answer) == 1
+                - score_for = question.data.score_for(@answer)
+                - if score_for == 1
                   - @have_correct_answer = true
                   %span.green= t '.correct'
+                - elsif score_for > 0
+                  %span.blue= t '.partially_correct'
                 - else
                   %span.red= t '.incorrect'
               - else

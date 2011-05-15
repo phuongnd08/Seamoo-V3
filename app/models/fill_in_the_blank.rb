@@ -1,6 +1,6 @@
 class FillInTheBlank < ActiveRecord::Base
   def answer
-    segments.select{|s| s[:type] == "input"}.map{|segment|segment[:answer]}.join(", ")
+    answer_parts.join(", ")
   end
 
   def segments
@@ -19,6 +19,17 @@ class FillInTheBlank < ActiveRecord::Base
 
   def realized_answer(answer)
     answer
+  end
+
+  def score_for(user_answer)
+    if user_answer.present?
+      user_parts = user_answer.split(/,\s?/, -1)
+      parts = answer_parts
+      if (user_parts.size == parts.size)
+        index = -1
+        user_parts.count{|p| p.downcase == parts[index+=1].downcase} * 1.0 / parts.size
+      else; 0; end
+    else; 0; end
   end
 
   private
@@ -41,6 +52,10 @@ class FillInTheBlank < ActiveRecord::Base
         :answer => parts.join("")
       }
     end.merge(:type => "input")
+  end
+
+  def answer_parts
+    segments.select{|s| s[:type] == "input"}.map{|segment|segment[:answer]}
   end
 
 end

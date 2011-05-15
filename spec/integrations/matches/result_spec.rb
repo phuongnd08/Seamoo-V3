@@ -5,7 +5,7 @@ describe "Matching Result" do
     multiple_choice.options.find_index{ |o| o.correct }
   end
 
-  def add_answers(match, user, correct, count)
+  def add_answers(match, user, correct, count = 1)
     match_user = match.match_users.where(:user_id => user.id).first
     count.downto(1) do 
       question = match_user.current_question
@@ -17,7 +17,6 @@ describe "Matching Result" do
                end
       match_user.add_answer(match_user.current_question_position, answer.to_s)
     end
-    match_user.save!
   end
 
   before(:each) do
@@ -26,11 +25,14 @@ describe "Matching Result" do
     @eric = Factory(:user, :display_name => "eric")
     @admin = Factory(:admin, :display_name => "admin")
     @match = Factory(:match)
+    @match.update_attributes(:questions => @match.questions[0..1].concat([Factory(:fill_in_the_blank_question)]))
     @match.users << @mike
     @match.users << @peter
-    add_answers(@match, @mike, true, 1)
-    add_answers(@match, @peter, true, 2)
-    add_answers(@match, @peter, false, 1)
+    add_answers(@match, @mike, true)
+    add_answers(@match, @peter, true)
+    add_answers(@match, @peter, false)
+    muf_peter = @match.match_user_for(@peter)
+    muf_peter.add_answer(muf_peter.current_question_position, "blank1, ")
   end
 
   describe "display with regards to viewer" do
@@ -40,21 +42,21 @@ describe "Matching Result" do
         visit match_path(@match)
       end
       it "should show player as 'you'" do
-        page.should have_content "You (peter) - 67% correct"
+        page.should have_content "You (peter) - 50% correct"
         page.should have_content "mike - 33% correct"
         @match.questions.each_with_index do |question, index|
-          page.should have_content question.data.content
+          page.should have_content question.data.preview
           case index
           when 0
             page.should have_content "You: #{question.data.options.first.content} - correct"
             page.should have_content "mike: #{question.data.options.first.content} - correct"
           when 1
-            page.should have_content "You: #{question.data.options.first.content} - correct"
-            page.should have_content "mike: not answered"
-          when 2
             page.should have_content "You: #{question.data.options.last.content} - incorrect"
             page.should have_content "mike: not answered"
-            page.should have_content "correct answer: #{question.data.options.first.content}"
+          when 2
+            page.should have_content "You: blank1, - partially correct"
+            page.should have_content "mike: not answered"
+            page.should have_content "correct answer: #{question.data.answer}"
           end
         end
       end
@@ -74,18 +76,18 @@ describe "Matching Result" do
 
         it "should display summary but hide all answers" do
           @match.questions.each_with_index do |question, index|
-            page.should have_content question.data.content
+            page.should have_content question.data.preview
             case index
             when 0
               page.should have_content "peter: correct"
               page.should have_content "mike: correct"
             when 1
-              page.should have_content "peter: correct"
-              page.should have_content "mike: not answered"
-            when 2
               page.should have_content "peter: incorrect"
               page.should have_content "mike: not answered"
-              page.should_not have_content "correct answer: #{question.data.options.first.content}"
+            when 2
+              page.should have_content "peter: partially correct"
+              page.should have_content "mike: not answered"
+              page.should_not have_content "correct answer: #{question.data.answer}"
             end
           end
         end
@@ -105,7 +107,7 @@ describe "Matching Result" do
 
         it "should display all detailed answers and link to edit question" do
           @match.questions.each_with_index do |question, index|
-            page.should have_content question.data.content
+            page.should have_content question.data.preview
             case index
             when 0
               page.should have_content "peter: #{question.data.options.first.content} - correct"
@@ -116,12 +118,12 @@ describe "Matching Result" do
                 path_of(link[:href]).should == edit_question_path(question)
               end
             when 1
-              page.should have_content "peter: #{question.data.options.first.content} - correct"
-              page.should have_content "mike: not answered"
-            when 2
               page.should have_content "peter: #{question.data.options.last.content} - incorrect"
               page.should have_content "mike: not answered"
-              page.should have_content "correct answer: #{question.data.options.first.content}"
+            when 2
+              page.should have_content "peter: blank1, - partially correct"
+              page.should have_content "mike: not answered"
+              page.should have_content "correct answer: #{question.data.answer}"
             end
           end
         end

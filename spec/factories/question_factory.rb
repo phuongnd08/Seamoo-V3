@@ -2,6 +2,10 @@ Factory.define :question do |q|
   q.association(:data, :factory => :multiple_choice)
 end
 
+Factory.define :fill_in_the_blank_question, :class => Question do |q|
+  q.association(:data, :factory => :fill_in_the_blank)
+end
+
 Factory.define :multiple_choice do |m|
   m.sequence(:content) {|n| "Multiple choice \##{n}"}
   m.options { |os| [
@@ -12,3 +16,8 @@ end
 
 Factory.define :multiple_choice_option do |o|
 end
+
+Factory.define :fill_in_the_blank do |f|
+  f.content("This is {blank1} and {blank2}")
+end
+

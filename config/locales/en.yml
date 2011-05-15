@@ -37,6 +37,7 @@ en:
       You: You
       correct: correct
       incorrect: incorrect
+      partially_correct: partially correct
       not_answered: not answered
       correct_answer: correct answer
       rematch: "Let's match again"

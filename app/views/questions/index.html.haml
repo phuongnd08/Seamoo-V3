@@ -9,7 +9,7 @@
 
   - @questions.each do |question|
     %tr
-      %td= question.content
+      %td= question.data.preview
       %td= link_to 'Show', question_path(:id => question)
       %td= link_to 'Edit', edit_question_path(:id => question)
       %td= link_to 'Destroy', question, :confirm => 'Are you sure?', :method => :delete

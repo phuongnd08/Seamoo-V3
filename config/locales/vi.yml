@@ -42,6 +42,7 @@ vi:
       You: Bạn
       correct: đúng
       incorrect: sai
+      partially_correct: đúng một phần
       not_answered: không trả lời
       correct_answer: câu trả lời đúng
       rematch: Đấu trận khác

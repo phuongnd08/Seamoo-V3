@@ -14,6 +14,10 @@ class MultipleChoice < ActiveRecord::Base
     user_answer.blank? ? nil : options[user_answer.to_i].content
   end
 
+  def preview
+    self.content
+  end
+
   def answer
     options.detect{|o| o.correct}.content
   rescue => e

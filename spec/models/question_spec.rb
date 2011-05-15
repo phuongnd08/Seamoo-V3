@@ -49,20 +49,6 @@ describe Question do
     end
   end
 
-  describe "content" do
-    describe "multiple choice data" do
-      it "should return content" do
-        Question.create_multiple_choices("Who are you", {"a" => false, "b" => false, "c" => false, "d" => true}).content.should == "Who are you"
-      end
-    end
-
-    describe "follow pattern data" do
-      it "should return instruction" do
-        Question.create_follow_pattern("Your name", "ph[uong]").content.should == "Your name"
-      end
-    end
-  end
-
   describe "content_type" do
     it "should return according to question data" do
       Question.create_multiple_choices("Who are you", {"a" => false, "b" => false, "c" => false, "d" => true}).content_type.should == "multiple_choice"
