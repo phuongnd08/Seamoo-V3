@@ -8,6 +8,7 @@ class Package < ActiveRecord::Base
     self.entries = []
     File.open(path){|f| f.readlines }.each do |line|
       pos += 1
+      line = line.squish.gsub /(https?:\/\/[^\s\|\:]+)/, '<img src="\1"/>'
       question = create_question_from_line(line.squish)
       unless question.nil?
         self.entries << question.id
