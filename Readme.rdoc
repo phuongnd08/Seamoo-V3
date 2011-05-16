@@ -43,6 +43,8 @@ for nginx
   restart the server and telnet into localhost 80 to make sure nginx config to run at start
 for mysql2
   libmysqlclient-dev
+for rmagick
+  imagemagick libmagickcore-dev libmagickwand-dev
 ===Install ruby from source
   Download ruby & rubygems sources
   Install zlib

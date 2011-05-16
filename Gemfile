@@ -44,6 +44,8 @@ gem 'unicorn', :require => false
 group :development, :test do
   gem 'capistrano'
   gem 'rspec-rails', "~> 2.5"
+  gem 'rmagick'
+  gem 'aws-s3'
 end
 
 group :test do
