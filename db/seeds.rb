@@ -65,33 +65,31 @@ League.create!(
   :status => 'coming_soon'
 )
 
-#Question.create_multiple_choices(
-  #"What's your formulae of $\\pi$", 
-  #{'$\\sigma$' => true, '$\\beta$' => false, '$\\alpha$' => false}, 
-  #{:category => math, :level => 0}
-#)
+Question.create_multiple_choices(
+  "What's your formulae of $\\pi$", 
+  {'$\\sigma$' => true, '$\\beta$' => false, '$\\alpha$' => false}, 
+  {:category => math, :level => 0}
+)
 
-#Question.create_follow_pattern(
-  #"My $\\lambda$", 'ph[uo]ng ng[uy]en', 
-  #{:category => math, :level => 0}
-#)
+Question.create_follow_pattern(
+  "My $\\lambda$", 'ph[uo]ng ng[uy]en', 
+  {:category => math, :level => 0}
+)
 
-#Question.create_multiple_choices(
-  #"What's your best $\\omega$", 
-  #{'thuc$\\omega$' => true, 'trien' => false, 'toan' => false}, 
-  #{:category => math, :level => 0}
-#)
-#Question.create_multiple_choices(
-  #"What's your pet $\\sigma$ name",
-  #{'na' => true, 'trien$\\omega$' => false, 'toan' => false},
-  #{:category => math, :level => 0}
-#)
-4.times do 
+Question.create_multiple_choices(
+  "What's your best $\\omega$", 
+  {'thuc$\\omega$' => true, 'trien' => false, 'toan' => false}, 
+  {:category => math, :level => 0}
+)
+Question.create_multiple_choices(
+  "What's your pet $\\sigma$ name",
+  {'na' => true, 'trien$\\omega$' => false, 'toan' => false},
+  {:category => math, :level => 0}
+)
   Question.create_fill_in_the_blank(
     "Please fill in: {na[m]e1}, or {name|name2} or {name3}",
     {:category => math, :level => 0}
   )
-end
 
 ["phuong", "hung", "thuc", "trien", "toan", "quan", "tien", "huy", "cuong", "mai", "thuy", "hoa"].each_with_index do |name, index|
   user = User.create(:display_name => name, :email => "#{name}@#{Site.domain}")

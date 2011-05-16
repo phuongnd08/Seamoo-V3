@@ -318,6 +318,8 @@
       }, 0);
       return false;
     });
+
+    $('#question input[type=text]:first').focus();
     $('#question #ignore').click(function(event){
       submitAnswer(null);
     });

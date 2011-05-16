@@ -51,4 +51,12 @@ describe "matching with fill in the blank", :js => true, :memcached => true do
       assert_recorded_answer("mike", 2, nil)
     end
   end
+  it "should focus the first input" do
+    page.should have_content("Question 1/3")
+    page.execute_script("$.fn.focus = function(){ window.focusedElement = this[this.length-1]; }")
+    click_button "Submit"
+    wait_for_true do
+      page.evaluate_script("window.focusedElement == $('#question input[type=text]')[0]")
+    end
+  end
 end
