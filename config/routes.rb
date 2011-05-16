@@ -37,7 +37,7 @@ SeamooV3::Application.routes.draw do
   end
 
   root :to => "home#index"
-  match "/:locale" => "home#index"
+  match "/:locale" => "home#index", :constraints => {:locale => /en|vi/}
   match "/auth/:provider/callback" => "authorizations#create"
   match "/auth/failure" => "authorizations#failure"
   match "/auth/signin/:username" => "authorizations#signin"
