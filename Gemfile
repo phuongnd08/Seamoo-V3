@@ -24,6 +24,7 @@ gem "hoptoad_notifier"
 
 # Use unicorn as the web server
 gem 'unicorn', :require => false
+gem 'aws-s3'
 
 # Deploy with Capistrano
 # gem 'capistrano'
@@ -45,7 +46,7 @@ group :development, :test do
   gem 'capistrano'
   gem 'rspec-rails', "~> 2.5"
   gem 'rmagick'
-  gem 'aws-s3'
+  gem 'rio'
 end
 
 group :test do

@@ -217,6 +217,7 @@ GEM
     rake (0.8.7)
     rest-client (1.6.1)
       mime-types (>= 1.16)
+    rio (0.4.2)
     rmagick (2.13.1)
     rspec (2.5.0)
       rspec-core (~> 2.5.0)
@@ -298,6 +299,7 @@ DEPENDENCIES
   pickle
   rails (= 3.0.0)
   rails3-generators
+  rio
   rmagick
   rspec-rails (~> 2.5)
   ruby-debug

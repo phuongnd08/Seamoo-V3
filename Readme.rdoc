@@ -28,8 +28,13 @@ Install membase-server
 Create bucket dev, test1, test2, test3, test4, test5 with empty password
 ==Importing data
 Data file is located at data/
-To import a file, rake data:import FILE=filename CATEGORY=category_id LEVEL=level
-To unimport a file, rake data:unimport FILE=filename
+To import a file, 
+  $ rake data:import FILE=filename CATEGORY=category_id LEVEL=level
+To unimport a file, 
+  $ rake data:unimport FILE=filename
+==Process data
+To s3ize any external links inside a file:
+  $ rake data:s3ize IN=in_file OUT=out_file
 ===Ubuntu installation
 Require packages: 
 for nokogiri
