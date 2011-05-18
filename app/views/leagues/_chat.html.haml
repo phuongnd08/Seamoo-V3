@@ -5,14 +5,14 @@
     %div= text_field_tag :message, "", :placeholder => t("you_chat_here")
     #chat_hint= t("chat.hint")
 - else
-  %div= raw t("chat.need_signin", :signin_path => signin_path)
+  #chat_need_signin= raw t("chat.need_signin", :signin_path => signin_path)
 #chat_log
   = javascript_include_tag "#{Site.chat.server}/#{Site.chat.client_js}"
 
 - chat_entry_template = capture do
   .chat_entry
     %a{:href => "{link}", :title => "{display_name}"}
-      %img{:src => "{avatar_url}"}
+      %img{:src => "{avatar_url}", :size => "32x32"}
     %span.msg {content}
 
 - chat_error_template = capture do
@@ -31,12 +31,14 @@
     info: #{chat_info_template.to_json}
   }
 
-  function addMessage(message){
-    var entry = $(formatString(templates.chatEntry, message)).hide().fadeIn(500)
-    $('#chat_box').append(entry);
+  function scrollChatToEnd(){
     setTimeout(function(){
       $("#chat_box").attr({ scrollTop: $("#chat_box").attr("scrollHeight") })
     }, 0);
+  }
+  function addMessage(message){
+    var entry = $(formatString(templates.chatEntry, message)).hide().fadeIn(500)
+    $('#chat_box').append(entry);
   }
 
   function addMessages(messages){
@@ -65,12 +67,14 @@
       },
       success: function(messages){
         addMessages(messages);
+        scrollChatToEnd();
       }
     });
   });
 
   client.subscribe(channel, function(message) {
     addMessage(message);
+    scrollChatToEnd();
   });
 
 - if current_user.present?
