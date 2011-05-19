@@ -192,4 +192,24 @@ describe League do
       League.active.should == [@active_league]
     end
   end
+
+  describe "qualified?" do
+    before(:each) do
+      @category = Factory(:category)
+      @level0 = Factory(:league, :level => 0)
+      @level1 = Factory(:league, :level => 1)
+      @mike = Factory(:user)
+    end
+    describe "level 0" do
+      it "should return true" do
+        @level0.qualified?(@mike).should be_true 
+      end
+    end
+
+    describe "level 1" do
+      it "should only return true for user score enough from previous level" do
+        @level1.qualified?(@mike).should be_false
+      end
+    end
+  end
 end
