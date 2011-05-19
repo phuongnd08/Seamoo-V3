@@ -60,7 +60,6 @@ group :test do
   gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
   gem 'parallel'
   gem 'pickle'
-  gem 'webmock', :require => false
 end
 
 group :development do

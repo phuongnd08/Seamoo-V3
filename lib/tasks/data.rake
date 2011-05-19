@@ -68,6 +68,7 @@ namespace :data do
           open(in_path).each do |line|
             line = line.gsub(/(https?:\/\/[^\s\|\:]+)/) do |link|
               tmp_path= new_tmp_path
+              debugger
               rio(link) > rio(tmp_path)
               img = Magick::Image::read(tmp_path).first
               resized = img.resize_to_fit(200, 200)
