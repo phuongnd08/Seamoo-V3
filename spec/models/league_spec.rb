@@ -193,23 +193,12 @@ describe League do
     end
   end
 
-  describe "qualified?" do
-    before(:each) do
-      @category = Factory(:category)
-      @level0 = Factory(:league, :level => 0)
-      @level1 = Factory(:league, :level => 1)
-      @mike = Factory(:user)
-    end
-    describe "level 0" do
-      it "should return true" do
-        @level0.qualified?(@mike).should be_true 
-      end
-    end
-
-    describe "level 1" do
-      it "should only return true for user score enough from previous level" do
-        @level1.qualified?(@mike).should be_false
-      end
+  describe "previous" do
+    it "should return league in the same category and of 1 level lower" do
+      @level0a = Factory(:league, :category => @category, :level => 0)
+      @level0b = Factory(:league, :category => @category, :level => 0)
+      @level1 = Factory(:league, :category => @category, :level => 1)
+      @level1.previous.should == [@level0a, @level0b]
     end
   end
 end

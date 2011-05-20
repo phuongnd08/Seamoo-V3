@@ -35,6 +35,14 @@ class User < ActiveRecord::Base
     Membership.find_or_create_by_league_id_and_user_id(:league_id => league.id, :user_id => self.id)
   end
 
+  def qualified_for?(league)
+    unless league.level == 0 
+      league.previous.all?{|l| membership_in(l).rank_score >= Matching.qualified_rank_score}
+    else
+      true
+    end
+  end
+
   def email_hash
     Digest::MD5.hexdigest(self.email)
   end

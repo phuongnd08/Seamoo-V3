@@ -9,6 +9,10 @@ class League < ActiveRecord::Base
     self.status == 'active'
   end
 
+  def previous
+    League.where(:category_id => self.category_id, :level => self.level - 1)
+  end
+
   def dom_name
     name.downcase.split(/\s+/).join("_")
   end
