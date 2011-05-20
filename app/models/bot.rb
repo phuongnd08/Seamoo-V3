@@ -37,8 +37,8 @@ class Bot < User
       find(awaken_ids)
     end
 
-    def awake_new
-      available_bot_names = (Matching.bots.keys - awaken.map(&:display_name))
+    def awake_new(league)
+      available_bot_names = (Matching.bots[league.level].keys - awaken.map(&:display_name))
       new_bot_name = available_bot_names[Utils::RndGenerator.next(available_bot_names.size)]
       new_bot = find_or_create_by_display_name(
         :display_name => Matching.bots[new_bot_name], 

@@ -11,12 +11,15 @@ describe Matching do
 
   describe "bots" do
     it "should have correct size" do
-      Matching.bots.size.should == 100
+      Matching.bots.size.should == 2
+      (Matching.bots[0].size + Matching.bots[1].size).should == 100
     end
 
     it "should contains proper key/value pairs" do
-      Matching.bots["than_dong_daiso"].should == "Thần đồng đại số"
-      Matching.bots["ban_messi"].should == "ban_messi"
+      Matching.bots[0]["than_dong_daiso"][:display_name].should == "Thần đồng đại số"
+      Matching.bots[0]["ban_messi"][:display_name].should == "ban_messi"
+      Matching.bots[1]["r10"][:display_name].should == "r10"
+      Matching.bots[1]["vo_danh"][:display_name].should == "Vô Danh"
     end
   end
 end
