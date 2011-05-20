@@ -23,7 +23,7 @@ class Package < ActiveRecord::Base
 
   def create_question_from_line(line)
     extra = {:category => category, :level => level}
-    if line =~ /\{[\w\s\[\|]+\}/
+    if line =~ /\{[\w\s\[\]\|']+\}/
         Question.create_fill_in_the_blank(line, extra)
     else
       parts = line.split("|")

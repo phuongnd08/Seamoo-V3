@@ -2,5 +2,5 @@ từ thể hiện sự đồng ý http://host.com/img1.jpg|*yes|no|never|always
 từ thể hiện sự không đồng ý|*no|now http://host.com/img2.jpg|never|how
 'đằng sau' viết là|[b]ack
 'khoảng cách' viết là http://host.com/img3.jpg|*distan[ce]
-'khoảng cách' http://host.com/img4.jpg: {distance}
+'khoảng cách' http://host.com/img4.jpg: {dis[t]ance}
 'đặt tên': {name|naming}

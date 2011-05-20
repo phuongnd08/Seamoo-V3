@@ -38,7 +38,7 @@ describe Package do
       questions[2].data.pattern.should == "[b]ack"
       questions[3].data.instruction.should == %{'khoảng cách' viết là <img src="http://host.com/img3.jpg"/>}
       questions[3].data.pattern.should == "distan[ce]"
-      questions[4].data.content.should == %{'khoảng cách' <img src="http://host.com/img4.jpg"/>: {distance}}
+      questions[4].data.content.should == %{'khoảng cách' <img src="http://host.com/img4.jpg"/>: {dis[t]ance}}
       questions[5].data.content.should == "'đặt tên': {name|naming}"
       questions.each do |q|
         q.category.should == @category

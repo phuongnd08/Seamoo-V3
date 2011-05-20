@@ -62,27 +62,37 @@ namespace :data do
   task :s3ize => :environment do
     require 'aws/s3'
     require 'RMagick' unless defined?(Magick)
+    errors = []
     do_with "IN" do |in_path|
       do_with "OUT" do |out_path|
         open(out_path, "w") do |out_file|
           open(in_path).each do |line|
-            line = line.gsub(/(https?:\/\/[^\s\|\:]+)/) do |link|
+            puts "[process]#{line}"
+            new_line = line.gsub(/(https?:\/\/[^\s\|\:]+)/) do |link|
               tmp_path= new_tmp_path
-              debugger
-              rio(link) > rio(tmp_path)
-              img = Magick::Image::read(tmp_path).first
-              resized = img.resize_to_fit(200, 200)
-              resized.write(tmp_path)
+              puts "[downloading] #{link}"
+              begin
+                rio(link) > rio(tmp_path)
+                img = Magick::Image::read(tmp_path).first
+                resized = img.resize_to_fit(200, 200)
+                resized.write(tmp_path)
+              rescue
+                puts "[error] Cannot download/upload file"
+                errors << link
+              end
               now = Time.now
               s3_path = %{images/#{now.strftime("%Y/%m/%d")}/#{now.to_i}-#{Utils::RndGenerator.rnd(1000)}.jpg}
-              AWS::S3::S3Object.store(s3_path, open(tmp_path), :access => :public_read)
+              puts "[uploading] #{s3_path}"
+              AWS::S3::S3Object.store(s3_path, open(tmp_path), :access => :public_read) if File.exists?(tmp_path)
               AWS::S3::S3Object.url_for(s3_path, :authenticated => false)
             end
 
-            out_file.puts line
+            puts "[changed to]#{new_line}" unless new_line == line
+            out_file.puts new_line
           end
         end
       end
     end
+    puts %{CANNOT DOWNLOAD:\n#{errors.join("\n")}} unless errors.empty?
   end
 end
