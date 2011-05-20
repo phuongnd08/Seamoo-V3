@@ -11,7 +11,7 @@ class BotRunnerJob
         Delayed::Worker.logger.warn "Watch [#{league.name}]: #{waiting_users.inspect}"
         # bot user_id is negative one
         if (waiting_users.size == 1 && !waiting_users.first[:bot])
-          bot = Bot.awake_new
+          bot = Bot.awake_new(league.level)
           bot.data[:league_id] = league.id
         end
       end

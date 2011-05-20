@@ -15,13 +15,7 @@ describe LeaguesController do
   end
 
   describe "GET active_players", :memcached => true do
-    it "assign many fake active players as @active_players" do
-      @league = Factory(:league)
-      get :active_players, :id => @league.id
-      assigns(:active_players).size.should >= 1
-    end
-
-    it "should always include the real active players" do
+    it "should return active players" do
       @league = Factory(:league)
       user1 = Factory(:user)
       League.stub(:find).with(@league.id).and_return(@league)

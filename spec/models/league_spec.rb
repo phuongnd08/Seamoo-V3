@@ -163,28 +163,6 @@ describe League do
     end
   end
 
-  describe "fake_active_users", :memcached => true do
-    before(:each) do
-      @league = Factory(:league)
-      Matching.stub(:fake_active_users_slot).and_return(3)
-    end
-
-    it "should increase number of user as requests submitted" do
-      Utils::RndGenerator.stub(:rnd).and_return(1, 2, 3)
-      @league.fake_active_users.size.should == 1
-      @league.fake_active_users.size.should == 2
-      @league.fake_active_users.size.should == 3
-    end
-
-    it "should never return more than desired number of users" do
-      Utils::RndGenerator.stub(:rnd).and_return(1, 2, 3, 4)
-      @league.fake_active_users.size.should == 1
-      @league.fake_active_users.size.should == 2
-      @league.fake_active_users.size.should == 3
-      @league.fake_active_users.size.should == 3
-    end
-  end
-
   describe "active" do
     it "should only return active leagues" do
       @active_league = Factory(:league, :status => "active")

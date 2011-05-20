@@ -38,10 +38,8 @@ class LeaguesController < ApplicationController
   end
 
   def load_active_players
-    real_hash = Hash[User.find(@league.active_users.map{|u| u[:id]}).
+    @active_players = Hash[User.find(@league.active_users.map{|u| u[:id]}).
       map{|u| [u.email_hash, u]}]
-    fake_hash = Hash[@league.fake_active_users.map{|u| [u.email_hash, u]}]
-    @active_players = fake_hash.merge(real_hash)
   end
 
   def secured_players(hash)

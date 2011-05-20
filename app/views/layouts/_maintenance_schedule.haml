@@ -2,7 +2,7 @@
   = t "maintenance.from"
   :javascript
     function twoDigits(number){
-      return '' + (number > 10 ? number : '0' +number)
+      return '' + (number >= 10 ? number : '0' +number)
     }
     function writeDate(stamp){
       var date = new Date(stamp * 1000);
