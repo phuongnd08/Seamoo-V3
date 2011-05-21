@@ -1,19 +1,22 @@
-apollo 
 *ares 
-hades 
 *nhok_lj
-hera 
-hector 
 *anh_khong_hoi_nach
 *helen 
+*zethus 
+*thoon 
+*zeus 
+*r10
+*vo_danh Vô Danh
+*tan_kiem Tân Kiếm
+apollo 
+hades 
+hera 
+hector 
 leitus
 be_thuy 
 rhoeo
-*zethus 
 mr_ku_zin
-*thoon 
 poseidon
-*zeus 
 hanika
 em_thik_oto 
 ftw
@@ -21,7 +24,6 @@ lobster_baby
 smile
 java_guy
 love_bin
-*r10
 chuyen_lcd 
 x0933635237
 cay_la_gio_2000 
@@ -47,8 +49,6 @@ du_bd
 bo_kinh_van2
 trien_chieu 
 mo_ung_hung Mộ Ứng Hùng
-*vo_danh Vô Danh
-*tan_kiem Tân Kiếm
 hai_63 Hải Phạm 63
 huy_81
 nu_hoang_bang
