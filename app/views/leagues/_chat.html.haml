@@ -12,7 +12,7 @@
 - chat_entry_template = capture do
   .chat_entry
     %a{:href => "{link}", :title => "{display_name}"}
-      %img{:src => "{avatar_url}", :size => "32x32"}
+      %img{:src => "{avatar_url}", :width => "32", :height => "32"}
     %span.msg {content}
 
 - chat_error_template = capture do
