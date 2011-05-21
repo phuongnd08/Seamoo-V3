@@ -13,6 +13,10 @@ class League < ActiveRecord::Base
     League.where(:category_id => self.category_id, :level => self.level - 1)
   end
 
+  def advanced?
+    self.level > 0
+  end
+
   def dom_name
     name.downcase.split(/\s+/).join("_")
   end

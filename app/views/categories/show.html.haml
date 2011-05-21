@@ -8,7 +8,7 @@
         .description= @category.description
 .subcontent
   - @category.leagues.each do |league|
-    .item
+    .item{:id => league.dom_name}
       %table
         %tr
           %td.logo_cell
@@ -19,7 +19,7 @@
             %div= league.description
             - if league.available?
               .main_link
-                %a{:href => matching_league_path(league)}
+                %a{:href => league_path(league)}
                   %span= t('common.join_now')
       - unless league.available?
         .coming_soon{:style => "background-image: url('/stylesheets/imgs/coming_soon_#{I18n.locale}.png');"}

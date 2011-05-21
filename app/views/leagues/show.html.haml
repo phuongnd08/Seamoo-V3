@@ -1,14 +1,25 @@
 - @title = @league.name
-.item
+.item{:id => @league.dom_name}
   %table
     %tr
       %td.logo_cell
         = image_tag(@league.image, :size => "96x64")
       %td
         %div= @league.description
-        .main_link
-          %a{:href => matching_league_path(@league)}
-            %span= t('.start') 
+        - unless current_user
+          %div= raw t("leagues.matching.need_signin", :signin_path => signin_path)
+        - else
+          - if current_user.qualified_for?(@league)
+            - if @league.advanced?
+              .qualified= t("leagues.matching.qualified")
+            .main_link
+              %a{:href => matching_league_path(@league)}
+                %span= t('.compete') 
+          - else
+            = t("leagues.matching.not_qualified")
+            = t("leagues.matching.please_prove", :points => Matching.qualified_rank_score)
+            = t("leagues.matching.prove_in", :count => @league.previous.count)
+            = raw @league.previous.map{|l| link_to l.name, league_path(l)}.join(", ")
 .league_info
   .left
     .internal.chatting
