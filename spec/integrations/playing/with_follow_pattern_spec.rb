@@ -6,7 +6,7 @@ describe "matching with fill in the blank", :js => true, :memcached => true do
     @peter = Factory(:user, :display_name => "peter", :email => "peter@gmail.com")
     @league = Factory(:league)
     3.times do |i|
-      Question.create_follow_pattern("Follow Pattern \##{i+1}", 'patt[ern]', 
+      Question.create_follow_pattern("Follow Pattern \##{i+1}", '[g]o [b]ack', 
                                               :category => @league.category, :level => @league.level)
     end
     Matching.started_after #trigger settings class initialization
@@ -25,17 +25,18 @@ describe "matching with fill in the blank", :js => true, :memcached => true do
     within "#question" do
       page.should have_content("Question 1/3")
       page.should have_content("Follow Pattern #1")
-      page.should have_content("****ern")
+      page.should have_content("g* b***")
       inputs = page.all(:css, "input[type=text]")
       inputs.length.should == 1
-      inputs.first.set("ans")
+      inputs.first.set("go ba")
       check_hightlight '#question input[type=text]:first', 
-                       %{<span class="green">*</span><span class="green">*</span><span class="green">*</span><span class="gray">*</span><span class="gray">e</span><span class="gray">r</span><span class="gray">n</span>}
+                       %{<span class="green">g</span><span class="green">*</span><span class="green">_</span><span class="green">b</span>} +
+                       %{<span class="green">*</span><span class="gray">*</span><span class="gray">*</span>}
       click_button "Submit"
       page.should have_content("Question 2/3")
       page.should have_content("Follow Pattern #2")
       click_button "ignore"
-      assert_recorded_answer("mike", 0, "ans")
+      assert_recorded_answer("mike", 0, "go ba")
       assert_recorded_answer("mike", 1, nil)
     end
   end
