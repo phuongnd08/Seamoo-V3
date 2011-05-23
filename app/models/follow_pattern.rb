@@ -23,6 +23,6 @@ class FollowPattern < ActiveRecord::Base
   end
 
   def score_for(user_answer)
-    user_answer.try(:downcase) == answer ? 1 : 0
+    user_answer.try(:downcase) == answer.try(:downcase) ? 1 : 0
   end
 end

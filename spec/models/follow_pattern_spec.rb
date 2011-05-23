@@ -44,12 +44,21 @@ describe FollowPattern do
     it_should_behave_like "follow pattern question"
   end
 
-  describe "m[y] ans[wer]" do
+  describe "[g]o [b]ack" do
     let(:fp){ FollowPattern.new(:instruction => "Instruction", :pattern => "[g]o [b]ack") }
     let(:hint){"g* b***"}
     let(:answer){"go back"}
     let(:correct_ans){["go back", "gO Back"]}
     let(:incorrect_ans){["goback", nil]}
+    it_should_behave_like "follow pattern question"
+  end
+
+  describe "[I c]ould" do
+    let(:fp){ FollowPattern.new(:instruction => "Instruction", :pattern => "[I c]ould") }
+    let(:hint){"I c****"}
+    let(:answer){"I could"}
+    let(:correct_ans){["I could", "i couLD"]}
+    let(:incorrect_ans){["He could"]}
     it_should_behave_like "follow pattern question"
   end
 end
