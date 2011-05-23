@@ -25,7 +25,7 @@ describe "Chat" do
       Informer.login_as = "mike"
       visit league_path(@league)
       page.should have_no_content("Please signin to chat")
-      pending "Fuck, chat not yet tested because of shit"
+      pending "Chat cannot be tested right now because selenium watch for ajax request which chat is agressively making"
       #msg = "Hello world #{Time.now}"
       #within "#chat_form" do
         #fill_in("message", :with => msg)
