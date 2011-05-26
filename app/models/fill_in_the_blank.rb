@@ -42,14 +42,9 @@ class FillInTheBlank < ActiveRecord::Base
       parts = chunk.split("|")
       {:hint => parts.first, :no_highlight => true, :answer => parts.last}
     else
-      parts = chunk.split(/[\[\]]/)
-      index = 0
       {
-        :hint => parts.map{|p|
-          index +=1
-          index % 2 == 1 ? '*' * p.length : p
-        }.join(""),
-        :answer => parts.join("")
+        :hint => FollowPattern.hint_from(chunk),
+        :answer => FollowPattern.answer_from(chunk)
       }
     end.merge(:type => "input")
   end
