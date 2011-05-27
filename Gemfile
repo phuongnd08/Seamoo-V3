@@ -1,11 +1,12 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.0.0'
+gem 'rake', '0.8.7'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2'
+gem 'mysql2', "~> 0.2.7"
 gem 'haml', ">=3.1.alpha.147"
 gem 'omniauth', '0.2.0.beta5'
 gem 'authlogic'
@@ -29,10 +30,6 @@ gem 'aws-s3'
 # Deploy with Capistrano
 # gem 'capistrano'
 
-# To use debugger
-
-# gem 'ruby-debug'
-
 # Bundle the extra gems:
 # gem 'bj'
 # gem 'nokogiri'
@@ -46,7 +43,7 @@ group :development, :test do
   gem 'capistrano'
   gem 'rspec-rails', "~> 2.5"
   gem 'rmagick'
-  gem 'rio'
+  gem 'rio', "~> 0.4.3.1", :git => 'https://github.com/wishdev/rio.git'
 end
 
 group :test do
@@ -65,7 +62,7 @@ end
 group :development do
   gem "rails3-generators"
   gem 'haml-rails'
-  gem "ruby-debug"
+  gem "ruby-debug19", :require => 'ruby-debug'
   gem "heroku"
   gem "hpricot", :require => false
   gem "capistrano", :require => false
