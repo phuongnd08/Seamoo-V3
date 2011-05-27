@@ -26,7 +26,7 @@
         %li{:id => "question_#{question.id}"}
           - if @show_admin_link
             .edit_link= link_to t(".edit"), edit_question_path(question)
-          =question.data.preview
+          = raw question.data.preview
         %ul
           - @have_correct_answer = false
           - @match.match_users.each do |match_user|

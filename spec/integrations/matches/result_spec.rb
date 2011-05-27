@@ -25,7 +25,7 @@ describe "Matching Result" do
     @eric = Factory(:user, :display_name => "eric")
     @admin = Factory(:admin, :display_name => "admin")
     @match = Factory(:match)
-    @match.update_attributes(:questions => @match.questions[0..1].concat([Factory(:fill_in_the_blank_question)]))
+    @match.update_attributes(:questions => [@match.questions.first, Factory(:question_with_image), Factory(:fill_in_the_blank_question)])
     @match.users << @mike
     @match.users << @peter
     add_answers(@match, @mike, true)
@@ -33,6 +33,16 @@ describe "Matching Result" do
     add_answers(@match, @peter, false)
     muf_peter = @match.match_user_for(@peter)
     muf_peter.add_answer(muf_peter.current_question_position, "blank1, ")
+  end
+
+  describe "multimedia" do
+    before(:each) do
+      visit match_path(@match)
+    end
+
+    it "should display images" do
+      page.should have_css("img[src='/images/logo.png']")
+    end
   end
 
   describe "display with regards to viewer" do
