@@ -29,10 +29,6 @@ gem 'aws-s3'
 # Deploy with Capistrano
 # gem 'capistrano'
 
-# To use debugger
-
-# gem 'ruby-debug'
-
 # Bundle the extra gems:
 # gem 'bj'
 # gem 'nokogiri'
@@ -46,7 +42,7 @@ group :development, :test do
   gem 'capistrano'
   gem 'rspec-rails', "~> 2.5"
   gem 'rmagick'
-  gem 'rio'
+  gem 'rio', "~> 0.4.4", :svn => "http://rio.rubyforge.org/svn/"
 end
 
 group :test do
@@ -65,7 +61,7 @@ end
 group :development do
   gem "rails3-generators"
   gem 'haml-rails'
-  gem "ruby-debug"
+  gem "ruby-debug19", :require => 'ruby-debug'
   gem "heroku"
   gem "hpricot", :require => false
   gem "capistrano", :require => false
