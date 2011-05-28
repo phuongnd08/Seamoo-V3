@@ -1,19 +1,19 @@
 namespace :data do
-  def do_with_file
-    path = ENV["FILE"]
-    unless path
-      puts "Please specify the file with FILE variable"
+  def do_with(env_var, msg = nil)
+    unless ENV[env_var]
+      puts (msg || "Please specify #{env_var}")
     else
-      path = File.join(Rails.root, path)
-      yield(path)
+      yield ENV[env_var]
     end
   end
 
+  def new_tmp_path
+    now = Time.now
+    File.join(Rails.root, "tmp", "#{now.to_i}-#{Utils::RndGenerator.rnd(1000)}.tmp")
+  end
+
   def do_with_category
-    category_id = ENV["CATEGORY"]
-    unless category_id
-      puts "Please specify the category id with CATEGORY variable"
-    else
+    do_with "CATEGORY", "Please specify the category id with CATEGORY variable" do |category_id|
       category = Category.find(category_id.to_i)
       unless category
         puts "Subject \##{category_id} does not exist. Please check again"
@@ -23,21 +23,12 @@ namespace :data do
     end
   end
 
-  def do_with_level
-    level = ENV["LEVEL"]
-    unless level
-      puts "Please specify level of data with LEVEL variable"
-    else
-      yield level
-    end
-  end
-
   desc "Import data specified in FILE relative to the Rails.root path"
   task :import => :environment do
-    do_with_file do |path|
+    do_with "FILE" do |path|
       puts "Migrate from #{path}"
       do_with_category do |category|
-        do_with_level do |level|
+        do_with "LEVEL" do |level|
           unless File.exists?(path)
             puts "File [#{path}] does not exist"
           else
@@ -56,7 +47,7 @@ namespace :data do
 
   desc "Unimport data specified in FILE relative to the Rails.root path"
   task :unimport => :environment do
-    do_with_file do |path|
+    do_with "FILE" do |path|
       puts "Unimport [#{path}]"
       unless package = Package.find_by_path(path)
         puts "File [#{path}] is not imported"
@@ -65,5 +56,43 @@ namespace :data do
         puts "Successfully unimport [#{path}]. #{package.entries.count} questions deleted"
       end
     end
+  end
+
+  desc "Transfer all images into S3"
+  task :s3ize => :environment do
+    require 'aws/s3'
+    require 'RMagick' unless defined?(Magick)
+    errors = []
+    do_with "IN" do |in_path|
+      do_with "OUT" do |out_path|
+        open(out_path, "w") do |out_file|
+          open(in_path).each do |line|
+            puts "[process]#{line}"
+            new_line = line.gsub(/(https?:\/\/[^\s\|\:]+)/) do |link|
+              tmp_path= new_tmp_path
+              puts "[downloading] #{link}"
+              begin
+                rio(link) > rio(tmp_path)
+                img = Magick::Image::read(tmp_path).first
+                resized = img.resize_to_fit(200, 200)
+                resized.write(tmp_path)
+              rescue
+                puts "[error] Cannot download/upload file"
+                errors << link
+              end
+              now = Time.now
+              s3_path = %{images/#{now.strftime("%Y/%m/%d")}/#{now.to_i}-#{Utils::RndGenerator.rnd(1000)}.jpg}
+              puts "[uploading] #{s3_path}"
+              AWS::S3::S3Object.store(s3_path, open(tmp_path), :access => :public_read) if File.exists?(tmp_path)
+              AWS::S3::S3Object.url_for(s3_path, :authenticated => false)
+            end
+
+            puts "[changed to]#{new_line}" unless new_line == line
+            out_file.puts new_line
+          end
+        end
+      end
+    end
+    puts %{CANNOT DOWNLOAD:\n#{errors.join("\n")}} unless errors.empty?
   end
 end

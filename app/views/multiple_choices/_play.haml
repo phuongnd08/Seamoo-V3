@@ -1,6 +1,15 @@
 .multiple_choice
-  .instruction= multiple_choice.content
-  %ul
-    - multiple_choice.randomized_options.each do |index, option|
-      %li
-        %button.option{:answer => index}= option.content
+  .instruction= raw(multiple_choice.content)
+  = form_tag "#", :id => "multiple_choice_form" do
+    = hidden_field_tag "answer"
+    %ul
+      - multiple_choice.randomized_options.each do |index, option|
+        %li
+          %button.option{:answer => index}= raw(option.content)
+  :javascript
+    $('#multiple_choice_form button.option').click(function(event){
+      $("#multiple_choice_form #answer").val($(this).attr('answer'));
+    });
+    function getAnswer(){
+      return $("#multiple_choice_form #answer").val();
+    }

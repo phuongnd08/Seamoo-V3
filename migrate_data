@@ -1,0 +1,5 @@
+rake data:import CATEGORY=English LEVEL=0 FILE=data/english/BasicEnglish.001
+rake data:import CATEGORY=English LEVEL=0 FILE=data/english/BasicEnglish.002
+rake data:import CATEGORY=English LEVEL=0 FILE=data/english/BasicEnglish.003
+rake data:import CATEGORY=English LEVEL=0 FILE=data/english/BasicEnglish.004
+rake data:import CATEGORY=English LEVEL=1 FILE=data/english/BasicEnglish.005

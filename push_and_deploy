@@ -1,14 +1,11 @@
-#!/bin/bash
-echo "PUSH to GITHUB"
-git push origin master --force
-echo "PUSH to HEROKU"
-git push heroku master --force
-echo "Migrate DB"
-heroku rake db:migrate
-echo "RESTART"
-heroku restart
-echo "RESET MATCHES"
-heroku rake match:reset
-echo "START BOT"
-heroku rake match:start_bot
-echo "DONE"
+#!/usr/bin/ruby
+puts `git push origin master`
+puts `cap maintenance:schedule`
+(30*60).downto(1) do |time|
+  puts "Deploy in #{time/60}:#{'%02d' % (time % 60)}"
+  sleep 1
+end
+puts `cap deploy:web:disable UNTIL="#{(Time.now + 15 * 60).strftime("%Y/%-m/%-d %-H:%M")}"`
+puts `cap deploy:migrations`
+puts `cap deploy:web:enable`
+puts `cap maintenance:stop`

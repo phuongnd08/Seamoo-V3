@@ -5,6 +5,10 @@ en:
   next: Next
   previous: Prev
   you_chat_here: You chat here
+  maintenance:
+    from: System will be down from
+    to: to
+    after: for maintenance
   chat:
     header: Chatting
     connection_lost: Connection lost
@@ -33,6 +37,7 @@ en:
       You: You
       correct: correct
       incorrect: incorrect
+      partially_correct: partially correct
       not_answered: not answered
       correct_answer: correct answer
       rematch: "Let's match again"
@@ -46,13 +51,20 @@ en:
       score: Score
       matches: Matches
       rank_score: Index
-      start: Start
+      compete: Compete
     matching:
       welcome: Welcome to %{name}
       lets_match: "Let's match"
       Players: Players
       Some_maybe_around: Some other players maybe around
       leave_current_match: Leave current match
+      need_signin: Please <a href='%{signin_path}'>signin</a> to compete with other members
+      qualified: You are qualifed
+      not_qualified: You are not qualified for this league
+      please_prove: Please prove that you are qualified for this league by earning %{points} rank score
+      prove_in:
+        one: in league
+        other: "in these leagues:"
   questions:
     question_position: Question %{current}/%{total}
     ignore_current_question: Ignore this question

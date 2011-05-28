@@ -1,8 +1,10 @@
 class Informer
   class << self
+    attr_accessor :logout
     attr_accessor :login_as
     def reset
       login_as = nil
+      logout = false
     end
   end
 end
@@ -14,8 +16,8 @@ class ApplicationController < ActionController::Base
     if Informer.login_as
       self.send(:activate_authlogic)
       UserSession.create(User.find_by_display_name(Informer.login_as), true)
-      #puts "Login as #{Informer.login_as}"
-      #Informer.login_as = nil
+    elsif Informer.logout
+      session.destroy
     end
   end
 end

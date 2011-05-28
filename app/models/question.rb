@@ -16,13 +16,14 @@ class Question < ActiveRecord::Base
       data = FollowPattern.create(:instruction => instruction, :pattern => pattern)
       create(extra.merge(:data => data))
     end
+
+    def create_fill_in_the_blank(content, extra = {})
+      data = FillInTheBlank.create(:content => content)
+      create(extra.merge(:data => data))
+    end
   end
 
-  def content
-    if data.is_a?(MultipleChoice)
-      data.content
-    else
-      data.instruction
-    end
+  def content_type
+    ActiveModel::Naming.singular(self.data)
   end
 end

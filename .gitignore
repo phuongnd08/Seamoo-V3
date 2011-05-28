@@ -2,9 +2,11 @@
 db/*.sqlite3
 log/*.log
 tmp/**/*
+tmp/*
 nbproject
 database.yml
 *.swp
 *.swo
 tags
 features/screenshots/
+dautri.pem

@@ -6,9 +6,13 @@ development: &development
     server: "http://localhost:3500"
     client_js: "chat.js"
     mount_point: "chat"
+    history_mount_point: "history"
     history_limit: 50
 test:
   <<: *development
 
 production:
   <<: *development
+  chat:
+    <<: *chat
+    server: "http://chat.dautri.net" 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110408145317) do
+ActiveRecord::Schema.define(:version => 20110510115423) do
 
   create_table "authorizations", :force => true do |t|
     t.integer  "user_id"
@@ -51,6 +51,12 @@ ActiveRecord::Schema.define(:version => 20110408145317) do
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
+  create_table "fill_in_the_blanks", :force => true do |t|
+    t.string   "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "follow_patterns", :force => true do |t|
     t.text     "instruction"
     t.string   "pattern"
@@ -67,13 +73,21 @@ ActiveRecord::Schema.define(:version => 20110408145317) do
     t.integer  "level"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status",      :default => "active"
+    t.string   "status",       :default => "active"
+    t.boolean  "use_formulae", :default => false
   end
 
   create_table "links", :force => true do |t|
     t.string   "name"
     t.string   "url"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "maintenance_schedules", :force => true do |t|
+    t.datetime "started_at"
+    t.datetime "ended_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

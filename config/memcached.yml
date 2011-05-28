@@ -1,7 +1,6 @@
 production:
   server: 
-    - server-1:11211
-    - server-2:11211
+    - 127.0.0.1:11211
   nspace: prod
 development: &development
   server: 

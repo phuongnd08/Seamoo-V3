@@ -1,11 +1,17 @@
 .follow_pattern
-  .instruction= follow_pattern.instruction
+  .instruction= raw follow_pattern.instruction
   .hint_container
     (#{t 'questions.Hint'}: 
-    %span#hint
+    %span.hint.big#hint>
+      %span.gray>= follow_pattern.hint
     )
-  = form_tag :id => 'follow_pattern_form' do
+  = form_tag "#", :id => 'follow_pattern_form' do
     .text_field
-      = text_field_tag :answer, nil, :hint => follow_pattern.hint
+      = text_field_tag :answer, nil
     .submit
       = submit_tag t('questions.Submit')
+  :javascript
+    function getAnswer(){
+      return $('#follow_pattern_form #answer').val();
+    }
+    bindHighlight($('#follow_pattern_form #answer'), $('.follow_pattern #hint'));

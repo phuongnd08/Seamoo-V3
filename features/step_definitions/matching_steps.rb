@@ -112,22 +112,12 @@ Given /^league (\w+) has (\d+) follow pattern questions$/ do |league_name, count
   end
 end
 
-def assert_recored_answer(username, position, answer)
-  user = User.find_by_display_name(username)
-  match_user = MatchUser.find_by_user_id(user.id)
-  match = match_user.match
-  wait_for_true{
-    match_user.reload.answers.has_key?(position)
-  }
-  realized_answer = match.questions[position].data.realized_answer(match_user.answers[position])
-  realized_answer.should == answer
-end
 Then /^(\w+)'s recorded answer of (\d+)(?:st|nd|rd|th) question should be "([^"]*)"$/ do |username, pos, answer|
-  assert_recored_answer(username, pos.to_i - 1, answer)
+  assert_recorded_answer(username, pos.to_i - 1, answer)
 end
 
 Then /^(\w+)'s recorded answer of (\d+)(?:st|nd|rd|th) question should be empty$/ do |username, pos|
-  assert_recored_answer(username, pos.to_i - 1, nil)
+  assert_recorded_answer(username, pos.to_i - 1, nil)
 end
 
 Given /^(\w+) is already at the last question$/ do |username|

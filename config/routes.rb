@@ -1,8 +1,8 @@
 SeamooV3::Application.routes.draw do
   scope "(:locale)", :locale => /en|vi/ do
-    resources :follow_patterns, :except => [:index, :destroy]
-
-    resources :multiple_choices, :except => [:index, :destroy]
+    [:follow_patterns, :multiple_choices, :fill_in_the_blanks].each do |res|
+      resources res, :except => [:index, :destroy]
+    end
 
     resources :questions, :except => [:update]
 
@@ -13,7 +13,7 @@ SeamooV3::Application.routes.draw do
     end
 
     resources :categories
-    resources :leagues do
+    resources :leagues, :only => [:show] do
       member do
         get :matching
         post :request_match
@@ -37,7 +37,7 @@ SeamooV3::Application.routes.draw do
   end
 
   root :to => "home#index"
-  match "/:locale" => "home#index"
+  match "/:locale" => "home#index", :constraints => {:locale => /en|vi/}
   match "/auth/:provider/callback" => "authorizations#create"
   match "/auth/failure" => "authorizations#failure"
   match "/auth/signin/:username" => "authorizations#signin"

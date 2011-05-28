@@ -11,8 +11,8 @@
           = submit_tag t('.leave_current_match'), :class => "sad"
     .internal.chatting
       = render :partial => 'chat'
-    .internal
-      = render :partial => 'active_players'
+    -#.internal
+      -#= render :partial => 'active_players'
   .right
     #question
 :javascript
@@ -229,7 +229,7 @@
   })();
 
   function highlightPattern(input){
-    var hint = $(input).attr('hint');
+    var hint = $(input).data('hint');
     var val = $(input).val();
     function span(ch, clazz){
       return ["<span class='", clazz, "'>", ch, "</span>"].join("");
@@ -250,7 +250,7 @@
       }
     }
 
-    $('#question #hint').html(parts.join(""));
+    $(input).data('hinter').html(parts.join(""));
   }
 
   function formatString(template, variables){
@@ -296,10 +296,10 @@
         if (finished){
           li.css({textAlign: "right"});
         } else {
-          var iw = img.width();
+          var iw = 40;
           var fw = $('#match_players ul.list').width();
+          img.css({marginLeft: (fw - iw) * player.current_question_position / questionsPerMatch + "px"})
         }
-        img.css({marginLeft: (fw - iw) * player.current_question_position / questionsPerMatch + "px"})
       }
       $('#match_players ul.list').append(li);
     });
@@ -308,31 +308,28 @@
   function setQuestion(question){
     $('#question').html(question.content);
     setUpQuestionButtons(question.type);
+    if (window.refreshMathFormulae) refreshMathFormulae('question');
   }
 
   function setUpQuestionButtons(questionType){
-    switch(questionType){
-      case 'MultipleChoice':
-        $('#question button.option').click(function(event){
-          submitAnswer($(this).attr('answer'));
-        });
-        break;
-      case 'FollowPattern': 
-        $('#question form').submit(function(event){
-          var self = this;
-          setTimeout(function(){
-            submitAnswer($(self).find('#answer').val());
-          });
-          return false;
-        });
+    $('#question form').submit(function(event){
+      setTimeout(function(){
+        submitAnswer(getAnswer());
+      }, 0);
+      return false;
+    });
 
-        $('#question #answer').keyup(function(event){
-          highlightPattern(this);
-        }).keyup();
-        break;
-    }
+    $('#question input[type=text]:first').focus();
     $('#question #ignore').click(function(event){
       submitAnswer(null);
+    });
+  }
+  
+  function bindHighlight(input, hinter){
+    $(input).data('hint', $(hinter).text());
+    $(input).data('hinter', $(hinter));
+    $(input).keyup(function(event){
+      highlightPattern(this);
     });
   }
 

@@ -18,16 +18,6 @@
     .follow_pattern
       .hint_container
         overflow-x: hidden
-        #hint
-          font-size: 150%
-          .green
-            color: green
-          .red
-            color: red
-          .gray
-            color: gray
-          .purple
-            color: purple
       .text_field
         +columns(6, 8)
         input[type=text]
@@ -41,4 +31,17 @@
         +omega(8)
         input[type=submit]
           width: 100%
-
+    .fill_in_the_blank
+      input[type=text]
+        width: auto
+  .hint
+    .green
+      color: green
+    .red
+      color: red
+    .gray
+      color: gray
+    .purple
+      color: purple
+  .big
+    font-size: 150%

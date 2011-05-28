@@ -1,0 +1,15 @@
+= javascript_include_tag "http://cdn.mathjax.org/mathjax/1.1-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML-full"
+:javascript
+  MathJax.Hub.Config({
+    jax: ["input/TeX","output/HTML-CSS"],
+    extensions: ["tex2jax.js"],
+    tex2jax: {
+      inlineMath: [['$','$'],['\\(','\\)']],
+      processEscapes: true
+    }
+  });
+
+  function refreshMathFormulae(containerId){
+    var math = document.getElementById(containerId);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, math]);
+  }

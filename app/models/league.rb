@@ -9,6 +9,14 @@ class League < ActiveRecord::Base
     self.status == 'active'
   end
 
+  def previous
+    League.where(:category_id => self.category_id, :level => self.level - 1)
+  end
+
+  def advanced?
+    self.level > 0
+  end
+
   def dom_name
     name.downcase.split(/\s+/).join("_")
   end
@@ -33,9 +41,7 @@ class League < ActiveRecord::Base
     :match_user_id => :match_ticket,
     :waiting_counter => :counter, 
     :waiting_user => :position,
-    :active_user => :position,
-    :fake_user_counter => :counter,
-    :fake_user => :position
+    :active_user => :position
   }.each do |field, identifier|
     self.class_eval %{
       protected
@@ -48,7 +54,7 @@ class League < ActiveRecord::Base
   include Utils::Waiter
 
   def request_match(user_id, bot_request = false)
-    user_match_ticket[user_id] = user_match_ticket_counter.incr if (user_match_ticket[user_id].nil?)
+    user_match_ticket[user_id] = user_match_ticket_counter.incr if (user_match_ticket[user_id].nil? || user_lastseen[user_id].nil? || user_lastseen[user_id] < Matching.requester_stale_after.seconds.ago.to_i)
     user_league_ticket[user_id] = user_league_ticket_counter.incr if (user_league_ticket[user_id].nil?)
     user_lastseen[user_id] = Time.now.to_i
     waiting_user[waiting_counter.incr % Matching.waiting_slots_size] = { :id => user_id, :bot => bot_request, :time => Time.now.to_i }
@@ -104,15 +110,6 @@ class League < ActiveRecord::Base
               values.map{|group| group.sort_by{|user| user[:time]}.last}
   end
 
-  def fake_active_users
-    position = fake_user_counter.incr
-    fake_user[position % Matching.fake_active_users_slot] = Matching.bots_arr[Utils::RndGenerator.rnd(Matching.bots_arr.size)].first
-    (0...Matching.fake_active_users_slot).map{|index| fake_user[index]}.
-      select{|bot_name| bot_name.present?}.
-      to_set.
-      map{|name| Bot.new(:name => name)}
-  end
-
   def leave_current_match(user_id)
     user_match_ticket[user_id] = nil
     user_lastseen[user_id] = nil
@@ -139,8 +136,8 @@ class League < ActiveRecord::Base
       # user can only participate if first requester is still around && match not started
       first_requester_id = try_until_not_nil_or_timeout(Matching.requester_stale_after) { match_user_id[{:match_ticket => match_ticket, :position => 1}] }
       can = if first_requester_id
-              first_requester_lastseen= try_until_not_nil_or_timeout(Matching.requester_stale_after) { user_lastseen[first_requester_id] }
-              first_requester_lastseen =! nil && first_requester_lastseen > Matching.requester_stale_after.seconds.ago.to_i
+              first_requester_lastseen = try_until_not_nil_or_timeout(Matching.requester_stale_after) { user_lastseen[first_requester_id] }
+              (first_requester_lastseen != nil) && (first_requester_lastseen >= Matching.requester_stale_after.seconds.ago.to_i)
             else
               false
             end

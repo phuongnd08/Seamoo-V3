@@ -5,22 +5,22 @@
     %div= text_field_tag :message, "", :placeholder => t("you_chat_here")
     #chat_hint= t("chat.hint")
 - else
-  %div= raw t("chat.need_signin", :signin_path => signin_path)
+  #chat_need_signin= raw t("chat.need_signin", :signin_path => signin_path)
 #chat_log
   = javascript_include_tag "#{Site.chat.server}/#{Site.chat.client_js}"
 
-%div{:style => "display:none"}
-  - chat_entry_template = capture_haml do
-    .chat_entry
-      %a{:href => "{link}", :title => "{display_name}"}
-        %img{:src => "{avatar_url}"}
-      %span.msg {content}
+- chat_entry_template = capture do
+  .chat_entry
+    %a{:href => "{link}", :title => "{display_name}"}
+      %img{:src => "{avatar_url}", :width => "32", :height => "32"}
+    %span.msg {content}
 
-  - chat_error_template = capture_haml do
-    .chat_error {message}
+- chat_error_template = capture do
+  .chat_error {message}
 
-  - chat_info_template = capture_haml do
-    .chat_info {message}
+- chat_info_template = capture do
+  .chat_info {message}
+
 :javascript
   var client = new Faye.Client("#{Site.chat.server}/#{Site.chat.mount_point}");
   var channel = '/leagues/#{@league.id}';
@@ -31,12 +31,22 @@
     info: #{chat_info_template.to_json}
   }
 
-  function addMessage(message){
-    var entry = $(formatString(templates.chatEntry, message)).hide().fadeIn(500)
-    $('#chat_box').append(entry);
+  function scrollChatToEnd(){
     setTimeout(function(){
       $("#chat_box").attr({ scrollTop: $("#chat_box").attr("scrollHeight") })
     }, 0);
+  }
+  function addMessage(message){
+    var entry = $(formatString(templates.chatEntry, message)).hide().fadeIn(500)
+    $('#chat_box').append(entry);
+  }
+
+  function addMessages(messages){
+    if (messages != null){
+      for (var i = 0; i < messages.length; i++){
+        addMessage(messages[i]);
+      }
+    }
   }
 
   function addLog(type, message){
@@ -47,9 +57,26 @@
     }, 5000);
   }
 
+  $(function(){
+    $.ajax({
+      url: "#{Site.chat.server}/#{Site.chat.history_mount_point}",
+      dataType: "jsonp",
+      data: {
+        count: #{Site.chat.history_limit},
+        channel: channel,
+      },
+      success: function(messages){
+        addMessages(messages);
+        scrollChatToEnd();
+      }
+    });
+  });
+
   client.subscribe(channel, function(message) {
     addMessage(message);
+    scrollChatToEnd();
   });
+
 - if current_user.present?
   :javascript
     $('#chat_form').submit(function(){
@@ -64,4 +91,3 @@
       }, 0);
       return false;
     });
-

@@ -7,6 +7,13 @@ describe League do
     it { should have_many(:memberships)}
   end
 
+  describe "default values" do
+    it "should have desired default values" do
+      league = League.new
+      league.use_formulae.should be_false
+    end
+  end
+
   describe "dynamic accessor", :memcached => true do
     before(:each) do
       @league = League.create!(:level => 0)
@@ -69,6 +76,19 @@ describe League do
         @league.request_match(@user1.id)
         match = @league.request_match(@user2.id)
         match.questions.map(&:id).to_set.should == @questions.map(&:id).to_set
+      end
+
+      it "should handle situation where first_requester_last_seen evaluated to nil" do
+        now = Time.now
+        Time.stub(:now).and_return(now)
+        @league.request_match(@user1.id)
+        @league.send(:user_lastseen)[@user1.id] = nil
+        Matching.stub(:requester_stale_after).and_return(0.1)
+        @league.request_match(@user2.id)
+        match_1 = @league.request_match(@user1.id)
+        match_2 = @league.request_match(@user2.id)
+        match_1.should_not be_nil
+        match_2.should == match_1
       end
     end
 
@@ -143,33 +163,20 @@ describe League do
     end
   end
 
-  describe "fake_active_users", :memcached => true do
-    before(:each) do
-      @league = Factory(:league)
-      Matching.stub(:fake_active_users_slot).and_return(3)
-    end
-
-    it "should increase number of user as requests submitted" do
-      Utils::RndGenerator.stub(:rnd).and_return(1, 2, 3)
-      @league.fake_active_users.size.should == 1
-      @league.fake_active_users.size.should == 2
-      @league.fake_active_users.size.should == 3
-    end
-
-    it "should never return more than desired number of users" do
-      Utils::RndGenerator.stub(:rnd).and_return(1, 2, 3, 4)
-      @league.fake_active_users.size.should == 1
-      @league.fake_active_users.size.should == 2
-      @league.fake_active_users.size.should == 3
-      @league.fake_active_users.size.should == 3
-    end
-  end
-
   describe "active" do
     it "should only return active leagues" do
       @active_league = Factory(:league, :status => "active")
       @inactive_league = Factory(:league, :status => "coming_soon")
       League.active.should == [@active_league]
+    end
+  end
+
+  describe "previous" do
+    it "should return league in the same category and of 1 level lower" do
+      @level0a = Factory(:league, :category => @category, :level => 0)
+      @level0b = Factory(:league, :category => @category, :level => 0)
+      @level1 = Factory(:league, :category => @category, :level => 1)
+      @level1.previous.should == [@level0a, @level0b]
     end
   end
 end

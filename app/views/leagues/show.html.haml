@@ -1,20 +1,29 @@
 - @title = @league.name
-.item
+.item{:id => @league.dom_name}
   %table
     %tr
       %td.logo_cell
         = image_tag(@league.image, :size => "96x64")
       %td
         %div= @league.description
-        .main_link
-          %a{:href => matching_league_path(@league)}
-            %span= t('.start') 
+        - unless current_user
+          %div= raw t("leagues.matching.need_signin", :signin_path => signin_path)
+        - else
+          - if current_user.qualified_for?(@league)
+            - if @league.advanced?
+              .qualified= t("leagues.matching.qualified")
+            .main_link
+              %a{:href => matching_league_path(@league)}
+                %span= t('.compete') 
+          - else
+            = t("leagues.matching.not_qualified")
+            = t("leagues.matching.please_prove", :points => Matching.qualified_rank_score)
+            = t("leagues.matching.prove_in", :count => @league.previous.count)
+            = raw @league.previous.map{|l| link_to l.name, league_path(l)}.join(", ")
 .league_info
   .left
     .internal.chatting
       = render :partial => 'chat'
-    .internal
-      = render :partial => 'active_players'
   .right
     #membership
       %table
@@ -32,6 +41,6 @@
               =link_to membership.user.display_name, user_path(membership.user)
             %td.score= membership.matches_score
             %td.matches= membership.matches_count
-            %td.rank_score= membership.rank_score
+            %td.rank_score= "%.1f" % membership.rank_score
       .pagination= will_paginate @membership
      

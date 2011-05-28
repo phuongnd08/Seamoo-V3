@@ -12,6 +12,11 @@ describe MultipleChoicesController do
       get :show, :id => @multiple_choice.id
       assigns(:multiple_choice).should == @multiple_choice
     end
+
+    it "should require mathjax" do
+      get :show, :id => @multiple_choice.id
+      assigns(:use_formulae).should be_true
+    end
   end
 
   describe "GET new" do

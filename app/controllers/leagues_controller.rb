@@ -2,15 +2,14 @@ class LeaguesController < ApplicationController
   before_filter :require_user, :only => [:matching, :request_match_info]
   before_filter :load_league, :except => [:index]
   before_filter :load_active_players, :only => [:matching, :active_players]
-  def index
-    @leagues = League.all
-  end
 
   def show
     @membership = @league.memberships.paginate :per_page => Membership.per_page, :page => params[:page], :order => 'rank_score DESC'
   end
 
-  def matching; end
+  def matching; 
+    @use_formulae = @league.use_formulae
+  end
 
   def request_match
     match = @league.request_match(current_user.id) 
@@ -39,10 +38,8 @@ class LeaguesController < ApplicationController
   end
 
   def load_active_players
-    real_hash = Hash[User.find(@league.active_users.map{|u| u[:id]}).
+    @active_players = Hash[User.find(@league.active_users.map{|u| u[:id]}).
       map{|u| [u.email_hash, u]}]
-    fake_hash = Hash[@league.fake_active_users.map{|u| [u.email_hash, u]}]
-    @active_players = fake_hash.merge(real_hash)
   end
 
   def secured_players(hash)

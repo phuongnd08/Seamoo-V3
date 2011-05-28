@@ -1,0 +1,23 @@
+.fill_in_the_blank
+  = form_tag '#', :id => "fill_in_the_blank_form" do
+    - fill_in_the_blank.segments.each_with_index do |segment, index|
+      - if segment[:type] == "text"
+        %span.text= raw segment[:text]
+      - else
+        %span.input
+          = text_field_tag "entry_#{index}", nil, :size => segment[:hint].length,:class => segment[:no_highlight] ? "": "highlight"
+          (
+          %span.hint{:class => "entry_#{index}"}>
+            %span.gray>= segment[:hint]
+          )
+    .submit
+      = submit_tag t('questions.Submit')
+    :javascript
+      $('#fill_in_the_blank_form input[type=text].highlight').each(function(index, element){
+        bindHighlight($(element), $('.hint.' + $(element).attr('id')));
+      });
+
+      function getAnswer(){
+        return $('#fill_in_the_blank_form input[type=text]').
+          map(function(index, element) { return $(element).val() }).get().join(", ");
+      }

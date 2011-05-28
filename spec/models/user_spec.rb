@@ -96,4 +96,29 @@ describe User do
       User.new.admin.should be_false
     end
   end
+
+  describe "qualified_for?" do
+    before(:each) do
+      @category = Factory(:category)
+      @level0 = Factory(:league, :category => @category, :level => 0)
+      @level1 = Factory(:league, :category => @category, :level => 1)
+      @mike = Factory(:user)
+    end
+    describe "level 0" do
+      it "should return true" do
+        @mike.qualified_for?(@level0).should be_true 
+      end
+    end
+
+    describe "level 1" do
+      it "should only return true if user score enouth from previous level" do
+        @mike.qualified_for?(@level1).should be_false
+        @membership = @mike.membership_in(@level0)
+        @membership.update_attributes(:matches_count => 1, :matches_score => 999)
+        @mike.qualified_for?(@level1).should be_false
+        @membership.update_attribute(:matches_score, 1000)
+        @mike.qualified_for?(@level1).should be_true
+      end
+    end
+  end
 end

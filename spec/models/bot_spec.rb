@@ -29,22 +29,36 @@ describe Bot, :memcached => true do
   end
 
   describe "awake new" do
-    it "should awake new bot" do
-      Matching.stub(:bots).and_return({"abc" => "Abc User", "xyz" => "xyz"})
-      Utils::RndGenerator.stub(:rnd).and_return(1, 0)
-      Bot.awake_new
+    before(:each) do
+      Matching.stub(:bots).and_return(
+        [
+          {
+            "abc" => {:display_name => "Abc User"}, 
+            "xyz" => {:display_name => "xyz"}
+          }, 
+          {
+            "def" => {:display_name => "def"},
+            "tuv" => {:display_name => "tuv"}
+          }
+        ]
+      )
+    end
+
+    it "should awake new bot correspond to required level" do
+      Utils::RndGenerator.stub(:rnd).and_return(1, 0, 0)
+      Bot.awake_new(0)
       Bot.awaken.count.should == 1
-      Bot.awaken.first.display_name.should == "xyz"
-      Bot.awaken.first.email.should == "xyz@#{Site.bot_domain}"
-      Bot.awake_new
+      Bot.awake_new(0)
       Bot.awaken.count.should == 2
-      Bot.awaken.last.display_name.should == "Abc User"
-      Bot.awaken.last.email.should == "abc@#{Site.bot_domain}"
+      Bot.awaken.map(&:display_name).to_set.should == ["Abc User", "xyz"].to_set
+      Bot.awaken.map(&:email).to_set.should == ["abc@#{Site.bot_domain}", "xyz@#{Site.bot_domain}"].to_set
+      Bot.awake_new(1)
+      Bot.awaken.count.should == 3
+      ["def", "tuv"].should include(Bot.awaken.last.display_name)
     end
 
     it "should return the new awakened bot" do
-      Matching.stub(:bots).and_return({"abc" => "abc", "xyz" => "xyz"})
-      bot = Bot.awake_new
+      bot = Bot.awake_new(0)
       bot.is_a?(Bot).should be_true
       Bot.find(bot.id).should == bot
     end
@@ -52,11 +66,11 @@ describe Bot, :memcached => true do
     it "should reset bot information about past match" do
       #make sure same bot will be reused
       Utils::RndGenerator.stub(:rnd).and_return(1)
-      bot = Bot.awake_new
+      bot = Bot.awake_new(0)
       Bot.kill(bot)
       bot.data[:match_id] = 1
       bot.data[:match_request_retried] = 5
-      new_bot = Bot.awake_new
+      new_bot = Bot.awake_new(0)
       new_bot.should == bot
       new_bot.data[:match_id].should == nil
       new_bot.data[:match_request_retried].should == 0
@@ -79,7 +93,7 @@ describe Bot, :memcached => true do
         @questions << question
       end
       @league = League.create!(:level => 0, :category => @category)
-      @bot = Bot.awake_new
+      @bot = Bot.awake_new(0)
       @now = Time.now
       Time.stub(:now).and_return(@now)
     end
