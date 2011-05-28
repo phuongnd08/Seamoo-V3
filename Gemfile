@@ -1,11 +1,12 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.0.0'
+gem 'rake', '0.8.7'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2'
+gem 'mysql2', "~> 0.2.7"
 gem 'haml', ">=3.1.alpha.147"
 gem 'omniauth', '0.2.0.beta5'
 gem 'authlogic'
@@ -42,7 +43,7 @@ group :development, :test do
   gem 'capistrano'
   gem 'rspec-rails', "~> 2.5"
   gem 'rmagick'
-  gem 'rio', "~> 0.4.4", :svn => "http://rio.rubyforge.org/svn/"
+  gem 'rio', "~> 0.4.3.1", :git => 'https://github.com/wishdev/rio.git'
 end
 
 group :test do
