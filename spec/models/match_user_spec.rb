@@ -9,7 +9,7 @@ describe MatchUser do
   describe "method visibility" do
     it "should protect current_question_postion= method" do
       @match_user = MatchUser.new(:match => @match)
-      @match_user.protected_methods.should include("current_question_position=")
+      @match_user.protected_methods.should include(:current_question_position=)
     end
   end
 

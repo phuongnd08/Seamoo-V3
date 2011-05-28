@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'spec_helper'
 
 describe 'matching_use_math', :memcached => true, :js => true do

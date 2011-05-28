@@ -10,7 +10,7 @@ shared_examples_for "authorize using external provider" do
       OmniAuth.config.test_mode = false
     end
 
-    describe "First Time" do
+    describe "First Time", :js => true do
       it "should welcome user for first time and persist authorization hash" do
         click_link(link_text)
         page.find_link(user_display_name).should_not be_nil
@@ -24,7 +24,7 @@ shared_examples_for "authorize using external provider" do
       end
     end
 
-    describe "Second Time" do
+    describe "Second Time", :js => true do
       it "should welcome user back" do
         User.create(:email => user_email, :display_name => user_display_name).
           authorizations.create(:provider => provider.to_s, :uid => uid)
@@ -33,7 +33,7 @@ shared_examples_for "authorize using external provider" do
       end
     end
 
-    describe "Using emails that already exists" do
+    describe "Using emails that already exists", :js => true do
       it "should notify user gratefully" do
         User.create(:email => user_email, :display_name => user_display_name).
           authorizations.create(:provider => "some_provider", :uid => "some uid")

@@ -8,7 +8,6 @@
           - text = capture do
             - if match_user.user == current_user
               %strong= t '.You'
-              (#{match_user.user.display_name})
             - else
               #{match_user.user.display_name}
             \- #{match_user.score_as_percent}% #{t '.correct'}

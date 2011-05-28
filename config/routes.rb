@@ -16,6 +16,7 @@ SeamooV3::Application.routes.draw do
     resources :leagues, :only => [:show] do
       member do
         get :matching
+        get :challenge
         post :request_match
         post :leave_current_match
         post :active_players
