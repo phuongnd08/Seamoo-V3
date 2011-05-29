@@ -6,7 +6,7 @@ set :repository,  "git@github.com:phuongnd08/Seamoo-V3.git"
 set :rails_env, :production
 
 set :scm, :git
-set :branch, :master
+set :branch, :production
 set :user, "ubuntu"
 set :use_sudo, false
 ssh_options[:keys] = ["#{Dir.pwd}/dautri.pem"]
