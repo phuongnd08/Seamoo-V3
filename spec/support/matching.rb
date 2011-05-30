@@ -25,6 +25,18 @@ module RSpec
       end
       league.matches.last
     end
+    def prepare_league_for_match(questions = [])
+      ::Matching.started_after #trigger settings class initialization
+      ::Matching.stub(:started_after).and_return(0) #all match started immediately
+
+      if questions.empty?
+        Factory(:league_with_questions)
+      else
+        lg = Factory(:league)
+        questions.each{ |q| lg.category.questions << q }
+        lg
+      end
+    end
 
     def assert_recorded_answer(username, position, answer)
       user = User.find_by_display_name(username)

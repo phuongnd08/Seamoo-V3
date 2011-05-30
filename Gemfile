@@ -6,6 +6,7 @@ gem 'rake', '0.8.7'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+gem 'escape_utils' # dealing with this warning 'regex match against utf-8 string'
 gem 'mysql2', "~> 0.2.7"
 gem 'haml', ">=3.1.alpha.147"
 gem 'omniauth', '0.2.0.beta5'

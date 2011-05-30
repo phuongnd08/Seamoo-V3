@@ -1,0 +1,1787 @@
+/* line 17, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* line 20, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+body {
+  line-height: 1;
+}
+
+/* line 22, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 24, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 26, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 28, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 101, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 30, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 115, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+/* Typography -------------------------------------------------------------- */
+/* The following classes are for use with @extend. */
+/* line 16, ../../app/stylesheets/_defaults.sass */
+html {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* line 19, ../../app/stylesheets/_defaults.sass */
+body {
+  line-height: 1.5em;
+}
+
+/* line 22, ../../app/stylesheets/_defaults.sass */
+.serif, body {
+  font-family: Cambria, Georgia, serif;
+}
+
+/* line 25, ../../app/stylesheets/_defaults.sass */
+.sans {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* line 28, ../../app/stylesheets/_defaults.sass */
+.mono, pre, code, tt {
+  font-family: "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, Courier, monospace, sans-serif;
+}
+
+/* line 31, ../../app/stylesheets/_defaults.sass */
+.caps, .allcaps, h1, h2, caption, .smallcaps, h4 {
+  letter-spacing: 0.1em;
+}
+
+/* line 34, ../../app/stylesheets/_defaults.sass */
+.allcaps, h1, h2, caption {
+  text-transform: uppercase;
+}
+
+/* line 38, ../../app/stylesheets/_defaults.sass */
+.smallcaps, h4 {
+  font-variant: small-caps;
+}
+
+/* Body -------------------------------------------------------------- */
+/* line 44, ../../app/stylesheets/_defaults.sass */
+body {
+  color: #4c4c4c;
+}
+
+/* Selected Text -------------------------------------------------------------- */
+/* -moz- must be declared separately */
+/* line 57, ../../app/stylesheets/_defaults.sass */
+::-moz-selection {
+  color: white;
+  background: #008fe0;
+  text-shadow: none;
+}
+
+/* line 62, ../../app/stylesheets/_defaults.sass */
+::selection {
+  color: white;
+  background: #008fe0;
+  text-shadow: none;
+}
+
+/* Links -------------------------------------------------------------- */
+/* line 70, ../../app/stylesheets/_defaults.sass */
+a:link, a:visited {
+  color: #008fe0;
+}
+/* line 72, ../../app/stylesheets/_defaults.sass */
+a:link, a:visited, a:hover, a:active {
+  outline: none;
+}
+/* line 74, ../../app/stylesheets/_defaults.sass */
+a:focus, a:hover, a:active {
+  color: #e05100;
+  text-decoration: none;
+}
+/* line 77, ../../app/stylesheets/_defaults.sass */
+a:focus {
+  outline: thin dotted;
+}
+
+/* Headings -------------------------------------------------------------- */
+/* line 82, ../../app/stylesheets/_defaults.sass */
+h2, h3, h4, h5, h6 {
+  margin-bottom: 1.5em;
+}
+
+/* line 85, ../../app/stylesheets/_defaults.sass */
+h1 {
+  font-size: 1.313em;
+  line-height: 1.143em;
+  margin-bottom: 1.143em;
+}
+
+/* line 92, ../../app/stylesheets/_defaults.sass */
+h3 {
+  font-weight: bold;
+}
+
+/* line 95, ../../app/stylesheets/_defaults.sass */
+h4 {
+  text-transform: lowercase;
+}
+
+/* line 99, ../../app/stylesheets/_defaults.sass */
+h5, h6 {
+  font-style: italic;
+}
+
+/* Inline -------------------------------------------------------------- */
+/* line 104, ../../app/stylesheets/_defaults.sass */
+cite, em, dfn, address, i {
+  font-style: italic;
+}
+
+/* line 107, ../../app/stylesheets/_defaults.sass */
+strong, dfn, b {
+  font-weight: bold;
+}
+
+/* line 110, ../../app/stylesheets/_defaults.sass */
+sup, sub {
+  font-size: smaller;
+  line-height: 0;
+}
+
+/* line 114, ../../app/stylesheets/_defaults.sass */
+sup {
+  vertical-align: super;
+}
+
+/* line 117, ../../app/stylesheets/_defaults.sass */
+sub {
+  vertical-align: sub;
+}
+
+/* line 120, ../../app/stylesheets/_defaults.sass */
+abbr, acronym {
+  border-bottom: 1px dotted;
+  cursor: help;
+}
+
+/* line 124, ../../app/stylesheets/_defaults.sass */
+ins {
+  text-decoration: underline;
+}
+
+/* line 127, ../../app/stylesheets/_defaults.sass */
+del {
+  text-decoration: line-through;
+}
+
+/* line 130, ../../app/stylesheets/_defaults.sass */
+mark {
+  background: #ffff99;
+  background-color: rgba(255, 255, 0, 0.5);
+  text-shadow: none;
+}
+
+/* line 135, ../../app/stylesheets/_defaults.sass */
+small {
+  font-size: 0.75em;
+  line-height: 2em;
+}
+
+/* line 138, ../../app/stylesheets/_defaults.sass */
+q {
+  font-style: italic;
+}
+/* line 140, ../../app/stylesheets/_defaults.sass */
+q em {
+  font-style: normal;
+}
+
+/* Block -------------------------------------------------------------- */
+/* line 148, ../../app/stylesheets/_defaults.sass */
+p {
+  margin-bottom: 1.5em;
+}
+
+/* line 151, ../../app/stylesheets/_defaults.sass */
+pre {
+  margin: 1.5em;
+  white-space: pre;
+  white-space: pre-wrap;
+  white-space: pre-line;
+  word-wrap: break-word;
+}
+
+/* line 158, ../../app/stylesheets/_defaults.sass */
+blockquote {
+  margin: 1.5em;
+  font-style: italic;
+}
+
+/* Replaced -------------------------------------------------------------- */
+/* line 164, ../../app/stylesheets/_defaults.sass */
+img {
+  vertical-align: text-bottom;
+  max-width: 100%;
+  -ms-interpolation-mode: bicubic;
+}
+
+/* Lists -------------------------------------------------------------- */
+/* line 171, ../../app/stylesheets/_defaults.sass */
+ol, ul, dl {
+  margin-bottom: 1.5em;
+  margin-left: 1.5em;
+}
+
+/* line 175, ../../app/stylesheets/_defaults.sass */
+ol {
+  list-style: decimal;
+}
+
+/* line 178, ../../app/stylesheets/_defaults.sass */
+ul {
+  list-style: disc;
+}
+/* line 180, ../../app/stylesheets/_defaults.sass */
+li ul {
+  list-style-type: circle;
+}
+
+/* line 183, ../../app/stylesheets/_defaults.sass */
+dt {
+  margin-top: 1.5em;
+  font-style: italic;
+}
+
+/* line 187, ../../app/stylesheets/_defaults.sass */
+dd {
+  padding-left: 1.5em;
+}
+
+/* Tables -------------------------------------------------------------- */
+/* tables still need 'cellspacing="0"' in the markup */
+/* line 193, ../../app/stylesheets/_defaults.sass */
+table {
+  margin-bottom: 1.5em;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/* line 199, ../../app/stylesheets/_defaults.sass */
+table, td, th {
+  vertical-align: top;
+}
+
+/* line 202, ../../app/stylesheets/_defaults.sass */
+th, thead th {
+  font-weight: bold;
+}
+
+/* line 205, ../../app/stylesheets/_defaults.sass */
+th, td, caption {
+  padding: 0.75em;
+  text-align: left;
+  font-weight: normal;
+}
+
+/* line 210, ../../app/stylesheets/_defaults.sass */
+table, th {
+  border-bottom-style: solid;
+  border-bottom-width: 0.063em;
+  padding-bottom: 0.688em;
+}
+
+/* line 213, ../../app/stylesheets/_defaults.sass */
+tfoot {
+  font-size: 0.875em;
+  line-height: 1.714em;
+}
+
+/* Forms -------------------------------------------------------------- */
+/* line 221, ../../app/stylesheets/_defaults.sass */
+fieldset {
+  margin-bottom: 1.5em;
+  border-style: solid;
+  border-width: 0.063em;
+  padding: 1.438em;
+}
+
+/* line 225, ../../app/stylesheets/_defaults.sass */
+legend {
+  font-size: 1.125em;
+  line-height: 1.333em;
+  font-weight: bold;
+}
+
+/* line 229, ../../app/stylesheets/_defaults.sass */
+input[type="radio"], input[type="checkbox"] {
+  vertical-align: baseline;
+}
+
+/* line 232, ../../app/stylesheets/_defaults.sass */
+label, input[type=button], input[type=submit], button {
+  cursor: pointer;
+}
+
+/* line 235, ../../app/stylesheets/_defaults.sass */
+label {
+  font-weight: bold;
+}
+
+/* line 240, ../../app/stylesheets/_defaults.sass */
+.textinput, textarea, input[type=text], input[type=password], input[type=email], input[type=url], input[type=tel], input[type=date], input[type=datetime], input[type=datetime-local], input[type=month], input[type=week], input[type=time], input[type=number], input[type=range], input[type=search], input[type=color] {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.875em;
+  line-height: 1.714em;
+  border-style: solid;
+  border-width: 0.071em;
+  padding: 0.357em;
+  margin-bottom: 0.75em;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: 0;
+  border-color: #4c4c4c;
+  height: 2.571em;
+}
+
+/* line 251, ../../app/stylesheets/_defaults.sass */
+textarea {
+  height: 11.143em;
+  vertical-align: text-bottom;
+}
+
+/* line 262, ../../app/stylesheets/_defaults.sass */
+input[type=search] {
+  -webkit-appearance: none;
+}
+/* line 264, ../../app/stylesheets/_defaults.sass */
+input[type=search]::-webkit-search-decoration {
+  display: none;
+}
+
+/* line 267, ../../app/stylesheets/_defaults.sass */
+button {
+  width: auto;
+  overflow: visible;
+}
+
+/* incase an inverted custom gradient isn't specified */
+/* line 177, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.fancy-button-reset-base-class, .header .right .features ul li a, .header .right .features ul li.youarehere a, .header .right .features ul li.disabled a, .body .item .main_link a, .matching button, .matching input[type="button"], .matching input[type="submit"], .matching input[type="submit"].sad, .matching button.sad, .match_result .rematch a, div.edit_user .right input[type=submit] {
+  font-family: "Lucida Grande", Lucida, Arial, sans-serif;
+  background: url('/images/button_bg.png?1301587728') repeat-x bottom left;
+  margin: 0;
+  width: auto;
+  overflow: visible;
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: none;
+  border-style: solid;
+  font-weight: bold;
+}
+/* line 165, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.fancy-button-reset-base-class::-moz-focus-inner, .header .right .features ul li a::-moz-focus-inner, .header .right .features ul li.youarehere a::-moz-focus-inner, .header .right .features ul li.disabled a::-moz-focus-inner, .body .item .main_link a::-moz-focus-inner, .matching button::-moz-focus-inner, .matching input[type="button"]::-moz-focus-inner, .matching input[type="submit"]::-moz-focus-inner, .matching input[type="submit"].sad::-moz-focus-inner, .matching button.sad::-moz-focus-inner, .match_result .rematch a::-moz-focus-inner, div.edit_user .right input[type=submit]::-moz-focus-inner {
+  border: none;
+  padding: 0;
+}
+/* line 168, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.fancy-button-reset-base-class:focus, .header .right .features ul li a:focus, .header .right .features ul li.youarehere a:focus, .header .right .features ul li.disabled a:focus, .body .item .main_link a:focus, .matching button:focus, .matching input[type="button"]:focus, .matching input[type="submit"]:focus, .matching input[type="submit"].sad:focus, .matching button.sad:focus, .match_result .rematch a:focus, div.edit_user .right input[type=submit]:focus {
+  outline: none;
+}
+
+/* Layout -------------------------------------------------------------- */
+/* line 23, ../../app/stylesheets/screen.sass */
+.container {
+  *zoom: 1;
+  margin: auto;
+  width: 61em;
+  max-width: 100%;
+  background-image: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(1.639%, rgba(0, 0, 0, 0)), color-stop(1.639%, rgba(100, 100, 225, 0.25)), color-stop(8.197%, rgba(100, 100, 225, 0.25)), color-stop(8.197%, rgba(0, 0, 0, 0)), color-stop(9.836%, rgba(0, 0, 0, 0)), color-stop(9.836%, rgba(100, 100, 225, 0.25)), color-stop(16.393%, rgba(100, 100, 225, 0.25)), color-stop(16.393%, rgba(0, 0, 0, 0)), color-stop(18.033%, rgba(0, 0, 0, 0)), color-stop(18.033%, rgba(100, 100, 225, 0.25)), color-stop(24.59%, rgba(100, 100, 225, 0.25)), color-stop(24.59%, rgba(0, 0, 0, 0)), color-stop(26.23%, rgba(0, 0, 0, 0)), color-stop(26.23%, rgba(100, 100, 225, 0.25)), color-stop(32.787%, rgba(100, 100, 225, 0.25)), color-stop(32.787%, rgba(0, 0, 0, 0)), color-stop(34.426%, rgba(0, 0, 0, 0)), color-stop(34.426%, rgba(100, 100, 225, 0.25)), color-stop(40.984%, rgba(100, 100, 225, 0.25)), color-stop(40.984%, rgba(0, 0, 0, 0)), color-stop(42.623%, rgba(0, 0, 0, 0)), color-stop(42.623%, rgba(100, 100, 225, 0.25)), color-stop(49.18%, rgba(100, 100, 225, 0.25)), color-stop(49.18%, rgba(0, 0, 0, 0)), color-stop(50.82%, rgba(0, 0, 0, 0)), color-stop(50.82%, rgba(100, 100, 225, 0.25)), color-stop(57.377%, rgba(100, 100, 225, 0.25)), color-stop(57.377%, rgba(0, 0, 0, 0)), color-stop(59.016%, rgba(0, 0, 0, 0)), color-stop(59.016%, rgba(100, 100, 225, 0.25)), color-stop(65.574%, rgba(100, 100, 225, 0.25)), color-stop(65.574%, rgba(0, 0, 0, 0)), color-stop(67.213%, rgba(0, 0, 0, 0)), color-stop(67.213%, rgba(100, 100, 225, 0.25)), color-stop(73.77%, rgba(100, 100, 225, 0.25)), color-stop(73.77%, rgba(0, 0, 0, 0)), color-stop(75.41%, rgba(0, 0, 0, 0)), color-stop(75.41%, rgba(100, 100, 225, 0.25)), color-stop(81.967%, rgba(100, 100, 225, 0.25)), color-stop(81.967%, rgba(0, 0, 0, 0)), color-stop(83.607%, rgba(0, 0, 0, 0)), color-stop(83.607%, rgba(100, 100, 225, 0.25)), color-stop(90.164%, rgba(100, 100, 225, 0.25)), color-stop(90.164%, rgba(0, 0, 0, 0)), color-stop(91.803%, rgba(0, 0, 0, 0)), color-stop(91.803%, rgba(100, 100, 225, 0.25)), color-stop(98.361%, rgba(100, 100, 225, 0.25)), color-stop(98.361%, rgba(0, 0, 0, 0)), color-stop(100%, rgba(0, 0, 0, 0)));
+  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0) 1.639%, rgba(100, 100, 225, 0.25) 1.639%, rgba(100, 100, 225, 0.25) 8.197%, rgba(0, 0, 0, 0) 8.197%, rgba(0, 0, 0, 0) 9.836%, rgba(100, 100, 225, 0.25) 9.836%, rgba(100, 100, 225, 0.25) 16.393%, rgba(0, 0, 0, 0) 16.393%, rgba(0, 0, 0, 0) 18.033%, rgba(100, 100, 225, 0.25) 18.033%, rgba(100, 100, 225, 0.25) 24.59%, rgba(0, 0, 0, 0) 24.59%, rgba(0, 0, 0, 0) 26.23%, rgba(100, 100, 225, 0.25) 26.23%, rgba(100, 100, 225, 0.25) 32.787%, rgba(0, 0, 0, 0) 32.787%, rgba(0, 0, 0, 0) 34.426%, rgba(100, 100, 225, 0.25) 34.426%, rgba(100, 100, 225, 0.25) 40.984%, rgba(0, 0, 0, 0) 40.984%, rgba(0, 0, 0, 0) 42.623%, rgba(100, 100, 225, 0.25) 42.623%, rgba(100, 100, 225, 0.25) 49.18%, rgba(0, 0, 0, 0) 49.18%, rgba(0, 0, 0, 0) 50.82%, rgba(100, 100, 225, 0.25) 50.82%, rgba(100, 100, 225, 0.25) 57.377%, rgba(0, 0, 0, 0) 57.377%, rgba(0, 0, 0, 0) 59.016%, rgba(100, 100, 225, 0.25) 59.016%, rgba(100, 100, 225, 0.25) 65.574%, rgba(0, 0, 0, 0) 65.574%, rgba(0, 0, 0, 0) 67.213%, rgba(100, 100, 225, 0.25) 67.213%, rgba(100, 100, 225, 0.25) 73.77%, rgba(0, 0, 0, 0) 73.77%, rgba(0, 0, 0, 0) 75.41%, rgba(100, 100, 225, 0.25) 75.41%, rgba(100, 100, 225, 0.25) 81.967%, rgba(0, 0, 0, 0) 81.967%, rgba(0, 0, 0, 0) 83.607%, rgba(100, 100, 225, 0.25) 83.607%, rgba(100, 100, 225, 0.25) 90.164%, rgba(0, 0, 0, 0) 90.164%, rgba(0, 0, 0, 0) 91.803%, rgba(100, 100, 225, 0.25) 91.803%, rgba(100, 100, 225, 0.25) 98.361%, rgba(0, 0, 0, 0) 98.361%, rgba(0, 0, 0, 0) 100%);
+  background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0) 1.639%, rgba(100, 100, 225, 0.25) 1.639%, rgba(100, 100, 225, 0.25) 8.197%, rgba(0, 0, 0, 0) 8.197%, rgba(0, 0, 0, 0) 9.836%, rgba(100, 100, 225, 0.25) 9.836%, rgba(100, 100, 225, 0.25) 16.393%, rgba(0, 0, 0, 0) 16.393%, rgba(0, 0, 0, 0) 18.033%, rgba(100, 100, 225, 0.25) 18.033%, rgba(100, 100, 225, 0.25) 24.59%, rgba(0, 0, 0, 0) 24.59%, rgba(0, 0, 0, 0) 26.23%, rgba(100, 100, 225, 0.25) 26.23%, rgba(100, 100, 225, 0.25) 32.787%, rgba(0, 0, 0, 0) 32.787%, rgba(0, 0, 0, 0) 34.426%, rgba(100, 100, 225, 0.25) 34.426%, rgba(100, 100, 225, 0.25) 40.984%, rgba(0, 0, 0, 0) 40.984%, rgba(0, 0, 0, 0) 42.623%, rgba(100, 100, 225, 0.25) 42.623%, rgba(100, 100, 225, 0.25) 49.18%, rgba(0, 0, 0, 0) 49.18%, rgba(0, 0, 0, 0) 50.82%, rgba(100, 100, 225, 0.25) 50.82%, rgba(100, 100, 225, 0.25) 57.377%, rgba(0, 0, 0, 0) 57.377%, rgba(0, 0, 0, 0) 59.016%, rgba(100, 100, 225, 0.25) 59.016%, rgba(100, 100, 225, 0.25) 65.574%, rgba(0, 0, 0, 0) 65.574%, rgba(0, 0, 0, 0) 67.213%, rgba(100, 100, 225, 0.25) 67.213%, rgba(100, 100, 225, 0.25) 73.77%, rgba(0, 0, 0, 0) 73.77%, rgba(0, 0, 0, 0) 75.41%, rgba(100, 100, 225, 0.25) 75.41%, rgba(100, 100, 225, 0.25) 81.967%, rgba(0, 0, 0, 0) 81.967%, rgba(0, 0, 0, 0) 83.607%, rgba(100, 100, 225, 0.25) 83.607%, rgba(100, 100, 225, 0.25) 90.164%, rgba(0, 0, 0, 0) 90.164%, rgba(0, 0, 0, 0) 91.803%, rgba(100, 100, 225, 0.25) 91.803%, rgba(100, 100, 225, 0.25) 98.361%, rgba(0, 0, 0, 0) 98.361%, rgba(0, 0, 0, 0) 100%);
+  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0) 1.639%, rgba(100, 100, 225, 0.25) 1.639%, rgba(100, 100, 225, 0.25) 8.197%, rgba(0, 0, 0, 0) 8.197%, rgba(0, 0, 0, 0) 9.836%, rgba(100, 100, 225, 0.25) 9.836%, rgba(100, 100, 225, 0.25) 16.393%, rgba(0, 0, 0, 0) 16.393%, rgba(0, 0, 0, 0) 18.033%, rgba(100, 100, 225, 0.25) 18.033%, rgba(100, 100, 225, 0.25) 24.59%, rgba(0, 0, 0, 0) 24.59%, rgba(0, 0, 0, 0) 26.23%, rgba(100, 100, 225, 0.25) 26.23%, rgba(100, 100, 225, 0.25) 32.787%, rgba(0, 0, 0, 0) 32.787%, rgba(0, 0, 0, 0) 34.426%, rgba(100, 100, 225, 0.25) 34.426%, rgba(100, 100, 225, 0.25) 40.984%, rgba(0, 0, 0, 0) 40.984%, rgba(0, 0, 0, 0) 42.623%, rgba(100, 100, 225, 0.25) 42.623%, rgba(100, 100, 225, 0.25) 49.18%, rgba(0, 0, 0, 0) 49.18%, rgba(0, 0, 0, 0) 50.82%, rgba(100, 100, 225, 0.25) 50.82%, rgba(100, 100, 225, 0.25) 57.377%, rgba(0, 0, 0, 0) 57.377%, rgba(0, 0, 0, 0) 59.016%, rgba(100, 100, 225, 0.25) 59.016%, rgba(100, 100, 225, 0.25) 65.574%, rgba(0, 0, 0, 0) 65.574%, rgba(0, 0, 0, 0) 67.213%, rgba(100, 100, 225, 0.25) 67.213%, rgba(100, 100, 225, 0.25) 73.77%, rgba(0, 0, 0, 0) 73.77%, rgba(0, 0, 0, 0) 75.41%, rgba(100, 100, 225, 0.25) 75.41%, rgba(100, 100, 225, 0.25) 81.967%, rgba(0, 0, 0, 0) 81.967%, rgba(0, 0, 0, 0) 83.607%, rgba(100, 100, 225, 0.25) 83.607%, rgba(100, 100, 225, 0.25) 90.164%, rgba(0, 0, 0, 0) 90.164%, rgba(0, 0, 0, 0) 91.803%, rgba(100, 100, 225, 0.25) 91.803%, rgba(100, 100, 225, 0.25) 98.361%, rgba(0, 0, 0, 0) 98.361%, rgba(0, 0, 0, 0) 100%);
+  background-image: linear-gradient(left, rgba(0, 0, 0, 0) 1.639%, rgba(100, 100, 225, 0.25) 1.639%, rgba(100, 100, 225, 0.25) 8.197%, rgba(0, 0, 0, 0) 8.197%, rgba(0, 0, 0, 0) 9.836%, rgba(100, 100, 225, 0.25) 9.836%, rgba(100, 100, 225, 0.25) 16.393%, rgba(0, 0, 0, 0) 16.393%, rgba(0, 0, 0, 0) 18.033%, rgba(100, 100, 225, 0.25) 18.033%, rgba(100, 100, 225, 0.25) 24.59%, rgba(0, 0, 0, 0) 24.59%, rgba(0, 0, 0, 0) 26.23%, rgba(100, 100, 225, 0.25) 26.23%, rgba(100, 100, 225, 0.25) 32.787%, rgba(0, 0, 0, 0) 32.787%, rgba(0, 0, 0, 0) 34.426%, rgba(100, 100, 225, 0.25) 34.426%, rgba(100, 100, 225, 0.25) 40.984%, rgba(0, 0, 0, 0) 40.984%, rgba(0, 0, 0, 0) 42.623%, rgba(100, 100, 225, 0.25) 42.623%, rgba(100, 100, 225, 0.25) 49.18%, rgba(0, 0, 0, 0) 49.18%, rgba(0, 0, 0, 0) 50.82%, rgba(100, 100, 225, 0.25) 50.82%, rgba(100, 100, 225, 0.25) 57.377%, rgba(0, 0, 0, 0) 57.377%, rgba(0, 0, 0, 0) 59.016%, rgba(100, 100, 225, 0.25) 59.016%, rgba(100, 100, 225, 0.25) 65.574%, rgba(0, 0, 0, 0) 65.574%, rgba(0, 0, 0, 0) 67.213%, rgba(100, 100, 225, 0.25) 67.213%, rgba(100, 100, 225, 0.25) 73.77%, rgba(0, 0, 0, 0) 73.77%, rgba(0, 0, 0, 0) 75.41%, rgba(100, 100, 225, 0.25) 75.41%, rgba(100, 100, 225, 0.25) 81.967%, rgba(0, 0, 0, 0) 81.967%, rgba(0, 0, 0, 0) 83.607%, rgba(100, 100, 225, 0.25) 83.607%, rgba(100, 100, 225, 0.25) 90.164%, rgba(0, 0, 0, 0) 90.164%, rgba(0, 0, 0, 0) 91.803%, rgba(100, 100, 225, 0.25) 91.803%, rgba(100, 100, 225, 0.25) 98.361%, rgba(0, 0, 0, 0) 98.361%, rgba(0, 0, 0, 0) 100%);
+  background-position: left top;
+}
+/* line 22, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
+.container:after {
+  content: "\0020";
+  display: block;
+  height: 0;
+  clear: both;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+/* line 32, ../../app/stylesheets/screen.sass */
+.notice {
+  clear: both;
+  margin-left: 1.639%;
+  margin-right: 1.639%;
+  background-color: #003e61;
+  text-align: center;
+  color: white;
+}
+
+/* line 35, ../../app/stylesheets/screen.sass */
+.error {
+  clear: both;
+  margin-left: 1.639%;
+  margin-right: 1.639%;
+  background-color: #003e61;
+  text-align: center;
+  color: red;
+}
+
+/* line 56, ../../app/stylesheets/screen.sass */
+.header {
+  clear: both;
+  margin-left: 1.639%;
+  margin-right: 1.639%;
+}
+/* line 58, ../../app/stylesheets/screen.sass */
+.header .left {
+  display: inline;
+  float: left;
+  width: 32.203%;
+  margin-right: 1.695%;
+}
+/* line 60, ../../app/stylesheets/screen.sass */
+.header .left .logo {
+  display: inline;
+  float: left;
+  width: 21.053%;
+  margin-right: 5.263%;
+}
+/* line 62, ../../app/stylesheets/screen.sass */
+.header .left .extra {
+  display: inline;
+  float: left;
+  width: 73.684%;
+  margin-right: 5.263%;
+  display: inline;
+  float: right;
+  margin-right: 0;
+  #margin-left: -1em;
+}
+/* line 65, ../../app/stylesheets/screen.sass */
+.header .left .extra .site_name {
+  text-decoration: none;
+  color: #4c4c4c;
+  clear: both;
+  font-size: 2em;
+  line-height: 1.5em;
+}
+/* line 70, ../../app/stylesheets/screen.sass */
+.header .left .extra .site_name .first {
+  color: #008fe0;
+}
+/* line 72, ../../app/stylesheets/screen.sass */
+.header .left .extra .site_name .last {
+  color: #ff9600;
+}
+/* line 74, ../../app/stylesheets/screen.sass */
+.header .left .extra .slogan {
+  clear: both;
+  margin-top: -0.75em;
+}
+/* line 77, ../../app/stylesheets/screen.sass */
+.header .left .extra .langbar {
+  clear: both;
+}
+/* line 79, ../../app/stylesheets/screen.sass */
+.header .left .extra .langbar a {
+  width: 16px;
+  height: 11px;
+  line-height: 11px;
+  float: left;
+  margin-right: 5px;
+}
+/* line 53, ../../app/stylesheets/screen.sass */
+.header .left .extra .langbar a img {
+  border: none;
+  vertical-align: text-top;
+}
+/* line 81, ../../app/stylesheets/screen.sass */
+.header .right {
+  display: inline;
+  float: left;
+  width: 66.102%;
+  margin-right: 1.695%;
+  display: inline;
+  float: right;
+  margin-right: 0;
+  #margin-left: -1em;
+}
+/* line 84, ../../app/stylesheets/screen.sass */
+.header .right .user_info {
+  clear: both;
+  text-align: right;
+}
+/* line 87, ../../app/stylesheets/screen.sass */
+.header .right .features {
+  clear: both;
+  margin-top: 1.5em;
+}
+/* line 90, ../../app/stylesheets/screen.sass */
+.header .right .features ul {
+  margin: 0;
+}
+/* line 92, ../../app/stylesheets/screen.sass */
+.header .right .features ul li {
+  display: block;
+  float: right;
+  margin-left: 7px;
+}
+/* line 96, ../../app/stylesheets/screen.sass */
+.header .right .features ul li a {
+  -moz-border-radius: 1em;
+  -webkit-border-radius: 1em;
+  -o-border-radius: 1em;
+  -ms-border-radius: 1em;
+  -khtml-border-radius: 1em;
+  border-radius: 1em;
+  font-size: 16px;
+  line-height: 1.2em;
+  padding: 0.3em 1em;
+  border-width: 1px;
+  background-color: #008fe0;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #89d4ff), color-stop(10%, #2eb3ff), color-stop(50%, #0085d1), color-stop(50%, #007bc1), color-stop(100%, #009cf4));
+  background-image: -webkit-linear-gradient(#89d4ff, #2eb3ff 10%, #0085d1 50%, #007bc1 50%, #009cf4);
+  background-image: -moz-linear-gradient(#89d4ff, #2eb3ff 10%, #0085d1 50%, #007bc1 50%, #009cf4);
+  background-image: -o-linear-gradient(#89d4ff, #2eb3ff 10%, #0085d1 50%, #007bc1 50%, #009cf4);
+  background-image: linear-gradient(#89d4ff, #2eb3ff 10%, #0085d1 50%, #007bc1 50%, #009cf4);
+  border-color: #005e94;
+  text-shadow: #003e61 0px 1px 1px;
+  -moz-box-shadow: rgba(255, 255, 255, 0.439) 0 0 0.1em 1px inset;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.439) 0 0 0.1em 1px inset;
+  -o-box-shadow: rgba(255, 255, 255, 0.439) 0 0 0.1em 1px inset;
+  box-shadow: rgba(255, 255, 255, 0.439) 0 0 0.1em 1px inset;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding;
+  -o-background-clip: padding-box;
+  -ms-background-clip: padding-box;
+  -khtml-background-clip: padding-box;
+  background-clip: padding-box;
+  display: block;
+}
+/* line 116, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.header .right .features ul li a, .header .right .features ul li a:visited {
+  color: white;
+}
+/* line 31, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.header .right .features ul li a:hover, .header .right .features ul li a:focus {
+  background-color: #8fe000;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #d4ff89), color-stop(10%, #b3ff2e), color-stop(50%, #85d100), color-stop(50%, #7bc100), color-stop(100%, #9cf400));
+  background-image: -webkit-linear-gradient(#d4ff89, #b3ff2e 10%, #85d100 50%, #7bc100 50%, #9cf400);
+  background-image: -moz-linear-gradient(#d4ff89, #b3ff2e 10%, #85d100 50%, #7bc100 50%, #9cf400);
+  background-image: -o-linear-gradient(#d4ff89, #b3ff2e 10%, #85d100 50%, #7bc100 50%, #9cf400);
+  background-image: linear-gradient(#d4ff89, #b3ff2e 10%, #85d100 50%, #7bc100 50%, #9cf400);
+  border-color: #5e9400;
+  text-shadow: #3e6100 0px 1px 1px;
+}
+/* line 116, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.header .right .features ul li a:hover, .header .right .features ul li a:hover:visited, .header .right .features ul li a:focus, .header .right .features ul li a:focus:visited {
+  color: white;
+}
+/* line 36, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.header .right .features ul li a:active {
+  background-color: #7bc100;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #7bc100), color-stop(30%, #82cc00), color-stop(50%, #75b700), color-stop(50%, #6ba800), color-stop(100%, #96ea00));
+  background-image: -webkit-linear-gradient(#7bc100, #82cc00 30%, #75b700 50%, #6ba800 50%, #96ea00);
+  background-image: -moz-linear-gradient(#7bc100, #82cc00 30%, #75b700 50%, #6ba800 50%, #96ea00);
+  background-image: -o-linear-gradient(#7bc100, #82cc00 30%, #75b700 50%, #6ba800 50%, #96ea00);
+  background-image: linear-gradient(#7bc100, #82cc00 30%, #75b700 50%, #6ba800 50%, #96ea00);
+  border-color: #4b7500;
+  text-shadow: #2a4200 0px -1px -1px;
+  -moz-box-shadow: #5e9400 0 0.08em 0.1em 1px inset;
+  -webkit-box-shadow: #5e9400 0 0.08em 0.1em 1px inset;
+  -o-box-shadow: #5e9400 0 0.08em 0.1em 1px inset;
+  box-shadow: #5e9400 0 0.08em 0.1em 1px inset;
+}
+/* line 116, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.header .right .features ul li a:active, .header .right .features ul li a:active:visited {
+  color: white;
+}
+/* line 20, ../../app/stylesheets/screen.sass */
+.header .right .features ul li a[disabled] {
+  background-color: white;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(10%, #f2f2f2), color-stop(50%, #c4c4c4), color-stop(50%, #bcbcbc), color-stop(100%, #d6d6d6));
+  background-image: -webkit-linear-gradient(#ffffff, #f2f2f2 10%, #c4c4c4 50%, #bcbcbc 50%, #d6d6d6);
+  background-image: -moz-linear-gradient(#ffffff, #f2f2f2 10%, #c4c4c4 50%, #bcbcbc 50%, #d6d6d6);
+  background-image: -o-linear-gradient(#ffffff, #f2f2f2 10%, #c4c4c4 50%, #bcbcbc 50%, #d6d6d6);
+  background-image: linear-gradient(#ffffff, #f2f2f2 10%, #c4c4c4 50%, #bcbcbc 50%, #d6d6d6);
+  border-color: #a5a5a5;
+  text-shadow: white 0px 1px 1px;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+  opacity: 0.7;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  -o-box-shadow: none;
+  box-shadow: none;
+  cursor: default !important;
+}
+/* line 120, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.header .right .features ul li a[disabled], .header .right .features ul li a[disabled]:visited {
+  color: #222222;
+}
+/* line 100, ../../app/stylesheets/screen.sass */
+.header .right .features ul li.youarehere a {
+  -moz-border-radius: 1em;
+  -webkit-border-radius: 1em;
+  -o-border-radius: 1em;
+  -ms-border-radius: 1em;
+  -khtml-border-radius: 1em;
+  border-radius: 1em;
+  font-size: 16px;
+  line-height: 1.2em;
+  padding: 0.3em 1em;
+  border-width: 1px;
+  background-color: #8fe000;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #d4ff89), color-stop(10%, #b3ff2e), color-stop(50%, #85d100), color-stop(50%, #7bc100), color-stop(100%, #9cf400));
+  background-image: -webkit-linear-gradient(#d4ff89, #b3ff2e 10%, #85d100 50%, #7bc100 50%, #9cf400);
+  background-image: -moz-linear-gradient(#d4ff89, #b3ff2e 10%, #85d100 50%, #7bc100 50%, #9cf400);
+  background-image: -o-linear-gradient(#d4ff89, #b3ff2e 10%, #85d100 50%, #7bc100 50%, #9cf400);
+  background-image: linear-gradient(#d4ff89, #b3ff2e 10%, #85d100 50%, #7bc100 50%, #9cf400);
+  border-color: #5e9400;
+  text-shadow: #3e6100 0px 1px 1px;
+  -moz-box-shadow: rgba(255, 255, 255, 0.439) 0 0 0.1em 1px inset;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.439) 0 0 0.1em 1px inset;
+  -o-box-shadow: rgba(255, 255, 255, 0.439) 0 0 0.1em 1px inset;
+  box-shadow: rgba(255, 255, 255, 0.439) 0 0 0.1em 1px inset;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding;
+  -o-background-clip: padding-box;
+  -ms-background-clip: padding-box;
+  -khtml-background-clip: padding-box;
+  background-clip: padding-box;
+}
+/* line 116, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.header .right .features ul li.youarehere a, .header .right .features ul li.youarehere a:visited {
+  color: white;
+}
+/* line 31, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.header .right .features ul li.youarehere a:hover, .header .right .features ul li.youarehere a:focus {
+  background-color: #8fe000;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #d4ff89), color-stop(10%, #b3ff2e), color-stop(50%, #85d100), color-stop(50%, #7bc100), color-stop(100%, #9cf400));
+  background-image: -webkit-linear-gradient(#d4ff89, #b3ff2e 10%, #85d100 50%, #7bc100 50%, #9cf400);
+  background-image: -moz-linear-gradient(#d4ff89, #b3ff2e 10%, #85d100 50%, #7bc100 50%, #9cf400);
+  background-image: -o-linear-gradient(#d4ff89, #b3ff2e 10%, #85d100 50%, #7bc100 50%, #9cf400);
+  background-image: linear-gradient(#d4ff89, #b3ff2e 10%, #85d100 50%, #7bc100 50%, #9cf400);
+  border-color: #5e9400;
+  text-shadow: #3e6100 0px 1px 1px;
+}
+/* line 116, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.header .right .features ul li.youarehere a:hover, .header .right .features ul li.youarehere a:hover:visited, .header .right .features ul li.youarehere a:focus, .header .right .features ul li.youarehere a:focus:visited {
+  color: white;
+}
+/* line 36, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.header .right .features ul li.youarehere a:active {
+  background-color: #7bc100;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #7bc100), color-stop(30%, #82cc00), color-stop(50%, #75b700), color-stop(50%, #6ba800), color-stop(100%, #96ea00));
+  background-image: -webkit-linear-gradient(#7bc100, #82cc00 30%, #75b700 50%, #6ba800 50%, #96ea00);
+  background-image: -moz-linear-gradient(#7bc100, #82cc00 30%, #75b700 50%, #6ba800 50%, #96ea00);
+  background-image: -o-linear-gradient(#7bc100, #82cc00 30%, #75b700 50%, #6ba800 50%, #96ea00);
+  background-image: linear-gradient(#7bc100, #82cc00 30%, #75b700 50%, #6ba800 50%, #96ea00);
+  border-color: #4b7500;
+  text-shadow: #2a4200 0px -1px -1px;
+  -moz-box-shadow: #5e9400 0 0.08em 0.1em 1px inset;
+  -webkit-box-shadow: #5e9400 0 0.08em 0.1em 1px inset;
+  -o-box-shadow: #5e9400 0 0.08em 0.1em 1px inset;
+  box-shadow: #5e9400 0 0.08em 0.1em 1px inset;
+}
+/* line 116, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.header .right .features ul li.youarehere a:active, .header .right .features ul li.youarehere a:active:visited {
+  color: white;
+}
+/* line 104, ../../app/stylesheets/screen.sass */
+.header .right .features ul li.disabled a {
+  cursor: default;
+  -moz-border-radius: 1em;
+  -webkit-border-radius: 1em;
+  -o-border-radius: 1em;
+  -ms-border-radius: 1em;
+  -khtml-border-radius: 1em;
+  border-radius: 1em;
+  font-size: 16px;
+  line-height: 1.2em;
+  padding: 0.3em 1em;
+  border-width: 1px;
+  background-color: #8c8c8c;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e0e0e0), color-stop(10%, #b2b2b2), color-stop(50%, #848484), color-stop(50%, #7c7c7c), color-stop(100%, #969696));
+  background-image: -webkit-linear-gradient(#e0e0e0, #b2b2b2 10%, #848484 50%, #7c7c7c 50%, #969696);
+  background-image: -moz-linear-gradient(#e0e0e0, #b2b2b2 10%, #848484 50%, #7c7c7c 50%, #969696);
+  background-image: -o-linear-gradient(#e0e0e0, #b2b2b2 10%, #848484 50%, #7c7c7c 50%, #969696);
+  background-image: linear-gradient(#e0e0e0, #b2b2b2 10%, #848484 50%, #7c7c7c 50%, #969696);
+  border-color: #666666;
+  text-shadow: #4c4c4c 0px 1px 1px;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+  opacity: 0.7;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  -o-box-shadow: none;
+  box-shadow: none;
+  cursor: default !important;
+}
+/* line 116, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.header .right .features ul li.disabled a, .header .right .features ul li.disabled a:visited {
+  color: white;
+}
+/* line 108, ../../app/stylesheets/screen.sass */
+.header .topbar {
+  display: inline;
+  float: left;
+  width: 66.102%;
+  margin-right: 1.695%;
+  display: inline;
+  float: right;
+  margin-right: 0;
+  #margin-left: -1em;
+}
+/* line 111, ../../app/stylesheets/screen.sass */
+.header .hmenus {
+  display: inline;
+  float: left;
+  width: 66.102%;
+  margin-right: 1.695%;
+  display: inline;
+  float: right;
+  margin-right: 0;
+  #margin-left: -1em;
+}
+
+/* line 126, ../../app/stylesheets/screen.sass */
+.body {
+  clear: both;
+  margin-left: 1.639%;
+  margin-right: 1.639%;
+  padding-top: 16px;
+}
+/* line 129, ../../app/stylesheets/screen.sass */
+.body .subheader {
+  border-bottom: 1px solid #4c4c4c;
+  margin-bottom: 1em;
+}
+/* line 131, ../../app/stylesheets/screen.sass */
+.body .subheader h2 {
+  margin-bottom: 0px;
+}
+/* line 133, ../../app/stylesheets/screen.sass */
+.body .subheader h2 a:link, .body .subheader h2 a:hover {
+  text-decoration: none;
+}
+/* line 136, ../../app/stylesheets/screen.sass */
+.body .item {
+  clear: both;
+  position: relative;
+  border: solid 2px #8c8c8c;
+  margin-bottom: 1.5em;
+}
+/* line 141, ../../app/stylesheets/screen.sass */
+.body .item table {
+  width: 100%;
+  border-bottom-style: solid;
+  border-bottom-width: 0em;
+  padding-bottom: 1.5em;
+  padding-bottom: 0em;
+  margin-bottom: 0em;
+}
+/* line 146, ../../app/stylesheets/screen.sass */
+.body .item table .logo_cell {
+  width: 96px;
+}
+/* line 148, ../../app/stylesheets/screen.sass */
+.body .item .coming_soon {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: black;
+  background-position: top right;
+  background-repeat: no-repeat;
+  opacity: 0.7;
+  left: 0px;
+  top: 0px;
+}
+/* line 150, ../../app/stylesheets/screen.sass */
+.body .item .sub_link {
+  font-size: 80%;
+}
+/* line 152, ../../app/stylesheets/screen.sass */
+.body .item .main_link {
+  font-size: 120%;
+}
+/* line 41, ../../app/stylesheets/screen.sass */
+.body .item .main_link a {
+  -moz-border-radius: 1em;
+  -webkit-border-radius: 1em;
+  -o-border-radius: 1em;
+  -ms-border-radius: 1em;
+  -khtml-border-radius: 1em;
+  border-radius: 1em;
+  font-size: 16px;
+  line-height: 1.2em;
+  padding: 0.3em 1em;
+  border-width: 1px;
+  background-color: #ff9600;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffdba8), color-stop(10%, #ffb64d), color-stop(50%, #f08d00), color-stop(50%, #e08400), color-stop(100%, #ff9e14));
+  background-image: -webkit-linear-gradient(#ffdba8, #ffb64d 10%, #f08d00 50%, #e08400 50%, #ff9e14);
+  background-image: -moz-linear-gradient(#ffdba8, #ffb64d 10%, #f08d00 50%, #e08400 50%, #ff9e14);
+  background-image: -o-linear-gradient(#ffdba8, #ffb64d 10%, #f08d00 50%, #e08400 50%, #ff9e14);
+  background-image: linear-gradient(#ffdba8, #ffb64d 10%, #f08d00 50%, #e08400 50%, #ff9e14);
+  border-color: #b36900;
+  text-shadow: #804b00 0px 1px 1px;
+  -moz-box-shadow: rgba(255, 255, 255, 0.5) 0 0 0.1em 1px inset;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.5) 0 0 0.1em 1px inset;
+  -o-box-shadow: rgba(255, 255, 255, 0.5) 0 0 0.1em 1px inset;
+  box-shadow: rgba(255, 255, 255, 0.5) 0 0 0.1em 1px inset;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding;
+  -o-background-clip: padding-box;
+  -ms-background-clip: padding-box;
+  -khtml-background-clip: padding-box;
+  background-clip: padding-box;
+  display: block;
+  float: left;
+  text-decoration: none;
+}
+/* line 116, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.body .item .main_link a, .body .item .main_link a:visited {
+  color: white;
+}
+/* line 31, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.body .item .main_link a:hover, .body .item .main_link a:focus {
+  background-color: #9600ff;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #dba8ff), color-stop(10%, #b64dff), color-stop(50%, #8d00f0), color-stop(50%, #8400e0), color-stop(100%, #9e14ff));
+  background-image: -webkit-linear-gradient(#dba8ff, #b64dff 10%, #8d00f0 50%, #8400e0 50%, #9e14ff);
+  background-image: -moz-linear-gradient(#dba8ff, #b64dff 10%, #8d00f0 50%, #8400e0 50%, #9e14ff);
+  background-image: -o-linear-gradient(#dba8ff, #b64dff 10%, #8d00f0 50%, #8400e0 50%, #9e14ff);
+  background-image: linear-gradient(#dba8ff, #b64dff 10%, #8d00f0 50%, #8400e0 50%, #9e14ff);
+  border-color: #6900b3;
+  text-shadow: #4b0080 0px 1px 1px;
+}
+/* line 116, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.body .item .main_link a:hover, .body .item .main_link a:hover:visited, .body .item .main_link a:focus, .body .item .main_link a:focus:visited {
+  color: white;
+}
+/* line 36, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.body .item .main_link a:active {
+  background-color: #8400e0;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8400e0), color-stop(30%, #8a00eb), color-stop(50%, #7e00d6), color-stop(50%, #7500c7), color-stop(100%, #9a0aff));
+  background-image: -webkit-linear-gradient(#8400e0, #8a00eb 30%, #7e00d6 50%, #7500c7 50%, #9a0aff);
+  background-image: -moz-linear-gradient(#8400e0, #8a00eb 30%, #7e00d6 50%, #7500c7 50%, #9a0aff);
+  background-image: -o-linear-gradient(#8400e0, #8a00eb 30%, #7e00d6 50%, #7500c7 50%, #9a0aff);
+  background-image: linear-gradient(#8400e0, #8a00eb 30%, #7e00d6 50%, #7500c7 50%, #9a0aff);
+  border-color: #570094;
+  text-shadow: #390061 0px -1px -1px;
+  -moz-box-shadow: #6900b3 0 0.08em 0.1em 1px inset;
+  -webkit-box-shadow: #6900b3 0 0.08em 0.1em 1px inset;
+  -o-box-shadow: #6900b3 0 0.08em 0.1em 1px inset;
+  box-shadow: #6900b3 0 0.08em 0.1em 1px inset;
+}
+/* line 116, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.body .item .main_link a:active, .body .item .main_link a:active:visited {
+  color: white;
+}
+/* line 20, ../../app/stylesheets/screen.sass */
+.body .item .main_link a[disabled] {
+  background-color: white;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(10%, #f2f2f2), color-stop(50%, #c4c4c4), color-stop(50%, #bcbcbc), color-stop(100%, #d6d6d6));
+  background-image: -webkit-linear-gradient(#ffffff, #f2f2f2 10%, #c4c4c4 50%, #bcbcbc 50%, #d6d6d6);
+  background-image: -moz-linear-gradient(#ffffff, #f2f2f2 10%, #c4c4c4 50%, #bcbcbc 50%, #d6d6d6);
+  background-image: -o-linear-gradient(#ffffff, #f2f2f2 10%, #c4c4c4 50%, #bcbcbc 50%, #d6d6d6);
+  background-image: linear-gradient(#ffffff, #f2f2f2 10%, #c4c4c4 50%, #bcbcbc 50%, #d6d6d6);
+  border-color: #a5a5a5;
+  text-shadow: white 0px 1px 1px;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+  opacity: 0.7;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  -o-box-shadow: none;
+  box-shadow: none;
+  cursor: default !important;
+}
+/* line 120, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.body .item .main_link a[disabled], .body .item .main_link a[disabled]:visited {
+  color: #222222;
+}
+/* line 41, ../../app/stylesheets/_base.sass */
+.body .item .main_link a:after {
+  content: " ";
+  display: block;
+  clear: both;
+  height: 0;
+}
+/* line 154, ../../app/stylesheets/screen.sass */
+.body .item .qualified {
+  font-weight: bold;
+  color: #008fe0;
+}
+/* line 157, ../../app/stylesheets/screen.sass */
+.body .subcontent {
+  clear: both;
+  padding-left: 8.475%;
+}
+
+/* line 161, ../../app/stylesheets/screen.sass */
+.footer {
+  margin-top: 1.5em;
+  border-top: solid 1px #4c4c4c;
+  font-size: 80%;
+  clear: both;
+  margin-left: 1.639%;
+  margin-right: 1.639%;
+}
+/* line 166, ../../app/stylesheets/screen.sass */
+.footer .links {
+  display: inline;
+  float: left;
+  width: 32.203%;
+  margin-right: 1.695%;
+}
+/* line 168, ../../app/stylesheets/screen.sass */
+.footer .copyright {
+  display: inline;
+  float: left;
+  width: 66.102%;
+  margin-right: 1.695%;
+  display: inline;
+  float: right;
+  margin-right: 0;
+  #margin-left: -1em;
+  text-align: right;
+}
+
+/* Styles -------------------------------------------------------------- */
+/* line 14, ../../app/stylesheets/_matching.sass */
+.matching {
+  clear: both;
+}
+/* line 3, ../../app/stylesheets/_matching.sass */
+.matching .left {
+  display: inline;
+  float: left;
+  width: 32.203%;
+  margin-right: 1.695%;
+}
+/* line 5, ../../app/stylesheets/_matching.sass */
+.matching .left .internal {
+  border: 2px solid;
+  padding: 5.263%;
+  margin-bottom: 1.5em;
+}
+/* line 9, ../../app/stylesheets/_matching.sass */
+.matching .right {
+  display: inline;
+  float: left;
+  width: 66.102%;
+  margin-right: 1.695%;
+  display: inline;
+  float: right;
+  margin-right: 0;
+  #margin-left: -1em;
+  margin-bottom: 1.5em;
+}
+/* line 16, ../../app/stylesheets/_matching.sass */
+.matching .counter {
+  font-size: 2em;
+  line-height: 1.5em;
+  color: #008fe0;
+}
+/* line 20, ../../app/stylesheets/_matching.sass */
+.matching button, .matching input[type="button"], .matching input[type="submit"] {
+  -moz-border-radius: 1em;
+  -webkit-border-radius: 1em;
+  -o-border-radius: 1em;
+  -ms-border-radius: 1em;
+  -khtml-border-radius: 1em;
+  border-radius: 1em;
+  font-size: 16px;
+  line-height: 1.2em;
+  padding: 0.3em 1em;
+  border-width: 1px;
+  background-color: #ff9600;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffdba8), color-stop(10%, #ffb64d), color-stop(50%, #f08d00), color-stop(50%, #e08400), color-stop(100%, #ff9e14));
+  background-image: -webkit-linear-gradient(#ffdba8, #ffb64d 10%, #f08d00 50%, #e08400 50%, #ff9e14);
+  background-image: -moz-linear-gradient(#ffdba8, #ffb64d 10%, #f08d00 50%, #e08400 50%, #ff9e14);
+  background-image: -o-linear-gradient(#ffdba8, #ffb64d 10%, #f08d00 50%, #e08400 50%, #ff9e14);
+  background-image: linear-gradient(#ffdba8, #ffb64d 10%, #f08d00 50%, #e08400 50%, #ff9e14);
+  border-color: #b36900;
+  text-shadow: #804b00 0px 1px 1px;
+  -moz-box-shadow: rgba(255, 255, 255, 0.5) 0 0 0.1em 1px inset;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.5) 0 0 0.1em 1px inset;
+  -o-box-shadow: rgba(255, 255, 255, 0.5) 0 0 0.1em 1px inset;
+  box-shadow: rgba(255, 255, 255, 0.5) 0 0 0.1em 1px inset;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding;
+  -o-background-clip: padding-box;
+  -ms-background-clip: padding-box;
+  -khtml-background-clip: padding-box;
+  background-clip: padding-box;
+}
+/* line 116, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.matching button, .matching button:visited, .matching input[type="button"], .matching input[type="button"]:visited, .matching input[type="submit"], .matching input[type="submit"]:visited {
+  color: white;
+}
+/* line 31, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.matching button:hover, .matching button:focus, .matching input[type="button"]:hover, .matching input[type="button"]:focus, .matching input[type="submit"]:hover, .matching input[type="submit"]:focus {
+  background-color: #9600ff;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #dba8ff), color-stop(10%, #b64dff), color-stop(50%, #8d00f0), color-stop(50%, #8400e0), color-stop(100%, #9e14ff));
+  background-image: -webkit-linear-gradient(#dba8ff, #b64dff 10%, #8d00f0 50%, #8400e0 50%, #9e14ff);
+  background-image: -moz-linear-gradient(#dba8ff, #b64dff 10%, #8d00f0 50%, #8400e0 50%, #9e14ff);
+  background-image: -o-linear-gradient(#dba8ff, #b64dff 10%, #8d00f0 50%, #8400e0 50%, #9e14ff);
+  background-image: linear-gradient(#dba8ff, #b64dff 10%, #8d00f0 50%, #8400e0 50%, #9e14ff);
+  border-color: #6900b3;
+  text-shadow: #4b0080 0px 1px 1px;
+}
+/* line 116, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.matching button:hover, .matching button:hover:visited, .matching button:focus, .matching button:focus:visited, .matching input[type="button"]:hover, .matching input[type="button"]:hover:visited, .matching input[type="button"]:focus, .matching input[type="button"]:focus:visited, .matching input[type="submit"]:hover, .matching input[type="submit"]:hover:visited, .matching input[type="submit"]:focus, .matching input[type="submit"]:focus:visited {
+  color: white;
+}
+/* line 36, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.matching button:active, .matching input[type="button"]:active, .matching input[type="submit"]:active {
+  background-color: #8400e0;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8400e0), color-stop(30%, #8a00eb), color-stop(50%, #7e00d6), color-stop(50%, #7500c7), color-stop(100%, #9a0aff));
+  background-image: -webkit-linear-gradient(#8400e0, #8a00eb 30%, #7e00d6 50%, #7500c7 50%, #9a0aff);
+  background-image: -moz-linear-gradient(#8400e0, #8a00eb 30%, #7e00d6 50%, #7500c7 50%, #9a0aff);
+  background-image: -o-linear-gradient(#8400e0, #8a00eb 30%, #7e00d6 50%, #7500c7 50%, #9a0aff);
+  background-image: linear-gradient(#8400e0, #8a00eb 30%, #7e00d6 50%, #7500c7 50%, #9a0aff);
+  border-color: #570094;
+  text-shadow: #390061 0px -1px -1px;
+  -moz-box-shadow: #6900b3 0 0.08em 0.1em 1px inset;
+  -webkit-box-shadow: #6900b3 0 0.08em 0.1em 1px inset;
+  -o-box-shadow: #6900b3 0 0.08em 0.1em 1px inset;
+  box-shadow: #6900b3 0 0.08em 0.1em 1px inset;
+}
+/* line 116, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.matching button:active, .matching button:active:visited, .matching input[type="button"]:active, .matching input[type="button"]:active:visited, .matching input[type="submit"]:active, .matching input[type="submit"]:active:visited {
+  color: white;
+}
+/* line 20, ../../app/stylesheets/screen.sass */
+.matching button[disabled], .matching input[type="button"][disabled], .matching input[type="submit"][disabled] {
+  background-color: white;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(10%, #f2f2f2), color-stop(50%, #c4c4c4), color-stop(50%, #bcbcbc), color-stop(100%, #d6d6d6));
+  background-image: -webkit-linear-gradient(#ffffff, #f2f2f2 10%, #c4c4c4 50%, #bcbcbc 50%, #d6d6d6);
+  background-image: -moz-linear-gradient(#ffffff, #f2f2f2 10%, #c4c4c4 50%, #bcbcbc 50%, #d6d6d6);
+  background-image: -o-linear-gradient(#ffffff, #f2f2f2 10%, #c4c4c4 50%, #bcbcbc 50%, #d6d6d6);
+  background-image: linear-gradient(#ffffff, #f2f2f2 10%, #c4c4c4 50%, #bcbcbc 50%, #d6d6d6);
+  border-color: #a5a5a5;
+  text-shadow: white 0px 1px 1px;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+  opacity: 0.7;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  -o-box-shadow: none;
+  box-shadow: none;
+  cursor: default !important;
+}
+/* line 120, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.matching button[disabled], .matching button[disabled]:visited, .matching input[type="button"][disabled], .matching input[type="button"][disabled]:visited, .matching input[type="submit"][disabled], .matching input[type="submit"][disabled]:visited {
+  color: #222222;
+}
+/* line 22, ../../app/stylesheets/_matching.sass */
+.matching input[type="submit"].sad, .matching button.sad {
+  -moz-border-radius: 1em;
+  -webkit-border-radius: 1em;
+  -o-border-radius: 1em;
+  -ms-border-radius: 1em;
+  -khtml-border-radius: 1em;
+  border-radius: 1em;
+  font-size: 16px;
+  line-height: 1.2em;
+  padding: 0.3em 1em;
+  border-width: 1px;
+  background-color: #008fe0;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #89d4ff), color-stop(10%, #2eb3ff), color-stop(50%, #0085d1), color-stop(50%, #007bc1), color-stop(100%, #009cf4));
+  background-image: -webkit-linear-gradient(#89d4ff, #2eb3ff 10%, #0085d1 50%, #007bc1 50%, #009cf4);
+  background-image: -moz-linear-gradient(#89d4ff, #2eb3ff 10%, #0085d1 50%, #007bc1 50%, #009cf4);
+  background-image: -o-linear-gradient(#89d4ff, #2eb3ff 10%, #0085d1 50%, #007bc1 50%, #009cf4);
+  background-image: linear-gradient(#89d4ff, #2eb3ff 10%, #0085d1 50%, #007bc1 50%, #009cf4);
+  border-color: #005e94;
+  text-shadow: #003e61 0px 1px 1px;
+  -moz-box-shadow: rgba(255, 255, 255, 0.439) 0 0 0.1em 1px inset;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.439) 0 0 0.1em 1px inset;
+  -o-box-shadow: rgba(255, 255, 255, 0.439) 0 0 0.1em 1px inset;
+  box-shadow: rgba(255, 255, 255, 0.439) 0 0 0.1em 1px inset;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding;
+  -o-background-clip: padding-box;
+  -ms-background-clip: padding-box;
+  -khtml-background-clip: padding-box;
+  background-clip: padding-box;
+}
+/* line 116, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.matching input[type="submit"].sad, .matching input[type="submit"].sad:visited, .matching button.sad, .matching button.sad:visited {
+  color: white;
+}
+/* line 31, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.matching input[type="submit"].sad:hover, .matching input[type="submit"].sad:focus, .matching button.sad:hover, .matching button.sad:focus {
+  background-color: #8fe000;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #d4ff89), color-stop(10%, #b3ff2e), color-stop(50%, #85d100), color-stop(50%, #7bc100), color-stop(100%, #9cf400));
+  background-image: -webkit-linear-gradient(#d4ff89, #b3ff2e 10%, #85d100 50%, #7bc100 50%, #9cf400);
+  background-image: -moz-linear-gradient(#d4ff89, #b3ff2e 10%, #85d100 50%, #7bc100 50%, #9cf400);
+  background-image: -o-linear-gradient(#d4ff89, #b3ff2e 10%, #85d100 50%, #7bc100 50%, #9cf400);
+  background-image: linear-gradient(#d4ff89, #b3ff2e 10%, #85d100 50%, #7bc100 50%, #9cf400);
+  border-color: #5e9400;
+  text-shadow: #3e6100 0px 1px 1px;
+}
+/* line 116, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.matching input[type="submit"].sad:hover, .matching input[type="submit"].sad:hover:visited, .matching input[type="submit"].sad:focus, .matching input[type="submit"].sad:focus:visited, .matching button.sad:hover, .matching button.sad:hover:visited, .matching button.sad:focus, .matching button.sad:focus:visited {
+  color: white;
+}
+/* line 36, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.matching input[type="submit"].sad:active, .matching button.sad:active {
+  background-color: #7bc100;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #7bc100), color-stop(30%, #82cc00), color-stop(50%, #75b700), color-stop(50%, #6ba800), color-stop(100%, #96ea00));
+  background-image: -webkit-linear-gradient(#7bc100, #82cc00 30%, #75b700 50%, #6ba800 50%, #96ea00);
+  background-image: -moz-linear-gradient(#7bc100, #82cc00 30%, #75b700 50%, #6ba800 50%, #96ea00);
+  background-image: -o-linear-gradient(#7bc100, #82cc00 30%, #75b700 50%, #6ba800 50%, #96ea00);
+  background-image: linear-gradient(#7bc100, #82cc00 30%, #75b700 50%, #6ba800 50%, #96ea00);
+  border-color: #4b7500;
+  text-shadow: #2a4200 0px -1px -1px;
+  -moz-box-shadow: #5e9400 0 0.08em 0.1em 1px inset;
+  -webkit-box-shadow: #5e9400 0 0.08em 0.1em 1px inset;
+  -o-box-shadow: #5e9400 0 0.08em 0.1em 1px inset;
+  box-shadow: #5e9400 0 0.08em 0.1em 1px inset;
+}
+/* line 116, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.matching input[type="submit"].sad:active, .matching input[type="submit"].sad:active:visited, .matching button.sad:active, .matching button.sad:active:visited {
+  color: white;
+}
+/* line 20, ../../app/stylesheets/screen.sass */
+.matching input[type="submit"].sad[disabled], .matching button.sad[disabled] {
+  background-color: white;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(10%, #f2f2f2), color-stop(50%, #c4c4c4), color-stop(50%, #bcbcbc), color-stop(100%, #d6d6d6));
+  background-image: -webkit-linear-gradient(#ffffff, #f2f2f2 10%, #c4c4c4 50%, #bcbcbc 50%, #d6d6d6);
+  background-image: -moz-linear-gradient(#ffffff, #f2f2f2 10%, #c4c4c4 50%, #bcbcbc 50%, #d6d6d6);
+  background-image: -o-linear-gradient(#ffffff, #f2f2f2 10%, #c4c4c4 50%, #bcbcbc 50%, #d6d6d6);
+  background-image: linear-gradient(#ffffff, #f2f2f2 10%, #c4c4c4 50%, #bcbcbc 50%, #d6d6d6);
+  border-color: #a5a5a5;
+  text-shadow: white 0px 1px 1px;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+  opacity: 0.7;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  -o-box-shadow: none;
+  box-shadow: none;
+  cursor: default !important;
+}
+/* line 120, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.matching input[type="submit"].sad[disabled], .matching input[type="submit"].sad[disabled]:visited, .matching button.sad[disabled], .matching button.sad[disabled]:visited {
+  color: #222222;
+}
+/* line 24, ../../app/stylesheets/_matching.sass */
+.matching button.idontknow {
+  padding: 0px;
+}
+
+/* line 26, ../../app/stylesheets/_matching.sass */
+.league_info {
+  clear: both;
+}
+/* line 3, ../../app/stylesheets/_matching.sass */
+.league_info .left {
+  display: inline;
+  float: left;
+  width: 32.203%;
+  margin-right: 1.695%;
+}
+/* line 5, ../../app/stylesheets/_matching.sass */
+.league_info .left .internal {
+  border: 2px solid;
+  padding: 5.263%;
+  margin-bottom: 1.5em;
+}
+/* line 9, ../../app/stylesheets/_matching.sass */
+.league_info .right {
+  display: inline;
+  float: left;
+  width: 66.102%;
+  margin-right: 1.695%;
+  display: inline;
+  float: right;
+  margin-right: 0;
+  #margin-left: -1em;
+  margin-bottom: 1.5em;
+}
+
+/* line 1, ../../app/stylesheets/_question.sass */
+#question {
+  clear: both;
+}
+/* line 3, ../../app/stylesheets/_question.sass */
+#question h3 {
+  display: inline;
+  float: left;
+  width: 87.179%;
+  margin-right: 2.564%;
+  margin-bottom: 0.75em;
+}
+/* line 6, ../../app/stylesheets/_question.sass */
+#question .side {
+  display: inline;
+  float: left;
+  width: 10.256%;
+  margin-right: 2.564%;
+  display: inline;
+  float: right;
+  margin-right: 0;
+  #margin-left: -1em;
+  text-align: right;
+}
+/* line 10, ../../app/stylesheets/_question.sass */
+#question .content {
+  clear: both;
+}
+/* line 15, ../../app/stylesheets/_question.sass */
+#question .content .multiple_choice ul li {
+  list-style-type: none;
+  margin-bottom: 0.5em;
+}
+/* line 19, ../../app/stylesheets/_question.sass */
+#question .content .follow_pattern .hint_container {
+  overflow-x: hidden;
+}
+/* line 21, ../../app/stylesheets/_question.sass */
+#question .content .follow_pattern .text_field {
+  display: inline;
+  float: left;
+  width: 74.359%;
+  margin-right: 2.564%;
+}
+/* line 23, ../../app/stylesheets/_question.sass */
+#question .content .follow_pattern .text_field input[type=text] {
+  font-size: 150%;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  line-height: 1em;
+  height: auto;
+}
+/* line 29, ../../app/stylesheets/_question.sass */
+#question .content .follow_pattern .submit {
+  display: inline;
+  float: left;
+  width: 23.077%;
+  margin-right: 2.564%;
+  display: inline;
+  float: right;
+  margin-right: 0;
+  #margin-left: -1em;
+}
+/* line 32, ../../app/stylesheets/_question.sass */
+#question .content .follow_pattern .submit input[type=submit] {
+  width: 100%;
+}
+/* line 35, ../../app/stylesheets/_question.sass */
+#question .content .fill_in_the_blank input[type=text] {
+  width: auto;
+}
+/* line 38, ../../app/stylesheets/_question.sass */
+#question .hint .green {
+  color: green;
+}
+/* line 40, ../../app/stylesheets/_question.sass */
+#question .hint .red {
+  color: red;
+}
+/* line 42, ../../app/stylesheets/_question.sass */
+#question .hint .gray {
+  color: gray;
+}
+/* line 44, ../../app/stylesheets/_question.sass */
+#question .hint .purple {
+  color: purple;
+}
+/* line 46, ../../app/stylesheets/_question.sass */
+#question .big {
+  font-size: 150%;
+}
+
+/* line 2, ../../app/stylesheets/_players.sass */
+#match_players .internal {
+  border-top: none;
+  border-bottom: none;
+  border-left: solid 0.3em #008fe0;
+  border-right: solid 0.3em #ff9600;
+}
+/* line 7, ../../app/stylesheets/_players.sass */
+#match_players .internal ul {
+  padding: 0px;
+  margin: 0px;
+}
+/* line 10, ../../app/stylesheets/_players.sass */
+#match_players .internal ul li {
+  margin: 0px;
+  list-style-type: none;
+  border-top: dashed 2px #4c4c4c;
+  border-bottom: dashed 2px #4c4c4c;
+}
+/* line 15, ../../app/stylesheets/_players.sass */
+#match_players .internal ul li.notfirst {
+  border-top: none;
+}
+
+/* line 19, ../../app/stylesheets/_players.sass */
+#league_active_players .active_players .player {
+  float: left;
+  width: 40px;
+  height: 40px;
+}
+/* line 41, ../../app/stylesheets/_base.sass */
+#league_active_players .active_players:after {
+  content: " ";
+  display: block;
+  clear: both;
+  height: 0;
+}
+
+/* line 2, ../../app/stylesheets/_match_result.sass */
+.match_result .left {
+  display: inline;
+  float: left;
+  width: 32.203%;
+  margin-right: 1.695%;
+}
+/* line 4, ../../app/stylesheets/_match_result.sass */
+.match_result .left .internal {
+  border: solid 2px #4c4c4c;
+  padding: 5.263%;
+}
+/* line 7, ../../app/stylesheets/_match_result.sass */
+.match_result .right {
+  display: inline;
+  float: left;
+  width: 66.102%;
+  margin-right: 1.695%;
+  display: inline;
+  float: right;
+  margin-right: 0;
+  #margin-left: -1em;
+}
+/* line 10, ../../app/stylesheets/_match_result.sass */
+.match_result .right .edit_link {
+  float: right;
+}
+/* line 12, ../../app/stylesheets/_match_result.sass */
+.match_result .right .gray {
+  color: gray;
+}
+/* line 14, ../../app/stylesheets/_match_result.sass */
+.match_result .right .red {
+  color: red;
+}
+/* line 16, ../../app/stylesheets/_match_result.sass */
+.match_result .right .green {
+  color: green;
+}
+/* line 18, ../../app/stylesheets/_match_result.sass */
+.match_result .right .blue {
+  color: blue;
+}
+/* line 20, ../../app/stylesheets/_match_result.sass */
+.match_result .rematch {
+  font-size: 120%;
+}
+/* line 41, ../../app/stylesheets/screen.sass */
+.match_result .rematch a {
+  -moz-border-radius: 1em;
+  -webkit-border-radius: 1em;
+  -o-border-radius: 1em;
+  -ms-border-radius: 1em;
+  -khtml-border-radius: 1em;
+  border-radius: 1em;
+  font-size: 16px;
+  line-height: 1.2em;
+  padding: 0.3em 1em;
+  border-width: 1px;
+  background-color: #ff9600;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffdba8), color-stop(10%, #ffb64d), color-stop(50%, #f08d00), color-stop(50%, #e08400), color-stop(100%, #ff9e14));
+  background-image: -webkit-linear-gradient(#ffdba8, #ffb64d 10%, #f08d00 50%, #e08400 50%, #ff9e14);
+  background-image: -moz-linear-gradient(#ffdba8, #ffb64d 10%, #f08d00 50%, #e08400 50%, #ff9e14);
+  background-image: -o-linear-gradient(#ffdba8, #ffb64d 10%, #f08d00 50%, #e08400 50%, #ff9e14);
+  background-image: linear-gradient(#ffdba8, #ffb64d 10%, #f08d00 50%, #e08400 50%, #ff9e14);
+  border-color: #b36900;
+  text-shadow: #804b00 0px 1px 1px;
+  -moz-box-shadow: rgba(255, 255, 255, 0.5) 0 0 0.1em 1px inset;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.5) 0 0 0.1em 1px inset;
+  -o-box-shadow: rgba(255, 255, 255, 0.5) 0 0 0.1em 1px inset;
+  box-shadow: rgba(255, 255, 255, 0.5) 0 0 0.1em 1px inset;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding;
+  -o-background-clip: padding-box;
+  -ms-background-clip: padding-box;
+  -khtml-background-clip: padding-box;
+  background-clip: padding-box;
+  display: block;
+  float: left;
+  text-decoration: none;
+}
+/* line 116, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.match_result .rematch a, .match_result .rematch a:visited {
+  color: white;
+}
+/* line 31, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.match_result .rematch a:hover, .match_result .rematch a:focus {
+  background-color: #9600ff;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #dba8ff), color-stop(10%, #b64dff), color-stop(50%, #8d00f0), color-stop(50%, #8400e0), color-stop(100%, #9e14ff));
+  background-image: -webkit-linear-gradient(#dba8ff, #b64dff 10%, #8d00f0 50%, #8400e0 50%, #9e14ff);
+  background-image: -moz-linear-gradient(#dba8ff, #b64dff 10%, #8d00f0 50%, #8400e0 50%, #9e14ff);
+  background-image: -o-linear-gradient(#dba8ff, #b64dff 10%, #8d00f0 50%, #8400e0 50%, #9e14ff);
+  background-image: linear-gradient(#dba8ff, #b64dff 10%, #8d00f0 50%, #8400e0 50%, #9e14ff);
+  border-color: #6900b3;
+  text-shadow: #4b0080 0px 1px 1px;
+}
+/* line 116, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.match_result .rematch a:hover, .match_result .rematch a:hover:visited, .match_result .rematch a:focus, .match_result .rematch a:focus:visited {
+  color: white;
+}
+/* line 36, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.match_result .rematch a:active {
+  background-color: #8400e0;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8400e0), color-stop(30%, #8a00eb), color-stop(50%, #7e00d6), color-stop(50%, #7500c7), color-stop(100%, #9a0aff));
+  background-image: -webkit-linear-gradient(#8400e0, #8a00eb 30%, #7e00d6 50%, #7500c7 50%, #9a0aff);
+  background-image: -moz-linear-gradient(#8400e0, #8a00eb 30%, #7e00d6 50%, #7500c7 50%, #9a0aff);
+  background-image: -o-linear-gradient(#8400e0, #8a00eb 30%, #7e00d6 50%, #7500c7 50%, #9a0aff);
+  background-image: linear-gradient(#8400e0, #8a00eb 30%, #7e00d6 50%, #7500c7 50%, #9a0aff);
+  border-color: #570094;
+  text-shadow: #390061 0px -1px -1px;
+  -moz-box-shadow: #6900b3 0 0.08em 0.1em 1px inset;
+  -webkit-box-shadow: #6900b3 0 0.08em 0.1em 1px inset;
+  -o-box-shadow: #6900b3 0 0.08em 0.1em 1px inset;
+  box-shadow: #6900b3 0 0.08em 0.1em 1px inset;
+}
+/* line 116, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.match_result .rematch a:active, .match_result .rematch a:active:visited {
+  color: white;
+}
+/* line 20, ../../app/stylesheets/screen.sass */
+.match_result .rematch a[disabled] {
+  background-color: white;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(10%, #f2f2f2), color-stop(50%, #c4c4c4), color-stop(50%, #bcbcbc), color-stop(100%, #d6d6d6));
+  background-image: -webkit-linear-gradient(#ffffff, #f2f2f2 10%, #c4c4c4 50%, #bcbcbc 50%, #d6d6d6);
+  background-image: -moz-linear-gradient(#ffffff, #f2f2f2 10%, #c4c4c4 50%, #bcbcbc 50%, #d6d6d6);
+  background-image: -o-linear-gradient(#ffffff, #f2f2f2 10%, #c4c4c4 50%, #bcbcbc 50%, #d6d6d6);
+  background-image: linear-gradient(#ffffff, #f2f2f2 10%, #c4c4c4 50%, #bcbcbc 50%, #d6d6d6);
+  border-color: #a5a5a5;
+  text-shadow: white 0px 1px 1px;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+  opacity: 0.7;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  -o-box-shadow: none;
+  box-shadow: none;
+  cursor: default !important;
+}
+/* line 120, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+.match_result .rematch a[disabled], .match_result .rematch a[disabled]:visited {
+  color: #222222;
+}
+/* line 41, ../../app/stylesheets/_base.sass */
+.match_result .rematch a:after {
+  content: " ";
+  display: block;
+  clear: both;
+  height: 0;
+}
+/* line 41, ../../app/stylesheets/_base.sass */
+.match_result .rematch:after {
+  content: " ";
+  display: block;
+  clear: both;
+  height: 0;
+}
+
+/* line 13, ../../app/stylesheets/_users.sass */
+.show_user {
+  clear: both;
+}
+/* line 3, ../../app/stylesheets/_users.sass */
+.show_user:after {
+  clear: both;
+  display: block;
+  content: " ";
+}
+/* line 7, ../../app/stylesheets/_users.sass */
+.show_user .left {
+  display: inline;
+  float: left;
+  width: 15.254%;
+  margin-right: 1.695%;
+  overflow-x: hidden;
+}
+/* line 10, ../../app/stylesheets/_users.sass */
+.show_user .right {
+  display: inline;
+  float: left;
+  width: 83.051%;
+  margin-right: 1.695%;
+  display: inline;
+  float: right;
+  margin-right: 0;
+  #margin-left: -1em;
+}
+
+/* line 16, ../../app/stylesheets/_users.sass */
+div.edit_user {
+  clear: both;
+}
+/* line 3, ../../app/stylesheets/_users.sass */
+div.edit_user:after {
+  clear: both;
+  display: block;
+  content: " ";
+}
+/* line 7, ../../app/stylesheets/_users.sass */
+div.edit_user .left {
+  display: inline;
+  float: left;
+  width: 15.254%;
+  margin-right: 1.695%;
+  overflow-x: hidden;
+}
+/* line 10, ../../app/stylesheets/_users.sass */
+div.edit_user .right {
+  display: inline;
+  float: left;
+  width: 83.051%;
+  margin-right: 1.695%;
+  display: inline;
+  float: right;
+  margin-right: 0;
+  #margin-left: -1em;
+}
+/* line 19, ../../app/stylesheets/_users.sass */
+div.edit_user .left .link {
+  text-align: center;
+}
+/* line 22, ../../app/stylesheets/_users.sass */
+div.edit_user .right .field {
+  clear: both;
+}
+/* line 24, ../../app/stylesheets/_users.sass */
+div.edit_user .right .field label {
+  clear: both;
+  display: block;
+}
+/* line 27, ../../app/stylesheets/_users.sass */
+div.edit_user .right .field input[type=text] {
+  display: inline;
+  float: left;
+  width: 59.184%;
+  margin-right: 2.041%;
+}
+/* line 29, ../../app/stylesheets/_users.sass */
+div.edit_user .right .field .hint {
+  display: inline;
+  float: left;
+  width: 38.776%;
+  margin-right: 2.041%;
+  display: inline;
+  float: right;
+  margin-right: 0;
+  #margin-left: -1em;
+}
+/* line 32, ../../app/stylesheets/_users.sass */
+div.edit_user .right .field .explanation {
+  clear: both;
+}
+/* line 34, ../../app/stylesheets/_users.sass */
+div.edit_user .right input[type=submit] {
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -o-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -khtml-border-radius: 6px;
+  border-radius: 6px;
+  font-size: 18px;
+  line-height: 1.2em;
+  padding: 0.3em 1em;
+  border-width: 1px;
+  background-color: #444444;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #989898), color-stop(10%, #6a6a6a), color-stop(50%, #3c3c3c), color-stop(50%, #353535), color-stop(100%, #4e4e4e));
+  background-image: -webkit-linear-gradient(#989898, #6a6a6a 10%, #3c3c3c 50%, #353535 50%, #4e4e4e);
+  background-image: -moz-linear-gradient(#989898, #6a6a6a 10%, #3c3c3c 50%, #353535 50%, #4e4e4e);
+  background-image: -o-linear-gradient(#989898, #6a6a6a 10%, #3c3c3c 50%, #353535 50%, #4e4e4e);
+  background-image: linear-gradient(#989898, #6a6a6a 10%, #3c3c3c 50%, #353535 50%, #4e4e4e);
+  border-color: #1e1e1e;
+  text-shadow: #040404 0px 1px 1px;
+  -moz-box-shadow: rgba(255, 255, 255, 0.267) 0 0 0.1em 1px inset;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.267) 0 0 0.1em 1px inset;
+  -o-box-shadow: rgba(255, 255, 255, 0.267) 0 0 0.1em 1px inset;
+  box-shadow: rgba(255, 255, 255, 0.267) 0 0 0.1em 1px inset;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding;
+  -o-background-clip: padding-box;
+  -ms-background-clip: padding-box;
+  -khtml-background-clip: padding-box;
+  background-clip: padding-box;
+}
+/* line 116, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+div.edit_user .right input[type=submit], div.edit_user .right input[type=submit]:visited {
+  color: white;
+}
+/* line 31, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+div.edit_user .right input[type=submit]:hover, div.edit_user .right input[type=submit]:focus {
+  background-color: #3c3c3c;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #919191), color-stop(10%, #636363), color-stop(50%, #353535), color-stop(50%, #2d2d2d), color-stop(100%, #474747));
+  background-image: -webkit-linear-gradient(#919191, #636363 10%, #353535 50%, #2d2d2d 50%, #474747);
+  background-image: -moz-linear-gradient(#919191, #636363 10%, #353535 50%, #2d2d2d 50%, #474747);
+  background-image: -o-linear-gradient(#919191, #636363 10%, #353535 50%, #2d2d2d 50%, #474747);
+  background-image: linear-gradient(#919191, #636363 10%, #353535 50%, #2d2d2d 50%, #474747);
+  border-color: #161616;
+  text-shadow: black 0px 1px 1px;
+}
+/* line 116, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+div.edit_user .right input[type=submit]:hover, div.edit_user .right input[type=submit]:hover:visited, div.edit_user .right input[type=submit]:focus, div.edit_user .right input[type=submit]:focus:visited {
+  color: white;
+}
+/* line 36, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+div.edit_user .right input[type=submit]:active {
+  background-color: #353535;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #353535), color-stop(30%, #3a3a3a), color-stop(50%, #303030), color-stop(50%, #282828), color-stop(100%, #494949));
+  background-image: -webkit-linear-gradient(#353535, #3a3a3a 30%, #303030 50%, #282828 50%, #494949);
+  background-image: -moz-linear-gradient(#353535, #3a3a3a 30%, #303030 50%, #282828 50%, #494949);
+  background-image: -o-linear-gradient(#353535, #3a3a3a 30%, #303030 50%, #282828 50%, #494949);
+  background-image: linear-gradient(#353535, #3a3a3a 30%, #303030 50%, #282828 50%, #494949);
+  border-color: #0e0e0e;
+  text-shadow: black 0px -1px -1px;
+  -moz-box-shadow: #1e1e1e 0 0.08em 0.2em 1px inset;
+  -webkit-box-shadow: #1e1e1e 0 0.08em 0.2em 1px inset;
+  -o-box-shadow: #1e1e1e 0 0.08em 0.2em 1px inset;
+  box-shadow: #1e1e1e 0 0.08em 0.2em 1px inset;
+}
+/* line 116, ../../../../.rvm/gems/ruby-1.9.2-p180@dautri/gems/fancy-buttons-1.1.1/lib/stylesheets/_fancy-buttons.sass */
+div.edit_user .right input[type=submit]:active, div.edit_user .right input[type=submit]:active:visited {
+  color: white;
+}
+
+/* line 1, ../../app/stylesheets/_pagination.sass */
+.pagination {
+  text-align: left;
+  padding: 0.3em 0.3em 0.3em 0em;
+}
+/* line 4, ../../app/stylesheets/_pagination.sass */
+.pagination a, .pagination span {
+  padding: 0.2em 0.5em;
+}
+/* line 6, ../../app/stylesheets/_pagination.sass */
+.pagination span.disabled {
+  color: #cccccc;
+}
+/* line 8, ../../app/stylesheets/_pagination.sass */
+.pagination em {
+  font-weight: bold;
+  color: #008fe0;
+}
+/* line 11, ../../app/stylesheets/_pagination.sass */
+.pagination a {
+  border: 1px solid #8c8c8c;
+  color: #ff9600;
+  text-decoration: none;
+}
+/* line 15, ../../app/stylesheets/_pagination.sass */
+.pagination a:hover, .pagination a:focus {
+  border-color: #0c0c0c;
+  color: #008fe0;
+}
+/* line 18, ../../app/stylesheets/_pagination.sass */
+.pagination .page_info {
+  color: #aaaaaa;
+  padding-top: 0.8em;
+}
+/* line 21, ../../app/stylesheets/_pagination.sass */
+.pagination .prev_page, .pagination .next_page {
+  border-width: 2px;
+}
+/* line 23, ../../app/stylesheets/_pagination.sass */
+.pagination .prev_page {
+  margin-right: 1em;
+}
+/* line 25, ../../app/stylesheets/_pagination.sass */
+.pagination .next_page {
+  margin-left: 1em;
+}
+
+/* line 2, ../../app/stylesheets/_chatting.sass */
+.chatting #chat_box {
+  height: 200px;
+  overflow-y: auto;
+}
+/* line 6, ../../app/stylesheets/_chatting.sass */
+.chatting #chat_box .chat_entry a {
+  text-decoration: none;
+}
+/* line 8, ../../app/stylesheets/_chatting.sass */
+.chatting #chat_box .chat_entry a img {
+  border: none;
+}
+/* line 10, ../../app/stylesheets/_chatting.sass */
+.chatting #chat_log {
+  min-height: 1em;
+}
+/* line 12, ../../app/stylesheets/_chatting.sass */
+.chatting #chat_log .chat_info {
+  color: #008fe0;
+}
+/* line 14, ../../app/stylesheets/_chatting.sass */
+.chatting #chat_log .chat_error {
+  color: red;
+}
+/* line 16, ../../app/stylesheets/_chatting.sass */
+.chatting #chat_hint {
+  font-size: 0.75em;
+  line-height: 0.75em;
+}
