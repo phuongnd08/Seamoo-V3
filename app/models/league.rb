@@ -1,10 +1,32 @@
 class League < ActiveRecord::Base
+  include Utils::Waiter
+
   belongs_to :category
   has_many :matches
   has_many :memberships
   validates :status, :inclusion => { :in => ['active', 'coming_soon'] }
   scope :active, where(:status => 'active')
 
+  private
+  @@attrs = [
+    :user_match_ticket,
+    :user_lastseen,
+    :user_league_ticket,
+    :match_id,
+    :match_user_id,
+    :waiting_user,
+    :active_user
+  ]
+  @@attrs.each do |attr|
+    self.class_eval %{
+      protected
+        def #{attr}
+          @nest_for_#{attr} ||= Nest.new("league:" + self.id.to_s + ":#{attr}")
+        end
+    }
+  end
+
+  public
   def available?
     self.status == 'active'
   end
@@ -31,42 +53,38 @@ class League < ActiveRecord::Base
   end
 
 
-  {
-    :user_match_ticket_counter => :counter, 
-    :user_match_ticket => :user_id, 
-    :user_lastseen => :user_id, 
-    :user_league_ticket_counter => :counter,
-    :user_league_ticket => :user_id,
-    :match_id => :match_ticket, 
-    :match_user_id => :match_ticket,
-    :waiting_counter => :counter, 
-    :waiting_user => :position,
-    :active_user => :position
-  }.each do |field, identifier|
-    self.class_eval %{
-      protected
-      def #{field}
-        @mem_hash_for_#{field} ||= Utils::Memcached::MemHash.new({:category => League.name, :id => self.id, :field => :#{field}}, :#{identifier})
-      end
-    }
+
+  def initialize(*args)
+    super
   end
 
-  include Utils::Waiter
 
-  def request_match(user_id, bot_request = false)
-    user_match_ticket[user_id] = user_match_ticket_counter.incr if (user_match_ticket[user_id].nil? || user_lastseen[user_id].nil? || user_lastseen[user_id] < Matching.requester_stale_after.seconds.ago.to_i)
-    user_league_ticket[user_id] = user_league_ticket_counter.incr if (user_league_ticket[user_id].nil?)
-    user_lastseen[user_id] = Time.now.to_i
-    waiting_user[waiting_counter.incr % Matching.waiting_slots_size] = { :id => user_id, :bot => bot_request, :time => Time.now.to_i }
-    active_user[user_league_ticket[user_id] % Matching.active_slots_size] = { :id => user_id, :time => Time.now.to_i }
+  def ticket_provided?(user_id)
+    user_match_ticket[user_id].present? &&
+      user_lastseen[user_id].get.to_i &&
+      user_lastseen[user_id].get.to_i > MatchingSettings.requester_stale_after.seconds.ago.to_i
+  end
+
+  def add_waiting_user(user_id, is_bot)
+    slot = waiting_user[:counter].incr % MatchingSettings.waiting_slots_size
+    waiting_user[slot].hset :id, user_id
+    waiting_user[slot].hset :bot, is_bot
+    waiting_user[slot].hset :time, Time.now.to_i
+  end
+
+  def request_match(user_id, is_bot = false)
+    user_match_ticket[user_id].set user_match_ticket[:counter].incr unless ticket_provided?(user_id)
+    user_league_ticket[user_id] = user_league_ticket[:counter].incr if user_league_ticket[user_id].nil?
+    user_lastseen[user_id].set Time.now.to_i
+    add_waiting_user(user_id, is_bot)
     ok = false
     while !ok do
-      match_ticket = (user_match_ticket[user_id] - 1) / Matching.users_per_match + 1
-      match_position = ((user_match_ticket[user_id] - 1) % Matching.users_per_match) + 1
+      match_ticket = (user_match_ticket[user_id].get.to_i - 1) / MatchingSettings.users_per_match + 1
+      match_position = ((user_match_ticket[user_id].get.to_i - 1) % MatchingSettings.users_per_match) + 1
       unless user_finished?(match_ticket, user_id)
         # when user leave match through official request, do not add him to the same match
         unless user_joined_before?(match_ticket, user_id, match_position)
-          match_user_id[{:match_ticket => match_ticket, :position => match_position}] = user_id
+          match_user_id[match_ticket][match_position].set user_id
           if participating?(match_ticket, match_position, user_id)
             ok = true
           elsif can_participate?(match_ticket, match_position)
@@ -75,85 +93,85 @@ class League < ActiveRecord::Base
               # second user create the match
               match = Match.create(:league => self)
               MatchUser.create(:match_id => match.id, :user_id => user_id)
-              match_id[match_ticket] = match.id
+              match_id[match_ticket].set match.id
               ok = true
-            else 
-              # other user just register to match 
-              ok = add_user_to_match(match_id[match_ticket], user_id)
+            else
+              # other user just register to match
+              ok = add_user_to_match(match_id[match_ticket].get, user_id)
             end
           end
         end
       end
-      user_match_ticket[user_id] = user_match_ticket_counter.incr unless ok
+      user_match_ticket[user_id].set user_match_ticket[:counter].incr unless ok
     end
 
     @@status = "[u] #{user_id}: [ut] #{user_match_ticket[user_id]} [t] #{match_ticket}, [p] #{match_position}, [mid] #{match_id[match_ticket]}"
     # puts @@status
-    match_id[match_ticket] != nil ? Match.find(match_id[match_ticket]) : nil
+    Match.find(match_id[match_ticket].get) if match_id[match_ticket].get
   end
 
-  def waiting_users
-    min_time = Matching.requester_stale_after.seconds.ago.to_i
-    wusers = (0..Matching.waiting_slots_size-1).
-              map{|index| waiting_user[index]}.
-              select{|user| user!=nil && user[:time] > min_time}.
-              group_by{|user| user[:id]}.
-              values.map{|group| group.sort_by{|user| user[:time]}.last}
-  end
-
-  def active_users
-    min_time = Matching.user_inactive_after.seconds.ago.to_i
-    ausers = (0..Matching.active_slots_size-1).
-              map{|index| active_user[index]}.
-              select{|user| user!=nil && user[:time] > min_time}.
-              group_by{|user| user[:id]}.
-              values.map{|group| group.sort_by{|user| user[:time]}.last}
+  def waiting_users_info
+    min_time = MatchingSettings.requester_stale_after.seconds.ago.to_i
+    wusers = (0..MatchingSettings.waiting_slots_size-1).
+      map{|index| waiting_user[index]}.
+      select{|user| (user.hlen > 0) && user.hget(:time).to_i > min_time}.
+      group_by{|user| user.hget :id}.
+      values.map{|group| group.sort_by{|user| user.hget :time}.last}
   end
 
   def leave_current_match(user_id)
-    user_match_ticket[user_id] = nil
-    user_lastseen[user_id] = nil
+    user_match_ticket[user_id].set nil
+    user_lastseen[user_id].set nil
   end
 
-  protected
+  private
   def user_finished?(match_ticket, user_id)
-    if match_id[match_ticket].present?
-      match_user = MatchUser.find_by_match_id_and_user_id(match_id[match_ticket], user_id)
-      match_user.present? && match_user.finished?
+    match_id[match_ticket].get && \
+      MatchUser.find_by_match_id_and_user_id(match_id[match_ticket], user_id).try(:finished?)
+  end
+
+  def user_joined_before?(match_ticket, user_id, match_position)
+    (1..match_position-1).map{|pos|
+      match_user_id[match_ticket][pos].get.to_i
+    }.include?(user_id)
+  end
+
+  def first_requester_available?(match_ticket)
+    first_requester_id = try_until_not_nil_or_timeout(MatchingSettings.requester_stale_after) do
+      match_user_id[match_ticket][1].get.to_i
+    end
+    if first_requester_id
+      first_requester_lastseen = try_until_not_nil_or_timeout(MatchingSettings.requester_stale_after) do
+        user_lastseen[first_requester_id].get.to_i
+      end
+      (first_requester_lastseen != nil) && (first_requester_lastseen >= MatchingSettings.requester_stale_after.seconds.ago.to_i)
     else
       false
     end
   end
 
-  def user_joined_before?(match_ticket, user_id, match_position)
-    (1..(match_position - 1)).map{|pos| match_user_id[{:match_ticket => match_ticket, :position => pos}]}.include?(user_id) 
+  def match_started?(match_ticket)
+    match_id[match_ticket].get && Match.find(match_id[match_ticket].get).started?
   end
 
   def can_participate?(match_ticket, match_position)
     if match_position == 1
       true
     else
-      # user can only participate if first requester is still around && match not started
-      first_requester_id = try_until_not_nil_or_timeout(Matching.requester_stale_after) { match_user_id[{:match_ticket => match_ticket, :position => 1}] }
-      can = if first_requester_id
-              first_requester_lastseen = try_until_not_nil_or_timeout(Matching.requester_stale_after) { user_lastseen[first_requester_id] }
-              (first_requester_lastseen != nil) && (first_requester_lastseen >= Matching.requester_stale_after.seconds.ago.to_i)
-            else
-              false
-            end
-      can && (match_id[match_ticket].nil? || !Match.find(match_id[match_ticket]).started?)
+      first_requester_available?(match_ticket) && ! match_started?(match_ticket)
     end
   end
 
+  def user_playing?(match_ticket, user_id)
+    match_user = MatchUser.find_by_match_id_and_user_id(match_id[match_ticket].get, user_id)
+    match_user.present? && !match_user.finished? if match_user
+  end
+
   def participating?(match_ticket, match_position, user_id)
-    b = match_user_id[{:match_ticket => match_ticket, :position => match_position}] == user_id
-    b = b && match_id[match_ticket]!=nil 
-    b = b && !Match.find(match_id[match_ticket]).finished?
-    if (b)
-      match_user = MatchUser.find_by_match_id_and_user_id(match_id[match_ticket], user_id)
-      b = b && match_user.present? && !match_user.finished?
-    end
-    b
+    match_user_id[match_ticket][match_position].get == user_id && \
+      match_id[match_ticket].get && \
+      !Match.find(match_id[match_ticket].get).finished? && \
+      user_playing?(match_ticket, user_id)
   end
 
   public

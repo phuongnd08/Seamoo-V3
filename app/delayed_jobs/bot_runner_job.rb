@@ -7,10 +7,10 @@ class BotRunnerJob
       #   -> If find one, invoke 1 more bot for that league
       #       -> Register the bot to league
       League.active.each do |league|
-        waiting_users = league.waiting_users
+        waiting_users_info = league.waiting_users_info
         Delayed::Worker.logger.warn "Watch [#{league.name}]: #{waiting_users.inspect}"
         # bot user_id is negative one
-        if (waiting_users.size == 1 && !waiting_users.first[:bot])
+        if (waiting_users_info.size == 1 && !waiting_users_info.first[:bot])
           bot = Bot.awake_new(league.level)
           bot.data[:league_id] = league.id
         end
@@ -23,9 +23,9 @@ class BotRunnerJob
       #   -> Any bots that said they finished their jobs should be retire to be used again
       
       # Sleep between beats
-      sleep Matching.bot_sleep_time_between_beats unless started_at < Matching.bot_life_time.ago
+      sleep MatchingSettings.bot_sleep_time_between_beats unless started_at < MatchingSettings.bot_life_time.ago
 
-    end while started_at > Matching.bot_life_time.ago 
+    end while started_at > MatchingSettings.bot_life_time.ago 
   ensure
     Delayed::Worker.logger.warn "BotRunner Quitting. Queue another BotRunner"
     Delayed::Job.enqueue BotRunnerJob.new unless Delayed::Job.count > 1

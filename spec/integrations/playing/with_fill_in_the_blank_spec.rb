@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "matching with fill in the blank", :js => true, :memcached => true do
+describe "matching with fill in the blank", :js => true, :caching => true do
   before(:each) do
     @mike = Factory(:user, :display_name => "mike", :email => "mike@gmail.com")
     @peter = Factory(:user, :display_name => "peter", :email => "peter@gmail.com")
@@ -8,8 +8,8 @@ describe "matching with fill in the blank", :js => true, :memcached => true do
     ["Please {na[m]e1} this", "Please {name|name2} and {name3}", "Also {name4}"].each do |content|
       @league.category.questions << Question.create_fill_in_the_blank(content, :level => 0)
     end
-    Matching.started_after #trigger settings class initialization
-    Matching.stub(:started_after).and_return(0) #all match started immediately
+    MatchingSettings.started_after #trigger settings class initialization
+    MatchingSettings.stub(:started_after).and_return(0) #all match started immediately
     # let mike and peter match on the league
     @match = start_match(@league, [@mike, @peter])
   end

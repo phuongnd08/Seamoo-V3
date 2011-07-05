@@ -7,7 +7,7 @@
 - else
   #chat_need_signin= raw t("chat.need_signin", :signin_path => signin_path)
 #chat_log
-  = javascript_include_tag "#{Site.chat.server}/#{Site.chat.client_js}"
+  = javascript_include_tag "#{SiteSettings.chat.server}/#{SiteSettings.chat.client_js}"
 
 - chat_entry_template = capture do
   .chat_entry
@@ -22,7 +22,7 @@
   .chat_info {message}
 
 :javascript
-  var client = new Faye.Client("#{Site.chat.server}/#{Site.chat.mount_point}");
+  var client = new Faye.Client("#{SiteSettings.chat.server}/#{SiteSettings.chat.mount_point}");
   var channel = '/leagues/#{@league.id}';
 
   var templates = { 
@@ -59,10 +59,10 @@
 
   $(function(){
     $.ajax({
-      url: "#{Site.chat.server}/#{Site.chat.history_mount_point}",
+      url: "#{SiteSettings.chat.server}/#{SiteSettings.chat.history_mount_point}",
       dataType: "jsonp",
       data: {
-        count: #{Site.chat.history_limit},
+        count: #{SiteSettings.chat.history_limit},
         channel: channel,
       },
       success: function(messages){

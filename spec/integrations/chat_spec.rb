@@ -17,9 +17,6 @@ describe "Chat" do
   end
 
   describe "logged in", :js => true do
-    before(:each) do
-      Dalli::Client.new("localhost:11211", :namespace => "chat_prod").flush_all
-    end
     it "should allow user to send and receive msg" do
       Factory(:user, :display_name => "mike")
       Informer.login_as = "mike"

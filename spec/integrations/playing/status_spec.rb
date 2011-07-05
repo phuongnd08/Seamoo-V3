@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe "matching status", :js => true, :memcached => true do
+describe "matching status", :js => true, :caching => true do
   before(:each) do
     @mike = Factory(:user, :display_name => "mike", :email => "mike@gmail.com")
     @peter = Factory(:user, :display_name => "peter", :email => "peter@gmail.com")
     @league = Factory(:league_with_questions)
-    Matching.started_after #trigger settings class initialization
-    Matching.stub(:started_after).and_return(0) #all match started immediately
+    MatchingSettings.started_after #trigger settings class initialization
+    MatchingSettings.stub(:started_after).and_return(0) #all match started immediately
     # let mike and peter match on the league
     @match = start_match(@league, [@mike, @peter])
   end

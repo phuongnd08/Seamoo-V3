@@ -9,8 +9,8 @@ describe Match do
 
   describe "timing" do
     before(:each) do
-      Matching.stub(:ended_after).and_return(600)
-      Matching.stub(:started_after).and_return(60)
+      MatchingSettings.stub(:duration).and_return(600)
+      MatchingSettings.stub(:started_after).and_return(60)
     end
 
     describe "started" do
@@ -41,8 +41,8 @@ describe Match do
     describe "finished" do
       it "should return true if either the match is ended or finished_at is set" do
         Match.new(:created_at => Time.now - 659.seconds).finished?.should == false
-        Match.new(:created_at => Time.now - 660.seconds).finished?.should == true 
-        Match.new(:created_at => Time.now - 650.seconds, :finished_at => 1.second.ago).finished?.should == true 
+        Match.new(:created_at => Time.now - 660.seconds).finished?.should == true
+        Match.new(:created_at => Time.now - 650.seconds, :finished_at => 1.second.ago).finished?.should == true
       end
     end
   end

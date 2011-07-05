@@ -97,7 +97,7 @@ describe MatchUser do
     end
     describe "score" do
       before(:each) do
-        Matching.stub(:questions_per_match).and_return(3)
+        MatchingSettings.stub(:questions_per_match).and_return(3)
         @match= Factory(:match)
         @user = Factory(:user)
         @match_user = MatchUser.create(:match => @match, :user => @user)

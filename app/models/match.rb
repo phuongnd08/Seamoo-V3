@@ -28,15 +28,15 @@ class Match < ActiveRecord::Base
   end
 
   def ended_at
-    started_at + Matching.ended_after.seconds
+    started_at + MatchingSettings.duration.seconds
   end
 
   def started_at
-    created_at + Matching.started_after.seconds
+    created_at + MatchingSettings.started_after.seconds
   end
 
   def fetch_questions
-    self.questions = league.random_questions(Matching.questions_per_match) if self.questions.empty?
+    self.questions = league.random_questions(MatchingSettings.questions_per_match) if self.questions.empty?
   end
 
   def check_if_finished!

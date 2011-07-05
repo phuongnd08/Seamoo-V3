@@ -1,3 +1,10 @@
-access_key: AKIAILZIEBGGUDJL2LHA
-secret_access_key: "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"
-bucket: dautrinet
+development: &development
+  access_key: AKIAILZIEBGGUDJL2LHA
+  secret_access_key: "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"
+  bucket: dautrinet
+
+test:
+  <<: *development
+
+production:
+  <<: *development

@@ -5,7 +5,7 @@ class TestEnv
     end
 
     def host
-      @host ||= "#{Site.name}#{number}.local.com"
+      @host ||= "#{SiteSettings.name}#{number}.local.com"
     end
   end
 end

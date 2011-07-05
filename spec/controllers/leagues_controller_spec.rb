@@ -14,17 +14,6 @@ describe LeaguesController do
     end
   end
 
-  describe "GET active_players", :memcached => true do
-    it "should return active players" do
-      @league = Factory(:league)
-      user1 = Factory(:user)
-      League.stub(:find).with(@league.id).and_return(@league)
-      @league.stub(:active_users).and_return([{:id => user1.id}])
-      get :active_players, :id => @league.id
-      assigns(:active_players).values.should include(user1)
-    end
-  end
-
   describe "GET matching" do
     render_views
     before(:each) do

@@ -17,10 +17,10 @@
     #question
 :javascript
   var leagueId = #{@league.id};
-  var questionsPerMatch = #{Matching.questions_per_match};
-  var questionsPerCacheBlock = #{Matching.questions_per_cache_block};
-  var questionsRefillThreshold = #{Matching.questions_refill_threshold};
-  var statusRecheckInterval = #{Matching.status_recheck_interval} * 1000;
+  var questionsPerMatch = #{MatchingSettings.questions_per_match};
+  var questionsPerCacheBlock = #{MatchingSettings.questions_per_cache_block};
+  var questionsRefillThreshold = #{MatchingSettings.questions_refill_threshold};
+  var statusRecheckInterval = #{MatchingSettings.status_recheck_interval} * 1000;
   var requestingMatchInfo = false;
   var matchId;
   var retried = 0;

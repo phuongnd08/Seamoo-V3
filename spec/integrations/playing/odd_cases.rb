@@ -22,9 +22,9 @@ describe "odd cases", :js => true, :memcached => true do
 
   describe "match ended without anyone finished" do
     it "should route user to result page" do
-      @match.match_user_for(@mike.id).update_attributes(:current_question_position => Matching.questions_per_match - 1)
+      @match.match_user_for(@mike.id).update_attributes(:current_question_position => MatchingSettings.questions_per_match - 1)
       skip_timestamps(Match) do
-        @match.update_attribute(:created_at, (Matching.started_after + Matching.ended_after - 3).seconds.ago)
+        @match.update_attribute(:created_at, (MatchingSettings.started_after + MatchingSettings.duration - 3).seconds.ago)
       end
       visit matching_league_path(@league)
       wait_for_value match_path(@match) do
@@ -35,7 +35,7 @@ describe "odd cases", :js => true, :memcached => true do
 
   describe "fast bird" do
     it "should see the match count to end then switch to result page" do
-      @match.match_user_for(@mike.id).update_attributes(:current_question_position => Matching.questions_per_match - 1)
+      @match.match_user_for(@mike.id).update_attributes(:current_question_position => MatchingSettings.questions_per_match - 1)
       visit matching_league_path(@league)
       within "#question" do
         page.should have_content("Question 3/3")
@@ -47,7 +47,7 @@ describe "odd cases", :js => true, :memcached => true do
       end
 
       skip_timestamps(Match) do
-        @match.update_attribute(:created_at, (Matching.started_after + Matching.ended_after).seconds.ago)
+        @match.update_attribute(:created_at, (MatchingSettings.started_after + MatchingSettings.duration).seconds.ago)
       end
 
       wait_for_value match_path(@match) do

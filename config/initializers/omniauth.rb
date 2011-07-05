@@ -1,11 +1,11 @@
 require 'omniauth/openid'
-require 'openid/store/memcache'
+require 'openid/store/filesystem'
 
 # you will be able to access the above providers by the following url
 # /auth/providername for example /auth/twitter /auth/facebook
 #
 Rails.application.config.middleware.use OmniAuth::Strategies::OpenID, 
-  OpenID::Store::Memcache.new(Dalli::Client.new(MemcachedSettings.server, :namespace => MemcachedSettings.namespace)),
+  OpenID::Store::Filesystem.new(File.join(Rails.root, '/tmp')),
   :name => "google",  :identifier => "https://www.google.com/accounts/o8/id"
   #use OmniAuth::Strategies::OpenID, OpenID::Store::Filesystem.new('/tmp'), :name => "yahoo",   :identifier => "https://me.yahoo.com"
 
@@ -13,24 +13,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   provider :facebook, OauthSettings.facebook.app_id, OauthSettings.facebook.app_secret, :scope => OauthSettings.facebook.scope
   # provider :twitter,  'KEY', 'SECRET'
   # provider :linked_in, 'KEY', 'SECRET'
-  provider :open_id, OpenID::Store::Memcache.new(Dalli::Client.new(MemcachedSettings.server, :namespace => MemcachedSettings.namespace))
-end
-
-require 'openid/store/nonce'
-require 'openid/store/interface'
-module OpenID
-  module Store
-    class Memcache < Interface
-      def use_nonce(server_url, timestamp, salt)
-        return false if (timestamp - Time.now.to_i).abs > Nonce.skew
-        ts = timestamp.to_s # base 10 seconds since epoch
-        nonce_key = key_prefix + 'N' + server_url + '|' + ts + '|' + salt
-        result = @cache_client.add(nonce_key, '', expiry(Nonce.skew + 5))
-
-        return result #== true (edited 10/25/10)
-      end
-    end
-  end
+  provider :open_id,  OpenID::Store::Filesystem.new(File.join(Rails.root, '/tmp'))
 end
 
 # you won't be able to access the openid urls like /auth/google

@@ -1,8 +1,6 @@
 RSpec.configure do |config|
   # empty memcache before every spec
   config.before(:each) do
-    Utils::Memcached::Common.client.flush_all if example.metadata[:memcached]# clear memecached
+    Redis.current.flushdb if example.metadata[:caching]# clear memecached
   end
 end
-
-

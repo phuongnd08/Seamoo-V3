@@ -52,7 +52,7 @@ class MatchesController < ApplicationController
     respond_to do |format|
       format.json do
         loaded = params[:loaded].to_i
-        max = [loaded + Matching.questions_per_cache_block - 1, @match.questions.count - 1].min
+        max = [loaded + MatchingSettings.questions_per_cache_block - 1, @match.questions.count - 1].min
         json = (loaded..max).map do |index|
           {
             :content => render_to_string(:partial => "questions/play", :format => :html,

@@ -8,7 +8,7 @@ module RSpec
           match = league.matches.first
           Rails.logger.warn("But first league match is nil") if match.nil?
           match.questions.clear
-          ::Matching.questions_per_match.times.each do |i|
+          ::MatchingSettings.questions_per_match.times.each do |i|
             match.questions << league.category.questions.all[i]
           end
         end
@@ -26,8 +26,8 @@ module RSpec
       league.matches.last
     end
     def prepare_league_for_match(questions = [])
-      ::Matching.started_after #trigger settings class initialization
-      ::Matching.stub(:started_after).and_return(0) #all match started immediately
+      ::MatchingSettings.started_after #trigger settings class initialization
+      ::MatchingSettings.stub(:started_after).and_return(0) #all match started immediately
 
       if questions.empty?
         Factory(:league_with_questions)

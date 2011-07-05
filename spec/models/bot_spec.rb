@@ -1,18 +1,19 @@
+# encoding: utf-8
 require 'spec_helper'
 
-describe Bot, :memcached => true do
+describe Bot, :caching => true do
   describe "avatar" do
     it "should have gravatar like users" do
-      Bot.new(:email => "bot@#{Site.domain}").gravatar_url.should_not be_nil
+      Bot.new(:email => "bot@#{SiteSettings.domain}").gravatar_url.should_not be_nil
     end
   end
 
   describe "new" do
     it "should generate email & display_name based on name if set" do
-      Matching.stub(:bots).and_return({"abc" => "User Abc"})
+      Bot.stub(:names).and_return(:all => {"abc" => "User Abc"})
       bot = Bot.new(:name => "abc")
       bot.display_name.should == "User Abc"
-      bot.email.should == "abc@#{Site.bot_domain}"
+      bot.email.should == "abc@#{SiteSettings.bot_domain}"
     end
 
     it "should not touch email & display_name if name unset" do
@@ -28,19 +29,34 @@ describe Bot, :memcached => true do
     end
   end
 
+  describe "names" do
+    it "should have correct size" do
+      Bot.names.size.should == 3
+      (Bot.names[0].size + Bot.names[1].size).should == 100
+      Bot.names[:all].size.should == 100
+    end
+
+    it "should contains proper key/value pairs" do
+      Bot.names[0]["than_dong_daiso"][:display_name].should == "Thần đồng đại số"
+      Bot.names[0]["ban_messi"][:display_name].should == "ban_messi"
+      Bot.names[1]["r10"][:display_name].should == "r10"
+      Bot.names[1]["vo_danh"][:display_name].should == "Vô Danh"
+    end
+  end
+
   describe "awake new" do
     before(:each) do
-      Matching.stub(:bots).and_return(
-        [
-          {
-            "abc" => {:display_name => "Abc User"}, 
+      Bot.stub(:names).and_return(
+        {
+          0 => {
+            "abc" => {:display_name => "Abc User"},
             "xyz" => {:display_name => "xyz"}
-          }, 
-          {
+          },
+          1 => {
             "def" => {:display_name => "def"},
             "tuv" => {:display_name => "tuv"}
           }
-        ]
+        }
       )
     end
 
@@ -51,7 +67,7 @@ describe Bot, :memcached => true do
       Bot.awake_new(0)
       Bot.awaken.count.should == 2
       Bot.awaken.map(&:display_name).to_set.should == ["Abc User", "xyz"].to_set
-      Bot.awaken.map(&:email).to_set.should == ["abc@#{Site.bot_domain}", "xyz@#{Site.bot_domain}"].to_set
+      Bot.awaken.map(&:email).to_set.should == ["abc@#{SiteSettings.bot_domain}", "xyz@#{SiteSettings.bot_domain}"].to_set
       Bot.awake_new(1)
       Bot.awaken.count.should == 3
       ["def", "tuv"].should include(Bot.awaken.last.display_name)
@@ -68,23 +84,23 @@ describe Bot, :memcached => true do
       Utils::RndGenerator.stub(:rnd).and_return(1)
       bot = Bot.awake_new(0)
       Bot.kill(bot)
-      bot.data[:match_id] = 1
-      bot.data[:match_request_retried] = 5
+      bot.match_id.set 1
+      bot.match_request_retried.set 5
       new_bot = Bot.awake_new(0)
       new_bot.should == bot
-      new_bot.data[:match_id].should == nil
-      new_bot.data[:match_request_retried].should == 0
+      new_bot.match_id.get == nil
+      new_bot.match_request_retried.get.to_i.should == 0
     end
   end
 
   describe "run" do
     before(:each) do
-      Matching.started_after #trigger settings logic accessor initilization to prevent re-override rspec stub
-      Matching.stub(:started_after).and_return(5)
-      Matching.stub(:bot_time_per_question).and_return(5)
-      Matching.stub(:bot_correctness).and_return(0.8)
-      Matching.stub(:ended_after).and_return(300)
-      Matching.stub(:questions_per_match).and_return(10)
+      MatchingSettings.started_after #trigger settings logic accessor initilization to prevent re-override rspec stub
+      MatchingSettings.stub(:started_after).and_return(5)
+      MatchingSettings.stub(:bot_time_per_question).and_return(5)
+      MatchingSettings.stub(:bot_correctness).and_return(0.8)
+      MatchingSettings.stub(:duration).and_return(300)
+      MatchingSettings.stub(:questions_per_match).and_return(10)
       @category = Factory(:category)
       @questions = []
       (1..10).each do |t|
@@ -102,7 +118,7 @@ describe Bot, :memcached => true do
       before(:each) do
         @mocked_league = mock_model(League)
         League.stub(:find).with(1).and_return(@mocked_league)
-        @bot.data[:league_id] = 1
+        @bot.league_id.set 1
       end
 
       it "should try to query for match_id" do
@@ -111,11 +127,11 @@ describe Bot, :memcached => true do
         @match = Match.create(:league => @league)
         @mocked_league.should_receive(:request_match).and_return(@match)
         @bot.run
-        @bot.data[:match_id].should == @match.id
+        @bot.match_id.get.to_i.should == @match.id
       end
 
       it "should die after maximum retries" do
-        Matching.stub(:bot_max_match_request_retries).and_return(3)
+        MatchingSettings.stub(:bot_max_match_request_retries).and_return(3)
         @mocked_league.should_receive(:request_match).exactly(3).and_return(nil)
         Bot.awaken.should include(@bot)
         4.times.each{ @bot.run }
@@ -126,7 +142,7 @@ describe Bot, :memcached => true do
     describe "match_id obtained" do
       before(:each) do
         @match = Match.create(:league => @league)
-        @bot.data[:match_id] = @match.id
+        @bot.match_id.set @match.id
         @match_user = MatchUser.create(:match => @match, :user => @bot)
         MatchUser.create(:match => @match, :user => Factory(:user)) # match have 2 users
       end
@@ -152,7 +168,7 @@ describe Bot, :memcached => true do
 
       describe "Match finished" do
         before(:each) do
-          Time.stub(:now).and_return(@now + Matching.started_after.seconds + Matching.ended_after.seconds + 1.second)
+          Time.stub(:now).and_return(@now + MatchingSettings.started_after.seconds + MatchingSettings.duration.seconds + 1.second)
           @bot.run
         end
         it "should die" do
@@ -169,7 +185,7 @@ describe Bot, :memcached => true do
       describe "Bot finished" do
         before(:each) do
           @match_user.stub(:request_match_check)
-          @match_user.send(:finished_at=, Time.now) 
+          @match_user.send(:finished_at=, Time.now)
           @match_user.save
           @bot.run
         end

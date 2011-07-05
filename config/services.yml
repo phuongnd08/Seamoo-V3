@@ -1,0 +1,12 @@
+development:
+  redis: 
+    url: "redis://localhost:6379"
+
+test:
+  redis: 
+    url: "redis://localhost:9736"
+
+production:
+  redis: 
+    url: "redis://redistogo:6c5d1a49b1f3d5dc577a9c932020e29b@bluegill.redistogo.com:9057/"
+  

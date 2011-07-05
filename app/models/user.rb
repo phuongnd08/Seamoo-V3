@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   require 'digest/md5'
   include Gravtastic
 
-  gravtastic :default => Styling.default_gravatar
+  gravtastic :default => DisplaySettings.default_gravatar
   acts_as_authentic
   validates :display_name, :presence => true
   validates :email, :presence => true
@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
 
   def qualified_for?(league)
     unless league.level == 0 
-      league.previous.all?{|l| membership_in(l).rank_score >= Matching.qualified_rank_score}
+      league.previous.all?{|l| membership_in(l).rank_score >= MatchingSettings.qualified_rank_score}
     else
       true
     end

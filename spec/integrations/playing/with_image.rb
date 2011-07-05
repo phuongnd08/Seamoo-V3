@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "matching with fill in the blank", :js => true, :memcached => true do
+describe "matching with fill in the blank", :js => true, :caching => true do
   before(:each) do
     @mike = Factory(:user, :display_name => "mike", :email => "mike@gmail.com")
     @peter = Factory(:user, :display_name => "peter", :email => "peter@gmail.com")

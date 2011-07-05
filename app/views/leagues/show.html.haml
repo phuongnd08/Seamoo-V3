@@ -17,7 +17,7 @@
                 %span= t('.compete') 
           - else
             = t("leagues.matching.not_qualified")
-            = t("leagues.matching.please_prove", :points => Matching.qualified_rank_score)
+            = t("leagues.matching.please_prove", :points => MatchingSettings.qualified_rank_score)
             = t("leagues.matching.prove_in", :count => @league.previous.count)
             = raw @league.previous.map{|l| link_to l.name, league_path(l)}.join(", ")
 .league_info

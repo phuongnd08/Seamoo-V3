@@ -14,7 +14,7 @@ def create_match_for_users(league, users)
 end
 
 Given /^these users$/ do |table|
-  table.raw.each{|row| User.create!(:display_name => row.first, :email => row.first + "@#{Site.domain}")}
+  table.raw.each{|row| User.create!(:display_name => row.first, :email => row.first + "@#{SiteSettings.domain}")}
 end
 
 Given /^category (\w+) is available$/ do |category_name|
@@ -43,7 +43,7 @@ Given /^(?:a|an) (\w+) match between ([\w\s]+) is started$/ do |league_name, use
   users = find_users_by_list(user_list)
   match = create_match_for_users(League.find_by_name(league_name), users)
   skip_timestamps(Match) do
-    match.update_attribute(:created_at, Time.now - Matching.started_after.seconds)
+    match.update_attribute(:created_at, Time.now - MatchingSettings.started_after.seconds)
   end
 end
 
@@ -51,7 +51,7 @@ Given /^(?:a|an) (\w+) match between ([\w\s]+) is finished$/ do |league_name, us
   users = find_users_by_list(user_list)
   match = create_match_for_users(League.find_by_name(league_name), users)
   skip_timestamps(Match) do
-    match.update_attribute(:created_at, Time.now - Matching.started_after.seconds - Matching.ended_after.seconds)
+    match.update_attribute(:created_at, Time.now - MatchingSettings.started_after.seconds - MatchingSettings.duration.seconds)
   end
 end
 
@@ -68,7 +68,7 @@ Given /^(\w+) want to join (\w+) (\d+) minutes ago$/ do |username, league_name, 
 end
 
 Given /^all data is fresh$/ do
-  Utils::Memcached::Common.client.flush_all
+  Utils::Caching::Common.client.flushdb
 end
 
 Then /^there is (?:only )?(\d+) (\w+) match(?:es)? for (\w+)$/ do |count, league_name, username|
@@ -86,7 +86,7 @@ Given /^first (\w+) match use default questions$/ do |league_name|
   match = league.matches.first
   Rails.logger.warn("But first league match is nil") if match.nil?
   match.questions.clear
-  Matching.questions_per_match.times.each do |i|
+  MatchingSettings.questions_per_match.times.each do |i|
     match.questions << Question.all[i]
   end
 end
@@ -94,8 +94,8 @@ end
 Given /^league (\w+) has (\d+) questions$/ do |league_name, count|
   league = League.find_by_name(league_name)
   count.to_i.times do |i|
-    question = Question.create_multiple_choices("Question \##{i+1}", 
-                                                {'Option #a' => true, 'Option #b' => false}, 
+    question = Question.create_multiple_choices("Question \##{i+1}",
+                                                {'Option #a' => true, 'Option #b' => false},
                                                   :category => league.category, :level => league.level)
   end
 end
@@ -107,7 +107,7 @@ end
 Given /^league (\w+) has (\d+) follow pattern questions$/ do |league_name, count|
   league = League.find_by_name(league_name)
   count.to_i.times do |i|
-    question = Question.create_follow_pattern("Follow Pattern \##{i+1}", 'patt[ern]', 
+    question = Question.create_follow_pattern("Follow Pattern \##{i+1}", 'patt[ern]',
                                               :category => league.category, :level => league.level)
   end
 end
@@ -122,27 +122,27 @@ end
 
 Given /^(\w+) is already at the last question$/ do |username|
   match_user = MatchUser.find_by_user_id(User.find_by_display_name(username).id)
-  match_user.send(:current_question_position=, Matching.questions_per_match - 1)
+  match_user.send(:current_question_position=, MatchingSettings.questions_per_match - 1)
   match_user.save!
 end
 
 Given /^(\w+) finished his match$/ do |username|
   match_user = MatchUser.find_by_user_id(User.find_by_display_name(username).id)
-  match_user.add_answer(Matching.questions_per_match - 1, 'u')
+  match_user.add_answer(MatchingSettings.questions_per_match - 1, 'u')
   match_user.save!
 end
 
 Given /^first (\w+) match is ended$/ do |league_name|
   league = League.find_by_name(league_name)
   skip_timestamps(Match) do
-    league.matches.first.update_attribute(:created_at, (Matching.started_after + Matching.ended_after + 1).seconds.ago)
+    league.matches.first.update_attribute(:created_at, (MatchingSettings.started_after + MatchingSettings.duration + 1).seconds.ago)
   end
 end
 
 Given /^first (\w+) match will be ended in (\d+) seconds$/ do |league_name, seconds|
   league = League.find_by_name(league_name)
   skip_timestamps(Match) do
-    league.matches.first.update_attribute(:created_at, (Matching.started_after + Matching.ended_after - seconds.to_i).seconds.ago)
+    league.matches.first.update_attribute(:created_at, (MatchingSettings.started_after + MatchingSettings.duration - seconds.to_i).seconds.ago)
   end
 end
 
@@ -153,7 +153,7 @@ When /^(\w+) request to leave his current (\w+) match$/ do |username, league_nam
 end
 
 Given /^all matches will be started after (\d+) seconds$/ do |seconds|
-  Matching.stub(:started_after).and_return(seconds.to_f)
+  MatchingSettings.stub(:started_after).and_return(seconds.to_f)
 end
 
 Given /^all matches will immediately start$/ do
@@ -183,7 +183,7 @@ Given /^(\w+) made (\d+) ((?:in)?correct) answers$/ do |username, number, correc
     multiple_choice = question.data
     answer = if correct
                correct_answer(multiple_choice)
-             else 
+             else
                ((0...multiple_choice.options.size).to_a - [correct_answer(multiple_choice)]).first
              end
     match_user.add_answer(match_user.current_question_position, answer.to_s)
@@ -198,7 +198,7 @@ Given /^next question rendering will be delayed$/ do
       var args = arguments;
       window.setQuestionDelayedCall = function(){
         window.oldSetQuestion.apply($, args);
-      } 
+      }
     }
   }
 end
@@ -206,7 +206,7 @@ end
 Given /^next question rendering is resumed$/ do
   page.execute_script %{
     window.setQuestionDelayedCall();
-  } 
+  }
 end
 
 Then /^\w+ should see indicator of "([^"]*)"$/ do |text|
