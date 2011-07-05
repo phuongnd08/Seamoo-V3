@@ -11,6 +11,20 @@ describe Nest, :caching => true do
     @n[:foo].get.should == "wow"
   end
 
+  it "should be extended with more getter" do
+    @n[:foo].set 1
+    @n[:foo].get_i.should == 1
+    @n[:foo].set false
+    @n[:foo].get_b.should == false
+    @n[:foo].set true
+    @n[:foo].get_b.should == true
+  end
+
+  it "should handle nil  graciously" do
+    @n[:foo].set nil
+    @n[:foo].get.should == nil
+  end
+
   it "should incr value properly" do
     @n[:foo].incr.should == 1
     @n[:foo].incr.should == 2
