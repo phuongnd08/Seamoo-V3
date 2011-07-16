@@ -1,5 +1,5 @@
 class Nest
-  alias :gets :get
+  alias :get_s :get
 
   def get_i
     self.get.to_i

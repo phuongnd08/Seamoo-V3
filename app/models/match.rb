@@ -4,6 +4,7 @@ class Match < ActiveRecord::Base
   has_many :match_questions, :order => 'id ASC'
   has_many :questions, :through => :match_questions
   belongs_to :league
+  validates :league, :presence => true
 
   before_create :fetch_questions
 

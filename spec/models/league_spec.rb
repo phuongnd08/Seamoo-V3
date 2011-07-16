@@ -21,93 +21,59 @@ describe League do
 
     it "should be maintained correctly" do
       now = Time.now.to_i
-      @league.send(:user_match_ticket)[1].set "abc_#{now}"
-      @league.send(:user_lastseen)[1].set "lastseen_#{now}"
-      @league.send(:user_match_ticket)[1].get.should == "abc_#{now}"
-      @league.send(:user_lastseen)[1].get.should == "lastseen_#{now}"
+      @league.send(:ticket)[1].set "abc_#{now}"
+      @league.send(:ticket)[1].get.should == "abc_#{now}"
     end
   end
 
   describe "coordinate requests in league", :caching => true do
     before(:each) do
-      @category = Factory(:category)
-      @user1 = Factory(:user)
-      @user2 = Factory(:user)
-      @questions = []
-      (1..3).each do |t|
-        @questions << Factory(:question, :level => 0, :category => @category)
-      end
-      @league = League.create!(:level => 0, :category => @category)
+      @users = (1..5).map{|index| Factory(:user)}
+      @league = Factory(:league_with_questions)
     end
 
-    describe "request_match" do
-      it "should never mess up if user request for match again after match already started" do
-        initial_time = Time.now
-        Time.stub(:now).and_return(initial_time)
-        match_1t = @league.request_match(@user1.id)
-        match_1a = @league.request_match(@user2.id)
-        match_1b = @league.request_match(@user1.id)
-        match_1t.should be_nil
-        match_1a.should_not be_nil
-        match_1b.should == match_1a
-
-        MatchingSettings.started_after.step(MatchingSettings.duration, MatchingSettings.requester_stale_after - 1) do |t|
-          Time.stub(:now).and_return(initial_time + t.seconds)
-          @league.request_match(@user1.id)
-          @league.request_match(@user2.id)
+    describe "match_for" do
+      context "user is not in any match" do
+        it "should route user to proper match" do
+          @league.match_for(@users[0]).id.should == Match.first.id
+          @league.match_for(@users[1]).id.should == Match.first.id
+          @league.match_for(@users[2]).id.should == Match.first.id
+          @league.match_for(@users[3]).id.should == Match.first.id
+          @league.match_for(@users[4]).id.should == Match.first.id + 1
         end
-        Time.stub(:now).and_return(initial_time + (MatchingSettings.started_after + MatchingSettings.duration + 1).seconds)
-        debugger
-        match_2t = @league.request_match(@user1.id)
-        match_2a = @league.request_match(@user2.id)
-        match_2b = @league.request_match(@user1.id)
-
-        match_2t.should be_nil
-        match_2a.should_not be_nil
-        match_2b.should == match_2a
-
-        match_2a.id.should == match_1a.id+1
       end
 
-      it "should assign questions to match" do
-        MatchingSettings.stub(:questions_per_match).and_return(3)
-        @league.request_match(@user1.id)
-        match = @league.request_match(@user2.id)
-        match.questions.map(&:id).to_set.should == @questions.map(&:id).to_set
+      context "match generation thread got stuck" do
+        before(:each) do
+          @league.send(:ticket_counter).incr
+        end
+        it "should route user to no match" do
+          @league.match_for(@users[0]).should be_nil
+        end
+
+        it "should route user to new match after stuck time" do
+          now = Time.now
+          Time.stub(:now).and_return(now)
+          @league.match_for(@users[0]).should be_nil
+          Time.stub(:now).and_return(now + (MatchingSettings.stuck_time + 1).seconds)
+          @league.match_for(@users[0]).id.should == Match.first.id
+        end
       end
 
-      it "should handle situation where first_requester_last_seen evaluated to nil" do
-        now = Time.now
-        Time.stub(:now).and_return(now)
-        @league.request_match(@user1.id)
-        @league.send(:user_lastseen)[@user1.id] = nil
-        MatchingSettings.stub(:requester_stale_after).and_return(0.1)
-        @league.request_match(@user2.id)
-        match_1 = @league.request_match(@user1.id)
-        match_2 = @league.request_match(@user2.id)
-        match_1.should_not be_nil
-        match_2.should == match_1
-      end
-    end
+      context "user is already in a match" do
+        context "user think that match is still joinable" do
+          it "should route user to that match" do
+            @league.match_for(@users[1]).id.should == Match.first.id
+            @league.match_for(@users[1]).id.should == Match.first.id
+          end
+        end
 
-    describe "waiting_users_info" do
-      it "should return number users are waiting for match" do
-        @league.request_match(@user1.id)
-        @league.waiting_users_info.count.should  == 1
-        @league.request_match(@user1.id)
-        @league.waiting_users_info.count.should == 1
-        @league.request_match(@user2.id)
-        @league.waiting_users_info.count.should == 2
-      end
-
-      it "should take into account the time" do
-        now = Time.now
-        Time.stub(:now).and_return(now - MatchingSettings.requester_stale_after.seconds)
-        @league.request_match(@user1.id)
-        Time.stub(:now).and_return(now)
-        @league.waiting_users_info.count.should  == 0
-        @league.request_match(@user1.id)
-        @league.waiting_users_info.count.should  == 1
+        context "user doesn't think that match is still joinable" do
+          it "should route user to next proper match" do
+            @league.match_for(@users[1]).id.should == 1
+            @league.match_for(@users[1], true).id.should == 2
+          end
+        end
       end
     end
   end

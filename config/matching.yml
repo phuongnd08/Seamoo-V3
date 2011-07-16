@@ -4,7 +4,9 @@ development: &development
   started_after: 5
   duration: 150
   questions_per_match: 3
-  users_per_match: 4
+  max_users_per_match: 4
+  min_users_per_match: 2
+  stuck_time: 5
   waiting_slots_size: 10 # this slots size used to calculate number of users waiting for match, so that auto bot can be launched
   active_slots_size: 50 # this slots size used to store 50 very last active users of league
   questions_per_cache_block: 5 # number of questions will be preloaded in order to make sure user always have smooth experience doing match
