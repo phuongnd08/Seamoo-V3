@@ -4,10 +4,11 @@ Factory.define :category do |c|
 end
 
 Factory.define :category_with_questions, :parent => :category do |c|
-  c.questions { |qs| [
-    qs.association(:question, :level => 0), 
-    qs.association(:question, :level => 0), 
-    qs.association(:question, :level => 0)] }
+  c.questions { |qs|
+    (0..MatchingSettings.questions_per_match).map {
+      qs.association(:question, :level => 0)
+    }
+  }
 end
 
 Factory.define :active_category, :parent => :category do |s|

@@ -1,6 +1,4 @@
 development: &development
-  requester_stale_after: 50
-  user_inactive_after: 400
   started_after: 5
   duration: 150
   questions_per_match: 3

@@ -6,22 +6,53 @@ class Match < ActiveRecord::Base
   belongs_to :league
   validates :league, :presence => true
 
-  before_create :fetch_questions
+  private
+  @@attrs = [
+    :ticket,
+    :counter
+  ]
+  @@attrs.each do |attr|
+    self.class_eval %{
+      protected
+        def #{attr}
+          @nest_for_#{attr} ||= Nest.new("match:" + self.id.to_s + ":#{attr}")
+        end
+    }
+  end
 
-  def seconds_until_started
+  public
+  def subscribe(user)
+    unless ticket[user.id].exists
+      unless started?
+        if ticket[user.id].incr == 1
+          match_users << MatchUser.new(:user => user)
+          if counter.incr == MatchingSettings.min_users_per_match
+            self.formed_at = Time.now
+            fetch_questions # this in turn save the formed at attr
+          end
+        end
+      end
+    end
+
+    ticket[user.id].exists
+  end
+
+  def formed?
+    self.formed_at.present? && self.formed_at >= Time.now
+  end
+
+  def started_at
+    if self.formed_at
+      formed_at + MatchingSettings.started_after.seconds
+    end
+  end
+
+  def seconds_until_start
     [0, (started_at - Time.now).round].max
   end
 
-  def seconds_until_ended
-    [0, (ended_at- Time.now).round].max
-  end
-
   def started?
-    Time.now >= started_at
-  end
-
-  def finished?
-    ended? || (finished_at.present? && Time.now >= finished_at)
+    started_at.present? && Time.now >= started_at
   end
 
   def ended?
@@ -32,12 +63,12 @@ class Match < ActiveRecord::Base
     started_at + MatchingSettings.duration.seconds
   end
 
-  def started_at
-    created_at + MatchingSettings.started_after.seconds
+  def finished?
+    ended? || (finished_at.present? && Time.now >= finished_at)
   end
 
   def fetch_questions
-    self.questions = league.random_questions(MatchingSettings.questions_per_match) if self.questions.empty?
+    self.update_attribute(:questions, league.random_questions(MatchingSettings.questions_per_match)) if self.questions.empty?
   end
 
   def check_if_finished!
@@ -55,7 +86,7 @@ class Match < ActiveRecord::Base
     match_users.map{|mu| [mu, mu.score]}.sort_by{|mus| mus.last}.map{|mus| mus.first}.reverse
   end
 
-  def match_user_for(user_id)
-    self.match_users.find_by_user_id(user_id)
+  def match_user_for(user)
+    self.match_users.find_by_user_id(user.id)
   end
 end
