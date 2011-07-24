@@ -15,13 +15,12 @@ class League < ActiveRecord::Base
     :ticket_counter,
     :stuck_since
   ]
+  protected
   @@attrs.each do |attr|
-    self.class_eval %{
-      protected
-        def #{attr}
-          @nest_for_#{attr} ||= Nest.new("league:" + self.id.to_s + ":#{attr}")
-        end
-    }
+    define_method attr do
+      @nest ||= {}
+      @nest[attr] ||= Nest.new("league:#{self.id}:#{attr}")
+    end
   end
 
   public

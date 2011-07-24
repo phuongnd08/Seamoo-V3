@@ -1,28 +1,20 @@
 require 'spec_helper'
 
 describe MatchesController do
-
-  def mock_match(stubs={})
-    (@mock_match ||= mock_model(Match).as_null_object).tap do |match|
-      match.stub(stubs) unless stubs.empty?
-    end
+  before(:each) do
+    @match = Factory(:match)
+    @user = Factory(:user)
+    @match.users << @user
   end
 
   describe "GET index" do
     it "assigns all matches as @matches" do
-      Match.stub(:all) { [mock_match] }
       get :index
-      assigns(:matches).should eq([mock_match])
+      assigns(:matches).should == [@match]
     end
   end
 
   describe "GET show" do
-    before(:each) do
-      @match = Factory(:match)
-      @user = Factory(:user)
-      @match.users << @user
-    end
-
     it "should require use_formulae if the league do so" do
       @match.league.update_attribute(:use_formulae, true);
       get :show, :id => @match.id
@@ -34,7 +26,7 @@ describe MatchesController do
       assigns(:match).should == @match
     end
 
-    describe "for players of the match" do
+    context "for players of the match" do
       before(:each) do
         controller.stub(:current_user).and_return(@user)
       end
@@ -67,11 +59,25 @@ describe MatchesController do
       end
     end
 
-    describe "for players not participating in match" do
+    context "for players not participating in match" do
       it "should hide all answers" do
         get :show, :id => @match.id
         assigns[:hide_all_answers].should be_true
       end
+    end
+  end
+
+  describe 'POST submit_answer' do
+    before(:each) do
+      @match.fetch_questions!
+      controller.stub(:current_user).and_return(@user)
+    end
+
+    it "should save user question" do
+      Services::PubSub.stub(:publish)
+      post :submit_answer, :id => @match.id, :position => 1, :answer => "2"
+      @match.match_user_for(@user).answers[1].should == "2"
+      JSON.parse(response.body)["successful"].should be_true
     end
   end
 end

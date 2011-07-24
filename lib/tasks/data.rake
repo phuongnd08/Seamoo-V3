@@ -60,7 +60,6 @@ namespace :data do
 
   desc "Transfer all images into S3"
   task :s3ize => :environment do
-    require 'aws/s3'
     require 'RMagick' unless defined?(Magick)
     errors = []
     do_with "IN" do |in_path|

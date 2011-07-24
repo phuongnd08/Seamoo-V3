@@ -1,2 +1,2 @@
-rvm 1.9.2-p180-patched@dautri --create
+rvm 1.9.2-p290@dautri --create
 export AUTOFEATURE=true

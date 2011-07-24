@@ -3,11 +3,11 @@
   .left
     .internal
       #status
-      #match_players{:style => 'display: none'}
+      #match_players
         .internal
           %ul.list
       #exit{:style => 'display: none'}
-        = form_tag leave_current_match_league_path(@league), :id => "leave_current_match_form" do 
+        = form_tag leave_current_match_league_path(@league), :id => "leave_current_match_form" do
           = submit_tag t('.leave_current_match'), :class => "sad"
     .internal.chatting
       = render :partial => 'chat'
@@ -30,15 +30,17 @@
   var remainedTime;
   var loadingMoreQuestions = false;
   var questionsLoadedCallback;
-  var statusChanged = false;
   var currentStatus;
+  var backloggedMessages = [];
+  var playerViews = {};
+  var matchInfo = {};
 
-  var MAX_RETRIES = 20; 
+  var MAX_RETRIES = 20;
 
   var statusHTML = #{['waiting', 'formed', 'started', 'you_finished'].inject({}){|hash, key| hash[key] = t "matches.#{key}"; hash}.to_json};
-  var avatarHTML = #{render(:partial => "users/avatar", :locals => { :avatar_size => '{avatar_size}', :avatar_url => '{avatar_url}', :text => '{text}', :title => '{title}'}).to_json};
+  var playerHTML = #{render(:partial => "users/player", :locals => { :avatar_size => '{avatar_size}', :avatar_url => '{avatar_url}', :display_name => '{display_name}'}).to_json};
 
-  $(function(){ 
+  $(function(){
     $('#leave_current_match_form').submit(function(){return confirm("Leave current match?");});
     requestMatch();
   })
@@ -48,25 +50,77 @@
     var caller = function(){
       $.ajax({
         type: 'post',
-        url: ["/#{I18n.locale}/leagues/", leagueId, "/request_match"].join(""),
+        url: "/#{I18n.locale}/leagues/" + leagueId + "/request_match",
         dataType: 'json',
         success: function(data){
           if (data.match_id){
             matchId = data.match_id;
-            requestMatchInfo();
-          } else {
             setStatus('waiting', data);
+            subscribeMatch(data.match_id);
+          } else {
             setTimeout(requestMatch, 1000);
           }
           retrier.reset();
         },
-        error: function(data){
+        error: function(){
           retrier.retry(requestMatch);
         }
       });
     }
     return caller;
   })();
+
+  var registerMatch = (function(){
+    var retrier = new Retrier();
+    var caller = function(){
+      $.ajax({
+        type: 'post',
+        url: "/#{I18n.locale}/matches/" + matchId + "/register",
+        dataType: 'json',
+        success: function(info){
+          if (info) {
+            setMatchInfo(info);
+            initialRequestComplete = true;
+            for (var i=0; i < backloggedMessages.length; i++) processMessage(backloggedMessages[i]);
+          } else {
+            alert("Match reject me");
+          }
+          retrier.reset();
+        },
+        error: function(){
+          retrier.retry(registerMatch);
+        }
+      });
+    }
+    return caller;
+  })()
+
+  function subscribeMatch(){
+    var client = new Faye.Client("#{SiteSettings.pubsub.server}/#{SiteSettings.pubsub.mount_point}");
+    var channel = '/matches/' + matchId;
+    initialRequestComplete = false;
+    client.subscribe(channel, function(message){
+      if (initialRequestComplete){
+        processMessage(message);
+      } else {
+        backloggedMessages.push(message);
+      }
+    });
+
+    registerMatch();
+  }
+
+  function processMessage(message){
+    switch(message.type){
+      case "join":
+      case "player_update":
+        showPlayer(message.user);
+        break;
+      case "status_changed":
+        setMatchInfo(message.info);
+        break;
+    }
+  }
 
   function requestCurrentQuestion(callback){
     if (currentQuestionPosition >= questions.length){
@@ -82,7 +136,7 @@
   var loadMoreQuestions = (function(){
     var retrier = new Retrier();
     var caller = function(callback){
-      if (callback != null) questionsLoadedCallback = callback; 
+      if (callback != null) questionsLoadedCallback = callback;
       if (!loadingMoreQuestions){
         $.ajax({
           type: 'post',
@@ -103,7 +157,7 @@
             }
             retrier.reset();
           },
-          error: function(data){
+          error: function(){
             retrier.retry(function(){
               loadMoreQuestions(callback)
             });
@@ -118,41 +172,19 @@
   })();
 
 
-  var requestMatchInfo = (function(){
-    var retrier = new Retrier();
-    var caller = function(){
-      if (!requestingMatchInfo) {
-        $.ajax({
-          type: 'post',
-          url: ["/#{I18n.locale}/matches/", matchId, "/infor"].join(""),
-          dataType: 'json',
-          beforeSend: function(){ requestingMatchInfo = true; },
-          complete: function(){ requestingMatchInfo = false; },
-          success: function(data){
-            setMatchInfo(data);
-            retrier.reset();
-          },
-          error: function(data){
-            retrier.retry(requestMatchInfo);
-          }
-        });
-      }
-     }
-     return caller;
-   })();
-
   function setMatchInfo(info){
-    if (info.status){
-      setStatus(info.status, info);
-      switch (info.status){
+    var statusChanged = (info.status != matchInfo.status);
+    $.extend(matchInfo, info);
+
+    if (matchInfo.status){
+      setStatus(matchInfo.status, matchInfo);
+      switch (matchInfo.status){
         case 'formed':
-          showCounter(info.seconds_until_started);
-          break;
-        case 'you_finished':
-          showCounter(info.seconds_until_ended);
+          showCounter(info.seconds_until_start);
           break;
         case 'started':
-          showCounter(info.seconds_until_ended);
+        case 'you_finished':
+          showCounter(info.seconds_until_end);
           break;
         default:
           stopCounter();
@@ -160,15 +192,16 @@
     }
 
     if (statusChanged){
-      if (info.status == 'started'){
+      if (matchInfo.status == 'started'){
         //switch from no question -> current questions
-        currentQuestionPosition = info.current_question_position
+        currentQuestionPosition = matchInfo.current_question_position || 0
         requestCurrentQuestion(setQuestion);
-      } else clearQuestion();
+      } else if (matchInfo.status == 'you_finished' || matchInfo.status == 'finished') clearQuestion();
     }
 
-    setPlayers(info.players, info.status);
-    setTimeout(requestMatchInfo, statusRecheckInterval);
+    $.each(info.players || [], function(index, player){
+      showPlayer(player);
+    });
   }
 
   function stopCounter(){
@@ -178,55 +211,60 @@
   function showCounter(time){
     stopCounter();
     remainedTime = time;
-    counterHandle = setTimeout(refreshCounter, 1000); 
+    counterHandle = setTimeout(refreshCounter, 1000);
   }
 
   function refreshCounter(){
-   if (remainedTime== 0){
-      requestMatchInfo();
+    if (remainedTime== 0){
+      if (matchInfo.status == 'formed'){
+        setMatchInfo({ status: 'started', seconds_until_end: matchInfo.duration });
+      }
     } else {
       remainedTime--;
       var params;
-      if (currentStatus == 'formed'){
-        params = { seconds_until_started: remainedTime}
+      if (matchInfo.status == 'formed'){
+        params = { seconds_until_start: remainedTime}
       } else {
-        params = { seconds_until_ended: remainedTime}
+        params = { seconds_until_end: remainedTime}
       }
-      setStatus(currentStatus, params);
+      setStatus(matchInfo.status, params);
       counterHandle = setTimeout(refreshCounter, 1000);
     }
   }
 
-  var submitAnswer = (function(){
+  var sendAnswer = (function(){
     var retrier = new Retrier();
     var caller = function (answer){
-      disableQuestionButtonsAndInputs();
-      var data = {
-        position: currentQuestionPosition
-      } 
-      if (answer != null) data.answer = answer;
-
       $.ajax({
         type: 'post',
         url: ["/#{I18n.locale}/matches/", matchId, "/submit_answer"].join(""),
         dataType: 'json',
-        data: data,
+        data: answer,
         success: function(){
-          if (currentQuestionPosition == questionsPerMatch) requestMatchInfo();
           retrier.reset();
         },
-        error: function(data){
-          retrier.retry(function(){submitAnswer(answer)});
+        error: function(){
+          retrier.retry(function(){sendAnswer(answer)});
         }
       })
-
-      currentQuestionPosition++;
-      if (currentQuestionPosition < questionsPerMatch){
-        requestCurrentQuestion(setQuestion);
-      }
     }
     return caller;
   })();
+
+  function submitAnswer(currentAnswer){
+    disableQuestionButtonsAndInputs();
+    var answer = {
+      position: currentQuestionPosition
+    }
+    if (currentAnswer != null) answer.answer = currentAnswer;
+    sendAnswer(answer);
+    currentQuestionPosition++;
+    if (currentQuestionPosition < questionsPerMatch){
+      requestCurrentQuestion(setQuestion);
+    } else {
+      setMatchInfo({status: "you_finished", seconds_until_end: remainedTime})
+    }
+  }
 
   function highlightPattern(input){
     var hint = $(input).data('hint');
@@ -261,48 +299,48 @@
     return formatted;
   }
 
-  function setStatus(status, params){
-    statusChanged = (status != currentStatus);
-    currentStatus = status;
+  function setStatus(status, info){
+    matchInfo.status = status;
     if (status == 'finished') {
-      window.location = params['match_result_url'];
+      window.location.replace(info['result_url']);
     } else {
-      $('#status').html(formatString(statusHTML[status], params));
+      $('#status').html(formatString(statusHTML[status], info));
       if (status == "waiting")
-        $('#exit, #match_players').hide();
+        $('#exit').hide();
       else
-        $('#exit, #match_players').show();
+        $('#exit').show();
     }
   }
 
-  function setPlayers(players, status){
-    $('#match_players ul.list').empty();
-    $.each(players, function(index, player){
-      var text = [player.display_name];
-      var started = status != 'formed';
-      var finished = started && player.current_question_position == questionsPerMatch;
-      if (started){
-        if (finished){
-          text.push(" (finished)");
-        } else {
-          text = text.concat([" (", player.current_question_position + 1, "/", questionsPerMatch, ")"]);
-        }
+  function newPlayerView(player){
+    var view = $(formatString(playerHTML, $.extend({}, player, { avatar_size: 40 })));
+    view.data('player', player);
+    if ($('#match_players ul.list li').size() != 0) view.addClass("notfirst");
+    $('#match_players ul.list').append(view);
+    return view;
+  }
+
+  function getPlayerView(player){
+    return (playerViews[player.id] || (playerViews[player.id] = newPlayerView(player)));
+  }
+
+  function showPlayer(player){
+    var view = getPlayerView(player);
+    var started = (matchInfo.status != 'formed' && matchInfo.status != 'waiting');
+    var finished = started && player.current_question_position == questionsPerMatch;
+    var title = view.data('player').display_name;
+    if (started){
+      if (finished){
+        title += " (finished)"
+      } else {
+        title += " (" + (player.current_question_position + 1) + "/" + questionsPerMatch + ")";
       }
-      var html = formatString(avatarHTML, $.extend({}, player, { avatar_size: 40, title: text.join(""), text: "" }));
-      var li = $(html);
-      if (index > 0) li.addClass("notfirst");
-      if (started){
-        var img = li.find('img');
-        if (finished){
-          li.css({textAlign: "right"});
-        } else {
-          var iw = 40;
-          var fw = $('#match_players ul.list').width();
-          img.css({marginLeft: (fw - iw) * player.current_question_position / questionsPerMatch + "px"})
-        }
-      }
-      $('#match_players ul.list').append(li);
-    });
+      var iw = 40;
+      var fw = view.parent().width();
+      view.find('img').css({marginLeft: (fw - iw) * player.current_question_position / questionsPerMatch + "px"})
+    }
+
+    view.find('img').attr('title', title);
   }
 
   function setQuestion(question){
@@ -324,7 +362,7 @@
       submitAnswer(null);
     });
   }
-  
+
   function bindHighlight(input, hinter){
     $(input).data('hint', $(hinter).text());
     $(input).data('hinter', $(hinter));

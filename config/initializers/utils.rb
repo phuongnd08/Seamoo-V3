@@ -1,2 +1,3 @@
-require "#{Rails.root}/lib/nest_add_on"
-require "#{Rails.root}/lib/string_utils"
+["nest_add_on", "string_utils"].each do |util|
+  require "#{Rails.root}/lib/#{util}"
+end

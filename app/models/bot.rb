@@ -78,7 +78,7 @@ class Bot < User
 
   def run
     # try to answer un-answered question at a predefined speed
-    unless match_id.get.nil?
+    unless match_id.get_i == 0
       match = Match.find_by_id(match_id.get.to_i)
       unless match.nil?
         match_user = match.match_users.find_by_user_id(self.id)

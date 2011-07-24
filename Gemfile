@@ -1,10 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.0.0'
-gem 'rake', '0.8.7'
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+gem 'rake'
 
 gem 'escape_utils' # dealing with this warning 'regex match against utf-8 string'
 gem 'mysql2', "~> 0.2.7"
@@ -23,31 +20,23 @@ gem "fancy-buttons", ">=1.1.0.alpha.1"
 gem "will_paginate", "~> 3.0.pre2"
 gem "hoptoad_notifier"
 gem "redis"
-gem "resque"
 gem "nest"
+gem "resque"
 
-# Use unicorn as the web server
-gem 'unicorn', :require => false
-gem 'aws-s3'
+gem 'aws-s3', :require => 'aws/s3'
 
-# Deploy with Capistrano
-# gem 'capistrano'
+gem 'eventmachine'
+gem 'faye'
 
-# Bundle the extra gems:
-# gem 'bj'
-# gem 'nokogiri'
-# gem 'sqlite3-ruby', :require => 'sqlite3'
-# gem 'aws-s3', :require => 'aws/s3'
 
-# Bundle gems for the local environment. Make sure to
-# put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
   gem 'capistrano'
   gem 'rspec-rails', "~> 2.5"
-  gem 'rmagick'
+  gem 'rmagick', :require => false
   gem 'rio', "~> 0.4.3.1", :git => 'https://github.com/wishdev/rio.git'
-  gem "ruby-debug19", :require => 'ruby-debug'
+  gem "ruby-debug19", :require => 'ruby-debug', :platforms => 'ruby_19'
+  gem 'ruby-debug', :platforms => 'rbx'
 end
 
 group :test do
@@ -58,7 +47,7 @@ group :test do
   gem 'cucumber-rails'
   gem 'spork'
   gem 'launchy'
-  gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
+  gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git', :branch => 'async_is_my_bitch'
   gem 'parallel'
   gem 'pickle'
 end
@@ -66,7 +55,6 @@ end
 group :development do
   gem "rails3-generators"
   gem 'haml-rails'
-  gem "heroku"
   gem "hpricot", :require => false
   gem "capistrano", :require => false
 end

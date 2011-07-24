@@ -16,11 +16,10 @@ describe MatchUser do
   describe "deal with questions" do
     before(:each) do
       #create the match with 3 questions
-      @league = mock_model(League)
-      @match = mock_model(Match)
-      @match.stub(:questions).and_return(['q0', 'q1', 'q2'])
-      @match.stub(:check_if_finished!)
-      @match_user = MatchUser.new(:match => @match)
+      @match = Factory(:match)
+      @match.fetch_questions!
+      @user = Factory(:user)
+      @match_user = MatchUser.new(:match => @match, :user => @user)
     end
 
     describe "answers" do
@@ -37,6 +36,10 @@ describe MatchUser do
     end
 
     describe "add_answer" do
+      before(:each) do
+        Services::PubSub.stub(:publish)
+      end
+
       it "should generate a hash entry" do
         @match_user.add_answer(0, 'abc')
         @match_user.add_answer(2, 'xyz')
@@ -58,8 +61,19 @@ describe MatchUser do
         @match_user.add_answer(2, 'xyz')
         @match_user.current_question_position.should == 3
       end
+
+      it "should update user info to match channel" do
+        Services::PubSub.should_receive(:publish).with(
+          "/matches/#{@match.id}",
+          {
+            :type => :player_update,
+            :user => { :id=> @user.id, :current_question_position=>1 }
+          }
+        )
+        @match_user.add_answer(0, 'abc')
+      end
     end
-    
+
     describe "finished" do
       it "should return value according to whether finished_at is set" do
         @match_user.finished_at = nil
@@ -68,16 +82,16 @@ describe MatchUser do
         @match_user.should be_finished
       end
     end
-    
+
     describe "current_question" do
       it "should return according to current_question_position" do
         @match_user.current_question_position= 0
-        @match_user.current_question.should == "q0" 
+        @match_user.current_question.should == @match.questions[0]
         @match_user.current_question_position= 1
-        @match_user.current_question.should == "q1" 
+        @match_user.current_question.should == @match.questions[1]
       end
     end
-    
+
     describe "after_save" do
       describe "match user finished" do
         it "should request match to check if it has finished" do
@@ -99,6 +113,7 @@ describe MatchUser do
       before(:each) do
         MatchingSettings.stub(:questions_per_match).and_return(3)
         @match= Factory(:match)
+        @match.fetch_questions!
         @user = Factory(:user)
         @match_user = MatchUser.create(:match => @match, :user => @user)
         @match_user.add_answer(0, '0')
@@ -112,7 +127,7 @@ describe MatchUser do
 
       describe "as percent" do
         it "should return score as percent of max possible score" do
-          @match_user.score_as_percent.should == 67 
+          @match_user.score_as_percent.should == 67
         end
       end
       describe "record!" do

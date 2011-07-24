@@ -1,6 +1,7 @@
 class MatchesController < ApplicationController
   before_filter :load_match, :except => [:index]
-  before_filter :require_user, :only => [:infor, :submit_answer_and_get_next_question]
+  before_filter :require_user, :only => [:register, :submit_answer_and_get_next_question]
+
   def index
     @matches = Match.all
   end
@@ -14,36 +15,14 @@ class MatchesController < ApplicationController
     @use_formulae = @match.league.use_formulae
   end
 
-  def infor
+  def register
     respond_to do |format|
       format.json{
-        match_user = nil
-        infor = {}
-        infor[:players] = @match.match_users.map{ |mu| 
-          { 
-            :display_name => mu.user.display_name, 
-            :avatar_url => mu.user.gravatar_url,
-            :current_question_position => mu.current_question_position
-          } 
-        }
-        infor[:status] = if @match.finished?
-                           infor[:match_result_url] = match_url(@match)
-                           :finished
-                         elsif @match.started?
-                           infor[:seconds_until_ended] = @match.seconds_until_ended
-                           @match_user ||= @match.match_users.find_by_user_id(current_user.id)
-                           infor[:current_question_position] = @match_user.current_question_position
-                           if @match_user.finished?
-                             :you_finished
-                           else
-                             :started
-                           end
-                         else
-                           infor[:seconds_until_started] = @match.seconds_until_started
-                           :formed
-                         end
-
-        render :json => infor
+        render :json => if @match.subscribe(current_user)
+          @match.summary.merge :current_question_position => @match.match_user_for(current_user).try(:current_question_position)
+        else
+          nil
+        end
       }
     end
   end
@@ -71,8 +50,8 @@ class MatchesController < ApplicationController
   end
 
   def submit_answer
-    @match_user = @match.match_user_for(current_user.id)
-    @match_user.add_answer(params[:position].to_i, params[:answer])   
+    @match.match_user_for(current_user).
+      add_answer(params[:position].to_i, params[:answer])
     render :json => {:successful => true}
   end
 

@@ -27,6 +27,14 @@ class User < ActiveRecord::Base
     user
   end
 
+  def brief
+    {
+      :id => id,
+      :display_name => display_name,
+      :avatar_url => gravatar_url
+    }
+  end
+
   def age
     Time.now.year - self.date_of_birth.year
   end
@@ -36,7 +44,7 @@ class User < ActiveRecord::Base
   end
 
   def qualified_for?(league)
-    unless league.level == 0 
+    unless league.level == 0
       league.previous.all?{|l| membership_in(l).rank_score >= MatchingSettings.qualified_rank_score}
     else
       true

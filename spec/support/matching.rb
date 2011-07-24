@@ -6,7 +6,6 @@ module RSpec
         # use 3 default questions in order
         if index == users.size - 1
           match = league.matches.first
-          Rails.logger.warn("But first league match is nil") if match.nil?
           match.questions.clear
           ::MatchingSettings.questions_per_match.times.each do |i|
             match.questions << league.category.questions.all[i]
@@ -25,6 +24,7 @@ module RSpec
       end
       league.matches.last
     end
+
     def prepare_league_for_match(questions = [])
       ::MatchingSettings.started_after #trigger settings class initialization
       ::MatchingSettings.stub(:started_after).and_return(0) #all match started immediately
@@ -54,6 +54,9 @@ end
 RSpec.configure do |config|
   # empty memcache before every spec
   config.include(RSpec::Matching)
+  config.before(:each) do
+    visit root_path if example.metadata[:asynchronous]
+  end
 end
 
 begin

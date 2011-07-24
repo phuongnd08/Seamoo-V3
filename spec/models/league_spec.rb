@@ -17,12 +17,15 @@ describe League do
   describe "dynamic accessor", :caching => true do
     before(:each) do
       @league = League.create!(:level => 0)
+      @league2 = League.create!(:level => 0)
     end
 
     it "should be maintained correctly" do
       now = Time.now.to_i
       @league.send(:ticket)[1].set "abc_#{now}"
+      @league2.send(:ticket)[1].set "abc2_#{now}"
       @league.send(:ticket)[1].get.should == "abc_#{now}"
+      @league2.send(:ticket)[1].get.should == "abc2_#{now}"
     end
   end
 

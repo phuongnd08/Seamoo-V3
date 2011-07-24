@@ -31,10 +31,10 @@ vi:
 
   matches:
     finished: Trận đấu đã kết thúc
-    formed: Trận đấu sẽ bắt đầu trong vòng <span class='counter'>{seconds_until_started}</span> giây  
-    started: Trận đấu đã bắt đầu. Thời gian còn <span class='counter'>{seconds_until_ended}</span> giây
+    formed: Trận đấu sẽ bắt đầu trong vòng <span class='counter'>{seconds_until_start}</span> giây
+    started: Trận đấu đã bắt đầu. Thời gian còn <span class='counter'>{seconds_until_end}</span> giây
     waiting: Chờ các đấu thủ khác
-    you_finished: Bạn đã hoàn thành trận đấu của mình. Trận đấu sẽ kết thúc sau <span class='counter'>{seconds_until_ended}</span> giây
+    you_finished: Bạn đã hoàn thành trận đấu của mình. Trận đấu sẽ kết thúc sau <span class='counter'>{seconds_until_end}</span> giây
     show:
       result: Kết quả
       ranking: Xếp hạng
@@ -90,7 +90,7 @@ vi:
   home:
     index:
       competition_system: Hệ thống thi đấu
-  
+
   common:
     join_now: Tham gia ngay
 

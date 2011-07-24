@@ -10,3 +10,6 @@ database.yml
 tags
 features/screenshots/
 dautri.pem
+*.rdb
+**/*.rbc
+**/*/*.rbc

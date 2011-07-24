@@ -141,11 +141,13 @@ describe Bot, :caching => true do
 
     describe "match_id obtained" do
       before(:each) do
-        @match = Match.create(:league => @league)
+        @match = Match.create(:league => @league, :formed_at => @now)
+        @match.fetch_questions!
         @bot.match_id.set @match.id
         @match_user = MatchUser.create(:match => @match, :user => @bot)
         MatchUser.create(:match => @match, :user => Factory(:user)) # match have 2 users
       end
+
       it "should answer questions at predefined speed" do
         Time.stub(:now).and_return(@now + 6.seconds)
         @bot.run

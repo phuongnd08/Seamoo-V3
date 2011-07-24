@@ -11,6 +11,14 @@ class MatchUser < ActiveRecord::Base
     self.current_question_position= index + 1
     self.finished_at = Time.now if (current_question_position== match.questions.size)
     save!
+    Services::PubSub.publish(match.channel, :type => :player_update, :user => brief)
+  end
+
+  def brief
+    {
+      :id => user.id,
+      :current_question_position => current_question_position
+    }
   end
 
   def finished?

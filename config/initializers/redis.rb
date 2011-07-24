@@ -1,1 +1,1 @@
-Redis.current = Redis.connect({}.merge(ServicesSettings.redis).symbolize_keys)
+ENV["REDIS_URL"] = ServicesSettings.redis.url

@@ -20,6 +20,10 @@ describe Match do
     end
 
     describe "subscribe" do
+      before(:each) do
+        Services::PubSub.stub(:publish)
+      end
+
       context "match not started" do
         it "should accept all users" do
           now = Time.now
@@ -63,18 +67,32 @@ describe Match do
             @now = Time.now
             Time.stub(:now).and_return(@now)
             MatchingSettings.stub(:min_users_per_match).and_return(3)
-            3.times do |index|
-              @match.subscribe(@users[index])
+          end
+
+          context "no pubsub" do
+            before(:each) do
+              3.times do |index|
+                @match.subscribe(@users[index])
+              end
+            end
+            it "should mark itself as formed" do
+              @match.formed?.should be_true
+              @match.formed_at.should == @now
+            end
+
+            it "should fetch questions" do
+              @match.questions.should_not be_empty
             end
           end
 
-          it "should mark itself as formed" do
-            @match.formed?.should be_true
-            @match.formed_at.should == @now
-          end
-
-          it "should fetch questions" do
-            @match.questions.should_not be_empty
+          context "with pubsub" do
+            it "should publish a message informing match formed" do
+              Services::PubSub.should_receive(:publish).with("/matches/#{@match.id}", :type => :status_changed, :info => { :status => :formed, :seconds_until_start => 60, :duration => 600 })
+              3.times do |index|
+                Services::PubSub.should_receive(:publish).with("/matches/#{@match.id}", :type => :join, :user => @users[index].brief)
+                @match.subscribe(@users[index])
+              end
+            end
           end
         end
       end
@@ -104,10 +122,34 @@ describe Match do
       end
     end
 
-    describe "started" do
-      it "should return correct value" do
-        Match.new(:formed_at => Time.now - 59.seconds).started?.should == false
-        Match.new(:formed_at => Time.now - 60.seconds).started?.should == true
+    describe "formed?" do
+      context "formed_at set" do
+        it "should return according to difference between formed_at and now" do
+          @now = Time.now
+          Time.stub(:now).and_return(@now)
+          @match = Match.create
+          @match.formed_at = @now
+          @match.formed?.should be_true
+          @match.formed_at = @now - 1.seconds
+          @match.formed?.should be_true
+          @match.formed_at = @now + 1.seconds
+          @match.formed?.should be_false
+        end
+      end
+    end
+
+    describe "started?" do
+      context "formed_at assigned" do
+        it "should return correct value" do
+          Match.new(:formed_at => Time.now - 59.seconds).started?.should == false
+          Match.new(:formed_at => Time.now - 60.seconds).started?.should == true
+        end
+      end
+
+      context "formed_at not assigned" do
+        it "should return false" do
+          Match.new.started?.should == false
+        end
       end
     end
 
@@ -122,10 +164,29 @@ describe Match do
       end
     end
 
+    describe "seconds_until_end" do
+      it "should return number of seconds until match ended" do
+        Match.new(:formed_at => Time.now - MatchingSettings.started_after - 20.seconds).seconds_until_end.should == 580
+        Match.new(:formed_at => Time.now - MatchingSettings.started_after - 60.seconds).seconds_until_end.should == 540
+      end
+
+      it "should not return negative value if the match is started already" do
+        Match.new(:formed_at => Time.now - MatchingSettings.started_after - 620.seconds).seconds_until_end.should == 0
+      end
+    end
+
     describe "ended" do
-      it "should return correct value with respect to Matching constants" do
-        Match.new(:formed_at => Time.now - 659.seconds).ended?.should == false
-        Match.new(:formed_at => Time.now - 660.seconds).ended?.should == true
+      context "formed_at assigned" do
+        it "should return correct value with respect to Matching constants" do
+          Match.new(:formed_at => Time.now - 659.seconds).ended?.should == false
+          Match.new(:formed_at => Time.now - 660.seconds).ended?.should == true
+        end
+      end
+
+      context "formed_at not assigned" do
+        it "should return false" do
+          Match.new.ended?.should == false
+        end
       end
     end
 
@@ -136,29 +197,57 @@ describe Match do
         Match.new(:formed_at => Time.now - 650.seconds, :finished_at => 1.second.ago).finished?.should == true
       end
     end
+
+    describe "status" do
+      it "should varies according to formed_at and now" do
+        @match = Match.new
+        @match.stub(:finished?).and_return(true)
+        @match.status.should == :finished
+        @match.stub(:finished?).and_return(false)
+        @match.stub(:started?).and_return(true)
+        @match.status.should == :started
+        @match.stub(:started?).and_return(false)
+        @match.stub(:formed?).and_return(true)
+        @match.status.should == :formed
+        @match.stub(:formed?).and_return(false)
+        @match.status.should == :waiting
+      end
+    end
   end
 
   describe "check_if_finished!" do
-    it "should update finished_at according to whether all match users finished" do
-      time1 = Time.mktime(2000, 1, 12)
-      time2 = Time.mktime(2000, 1, 13)
-      match = Match.new
-      match.stub(:save!)
-      match_user1 = MatchUser.create
-      match_user2 = MatchUser.create
-      match.match_users = [match_user1, match_user2]
-      match_user1.finished_at = time1
-      match.check_if_finished!
-      match.finished_at.should be_nil
-      match_user2.finished_at = time2
-      match.check_if_finished!
-      match.finished_at.should == time2
+    before(:each) do
+      @match = Factory(:match)
+      @match.match_users << @match_user1 = MatchUser.create
+      @match.match_users << @match_user2 = MatchUser.create
+      @now = Time.now
+      Time.stub(:now).and_return(@now)
+    end
+    context "not all users finished their questions" do
+      it "should not finish the match" do
+        @match_user1.finished_at = @now
+        @match.check_if_finished!
+        @match.reload.finished_at.should be_nil
+      end
     end
 
-    it "should re-save the match object" do
-      match = Match.new
-      match.should_receive(:save!)
-      match.check_if_finished!
+    context "all users finished their questions" do
+      before(:each) do
+        @match_user1.finished_at = @now
+        @match_user2.finished_at = @now
+      end
+
+      it "should finish the match" do
+        Services::PubSub.stub(:publish)
+        @match.check_if_finished!
+        @match.reload.finished_at.should_not be_nil
+      end
+
+      it "should publish status_changed to channel" do
+        Services::PubSub.should_receive(:publish).with(@match.channel, :type => :status_changed, :info => { :status => :finished, :result_url => "/en/matches/#{@match.id}" })
+        @match.check_if_finished!
+        @match.reload.finished_at.should_not be_nil
+      end
     end
   end
 

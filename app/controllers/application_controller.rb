@@ -2,10 +2,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :set_locale
 
-  def default_url_options(options={})
-    options.merge :locale => I18n.locale
-  end
-
   private
 
   def set_locale
@@ -13,6 +9,7 @@ class ApplicationController < ActionController::Base
     I18n.locale = if params[:locale].present? && params[:locale] =~ /^(en|vi)$/
                     params[:locale]
                   else; I18n.default_locale; end
+    Rails.application.routes.default_url_options[:locale] = I18n.locale
   end
 
   def current_user_session
