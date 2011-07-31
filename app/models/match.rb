@@ -11,7 +11,8 @@ class Match < ActiveRecord::Base
   private
   @@attrs = [
     :ticket,
-    :counter
+    :counter,
+    :left
   ]
   protected
   @@attrs.each do |attr|
@@ -27,30 +28,36 @@ class Match < ActiveRecord::Base
   end
 
   def subscribe(user)
-    unless ticket[user.id].exists
-      unless started?
-        if ticket[user.id].incr == 1
-          match_users << MatchUser.new(:user => user)
+    unless left[user.id].get_b
+      unless ticket[user.id].exists
+        unless started?
+          if ticket[user.id].incr == 1
+            match_users << MatchUser.new(:user => user)
 
-          Services::PubSub.publish(self.channel, {
-            :type => :join,
-            :user => user.brief
-          })
-
-          if counter.incr == MatchingSettings.min_users_per_match
-            self.formed_at = Time.now
-            fetch_questions! # this in turn save the formed at attr
             Services::PubSub.publish(self.channel, {
-              :type => :status_changed,
-              :info => brief
+              :type => :join,
+              :user => user.brief
             })
-          end
 
+            if counter.incr == MatchingSettings.min_users_per_match
+              self.formed_at = Time.now
+              fetch_questions! # this in turn save the formed at attr
+              Services::PubSub.publish(self.channel, {
+                :type => :status_changed,
+                :info => brief
+              })
+            end
+          end
         end
       end
+      ticket[user.id].exists
+    else
+      false
     end
+  end
 
-    ticket[user.id].exists
+  def unsubscribe(user)
+    left[user.id].set true
   end
 
   def summary

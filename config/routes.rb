@@ -28,6 +28,8 @@ SeamooV3::Application.routes.draw do
         post :register
         post :submit_answer
         post :more_questions
+        post :brief
+        post :unsubscribe
       end
     end
 

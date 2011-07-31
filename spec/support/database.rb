@@ -4,6 +4,3 @@ def skip_timestamps(clazz)
   clazz.record_timestamps = true
   return_value
 end
-
-DatabaseCleaner.strategy = :truncation
-DatabaseCleaner.clean

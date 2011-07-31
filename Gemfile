@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.0.0'
-gem 'rake'
+gem 'rake', '0.8.7'
 
 gem 'escape_utils' # dealing with this warning 'regex match against utf-8 string'
 gem 'mysql2', "~> 0.2.7"
@@ -28,15 +28,12 @@ gem 'aws-s3', :require => 'aws/s3'
 gem 'eventmachine'
 gem 'faye'
 
-
-# and rake tasks are available in development mode:
 group :development, :test do
-  gem 'capistrano'
   gem 'rspec-rails', "~> 2.5"
-  gem 'rmagick', :require => false
   gem 'rio', "~> 0.4.3.1", :git => 'https://github.com/wishdev/rio.git'
   gem "ruby-debug19", :require => 'ruby-debug', :platforms => 'ruby_19'
   gem 'ruby-debug', :platforms => 'rbx'
+  gem 'spork'
 end
 
 group :test do
@@ -45,8 +42,6 @@ group :test do
   gem 'shoulda'
   gem 'cucumber'
   gem 'cucumber-rails'
-  gem 'spork'
-  gem 'launchy'
   gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git', :branch => 'async_is_my_bitch'
   gem 'parallel'
   gem 'pickle'
@@ -57,4 +52,5 @@ group :development do
   gem 'haml-rails'
   gem "hpricot", :require => false
   gem "capistrano", :require => false
+  gem 'rmagick', :require => false
 end

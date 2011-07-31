@@ -9,9 +9,7 @@ class Informer
   end
 end
 
-class ApplicationController < ActionController::Base
-  prepend_before_filter :set_user
-  protected
+module FakeLoginMethods
   def set_user
     if Informer.login_as
       self.send(:activate_authlogic)
@@ -21,3 +19,6 @@ class ApplicationController < ActionController::Base
     end
   end
 end
+
+ApplicationController.send(:include, FakeLoginMethods)
+ApplicationController.prepend_before_filter :set_user

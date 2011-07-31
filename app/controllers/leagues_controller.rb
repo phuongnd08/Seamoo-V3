@@ -11,7 +11,7 @@ class LeaguesController < ApplicationController
   end
 
   def request_match
-    match = @league.match_for(current_user, params[:force])
+    match = @league.match_for(current_user, params[:force].try(:to_b))
     respond_to do |format|
       format.json{
         render :json => {
@@ -19,11 +19,6 @@ class LeaguesController < ApplicationController
         }
       }
     end
-  end
-
-  def leave_current_match
-    @league.leave_current_match(current_user.id)
-    redirect_to league_path(@league)
   end
 
   protected

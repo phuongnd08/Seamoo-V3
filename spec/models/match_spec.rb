@@ -120,6 +120,12 @@ describe Match do
           end
         end
       end
+      context "user left match before" do
+        it "should reject" do
+            @match.unsubscribe(@users.first)
+            @match.subscribe(@users.first).should be_false
+          end
+        end
     end
 
     describe "formed?" do

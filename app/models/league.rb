@@ -13,7 +13,8 @@ class League < ActiveRecord::Base
     :match_id,
     :ticket,
     :ticket_counter,
-    :stuck_since
+    :stuck_since,
+    :left
   ]
   protected
   @@attrs.each do |attr|
@@ -25,44 +26,15 @@ class League < ActiveRecord::Base
 
   public
 
-  def stuck_for?(user_id)
-    self.stuck_since[user_id].exists && (Time.now - Time.at(self.stuck_since[user_id].get_i) > MatchingSettings.stuck_time.seconds)
-  end
-
-  def assign_ticket(user_id)
-      self.ticket[user_id].set self.ticket_counter.incr
-  end
-
-  def match_temp_id(user_id)
-    (self.ticket[user_id].get_i - 1) / MatchingSettings.max_users_per_match + 1
-  end
-
   def match_for(user, force = false)
-    if self.ticket[user.id].exists
-      if force || stuck_for?(user.id)
-        bad_mtid = match_temp_id(user.id)
-        begin
-          assign_ticket(user.id)
-        end while (match_temp_id(user.id) == bad_mtid)
-      end
-    else
-      assign_ticket(user.id)
-    end
-
-    mtid = match_temp_id(user.id)
-    unless self.match_id[mtid].get_i > 0
-      if self.ticket[user.id].get_i % MatchingSettings.max_users_per_match == 1
-        self.match_id[mtid].set Match.create(:league => self).id
+    assign_proper_ticket(user, force)
+    create_or_find_match_for(user).tap do |match|
+      unless match
+        self.stuck_since[user.id].set Time.now.to_i
+      else
+        self.stuck_since[user.id].del
       end
     end
-
-    match = Match.find_by_id(self.match_id[mtid].get_i)
-    unless match
-      self.stuck_since[user.id].set Time.now.to_i
-    else
-      self.stuck_since[user.id].del
-    end
-    match
   end
 
   def available?
@@ -85,14 +57,46 @@ class League < ActiveRecord::Base
     super
   end
 
+  public
 
-  def ticket_provided?(user_id)
-    user_match_ticket[user_id].present? &&
-      user_lastseen[user_id].get.to_i &&
-      user_lastseen[user_id].get.to_i > MatchingSettings.requester_stale_after.seconds.ago.to_i
+  def stuck_for?(user)
+    self.stuck_since[user.id].exists &&
+      (Time.now - Time.at(self.stuck_since[user.id].get_i) > MatchingSettings.stuck_time.seconds)
   end
 
-  public
+  def assign_next_ticket(user)
+    self.ticket[user.id].set self.ticket_counter.incr
+  end
+
+  def assign_proper_ticket(user, force)
+    if self.ticket[user.id].exists
+      if force || stuck_for?(user)
+        bad_mtid = match_temp_id(user)
+        begin
+          assign_next_ticket(user)
+        end while (match_temp_id(user) == bad_mtid)
+      end
+    else
+      assign_next_ticket(user)
+    end
+  end
+
+  def first_user_in_match?(user)
+    self.ticket[user.id].get_i % MatchingSettings.max_users_per_match == 1
+  end
+
+  def create_or_find_match_for(user)
+    mtid = match_temp_id(user)
+    if (self.match_id[mtid].get_i == 0) && first_user_in_match?(user)
+      Match.create(:league => self).tap {|match| self.match_id[mtid].set match.id }
+    else
+      Match.find_by_id(self.match_id[mtid].get_i)
+    end
+  end
+
+  def match_temp_id(user)
+    (self.ticket[user.id].get_i - 1) / MatchingSettings.max_users_per_match + 1
+  end
 
   def random_questions(count)
     league_questions = category.questions.where(:level => self.level)

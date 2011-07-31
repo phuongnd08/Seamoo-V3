@@ -15,7 +15,8 @@ describe "settings" do
       MatchingSettings.started_after.should_not be_nil
       MatchingSettings.duration.should_not be_nil
       MatchingSettings.questions_per_match.should_not be_nil
-      MatchingSettings.users_per_match.should_not be_nil
+      MatchingSettings.min_users_per_match.should_not be_nil
+      MatchingSettings.max_users_per_match.should_not be_nil
     end
   end
 end

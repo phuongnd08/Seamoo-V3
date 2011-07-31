@@ -7,7 +7,7 @@
         .internal
           %ul.list
       #exit{:style => 'display: none'}
-        = form_tag leave_current_match_league_path(@league), :id => "leave_current_match_form" do
+        = form_tag "#", :id => "leave_current_match_form" do
           = submit_tag t('.leave_current_match'), :class => "sad"
     .internal.chatting
       = render :partial => 'chat'
@@ -24,7 +24,6 @@
   var requestingMatchInfo = false;
   var matchId;
   var retried = 0;
-  var currentQuestionPosition;
   var questions = [];
   var counterHandle;
   var remainedTime;
@@ -41,59 +40,27 @@
   var playerHTML = #{render(:partial => "users/player", :locals => { :avatar_size => '{avatar_size}', :avatar_url => '{avatar_url}', :display_name => '{display_name}'}).to_json};
 
   $(function(){
-    $('#leave_current_match_form').submit(function(){return confirm("Leave current match?");});
     requestMatch();
   })
 
-  var requestMatch = (function(){
-    var retrier = new Retrier();
-    var caller = function(){
-      $.ajax({
-        type: 'post',
-        url: "/#{I18n.locale}/leagues/" + leagueId + "/request_match",
-        dataType: 'json',
-        success: function(data){
-          if (data.match_id){
-            matchId = data.match_id;
-            setStatus('waiting', data);
-            subscribeMatch(data.match_id);
-          } else {
-            setTimeout(requestMatch, 1000);
-          }
-          retrier.reset();
-        },
-        error: function(){
-          retrier.retry(requestMatch);
+  var requestMatch = Retrier.newAjaxFunc(function(force){
+    var data = {};
+    if (force) data.force = true;
+    return {
+      type: 'post',
+      url: "/#{I18n.locale}/leagues/" + leagueId + "/request_match",
+      data: data,
+      dataType: 'json',
+      success: function(data){
+        if (data.match_id){
+          matchId = data.match_id;
+          subscribeMatch(data.match_id);
+        } else {
+          setTimeout(requestMatch, 1000);
         }
-      });
+      }
     }
-    return caller;
-  })();
-
-  var registerMatch = (function(){
-    var retrier = new Retrier();
-    var caller = function(){
-      $.ajax({
-        type: 'post',
-        url: "/#{I18n.locale}/matches/" + matchId + "/register",
-        dataType: 'json',
-        success: function(info){
-          if (info) {
-            setMatchInfo(info);
-            initialRequestComplete = true;
-            for (var i=0; i < backloggedMessages.length; i++) processMessage(backloggedMessages[i]);
-          } else {
-            alert("Match reject me");
-          }
-          retrier.reset();
-        },
-        error: function(){
-          retrier.retry(registerMatch);
-        }
-      });
-    }
-    return caller;
-  })()
+  });
 
   function subscribeMatch(){
     var client = new Faye.Client("#{SiteSettings.pubsub.server}/#{SiteSettings.pubsub.mount_point}");
@@ -123,67 +90,74 @@
   }
 
   function requestCurrentQuestion(callback){
-    if (currentQuestionPosition >= questions.length){
+    if (matchInfo.current_question_position >= questions.length){
       loadMoreQuestions(function(){ requestCurrentQuestion(callback) });
     } else {
-      callback(questions[currentQuestionPosition]);
-      if (currentQuestionPosition >= questions.length - questionsRefillThreshold) {
+      callback(questions[matchInfo.current_question_position]);
+      if (matchInfo.current_question_position >= questions.length - questionsRefillThreshold) {
         loadMoreQuestions(null);
       }
     }
   }
 
-  var loadMoreQuestions = (function(){
-    var retrier = new Retrier();
-    var caller = function(callback){
-      if (callback != null) questionsLoadedCallback = callback;
-      if (!loadingMoreQuestions){
-        $.ajax({
-          type: 'post',
-          url: ["/#{I18n.locale}/matches/", matchId, "/more_questions"].join(""),
-          data: {
-            loaded: questions.length
-          },
-          dataType: 'json',
-          beforeSend: function(){
-            loadingMoreQuestions = true;
-          },
-          success:function(data){
-            questions = questions.concat(data);
-            if (questionsLoadedCallback) {
-              var c = questionsLoadedCallback;
-              questionsLoadedCallback = null;
-              c();
-            }
-            retrier.reset();
-          },
-          error: function(){
-            retrier.retry(function(){
-              loadMoreQuestions(callback)
-            });
-          },
-          complete: function(){
-            loadingMoreQuestions = false;
-          }
-        });
+  var registerMatch = Retrier.newAjaxFunc(function(){
+    return {
+      type: 'post',
+      url: "/#{I18n.locale}/matches/" + matchId + "/register",
+      dataType: 'json',
+      success: function(info){
+        if (info) {
+          setMatchInfo(info);
+          initialRequestComplete = true;
+          for (var i=0; i < backloggedMessages.length; i++) processMessage(backloggedMessages[i]);
+        } else {
+          requestMatch(true);
+        }
       }
     }
-    return caller;
-  })();
+  });
 
+  var loadMoreQuestions = Retrier.newAjaxFunc(function(callback){
+    if (callback != null) questionsLoadedCallback = callback;
+    return loadingMoreQuestions ? null : {
+      type: 'post',
+      url: ["/#{I18n.locale}/matches/", matchId, "/more_questions"].join(""),
+      data: {
+        loaded: questions.length
+      },
+      dataType: 'json',
+      beforeSend: function(){
+        loadingMoreQuestions = true;
+      },
+      success:function(data){
+        questions = questions.concat(data);
+        if (questionsLoadedCallback) {
+          var c = questionsLoadedCallback;
+          questionsLoadedCallback = null;
+          c();
+        }
+      },
+      complete: function(){
+        loadingMoreQuestions = false;
+      }
+    }
+  });
 
-  function setMatchInfo(info){
-    var statusChanged = (info.status != matchInfo.status);
+  function meFinished(){
+    return matchInfo.current_question_position == questionsPerMatch
+  }
+
+  function setMatchInfo(info, forceRefresh){
+    forceRefresh = forceRefresh || (info.status != matchInfo.status);
     $.extend(matchInfo, info);
 
     if (matchInfo.status){
-      setStatus(matchInfo.status, matchInfo);
+      setMatchStatus(matchInfo.status, matchInfo);
       switch (matchInfo.status){
         case 'formed':
           showCounter(info.seconds_until_start);
           break;
         case 'started':
-        case 'you_finished':
           showCounter(info.seconds_until_end);
           break;
         default:
@@ -191,12 +165,12 @@
       }
     }
 
-    if (statusChanged){
-      if (matchInfo.status == 'started'){
+    if (forceRefresh){
+      if (matchInfo.status == 'started' && !meFinished()){
         //switch from no question -> current questions
-        currentQuestionPosition = matchInfo.current_question_position || 0
+        matchInfo.current_question_position = matchInfo.current_question_position || 0
         requestCurrentQuestion(setQuestion);
-      } else if (matchInfo.status == 'you_finished' || matchInfo.status == 'finished') clearQuestion();
+      } else if ((matchInfo.status == 'started' && meFinished()) || matchInfo.status == 'finished') clearQuestion();
     }
 
     $.each(info.players || [], function(index, player){
@@ -214,10 +188,28 @@
     counterHandle = setTimeout(refreshCounter, 1000);
   }
 
+  var expectStatus = Retrier.newAjaxFunc(function(status){
+    return {
+      url: "/#{I18n.locale}/matches/" + matchId + "/brief",
+      success: function(info){
+        if (info.status != status) {
+          setTimeout(function(){expectStatus(status)}, 1000);
+        } else {
+          setMatchInfo(info);
+        }
+      }
+    }
+  });
+
   function refreshCounter(){
     if (remainedTime== 0){
-      if (matchInfo.status == 'formed'){
-        setMatchInfo({ status: 'started', seconds_until_end: matchInfo.duration });
+      switch (matchInfo.status){
+        case 'formed':
+          setMatchInfo({ status: 'started', seconds_until_end: matchInfo.duration });
+          break;
+        case 'started':
+          expectStatus('finished');
+          break;
       }
     } else {
       remainedTime--;
@@ -227,42 +219,32 @@
       } else {
         params = { seconds_until_end: remainedTime}
       }
-      setStatus(matchInfo.status, params);
+      setMatchStatus(matchInfo.status, params);
       counterHandle = setTimeout(refreshCounter, 1000);
     }
   }
 
-  var sendAnswer = (function(){
-    var retrier = new Retrier();
-    var caller = function (answer){
-      $.ajax({
-        type: 'post',
-        url: ["/#{I18n.locale}/matches/", matchId, "/submit_answer"].join(""),
-        dataType: 'json',
-        data: answer,
-        success: function(){
-          retrier.reset();
-        },
-        error: function(){
-          retrier.retry(function(){sendAnswer(answer)});
-        }
-      })
+  var sendAnswer = Retrier.newAjaxFunc(function(answer){
+    return {
+      type: 'post',
+      url: ["/#{I18n.locale}/matches/", matchId, "/submit_answer"].join(""),
+      dataType: 'json',
+      data: answer
     }
-    return caller;
-  })();
+  });
 
   function submitAnswer(currentAnswer){
     disableQuestionButtonsAndInputs();
     var answer = {
-      position: currentQuestionPosition
+      position: matchInfo.current_question_position
     }
     if (currentAnswer != null) answer.answer = currentAnswer;
     sendAnswer(answer);
-    currentQuestionPosition++;
-    if (currentQuestionPosition < questionsPerMatch){
+    matchInfo.current_question_position++;
+    if (matchInfo.current_question_position < questionsPerMatch){
       requestCurrentQuestion(setQuestion);
     } else {
-      setMatchInfo({status: "you_finished", seconds_until_end: remainedTime})
+      setMatchInfo({status: "started", seconds_until_end: remainedTime}, true)
     }
   }
 
@@ -299,16 +281,20 @@
     return formatted;
   }
 
-  function setStatus(status, info){
+  function setMatchStatus(status, info){
     matchInfo.status = status;
     if (status == 'finished') {
       window.location.replace(info['result_url']);
     } else {
-      $('#status').html(formatString(statusHTML[status], info));
+      var templateName = (status == 'started' && meFinished()) ? 'you_finished' : status;
+      $('#status').html(formatString(statusHTML[templateName], info));
       if (status == "waiting")
         $('#exit').hide();
-      else
+      else {
+        $('#exit').find('form').attr("action", "/matches/" + matchId + "/unsubscribe");
+        $('#exit').find('form').submit(function(){return confirm(#{t(".leave_current_match_confirm").to_json});});
         $('#exit').show();
+      }
     }
   }
 

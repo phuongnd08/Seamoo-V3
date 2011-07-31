@@ -3,7 +3,7 @@ require 'spec_helper'
 describe QuestionsController do
 
   render_views
-  
+
   before(:each) do
     @multiple_choice_question = Question.create_multiple_choices("What's your name", {})
     @multiple_choice = @multiple_choice_question.data

@@ -43,6 +43,7 @@ en:
       rematch: "Let's match again"
       edit: Edit
       return_to: Or return to
+      details_not_available: Match is not finished, details are not available.
   leagues:
     active_players: Members playing now
     show:
@@ -58,6 +59,7 @@ en:
       Players: Players
       Some_maybe_around: Some other players maybe around
       leave_current_match: Leave current match
+      leave_current_match_confirm: Leave current match?
       need_signin: Please <a href='%{signin_path}'>signin</a> to compete with other members
       qualified: You are qualifed
       not_qualified: You are not qualified for this league

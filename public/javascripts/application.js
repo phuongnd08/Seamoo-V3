@@ -17,16 +17,35 @@ function Retrier(options){
 }
 
 $.extend(Retrier.prototype, {
-      retry: function(callback){
-        if (this.retried < this.options.max) {
-          this.retried++;
-          setTimeout(callback, this.options.interval);
+  retry: function(callback){
+    if (this.retried < this.options.max) {
+      this.retried++;
+      setTimeout(callback, this.options.interval);
+    }
+  },
+  reset: function(){
+    this.retried = 0;
+  }
+});
+
+Retrier.defaultAjaxOptions = { type: 'post', dataType: 'json' }
+Retrier.newAjaxFunc = function (getOptionsAction){
+  var retrier = new Retrier();
+  var closure = {}
+  closure.action = function(){
+    var options = $.isFunction(getOptionsAction) ? getOptionsAction.apply(null, arguments) : getOptionsAction;
+    if (options){
+      options = $.extend(Retrier.defaultAjaxOptions, options, {
+        error: function(){
+          retrier.retry(closure.action);
         }
-      },
-      reset: function(){
-        this.retried = 0;
-      }
-    });
+      });
+      $.ajax(options);
+    }
+  }
+
+  return closure.action;
+}
 
 
 function formatString(template, variables){

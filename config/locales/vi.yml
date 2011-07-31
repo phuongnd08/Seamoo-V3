@@ -48,6 +48,7 @@ vi:
       rematch: Đấu trận khác
       edit: Sửa
       return_to: Hoặc quay lại
+      details_not_available: Trận đấu chưa kết thúc, nội dung không truy cập được.
   leagues:
     active_players: Những thành viên đang thi đấu
     show:
@@ -63,6 +64,7 @@ vi:
       Players: Người chơi
       Some_maybe_around: Những người chơi khác có thể vẫn còn đâu đây
       leave_current_match: Bỏ trận đấu
+      leave_current_match_confirm: Bỏ trận đấu?
       need_signin: Vui lòng <a href='%{signin_path}'>đăng nhập</a> để thi đấu với các thành viên khác
       not_qualified: Bạn chưa đủ tiêu chuẩn tham gia giải đấu này.
       please_prove: Hãy chứng minh là bạn đủ tiêu chuẩn tham gia bằng cách tích lũy %{points} chỉ số
