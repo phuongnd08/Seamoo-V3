@@ -120,12 +120,25 @@ describe Match do
           end
         end
       end
+
       context "user left match before" do
         it "should reject" do
             @match.unsubscribe(@users.first)
             @match.subscribe(@users.first).should be_false
           end
         end
+
+      context "match finished" do
+        before(:each) do
+          @match.subscribe(@users[0])
+          @match.stub(:finished?).and_return(true)
+        end
+
+        it "should reject every one" do
+          @match.subscribe(@users[0]).should be_false
+          @match.subscribe(@users[1]).should be_false
+        end
+      end
     end
 
     describe "formed?" do

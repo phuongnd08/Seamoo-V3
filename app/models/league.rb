@@ -1,6 +1,4 @@
 class League < ActiveRecord::Base
-  include Utils::Waiter
-
   belongs_to :category
   has_many :matches
   has_many :memberships

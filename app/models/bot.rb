@@ -74,34 +74,38 @@ class Bot < User
     def kill(bot)
       @@awaken_ids.srem bot.id
     end
+
+    def listen
+      Services::PubSub.client.subscribe("/bots") do |message|
+        debugger
+        match = Match.find_by_id(message.match_id)
+        if match
+          process = lambda do
+            bot = awake_new(match.league.level)
+            bot.perform(match)
+          end
+
+          #EM.defer process
+          process.call
+        end
+      end
+    end
   end
 
-  def run
-    # try to answer un-answered question at a predefined speed
-    unless match_id.get_i == 0
-      match = Match.find_by_id(match_id.get.to_i)
-      unless match.nil?
-        match_user = match.match_users.find_by_user_id(self.id)
-        unless match_user.finished? || match.finished?
-          if match.started?
-            number_of_questions_to_answer = (Time.now - match.started_at)/MatchingSettings.bot_time_per_question
-            number_of_questions_to_answer = [match.questions.size, number_of_questions_to_answer.floor].min
-            (match_user.current_question_position...number_of_questions_to_answer).each do |index|
-              answer = Utils::RndGenerator.rnd > MatchingSettings.bot_correctness ? nil : correct_answer(match_user.current_question)
-              match_user.add_answer(index, answer)
-            end
-          end
-        else; match_user.record!; die; end
-      else; die; end
-    else
-      unless league_id.get.nil?
-        unless match_request_retried.get.nil? || match_request_retried.get.to_i >= MatchingSettings.bot_max_match_request_retries
-          id = League.find(league_id.get.to_i).request_match(self.id, true).try(:id)
-          match_id.set id if id
-          match_request_retried.incr
-        else; die; end
-      else; die; end
+  def perform(match)
+    match.subscribe(self)
+    match_user = match.match_user_for(self)
+    Kernel.sleep(match.seconds_until_start)
+    match.questions.count.times do |index|
+      Kernel.sleep Kernel.rand(MatchingSettings.bot_time_per_question * 2)
+      if match.seconds_until_end > 0
+        answer = Utils::RndGenerator.rnd > MatchingSettings.bot_correctness ? nil : correct_answer(match_user.current_question)
+        match_user.add_answer(index, answer)
+      else
+        break
+      end
     end
+    die
   end
 
   def die

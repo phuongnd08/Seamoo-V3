@@ -10,7 +10,7 @@ module Services
       end
 
       def client
-        Faye::Client.new(pubsub_url)
+        Faye::Client.new(server_url)
       end
 
       def publish(channel, data)

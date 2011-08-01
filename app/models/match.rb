@@ -28,7 +28,7 @@ class Match < ActiveRecord::Base
   end
 
   def subscribe(user)
-    unless left[user.id].get_b
+    unless self.finished? || left[user.id].get_b
       unless ticket[user.id].exists
         unless started?
           if ticket[user.id].incr == 1

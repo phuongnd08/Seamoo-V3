@@ -106,4 +106,15 @@ describe "in league playing", :js => true, :caching => true, :asynchronous => tr
       end
     end
   end
+
+  context "match again" do
+    before(:each) do
+      @match.update_attribute(:finished_at, Time.now)
+    end
+    it "should send user to new match" do
+      visit matching_league_path(@league)
+      page.should have_content("You have finished the match")
+      current_path.should == matching_league_path(@league)
+    end
+  end
 end

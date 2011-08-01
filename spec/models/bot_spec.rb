@@ -48,15 +48,15 @@ describe Bot, :caching => true do
     before(:each) do
       Bot.stub(:names).and_return(
         {
-          0 => {
-            "abc" => {:display_name => "Abc User"},
-            "xyz" => {:display_name => "xyz"}
-          },
-          1 => {
-            "def" => {:display_name => "def"},
-            "tuv" => {:display_name => "tuv"}
-          }
-        }
+        0 => {
+        "abc" => {:display_name => "Abc User"},
+        "xyz" => {:display_name => "xyz"}
+      },
+        1 => {
+        "def" => {:display_name => "def"},
+        "tuv" => {:display_name => "tuv"}
+      }
+      }
       )
     end
 
@@ -93,7 +93,7 @@ describe Bot, :caching => true do
     end
   end
 
-  describe "run" do
+  describe "perform" do
     before(:each) do
       MatchingSettings.started_after #trigger settings logic accessor initilization to prevent re-override rspec stub
       MatchingSettings.stub(:started_after).and_return(5)
@@ -101,106 +101,58 @@ describe Bot, :caching => true do
       MatchingSettings.stub(:bot_correctness).and_return(0.8)
       MatchingSettings.stub(:duration).and_return(300)
       MatchingSettings.stub(:questions_per_match).and_return(10)
-      @category = Factory(:category)
-      @questions = []
-      (1..10).each do |t|
-        question = Factory(:question, :level => 0, :category => @category)
-        question.data.options[0].update_attribute(:correct, true)
-        @questions << question
-      end
-      @league = League.create!(:level => 0, :category => @category)
+      @match = Factory(:match)
+      @user = Factory(:user)
+      @match.subscribe(@user)
       @bot = Bot.awake_new(0)
       @now = Time.now
       Time.stub(:now).and_return(@now)
+      Kernel.stub(:sleep)
+      Services::PubSub.stub(:publish)
+      @match.fetch_questions! # hack, force the match to fetch question first so that stubbed rnd used for answering
+
+      Utils::RndGenerator.stub(:rnd).and_return(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1)
+      @bot.perform(@match)
     end
 
-    describe "match_id not obtained" do
-      before(:each) do
-        @mocked_league = mock_model(League)
-        League.stub(:find).with(1).and_return(@mocked_league)
-        @bot.league_id.set 1
-      end
-
-      it "should try to query for match_id" do
-        @mocked_league.should_receive(:request_match).and_return(nil)
-        @bot.run
-        @match = Match.create(:league => @league)
-        @mocked_league.should_receive(:request_match).and_return(@match)
-        @bot.run
-        @bot.match_id.get.to_i.should == @match.id
-      end
-
-      it "should die after maximum retries" do
-        MatchingSettings.stub(:bot_max_match_request_retries).and_return(3)
-        @mocked_league.should_receive(:request_match).exactly(3).and_return(nil)
-        Bot.awaken.should include(@bot)
-        4.times.each{ @bot.run }
-        Bot.awaken.should_not include(@bot)
-      end
+    it "should join match" do
+      @match.users.should include(@bot)
     end
 
-    describe "match_id obtained" do
-      before(:each) do
-        @match = Match.create(:league => @league, :formed_at => @now)
-        @match.fetch_questions!
-        @bot.match_id.set @match.id
-        @match_user = MatchUser.create(:match => @match, :user => @bot)
-        MatchUser.create(:match => @match, :user => Factory(:user)) # match have 2 users
+    it "should answers all questions at predefined correctness" do
+      @match_user = @match.match_user_for(@bot)
+      @match_user.current_question_position.should == 10
+      @match.questions.each do |index|
+        @match_user.answers.has_key?(index)
       end
+      @match_user.reload.score.should == 8
+    end
 
-      it "should answer questions at predefined speed" do
-        Time.stub(:now).and_return(@now + 6.seconds)
-        @bot.run
-        @match_user.reload.current_question_position.should == 0
-        Time.stub(:now).and_return(@now + 11.seconds)
-        @bot.run
-        @match_user.reload.current_question_position.should == 1
-        Time.stub(:now).and_return(@now + 56.seconds)
-        @bot.run
-        @match_user.reload.current_question_position.should == 10
-      end
+    it "should die" do
+      Bot.awaken.should_not include(@bot)
+    end
+  end
 
-      it "should answer questions at predfined correctness" do
-        Time.stub(:now).and_return(@now + 59.seconds)
-        Utils::RndGenerator.stub(:rnd).and_return(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1)
-        @bot.run
-        @match_user.reload.current_question_position.should == 10
-        @match_user.reload.score.should == 8
-      end
+  describe "listen" do
+    before(:each) do
+      @user = Factory(:user)
+      @match = Factory(:match)
+    end
 
-      describe "Match finished" do
-        before(:each) do
-          Time.stub(:now).and_return(@now + MatchingSettings.started_after.seconds + MatchingSettings.duration.seconds + 1.second)
-          @bot.run
-        end
-        it "should die" do
-          Bot.awaken.should_not include(@bot)
+    it "should response to request with bots" do
+      EM.run {
+        Kernel.stub(:sleep)
+        Bot.listen
+        @match.subscribe @user
+        debugger
+        Services::PubSub.publish("/bots", { :match_id => @match.id })
+
+        wait_for_value 2 do
+          @match.reload.match_users.count
         end
 
-        it "should record match score into league membership" do
-          ms = Membership.find_by_league_id_and_user_id(@league.id, @bot.id)
-          ms.should_not be_nil
-          ms.matches_count.should == 1
-        end
-      end
-
-      describe "Bot finished" do
-        before(:each) do
-          @match_user.stub(:request_match_check)
-          @match_user.send(:finished_at=, Time.now)
-          @match_user.save
-          @bot.run
-        end
-        it "should die" do
-          Bot.awaken.should_not include(@bot)
-        end
-
-        it "should record match score into league membership" do
-          ms = Membership.find_by_league_id_and_user_id(@league.id, @bot.id)
-          ms.should_not be_nil
-          ms.matches_count.should == 1
-        end
-      end
+        EM.stop
+      }
     end
   end
 end
