@@ -21,22 +21,6 @@ describe "in league playing", :js => true, :caching => true, :asynchronous => tr
         page.should have_content(@match.questions[0].data.content)
       end
 
-      def assert_player_indicator(user, position, total)
-        within "#match_players" do
-          selector = if (position < total)
-                       "img[title='#{user.display_name} (#{position+1}/#{total})']"
-                     else
-                       "img[title='#{user.display_name} (finished)']"
-                     end
-          page.should have_css(selector)
-
-          img_width = page.evaluate_script(%{$("#match_players #{selector}").width()}).to_f
-          lane_width = page.evaluate_script(%{$("#match_players #{selector}").parent("li").width()}).to_f
-          margin = position.to_f/total*(lane_width-img_width)
-          page.evaluate_script(%{$("#match_players #{selector}").css('marginLeft')}).to_f.should be_within(0.1).of(margin)
-        end
-      end
-
       assert_player_indicator(@mike, 0, 3)
       assert_player_indicator(@peter, 0, 3)
 

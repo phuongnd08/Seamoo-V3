@@ -42,6 +42,22 @@ module RSpec
       realized_answer = match.questions[position].data.realized_answer(match_user.answers[position])
       realized_answer.should == answer
     end
+
+    def assert_player_indicator(user, position, total)
+      within "#match_players" do
+        selector = if (position < total)
+                     "img[title='#{user.display_name} (#{position+1}/#{total})']"
+                   else
+                     "img[title='#{user.display_name} (finished)']"
+                   end
+        page.should have_css(selector)
+
+        img_width = page.evaluate_script(%{$("#match_players #{selector}").width()}).to_f
+        lane_width = page.evaluate_script(%{$("#match_players #{selector}").parent("li").width()}).to_f
+        margin = position.to_f/total*(lane_width-img_width)
+        page.evaluate_script(%{$("#match_players #{selector}").css('marginLeft')}).to_f.should be_within(0.1).of(margin)
+      end
+    end
   end
 end
 
@@ -54,7 +70,7 @@ RSpec.configure do |config|
 end
 
 begin
-World(RSpec::Matching)
+  World(RSpec::Matching)
 rescue NoMethodError => e
   # it's ok, cucumber is not loaded
 end

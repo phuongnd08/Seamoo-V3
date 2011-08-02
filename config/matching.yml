@@ -16,6 +16,7 @@ development: &development
   bot_time_per_question: 5
   bot_correctness: 0.8
   qualified_rank_score: 1000
+  request_bot_after: 10
 
 test:
   <<: *development

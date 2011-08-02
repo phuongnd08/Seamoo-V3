@@ -21,6 +21,7 @@
   var questionsPerCacheBlock = #{MatchingSettings.questions_per_cache_block};
   var questionsRefillThreshold = #{MatchingSettings.questions_refill_threshold};
   var statusRecheckInterval = #{MatchingSettings.status_recheck_interval} * 1000;
+  var requestBotAfter = #{MatchingSettings.request_bot_after} * 1000;
   var requestingMatchInfo = false;
   var matchId;
   var retried = 0;
@@ -43,6 +44,10 @@
     requestMatch();
   })
 
+  function getClient(){
+    return new Faye.Client("#{SiteSettings.pubsub.server}/#{SiteSettings.pubsub.mount_point}");
+  }
+
   var requestMatch = Retrier.newAjaxFunc(function(force){
     var data = {};
     if (force) data.force = true;
@@ -55,6 +60,11 @@
         if (data.match_id){
           matchId = data.match_id;
           subscribeMatch(data.match_id);
+          setTimeout(function(){
+            if (playerCount() == 1) {
+              getClient().publish("/bots", { match_id: matchId });
+            }
+          }, requestBotAfter);
         } else {
           setTimeout(requestMatch, 1000);
         }
@@ -63,10 +73,9 @@
   });
 
   function subscribeMatch(){
-    var client = new Faye.Client("#{SiteSettings.pubsub.server}/#{SiteSettings.pubsub.mount_point}");
     var channel = '/matches/' + matchId;
     initialRequestComplete = false;
-    client.subscribe(channel, function(message){
+    getClient().subscribe(channel, function(message){
       if (initialRequestComplete){
         processMessage(message);
       } else {
@@ -308,6 +317,10 @@
 
   function getPlayerView(player){
     return (playerViews[player.id] || (playerViews[player.id] = newPlayerView(player)));
+  }
+
+  function playerCount(){
+    return $('#match_players ul.list li').size();
   }
 
   function showPlayer(player){

@@ -132,27 +132,4 @@ describe Bot, :caching => true do
       Bot.awaken.should_not include(@bot)
     end
   end
-
-  describe "listen" do
-    before(:each) do
-      @user = Factory(:user)
-      @match = Factory(:match)
-    end
-
-    it "should response to request with bots" do
-      EM.run {
-        Kernel.stub(:sleep)
-        Bot.listen
-        @match.subscribe @user
-        debugger
-        Services::PubSub.publish("/bots", { :match_id => @match.id })
-
-        wait_for_value 2 do
-          @match.reload.match_users.count
-        end
-
-        EM.stop
-      }
-    end
-  end
 end

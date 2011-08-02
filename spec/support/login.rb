@@ -1,14 +1,24 @@
-def wait_for_true(&block)
-  wait_for_value(true, &block)
+class Informer
+  class << self
+    attr_accessor :logout
+    attr_accessor :login_as
+    def reset
+      login_as = nil
+      logout = false
+    end
+  end
 end
 
-def wait_for_value(value, wait_time = nil)
-  wait_time ||= Capybara.default_wait_time
-  started_at = Time.now
-  res = nil
-  begin
-    res = yield
-    sleep 0.5 unless res
-  end while (started_at.to_i > saved_wait_time.seconds.ago.to_i && res != value)
-  res.should == value
+module FakeLoginMethods
+  def set_user
+    if Informer.login_as
+      self.send(:activate_authlogic)
+      UserSession.create(User.find_by_display_name(Informer.login_as), true)
+    elsif Informer.logout
+      session.destroy
+    end
+  end
 end
+
+ApplicationController.send(:include, FakeLoginMethods)
+ApplicationController.prepend_before_filter :set_user

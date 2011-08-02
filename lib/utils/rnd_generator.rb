@@ -5,7 +5,7 @@ module Utils
         unless exclusive_bound.present?
           rand
         else
-          rand(exclusive_bound)
+          rand(exclusive_bound).to_i
         end
       end
 

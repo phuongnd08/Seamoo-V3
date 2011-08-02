@@ -9,7 +9,6 @@ gem 'haml', ">=3.1.alpha.147"
 gem 'omniauth', '0.2.0.beta5'
 gem 'authlogic'
 gem "jquery-rails"
-gem "delayed_job"
 gem "settingslogic"
 gem "gravtastic"
 gem "sass"

@@ -64,11 +64,12 @@ class Bot < User
       new_bot_name = available_bot_names[Utils::RndGenerator.next(available_bot_names.size)]
       new_bot = find_or_create_by_display_name(
         :display_name => names[level][new_bot_name][:display_name],
-        :email => new_bot_name + "@#{SiteSettings.bot_domain}")
-        @@awaken_ids.sadd(new_bot.id)
-        new_bot.match_id.del
-        new_bot.match_request_retried.set 0
-        new_bot
+        :email => new_bot_name + "@#{SiteSettings.bot_domain}"
+      )
+      @@awaken_ids.sadd(new_bot.id)
+      new_bot.match_id.del
+      new_bot.match_request_retried.set 0
+      new_bot
     end
 
     def kill(bot)
@@ -77,16 +78,17 @@ class Bot < User
 
     def listen
       Services::PubSub.client.subscribe("/bots") do |message|
-        debugger
-        match = Match.find_by_id(message.match_id)
+        Rails.logger.info("[BOTS REQUEST]#{Rails.env}")
+        Rails.logger.info(message.inspect)
+        match = Match.find_by_id(message["match_id"])
         if match
           process = lambda do
             bot = awake_new(match.league.level)
             bot.perform(match)
           end
 
-          #EM.defer process
-          process.call
+          EM.defer process
+          #process.call
         end
       end
     end
