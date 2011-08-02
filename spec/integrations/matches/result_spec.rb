@@ -30,23 +30,23 @@ shared_examples_for "show question full details" do
   end
 end
 
-describe "Matching Result" do
+describe "Matching Result", :caching => true do
   def correct_answer(multiple_choice)
     multiple_choice.options.find_index{ |o| o.correct }
   end
 
-  def add_answers(match, user, correct, count = 1)
-    match_user = match.match_users.where(:user_id => user.id).first
-    count.downto(1) do 
-      question = match_user.current_question
-      multiple_choice = question.data
-      answer = if correct
-                 correct_answer(multiple_choice)
-               else 
-                 ((0...multiple_choice.options.size).to_a - [correct_answer(multiple_choice)]).first
-               end
-      match_user.add_answer(match_user.current_question_position, answer.to_s)
+  def add_answers(match, user, answer_or_correct)
+    match_user = match.match_user_for(user)
+    question = match_user.current_question
+    multiple_choice = question.data
+    unless answer_or_correct.is_a?(String)
+      answer_or_correct = if answer_or_correct
+                            correct_answer(multiple_choice)
+                          else
+                            ((0...multiple_choice.options.size).to_a - [correct_answer(multiple_choice)]).first
+                          end
     end
+    match_user.add_answer(match_user.current_question_position, answer_or_correct.to_s)
   end
 
   before(:each) do
@@ -55,14 +55,14 @@ describe "Matching Result" do
     @eric = Factory(:user, :display_name => "eric")
     @admin = Factory(:admin, :display_name => "admin")
     @match = Factory(:match)
-    @match.update_attributes(:questions => [@match.questions.first, Factory(:question_with_image), Factory(:fill_in_the_blank_question)])
-    @match.users << @mike
-    @match.users << @peter
+    @match.subscribe(@mike).should be_true
+    @match.subscribe(@peter).should be_true
+    @match.update_attributes(:questions => [Factory(:question), Factory(:question_with_image), Factory(:fill_in_the_blank_question)])
+    @match.update_attribute(:finished_at, Time.now)
     add_answers(@match, @mike, true)
     add_answers(@match, @peter, true)
     add_answers(@match, @peter, false)
-    muf_peter = @match.match_user_for(@peter)
-    muf_peter.add_answer(muf_peter.current_question_position, "blank1, ")
+    add_answers(@match, @peter, "blank1, ")
   end
 
   describe "multimedia" do
@@ -71,12 +71,12 @@ describe "Matching Result" do
     end
 
     it "should display images" do
-      page.should have_css("img[src='/images/logo.png']")
+      page.should have_css("img[src='/images/example.png']")
     end
   end
 
   describe "display with regards to viewer" do
-    describe "players of match" do
+    context "players of match" do
       before(:each) do
         Informer.login_as = "peter"
         visit match_path(@match)
@@ -94,8 +94,9 @@ describe "Matching Result" do
         end
       end
     end
-    describe "non-match-player" do
-      describe "regular user" do
+
+    context "non-match-player" do
+      context "regular user" do
         before(:each) do
           Informer.login_as = "eric"
           visit match_path(@match)
@@ -128,7 +129,7 @@ describe "Matching Result" do
         end
       end
 
-      describe "admin user" do
+      context "admin user" do
         before(:each) do
           Informer.login_as = "admin"
           visit match_path(@match)

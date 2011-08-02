@@ -22,17 +22,15 @@ describe "Chat" do
       Informer.login_as = "mike"
       visit league_path(@league)
       page.should have_no_content("Please signin to chat")
-      pending "Chat cannot be tested right now because selenium watch for ajax request which chat is agressively making"
-      #msg = "Hello world #{Time.now}"
-      #within "#chat_form" do
-        #fill_in("message", :with => msg)
-        #debugger
-        #page.execute_script("$('#chat_form').submit()");
-        #debugger
-      #end
-      #within "#chat_box" do
-        #page.should have_content(msg)
-      #end 
+      msg = "Hello world #{Time.now}"
+      within "#chat_form" do
+        fill_in("message", :with => msg)
+        page.execute_script("$('#chat_form').submit()");
+      end
+
+      within "#chat_box" do
+        page.should have_content(msg)
+      end
     end
   end
 end
